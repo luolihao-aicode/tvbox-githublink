@@ -4,7 +4,7 @@ from typing import Any
 import yaml
 from pydantic import ValidationError
 
-from .models import AppConfig, ChannelRule, PolicyConfig, SourceConfig
+from .models import AppConfig, ChannelRule, GitHubSearchConfig, PolicyConfig, SourceConfig
 
 
 def _read_yaml(path: Path) -> dict[str, Any]:
@@ -31,13 +31,16 @@ def load_config(config_dir: Path) -> AppConfig:
     sources_data = _read_yaml(config_dir / "sources.yml")
     channels_data = _read_yaml(config_dir / "channels.yml")
     policy_data = _read_yaml(config_dir / "policy.yml")
-    _reject_unknown_keys(sources_data, {"sources"}, "sources.yml")
+    _reject_unknown_keys(sources_data, {"sources", "github_search"}, "sources.yml")
     _reject_unknown_keys(channels_data, {"channels"}, "channels.yml")
     try:
         return AppConfig(
             sources=[SourceConfig.model_validate(item) for item in sources_data.get("sources", [])],
             channels=[ChannelRule.model_validate(item) for item in channels_data.get("channels", [])],
             policy=PolicyConfig.model_validate(policy_data),
+            github_search=GitHubSearchConfig.model_validate(
+                sources_data.get("github_search", {})
+            ),
         )
     except ValidationError as exc:
         message = str(exc)

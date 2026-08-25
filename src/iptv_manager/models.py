@@ -35,6 +35,15 @@ class SourceConfig(StrictModel):
     url: HttpUrl
     type: SourceType = SourceType.COMMUNITY
     enabled: bool = True
+    max_bytes: int = Field(default=2_000_000, ge=1, le=10_000_000)
+
+
+class GitHubSearchConfig(StrictModel):
+    enabled: bool = True
+    queries: list[str] = Field(default_factory=lambda: ["extension:m3u IPTV"])
+    max_files: int = Field(default=50, ge=1, le=500)
+    max_pages: int = Field(default=3, ge=1, le=10)
+    max_bytes: int = Field(default=2_000_000, ge=1, le=10_000_000)
 
 
 class ChannelRule(StrictModel):
@@ -98,4 +107,4 @@ class AppConfig(StrictModel):
     sources: list[SourceConfig]
     channels: list[ChannelRule]
     policy: PolicyConfig
-
+    github_search: GitHubSearchConfig = Field(default_factory=GitHubSearchConfig)

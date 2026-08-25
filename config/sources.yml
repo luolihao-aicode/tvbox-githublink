@@ -1,3 +1,12 @@
 # 仅添加无需登录即可公开访问的 M3U/M3U8 列表地址。
 sources: []
 
+# 每周发现任务使用 GitHub 代码搜索；新结果必须先进入候选池。
+github_search:
+  enabled: true
+  queries:
+    - "extension:m3u IPTV"
+    - "extension:m3u8 CCTV"
+  max_files: 50
+  max_pages: 3
+  max_bytes: 2000000
