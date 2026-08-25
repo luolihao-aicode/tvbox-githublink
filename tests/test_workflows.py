@@ -17,6 +17,11 @@ def test_update_workflow_is_daily_manual_and_serialized() -> None:
     assert "workflow_dispatch" in workflow["on"]
     assert workflow["permissions"]["contents"] == "write"
     assert workflow["concurrency"]["cancel-in-progress"] == "false"
+    validation_steps = [
+        step for step in workflow["jobs"]["update"]["steps"]
+        if step.get("name") == "校验已发布订阅"
+    ]
+    assert "grep -q" in validation_steps[0]["run"]
 
 
 def test_discovery_workflow_is_weekly_and_uses_github_token() -> None:

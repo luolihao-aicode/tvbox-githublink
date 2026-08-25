@@ -45,7 +45,12 @@ jobs:
 
       - name: 校验已发布订阅
         if: hashFiles('output/combined.m3u') != ''
-        run: iptv-manager validate-output --output-dir output
+        run: |
+          if grep -q '^#EXTINF:' output/combined.m3u; then
+            iptv-manager validate-output --output-dir output
+          else
+            echo "尚无连续两次检测合格的频道，本次只保存候选历史"
+          fi
 
       - name: 提交发现和检测结果
         run: |
@@ -58,4 +63,3 @@ jobs:
             git commit -m "chore: 自动发现并更新 IPTV 源"
             git push
           fi
-
