@@ -1,0 +1,59 @@
+name: 每日检测并更新订阅
+
+on:
+  schedule:
+    - cron: "23 19 * * *" # 北京时间每天 03:23，避开整点高峰
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: iptv-generated-data
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 50
+    steps:
+      - name: 检出仓库
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: 配置 Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: 安装 FFmpeg 和项目依赖
+        run: |
+          sudo apt-get update
+          sudo apt-get install --yes ffmpeg
+          python -m pip install --upgrade pip
+          python -m pip install ".[dev]"
+
+      - name: 运行测试
+        run: python -m pytest -q
+
+      - name: 抓取并检测播放源
+        run: iptv-manager update --config-dir config --data-dir data --output-dir output
+
+      - name: 校验已发布订阅
+        if: hashFiles('output/combined.m3u') != ''
+        run: iptv-manager validate-output --output-dir output
+
+      - name: 提交检测结果
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A -- data output
+          if git diff --cached --quiet; then
+            echo "检测结果没有变化"
+          else
+            git commit -m "chore: 自动更新 IPTV 检测结果"
+            git push
+          fi
+
