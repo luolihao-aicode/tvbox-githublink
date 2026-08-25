@@ -68,3 +68,32 @@ async def test_pipeline_publishes_only_twice_verified_hd_source(
     assert [item.channel_id for item in result.selections] == ["cctv-1"]
     assert (tmp_path / "output" / "combined.m3u").is_file()
 
+
+@pytest.mark.asyncio
+async def test_first_success_is_saved_without_publishing_empty_playlist(
+    tmp_path: Path, candidate_factory
+) -> None:
+    now = datetime(2026, 8, 25, tzinfo=UTC)
+    candidate = candidate_factory("https://stream.example/cctv1.m3u8", "央视一套")
+
+    async def discover():
+        return DiscoveryResult(candidates=[candidate])
+
+    async def probe_http(candidates, policy):
+        return [_successful_check(now)]
+
+    async def probe_media(item, policy):
+        return _successful_check(now)
+
+    result = await run_pipeline(
+        PipelineOptions(
+            config_dir=Path("config"),
+            data_dir=tmp_path / "data",
+            output_dir=tmp_path / "output",
+        ),
+        PipelineDependencies(discover, probe_http, probe_media, now=lambda: now),
+    )
+
+    assert result.selections == []
+    assert (tmp_path / "data" / "candidates.json").is_file()
+    assert not (tmp_path / "output" / "combined.m3u").exists()

@@ -181,5 +181,6 @@ async def run_pipeline(
             )
             + "\n",
         )
-        publish_outputs(selections, options.output_dir, now)
+        if selections:
+            publish_outputs(selections, options.output_dir, now)
     return PipelineResult(updated, selections, list(discovery.issues))
