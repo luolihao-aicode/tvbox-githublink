@@ -1,0 +1,8 @@
+# HTTP 初筛和媒体复检采用保守超时，避免任务被慢源拖住。
+http_timeout_seconds: 5
+media_probe_seconds: 8
+history_limit: 30
+minimum_height: 720
+switch_margin: 8
+global_concurrency: 30
+per_host_concurrency: 2
