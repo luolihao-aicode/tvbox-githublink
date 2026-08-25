@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="IPTV 播放源可用性、延迟与质量评分">
+  <title>IPTV 频道状态</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="hero">
+    <div>
+      <p class="eyebrow">自动检测 · 自动筛选 · 每日更新</p>
+      <h1>IPTV 频道状态</h1>
+      <p id="summary" class="summary" aria-live="polite">正在读取最新检测结果…</p>
+    </div>
+    <nav class="subscriptions" aria-label="订阅地址">
+      <a class="primary" href="combined.m3u">综合推荐</a>
+      <a href="official.m3u">官方源</a>
+      <a href="community.m3u">社区源</a>
+      <a href="backup.m3u">主备线路</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="notice" aria-label="检测说明">
+      <strong>测速说明</strong>
+      <span id="measurement-notice">延迟和速度由 GitHub Actions 节点测得，不代表用户本地网络体验。</span>
+    </section>
+
+    <section class="toolbar" aria-label="频道筛选">
+      <div class="filters" role="group" aria-label="按频道分类筛选">
+        <button class="active" type="button" data-category="全部">全部</button>
+        <button type="button" data-category="央视">央视</button>
+        <button type="button" data-category="地方频道">地方频道</button>
+        <button type="button" data-category="香港">香港</button>
+        <button type="button" data-category="台湾">台湾</button>
+      </div>
+      <label class="search">
+        <span>搜索频道</span>
+        <input id="search" type="search" placeholder="输入频道名称" autocomplete="off">
+      </label>
+    </section>
+
+    <section aria-labelledby="channel-heading">
+      <div class="section-heading">
+        <h2 id="channel-heading">可用频道</h2>
+        <span id="visible-count" class="count"></span>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>频道</th><th>分类</th><th>来源</th><th>画质</th>
+              <th>节点延迟</th><th>可用率</th><th>评分</th><th>检测时间</th>
+            </tr>
+          </thead>
+          <tbody id="channel-list"></tbody>
+        </table>
+        <p id="empty-state" class="empty" hidden>当前筛选条件下没有频道。</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>本项目只检测公开可访问资源，不提供破解、认证绕过、视频中转或转码。</p>
+    <p>社区源公开可访问不代表已经获得再分发授权；如需移除，请通过项目仓库联系维护者。</p>
+  </footer>
+  <script src="app.js" defer></script>
+</body>
+</html>
