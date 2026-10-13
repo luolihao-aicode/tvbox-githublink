@@ -1,6 +1,4 @@
 #EXTM3U
-#EXTINF:-1 tvg-id="tw-axn" tvg-name="AXN 台湾" group-title="台湾",AXN 台湾
-http://125.227.210.55:4050/VideoInput/play.ts
 #EXTINF:-1 tvg-id="tw-ftv-news" tvg-name="民视新闻台" group-title="台湾",民视新闻台
 http://38.64.72.148/hls/modn/list/4012/chunklist1.m3u8
 #EXTINF:-1 tvg-id="tw-indigenous" tvg-name="原住民族电视台" group-title="台湾",原住民族电视台
