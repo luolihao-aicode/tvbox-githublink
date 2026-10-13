@@ -79,3 +79,16 @@ async def test_github_file_with_wrapped_base64_is_decoded() -> None:
         result = await search_github(config, 'test-token', client)
     assert len(result.candidates) == 1
     assert result.issues == []
+
+
+@pytest.mark.asyncio
+async def test_region_scoped_seed_only_adds_matching_taiwan_channels():
+    from iptv_manager.models import ChannelRule
+    source = SourceConfig(url='https://list.example/taiwan.m3u', categories=['台湾'])
+    config = AppConfig(sources=[source], policy=PolicyConfig(), channels=[
+        ChannelRule(id='tw-ttv', name='台视', category='台湾', aliases=['台視']),
+        ChannelRule(id='cctv-1', name='CCTV1', category='央视')])
+    body = '#EXTM3U\n#EXTINF:-1,台視\nhttps://a.example/tw.m3u8\n#EXTINF:-1,CCTV1\nhttps://a.example/cn.m3u8\n'
+    async with httpx.AsyncClient(transport=httpx.MockTransport(lambda req: httpx.Response(200, text=body))) as client:
+        result = await fetch_seed_sources(config, client)
+    assert [item.raw_name for item in result.candidates] == ['台視']

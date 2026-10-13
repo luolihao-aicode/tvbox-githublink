@@ -1,6 +1,8 @@
 # HTTP 初筛和媒体复检采用保守超时，避免任务被慢源拖住。
 http_timeout_seconds: 5
 media_probe_seconds: 8
+# 媒体复检并发保持较低水平，单域名仍受 per_host_concurrency 限制。
+media_concurrency: 4
 history_limit: 30
 minimum_height: 720
 switch_margin: 8

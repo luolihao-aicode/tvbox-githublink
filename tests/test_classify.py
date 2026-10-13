@@ -53,3 +53,13 @@ def test_public_playlist_quality_annotations_do_not_hide_channel(raw, channel_ru
 
 def test_public_playlist_english_satellite_name_matches(channel_rules):
     assert classify_channel('Hunan TV (2160p)', channel_rules).channel_id == 'hunan-satellite'
+
+
+@pytest.mark.parametrize('raw,expected', [
+    ('台視 HD', 'tw-ttv'), ('民視新聞台', 'tw-ftv-news'),
+    ('EBC News (東森新聞台) (1080p) [Not 24/7]', 'tw-ebc-news'),
+    ('Taiwan Plus TV (1080p)', 'tw-taiwan-plus'),
+    ('DaAi1 (大愛1) (720p)', 'tw-daai-1'),
+    ('客家電視台', 'tw-hakka'), ('三立新聞', 'tw-set-news')])
+def test_taiwan_source_names_match_explicit_aliases(raw, expected, channel_rules):
+    assert classify_channel(raw, channel_rules).channel_id == expected

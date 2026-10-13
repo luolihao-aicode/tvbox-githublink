@@ -122,3 +122,52 @@ async def test_empty_discovery_persists_failure_report_without_overwriting_playl
     assert report['issues'][0]['code'] == 'GITHUB_SEARCH_FAILED'
     assert report['published_channels'] == 0
     assert (output / 'combined.m3u').read_text(encoding='utf-8') == '#EXTM3U\n旧频道\n'
+
+
+@pytest.mark.asyncio
+async def test_taiwan_only_update_keeps_other_channels_history_unchanged(tmp_path, candidate_factory):
+    from iptv_manager.models import ChannelCategory
+    now = datetime(2026, 10, 14, tzinfo=UTC)
+    cctv = candidate_factory('https://stream.example/cctv.m3u8', 'CCTV1')
+    cctv.history = [_successful_check(now - timedelta(days=1)), _successful_check(now)]
+    cctv.channel_id, cctv.channel_name, cctv.category = 'cctv-1', 'CCTV-1 综合', ChannelCategory.CCTV
+    taiwan = candidate_factory('https://stream.example/taiwan.m3u8', '台視')
+    taiwan.history = [_successful_check(now - timedelta(days=1))]
+    data = tmp_path / 'data'
+    data.mkdir()
+    (data / 'candidates.json').write_text(json.dumps([x.model_dump(mode='json') for x in [cctv, taiwan]]), encoding='utf-8')
+    async def discover():
+        return DiscoveryResult(candidates=[taiwan])
+    async def http_probe(candidates, policy):
+        assert [x.raw_name for x in candidates] == ['台視']
+        return [_successful_check(now)]
+    async def media_probe(item, policy):
+        return _successful_check(now)
+    result = await run_pipeline(PipelineOptions(Path('config'), data, tmp_path / 'output',
+                                               categories=(ChannelCategory.TAIWAN,)),
+                                PipelineDependencies(discover, http_probe, media_probe, now=lambda: now))
+    assert {x.channel_id for x in result.selections} == {'cctv-1', 'tw-ttv'}
+    assert len(next(x for x in result.candidates if x.channel_id == 'cctv-1').history) == 2
+    assert len(next(x for x in result.candidates if x.channel_id == 'tw-ttv').history) == 2
+
+
+@pytest.mark.asyncio
+async def test_media_checks_run_with_bounded_parallelism(tmp_path, candidate_factory):
+    import asyncio
+    now = datetime(2026, 10, 14, tzinfo=UTC)
+    items = [candidate_factory(f'https://host{index}.example/live.m3u8', '台视') for index in range(6)]
+    active, maximum = 0, 0
+    async def discover():
+        return DiscoveryResult(candidates=items)
+    async def http_probe(candidates, policy):
+        return [_successful_check(now) for item in candidates]
+    async def media_probe(item, policy):
+        nonlocal active, maximum
+        active += 1
+        maximum = max(maximum, active)
+        await asyncio.sleep(0.01)
+        active -= 1
+        return _successful_check(now)
+    await run_pipeline(PipelineOptions(Path('config'), tmp_path / 'data', tmp_path / 'output', dry_run=True),
+                       PipelineDependencies(discover, http_probe, media_probe, now=lambda: now))
+    assert maximum == 4

@@ -6,7 +6,7 @@ from enum import StrEnum
 from pathlib import Path
 from typing import Sequence
 
-from .models import SourceType, StreamCandidate
+from .models import ChannelCategory, SourceType, StreamCandidate
 from .scoring import ChannelSelection
 from .storage import atomic_write_text
 
@@ -116,6 +116,10 @@ def publish_outputs(
         "community.m3u": render_m3u(selections, PublishMode.COMMUNITY),
         "combined.m3u": render_m3u(selections, PublishMode.COMBINED),
         "backup.m3u": render_m3u(selections, PublishMode.BACKUP),
+        "taiwan.m3u": render_m3u(
+            [item for item in selections if item.primary.category is ChannelCategory.TAIWAN],
+            PublishMode.BACKUP,
+        ),
         "status.json": json.dumps(
             build_status(selections, checked_at, measurement_source), ensure_ascii=False, indent=2
         )

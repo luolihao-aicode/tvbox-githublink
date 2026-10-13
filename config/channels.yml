@@ -63,28 +63,50 @@ channels:
   - {id: hk-phoenix-info, name: 凤凰卫视资讯台, category: 香港, aliases: [凤凰资讯, 凤凰资讯台, Phoenix InfoNews Channel]}
 
   # 台湾知名频道
-  - {id: tw-cts, name: 华视, category: 台湾, aliases: [中华电视公司, CTS]}
-  - {id: tw-ctv, name: 中视, category: 台湾, aliases: [中国电视公司, CTV]}
-  - {id: tw-ttv, name: 台视, category: 台湾, aliases: [台湾电视公司, TTV]}
-  - {id: tw-ftv, name: 民视, category: 台湾, aliases: [民间全民电视公司, FTV, FTV (Taiwan)]}
-  - {id: tw-pts, name: 公视, category: 台湾, aliases: [公共电视, PTS]}
-  - {id: tw-pts2, name: 公视台语台, category: 台湾, aliases: [公视台语, PTS Taigi]}
-  - {id: tw-taiwan-plus, name: TaiwanPlus, category: 台湾, aliases: [Taiwan Plus]}
-  - {id: tw-set-news, name: 三立新闻台, category: 台湾, aliases: [三立新闻, SET新闻, SET News]}
-  - {id: tw-set-taiwan, name: 三立台湾台, category: 台湾, aliases: [三立台湾]}
-  - {id: tw-set-metro, name: 三立都会台, category: 台湾, aliases: [三立都会]}
-  - {id: tw-tvbs-news, name: TVBS 新闻台, category: 台湾, aliases: [TVBS新闻, TVBS NEWS, TVBS News]}
-  - {id: tw-tvbs, name: TVBS, category: 台湾, aliases: [TVBS欢乐台]}
-  - {id: tw-ebc-news, name: 东森新闻台, category: 台湾, aliases: [东森新闻, EBC新闻, EBC News]}
-  - {id: tw-ebc-finance, name: 东森财经新闻台, category: 台湾, aliases: [东森财经, 东森财经新闻, EBC Financial News]}
-  - {id: tw-cti-news, name: 中天新闻台, category: 台湾, aliases: [中天新闻, CTI新闻]}
-  - {id: tw-era-news, name: 年代新闻台, category: 台湾, aliases: [年代新闻]}
-  - {id: tw-next-news, name: 壹新闻, category: 台湾, aliases: [壹电视新闻台, NEXT TV]}
-  - {id: tw-ftv-news, name: 民视新闻台, category: 台湾, aliases: [民视新闻]}
-  - {id: tw-global-news, name: 寰宇新闻台, category: 台湾, aliases: [寰宇新闻]}
-  - {id: tw-momo, name: MOMO 综合台, category: 台湾, aliases: [MOMO综合, MOMO TV]}
+  - {id: tw-cts, name: 华视, category: 台湾, aliases: [中华电视公司, CTS, 華視, 华视主频]}
+  - {id: tw-ctv, name: 中视, category: 台湾, aliases: [中国电视公司, CTV, 中視]}
+  - {id: tw-ttv, name: 台视, category: 台湾, aliases: [台湾电视公司, TTV, 台視, 臺灣電視台]}
+  - {id: tw-ftv, name: 民视, category: 台湾, aliases: [民间全民电视公司, FTV, FTV (Taiwan), 民視, 民视无线台, 民視無線台, FTV (民視)]}
+  - {id: tw-pts, name: 公视, category: 台湾, aliases: [公共电视, PTS, 公視]}
+  - {id: tw-pts2, name: 公视台语台, category: 台湾, aliases: [公视台语, PTS Taigi, 公視台語台]}
+  - {id: tw-taiwan-plus, name: TaiwanPlus, category: 台湾, aliases: [Taiwan Plus, Taiwan Plus TV]}
+  - {id: tw-set-news, name: 三立新闻台, category: 台湾, aliases: [三立新闻, SET新闻, SET News, 三立新聞, 三立新聞台, SET News (三立新聞)]}
+  - {id: tw-set-taiwan, name: 三立台湾台, category: 台湾, aliases: [三立台湾, 三立台灣, 三立台灣台]}
+  - {id: tw-set-metro, name: 三立都会台, category: 台湾, aliases: [三立都会, 三立都會, 三立都會台]}
+  - {id: tw-tvbs-news, name: TVBS 新闻台, category: 台湾, aliases: [TVBS新闻, TVBS NEWS, TVBS News, TVBS新聞, TVBS新聞台, TVBS News (TVBS新聞台)]}
+  - {id: tw-tvbs, name: TVBS, category: 台湾, aliases: [TVBS欢乐台, TVBS歡樂台, TVBS欢乐]}
+  - {id: tw-ebc-news, name: 东森新闻台, category: 台湾, aliases: [东森新闻, EBC新闻, EBC News, 東森新聞, 東森新聞台, EBC News (東森新聞台)]}
+  - {id: tw-ebc-finance, name: 东森财经新闻台, category: 台湾, aliases: [东森财经, 东森财经新闻, EBC Financial News, 東森財經, 東森財經新聞台, EBC Financial News (東森財經新聞台)]}
+  - {id: tw-cti-news, name: 中天新闻台, category: 台湾, aliases: [中天新闻, CTI新闻, 中天新聞, 中天新聞台]}
+  - {id: tw-era-news, name: 年代新闻台, category: 台湾, aliases: [年代新闻, 年代新聞, 年代新聞台]}
+  - {id: tw-next-news, name: 壹新闻, category: 台湾, aliases: [壹电视新闻台, NEXT TV, 壹新聞, 壹電視新聞台]}
+  - {id: tw-ftv-news, name: 民视新闻台, category: 台湾, aliases: [民视新闻, 民視新聞, 民視新聞台]}
+  - {id: tw-global-news, name: 寰宇新闻台, category: 台湾, aliases: [寰宇新闻, 寰宇新聞, 寰宇新聞台]}
+  - {id: tw-momo, name: MOMO 综合台, category: 台湾, aliases: [MOMO综合, MOMO TV, MOMO綜合台, MOMO綜合]}
   - {id: tw-dazn-1, name: DAZN 1, category: 台湾, aliases: [ELEVEN SPORTS 1, Eleven体育1]}
   - {id: tw-dazn-2, name: DAZN 2, category: 台湾, aliases: [ELEVEN SPORTS 2, Eleven体育2]}
-  - {id: tw-videoland-sports, name: 纬来体育台, category: 台湾, aliases: [纬来体育]}
-  - {id: tw-videoland-movie, name: 纬来电影台, category: 台湾, aliases: [纬来电影]}
+  - {id: tw-videoland-sports, name: 纬来体育台, category: 台湾, aliases: [纬来体育, 緯來體育, 緯來體育台]}
+  - {id: tw-videoland-movie, name: 纬来电影台, category: 台湾, aliases: [纬来电影, 緯來電影, 緯來電影台]}
   - {id: tw-axn, name: AXN 台湾, category: 台湾, aliases: [AXN Taiwan, AXN, AXN Asia Taiwan]}
+  # 台湾试播扩展：公开新闻、公共文化及知名综合频道。
+  - {id: tw-daai-1, name: 大爱一台, category: 台湾, aliases: [大愛1, 大愛1台, 大爱1台, 大愛電視, DaAi 1, DaAi1 (大愛1)]}
+  - {id: tw-daai-2, name: 大爱二台, category: 台湾, aliases: [大愛2, 大愛2台, 大爱2台, 大愛二台, DaAi 2, DaAi2 (大愛2)]}
+  - {id: tw-hakka, name: 客家电视台, category: 台湾, aliases: [客家電視台, 客家电视, 客家電視, Hakka TV]}
+  - {id: tw-indigenous, name: 原住民族电视台, category: 台湾, aliases: [原住民族電視台, 原住民电视, 原住民電視, Indigenous TV, Taiwan Indigenous TV]}
+  - {id: tw-goodtv-1, name: 好消息一台, category: 台湾, aliases: [GOOD TV CH1 綜合台, GOODTV好消息, 好消息, 好消息1台]}
+  - {id: tw-goodtv-2, name: 好消息二台, category: 台湾, aliases: [GOOD TV CH2 真理台, 好消息2台]}
+  - {id: tw-cts-news, name: 华视新闻资讯台, category: 台湾, aliases: [華視新聞資訊, 華視新聞資訊台, 华视新闻, 華視新聞, CTS News, CTS News (華視新聞資訊)]}
+  - {id: tw-ctv-news, name: 中视新闻台, category: 台湾, aliases: [中視新聞台, 中視新聞, 中视新闻, CTV News]}
+  - {id: tw-ttv-news, name: 台视新闻台, category: 台湾, aliases: [台視新聞台, 台視新聞, 台视新闻, TTV News]}
+  - {id: tw-tvbs-asia, name: TVBS 亚洲台, category: 台湾, aliases: [TVBS亚洲, TVBS亞洲, TVBS亞州, TVBS-Asia, TVBS Asia]}
+  - {id: tw-ftv-one, name: 民视第一台, category: 台湾, aliases: [民視第一台, FTV One, FTV One (民視第一台)]}
+  - {id: tw-ftv-taiwan, name: 民视台湾台, category: 台湾, aliases: [民視台灣台, 民视台湾, FTV Taiwan, FTV Taiwan (民視台灣台)]}
+  - {id: tw-cti-variety, name: 中天综合台, category: 台湾, aliases: [中天综合, 中天綜合, 中天綜合台, CTi Variety, CTi Variety (中天綜合台)]}
+  - {id: tw-gtv-first, name: 八大第一台, category: 台湾, aliases: [八大第一, GTV八大第1台]}
+  - {id: tw-gtv-variety, name: 八大综合台, category: 台湾, aliases: [八大综合, 八大綜合, 八大綜合台, GTV八大綜合台]}
+  - {id: tw-gtv-drama, name: 八大戏剧台, category: 台湾, aliases: [八大戲劇, 八大戏剧, 八大戲劇台, GTV八大戲劇]}
+  - {id: tw-ebc-variety, name: 东森综合台, category: 台湾, aliases: [东森综合, 東森綜合, 東森綜合台]}
+  - {id: tw-ebc-drama, name: 东森戏剧台, category: 台湾, aliases: [东森戏剧, 東森戲劇, 東森戲劇台]}
+  - {id: tw-ebc-movie, name: 东森电影台, category: 台湾, aliases: [东森电影, 東森電影, 東森電影台]}
+  - {id: tw-ebc-kids, name: 东森幼幼台, category: 台湾, aliases: [東森幼幼台, 东森幼幼]}
+  - {id: tw-ustv-news, name: 非凡新闻台, category: 台湾, aliases: [非凡新聞台, 非凡新聞, 非凡新闻]}

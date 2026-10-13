@@ -2,18 +2,20 @@ from __future__ import annotations
 
 import json
 import os
+import asyncio
 from collections import Counter
 from collections.abc import Awaitable, Callable, Sequence
 from dataclasses import dataclass, field
 from datetime import UTC, datetime
 from pathlib import Path
+from urllib.parse import urlsplit
 
 import httpx
 
 from .classify import classify_channel
 from .config import load_config
 from .discovery import DiscoveryResult, fetch_seed_sources, search_github
-from .models import CheckResult, PolicyConfig, StreamCandidate, StreamStatus
+from .models import ChannelCategory, CheckResult, PolicyConfig, StreamCandidate, StreamStatus
 from .probe_http import probe_many_http
 from .probe_media import probe_media
 from .publisher import publish_outputs
@@ -39,6 +41,7 @@ class PipelineOptions:
     dry_run: bool = False
     discover_github: bool = False
     github_token: str = ""
+    categories: tuple[ChannelCategory, ...] = ()
 
 
 @dataclass(frozen=True, slots=True)
@@ -151,15 +154,22 @@ async def run_pipeline(
             )
         )
     candidates.sort(key=lambda item: item.stream_id)
+    to_check = [item for item in candidates if not options.categories or item.category in options.categories]
+    untouched = [item for item in candidates if options.categories and item.category not in options.categories]
 
-    http_results = await deps.probe_http(candidates, config.policy)
-    if len(http_results) != len(candidates):
+    http_results = await deps.probe_http(to_check, config.policy)
+    if len(http_results) != len(to_check):
         raise ValueError("HTTP 检测结果数量与候选源数量不一致")
 
-    updated: list[StreamCandidate] = []
-    for stream, http_result in zip(candidates, http_results, strict=True):
+    media_limit = asyncio.Semaphore(config.policy.media_concurrency)
+    media_hosts: dict[str, asyncio.Semaphore] = {}
+
+    async def check_one(stream: StreamCandidate, http_result: CheckResult) -> StreamCandidate:
         if http_result.success:
-            media_result = await deps.probe_media(stream, config.policy)
+            host = urlsplit(str(stream.url)).hostname or ''
+            host_limit = media_hosts.setdefault(host, asyncio.Semaphore(config.policy.per_host_concurrency))
+            async with media_limit, host_limit:
+                media_result = await deps.probe_media(stream, config.policy)
             result = _merge_check(http_result, media_result)
         else:
             result = http_result
@@ -172,7 +182,11 @@ async def run_pipeline(
             changes["last_success_at"] = result.checked_at
         checked = stream.model_copy(update=changes)
         checked.score = calculate_score(checked.history, config.policy)
-        updated.append(update_lifecycle(checked, now, config.policy))
+        return update_lifecycle(checked, now, config.policy)
+
+    checked_items = await asyncio.gather(*(check_one(stream, check) for stream, check
+                                          in zip(to_check, http_results, strict=True)))
+    updated = [*untouched, *checked_items]
 
     selections = select_lines(updated, config.policy)
     selected_states = {line.stream_id: line.status for choice in selections
@@ -184,6 +198,8 @@ async def run_pipeline(
             stream.status = StreamStatus.CANDIDATE
     reasons: Counter[str] = Counter()
     for stream in updated:
+        if (options.categories and stream.category not in options.categories) or not stream.history:
+            continue
         latest = stream.history[-1]
         if not latest.success:
             reasons[latest.failure_code or 'PROBE_FAILED'] += 1
@@ -191,14 +207,16 @@ async def run_pipeline(
             reasons['INSUFFICIENT_MEDIA_DURATION'] += 1
         elif (latest.height or 0) < config.policy.minimum_height:
             reasons['BELOW_HD_THRESHOLD'] += 1
-        elif len(stream.history) < 2 or not all(item.success for item in stream.history[-2:]):
+        elif len(stream.history) < 2 or not all(item.success and item.continuous_read for item in stream.history[-2:]):
             reasons['WAITING_SECOND_SUCCESS'] += 1
     report = {
         'schema_version': 1,
         'checked_at': now.isoformat(),
         'discovered_sources': len(discovery.candidates),
         'matched_sources': len(candidates),
-        'successful_sources': sum(stream.history[-1].success for stream in updated),
+        'checked_sources': len(to_check),
+        'successful_sources': sum(stream.history[-1].success for stream in updated
+                                  if stream.history and (not options.categories or stream.category in options.categories)),
         'published_channels': len(selections),
         'filter_reasons': dict(reasons),
         'unknown_channel_names': sorted(set(unknown_names))[:100],

@@ -52,3 +52,18 @@ def test_empty_publication_does_not_overwrite_existing_outputs(tmp_path) -> None
 
     assert old_file.read_text(encoding="utf-8") == "#EXTM3U\n旧订阅\n"
 
+
+def test_taiwan_playlist_contains_only_taiwan_primary_and_backups(tmp_path, selection, candidate_factory):
+    taiwan = candidate_factory('https://stream.example/taiwan.m3u8', '台视')
+    taiwan.channel_id = 'tw-ttv'
+    taiwan.channel_name = '台视'
+    taiwan.category = ChannelCategory.TAIWAN
+    backup = taiwan.model_copy(update={'url': 'https://stream.example/backup.m3u8'})
+    publish_outputs([selection, ChannelSelection('tw-ttv', taiwan, (backup,))], tmp_path,
+                    datetime(2026, 10, 14, tzinfo=UTC))
+    text = (tmp_path / 'taiwan.m3u').read_text(encoding='utf-8')
+    assert text.count('#EXTINF:') == 2
+    assert '台视 · 备用1' in text
+    assert 'CCTV' not in text
+    assert 'tvg-logo' not in text
+

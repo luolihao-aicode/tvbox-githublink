@@ -36,6 +36,7 @@ class SourceConfig(StrictModel):
     type: SourceType = SourceType.COMMUNITY
     enabled: bool = True
     max_bytes: int = Field(default=2_000_000, ge=1, le=10_000_000)
+    categories: list[ChannelCategory] = Field(default_factory=list)
 
 
 class GitHubSearchConfig(StrictModel):
@@ -57,6 +58,7 @@ class ChannelRule(StrictModel):
 class PolicyConfig(StrictModel):
     http_timeout_seconds: float = Field(default=5.0, gt=0)
     media_probe_seconds: float = Field(default=8.0, gt=0)
+    media_concurrency: int = Field(default=4, ge=1, le=16)
     history_limit: int = Field(default=30, ge=1)
     minimum_height: int = Field(default=720, ge=540)
     switch_margin: float = Field(default=8.0, ge=0, le=100)

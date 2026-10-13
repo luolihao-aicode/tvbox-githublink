@@ -6,6 +6,7 @@ from dataclasses import dataclass, field
 import httpx
 
 from .models import AppConfig, SourceType, StreamCandidate
+from .classify import classify_channel
 from .parser import parse_m3u
 
 
@@ -65,7 +66,11 @@ async def fetch_seed_sources(
                 DiscoveryIssue(source_url, "SOURCE_ENCODING_INVALID", "来源不是有效 UTF-8 文本")
             )
             continue
-        result.candidates.extend(parse_m3u(text, source_url, source.type))
+        parsed = parse_m3u(text, source_url, source.type)
+        if source.categories:
+            parsed = [item for item in parsed
+                      if classify_channel(item.raw_name, config.channels).category in source.categories]
+        result.candidates.extend(parsed)
     return result
 
 

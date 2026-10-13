@@ -8,6 +8,7 @@ from pathlib import Path
 from typing import Sequence
 
 from .pipeline import PipelineOptions, run_pipeline
+from .models import ChannelCategory
 from .publisher import OutputValidationError
 
 
@@ -23,6 +24,8 @@ def _parser() -> argparse.ArgumentParser:
         sub.add_argument("--data-dir", type=Path, default=Path("data"))
         sub.add_argument("--output-dir", type=Path, default=Path("output"))
         sub.add_argument("--dry-run", action="store_true", help="只运行检测，不写入文件")
+        sub.add_argument('--category', choices=[item.value for item in ChannelCategory],
+                         help='只复检指定分类，其他分类保留原检测记录')
     validate = subparsers.add_parser("validate-output", help="校验已生成订阅")
     validate.add_argument("--output-dir", type=Path, default=Path("output"))
     return parser
@@ -52,6 +55,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         dry_run=args.dry_run,
         discover_github=args.command == "discover",
         github_token=os.environ.get("GITHUB_TOKEN", ""),
+        categories=(ChannelCategory(args.category),) if args.category else (),
     )
     try:
         result = asyncio.run(run_pipeline(options))

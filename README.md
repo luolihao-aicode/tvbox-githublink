@@ -83,6 +83,14 @@ iptv-manager discover --config-dir config --data-dir data --output-dir output
 
 默认已配置 iptv-org 的中国大陆、香港、台湾三个公开社区列表，日常检测不依赖 GitHub 代码搜索是否可用。列表里的英文名称和分辨率注释会映射到频道白名单；发现了线路并不保证该线路通过播放与高清检测。
 
+台湾补充来源包括 iptv-org 原始台湾列表和两份公开社区列表，仅收录台湾频道。频道别名兼容简体、繁体及明确的中英文混合名称。可单独复检台湾线路，保留其他分类已有检测记录：
+
+```bash
+iptv-manager update --category 台湾 --config-dir config --data-dir data --output-dir output
+```
+
+媒体复检默认最多并发 4 个进程，且受单域名并发限制；可在 `policy.yml` 中调整 `media_concurrency`。
+
 ## 检测指标
 
 综合评分为 100 分：
@@ -103,12 +111,14 @@ https://用户名.github.io/仓库名/combined.m3u
 https://用户名.github.io/仓库名/official.m3u
 https://用户名.github.io/仓库名/community.m3u
 https://用户名.github.io/仓库名/backup.m3u
+https://用户名.github.io/仓库名/taiwan.m3u
 ```
 
 - `combined.m3u`：普通用户推荐，每频道一个最佳线路，合格时优先官方源。
 - `official.m3u`：仅官方来源。
 - `community.m3u`：检测合格的社区发现来源。
 - `backup.m3u`：主源及最多两个备用源。
+- `taiwan.m3u`：仅台湾频道，包含合格主源与备用源，便于在电视上逐条试播；采用同样的高清与连续两次成功门槛。
 
 仓库刚创建时订阅可能只有 M3U 文件头。系统需要至少两轮检测才会发布首批频道。
 
