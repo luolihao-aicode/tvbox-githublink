@@ -5,6 +5,7 @@ from datetime import datetime
 from enum import StrEnum
 from pathlib import Path
 from typing import Sequence
+from urllib.parse import urlsplit
 
 from .models import ChannelCategory, SourceType, StreamCandidate
 from .scoring import ChannelSelection
@@ -111,15 +112,25 @@ def publish_outputs(
     if not selections:
         raise OutputValidationError("没有可发布频道，已保留上一版订阅")
 
+    taiwan = [item for item in selections if item.primary.category is ChannelCategory.TAIWAN]
+    libretv: list[ChannelSelection] = []
+    for selection in taiwan:
+        # 保守导出明确的 HLS 地址；原始 TS 直链留给 VLC/电视播放器使用。
+        hls = [stream for stream in [selection.primary, *selection.backups]
+               if urlsplit(str(stream.url)).path.lower().endswith('.m3u8')]
+        if hls:
+            libretv.append(ChannelSelection(selection.channel_id, hls[0], tuple(hls[1:])))
+
     rendered = {
         "official.m3u": render_m3u(selections, PublishMode.OFFICIAL),
         "community.m3u": render_m3u(selections, PublishMode.COMMUNITY),
         "combined.m3u": render_m3u(selections, PublishMode.COMBINED),
         "backup.m3u": render_m3u(selections, PublishMode.BACKUP),
         "taiwan.m3u": render_m3u(
-            [item for item in selections if item.primary.category is ChannelCategory.TAIWAN],
+            taiwan,
             PublishMode.BACKUP,
         ),
+        "taiwan-libretv.m3u": render_m3u(libretv, PublishMode.BACKUP),
         "status.json": json.dumps(
             build_status(selections, checked_at, measurement_source), ensure_ascii=False, indent=2
         )

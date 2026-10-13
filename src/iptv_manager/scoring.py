@@ -108,6 +108,8 @@ def update_lifecycle(
 
 
 def _is_publishable(stream: StreamCandidate, policy: PolicyConfig) -> bool:
+    if stream.stream_id in policy.rejected_streams:
+        return False
     if stream.status in {StreamStatus.COOLING, StreamStatus.RETIRED}:
         return False
     if stream.channel_id is None or len(stream.history) < 2:

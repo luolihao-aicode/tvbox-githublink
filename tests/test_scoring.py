@@ -59,3 +59,12 @@ def test_select_lines_keeps_one_primary_and_two_backups(candidate_factory) -> No
     assert len(selection.backups) == 2
     assert all(item.status is StreamStatus.BACKUP for item in selection.backups)
 
+
+def test_known_wrong_channel_is_excluded_even_with_successful_history(candidate_factory):
+    now = datetime(2026, 10, 14, tzinfo=UTC)
+    stream = candidate_factory('https://stream.example/wrong.m3u8', '中视')
+    stream.channel_id = 'tw-ctv'
+    stream.history = [_success(now - timedelta(days=1)), _success(now)]
+    policy = PolicyConfig(rejected_streams={stream.stream_id: '实测为 CCTV-15，标注频道不符'})
+    assert select_lines([stream], policy) == []
+

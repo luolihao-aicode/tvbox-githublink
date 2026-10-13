@@ -1,10 +1,11 @@
 from __future__ import annotations
 
 import asyncio
+import re
 from dataclasses import dataclass
 from datetime import UTC, datetime
 from time import perf_counter
-from urllib.parse import urljoin, urlsplit
+from urllib.parse import unquote, urljoin, urlsplit
 
 import httpx
 
@@ -13,6 +14,18 @@ from .normalize import normalize_url
 
 PLAYLIST_LIMIT = 512_000
 STREAM_SAMPLE_LIMIT = 256_000
+_PLACEHOLDER_PATH = re.compile(r'(?:^|/)(?:nosignal|no_signal|no-signal|placeholder)(?:[_.-]|/|$)', re.IGNORECASE)
+
+
+class ProbeRejected(ValueError):
+    def __init__(self, code: str):
+        self.code = code
+        super().__init__(code)
+
+
+def _reject_placeholder(url: str) -> None:
+    if _PLACEHOLDER_PATH.search(unquote(urlsplit(url).path)):
+        raise ProbeRejected('PLACEHOLDER_STREAM')
 
 
 @dataclass(frozen=True, slots=True)
@@ -21,6 +34,7 @@ class _Sample:
     content_type: str
     first_byte_seconds: float
     elapsed_seconds: float
+    url: str = ''
 
 
 async def _fetch_sample(
@@ -28,11 +42,14 @@ async def _fetch_sample(
     url: str,
     limit: int,
 ) -> _Sample:
+    _reject_placeholder(url)
     started = perf_counter()
     first_byte: float | None = None
     body = bytearray()
     async with client.stream("GET", url, follow_redirects=True) as response:
         response.raise_for_status()
+        resolved_url = str(response.url)
+        _reject_placeholder(resolved_url)
         async for chunk in response.aiter_bytes():
             if first_byte is None:
                 first_byte = perf_counter() - started
@@ -42,7 +59,7 @@ async def _fetch_sample(
                 break
         content_type = response.headers.get("content-type", "").lower()
     elapsed = max(perf_counter() - started, 1e-9)
-    return _Sample(bytes(body), content_type, first_byte or elapsed, elapsed)
+    return _Sample(bytes(body), content_type, first_byte or elapsed, elapsed, resolved_url)
 
 
 def _looks_like_html(sample: _Sample) -> bool:
@@ -74,10 +91,13 @@ async def _probe_hls(
         return False, sample
     if not text.lstrip().startswith("#EXTM3U"):
         return False, sample
+    tags = {line.strip().upper() for line in text.splitlines() if line.strip().startswith('#')}
+    if '#EXT-X-ENDLIST' in tags or '#EXT-X-PLAYLIST-TYPE:VOD' in tags:
+        raise ProbeRejected('NON_LIVE_PLAYLIST')
     uri = _playlist_uri(text)
     if uri is None:
         return False, sample
-    child_url = normalize_url(urljoin(playlist_url, uri))
+    child_url = normalize_url(urljoin(sample.url or playlist_url, uri))
     child = await _fetch_sample(client, child_url, STREAM_SAMPLE_LIMIT)
     if _looks_like_html(child) or not child.body:
         return False, child
@@ -92,6 +112,8 @@ async def probe_http(
     policy: PolicyConfig,
 ) -> CheckResult:
     checked_at = datetime.now(UTC)
+    if candidate.stream_id in policy.rejected_streams:
+        return CheckResult(checked_at=checked_at, success=False, failure_code='MANUAL_REJECTION')
     try:
         sample = await _fetch_sample(client, str(candidate.url), PLAYLIST_LIMIT)
         if _looks_like_html(sample):
@@ -138,6 +160,8 @@ async def probe_http(
             first_byte_seconds=sample.first_byte_seconds,
             transfer_bytes_per_second=speed,
         )
+    except ProbeRejected as exc:
+        return CheckResult(checked_at=checked_at, success=False, failure_code=exc.code)
     except httpx.TimeoutException:
         return CheckResult(
             checked_at=checked_at,

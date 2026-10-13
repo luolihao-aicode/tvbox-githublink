@@ -67,3 +67,21 @@ def test_taiwan_playlist_contains_only_taiwan_primary_and_backups(tmp_path, sele
     assert 'CCTV' not in text
     assert 'tvg-logo' not in text
 
+
+def test_libretv_taiwan_export_promotes_hls_backup_and_excludes_raw_ts(tmp_path, selection, candidate_factory):
+    taiwan = candidate_factory('https://stream.example/live.ts', '台视')
+    taiwan.channel_id = 'tw-ttv'
+    taiwan.channel_name = '台视'
+    taiwan.category = ChannelCategory.TAIWAN
+    backup = taiwan.model_copy(update={'url': 'https://stream.example/backup.m3u8?token=demo'})
+    ts_only = taiwan.model_copy(update={'channel_id': 'tw-axn', 'url': 'https://stream.example/axn.ts'})
+    publish_outputs([selection, ChannelSelection('tw-ttv', taiwan, (backup,)),
+                     ChannelSelection('tw-axn', ts_only, ())], tmp_path,
+                    datetime(2026, 10, 14, tzinfo=UTC))
+    text = (tmp_path / 'taiwan-libretv.m3u').read_text(encoding='utf-8')
+    assert text.count('#EXTINF:') == 1
+    assert 'https://stream.example/backup.m3u8?token=demo' in text
+    assert '.ts' not in text
+    assert 'CCTV' not in text
+    assert '备用' not in text
+

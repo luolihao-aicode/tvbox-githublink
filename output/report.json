@@ -1,18 +1,20 @@
 {
   "schema_version": 1,
-  "checked_at": "2026-10-13T17:23:13.876659+00:00",
+  "checked_at": "2026-10-13T17:56:43.552003+00:00",
   "discovered_sources": 295,
   "matched_sources": 143,
   "checked_sources": 96,
-  "successful_sources": 22,
-  "published_channels": 26,
+  "successful_sources": 6,
+  "published_channels": 11,
   "filter_reasons": {
     "HTTP_TIMEOUT": 39,
-    "HTTP_FAILED": 28,
+    "NON_LIVE_PLAYLIST": 3,
     "HTML_RESPONSE": 5,
-    "WAITING_SECOND_SUCCESS": 1,
-    "BELOW_HD_THRESHOLD": 1,
     "MEDIA_TIMEOUT": 1,
+    "HTTP_FAILED": 25,
+    "PLACEHOLDER_STREAM": 14,
+    "MANUAL_REJECTION": 2,
+    "BELOW_HD_THRESHOLD": 1,
     "FFPROBE_FAILED": 1
   },
   "unknown_channel_names": [

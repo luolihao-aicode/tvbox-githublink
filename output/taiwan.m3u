@@ -1,41 +1,11 @@
 #EXTM3U
 #EXTINF:-1 tvg-id="tw-axn" tvg-name="AXN 台湾" group-title="台湾",AXN 台湾
 http://125.227.210.55:4050/VideoInput/play.ts
-#EXTINF:-1 tvg-id="tw-cts" tvg-name="华视" group-title="台湾",华视
-https://epg.pw/stream/2ef08642072574008f65939021951a59fe9fc71369c751393f40a1b2234e18c9.m3u8
-#EXTINF:-1 tvg-id="tw-ctv" tvg-name="中视" group-title="台湾",中视
-http://37.27.111.214:8080/live/7/hls.m3u8
-#EXTINF:-1 tvg-id="tw-ctv" tvg-name="中视" group-title="台湾",中视 · 备用1
-https://epg.pw/stream/850967cb490cf3c98e20a19b56de0e5a029710949cff71a4132bf059dcf656bc.m3u8
-#EXTINF:-1 tvg-id="tw-daai-2" tvg-name="大爱二台" group-title="台湾",大爱二台
-https://epg.pw/stream/1f3e158520af1be7f1dfdd5c56fe0393e54fe4bde8d8fbdfe04f74185117e9db.m3u8
-#EXTINF:-1 tvg-id="tw-ebc-drama" tvg-name="东森戏剧台" group-title="台湾",东森戏剧台
-https://epg.pw/stream/5dc124caeeb73ea07e5542cca877600b90f87a42e72b579e267528c3411b073f.m3u8
-#EXTINF:-1 tvg-id="tw-ebc-finance" tvg-name="东森财经新闻台" group-title="台湾",东森财经新闻台
-https://epg.pw/stream/c4452be892906f85b59ac80ba36d1924380e404a65012937dc589180fd84ebe2.m3u8
-#EXTINF:-1 tvg-id="tw-ebc-kids" tvg-name="东森幼幼台" group-title="台湾",东森幼幼台
-https://epg.pw/stream/de717f629316508933939cc9d90e62b3a86d6377aff1ca390e1717e68c960eb4.m3u8
-#EXTINF:-1 tvg-id="tw-ebc-news" tvg-name="东森新闻台" group-title="台湾",东森新闻台
-https://epg.pw/stream/d91376ed07fba14fec3772dd7bfcc266f213294ded9193f751afb3e7ca95f573.m3u8
-#EXTINF:-1 tvg-id="tw-ebc-variety" tvg-name="东森综合台" group-title="台湾",东森综合台
-https://epg.pw/stream/d8efe6bedc4a8852aafaf7f5e2c0f72096e12f314da5ce617922dd6802352486.m3u8
-#EXTINF:-1 tvg-id="tw-ftv" tvg-name="民视" group-title="台湾",民视
-https://epg.pw/stream/446ff2630964ca5ddcb9f9cb6d4e1a5f2ca1dca875b2a4e1c462b9e5cf83b77d.m3u8
 #EXTINF:-1 tvg-id="tw-ftv-news" tvg-name="民视新闻台" group-title="台湾",民视新闻台
 http://38.64.72.148/hls/modn/list/4012/chunklist1.m3u8
-#EXTINF:-1 tvg-id="tw-global-news" tvg-name="寰宇新闻台" group-title="台湾",寰宇新闻台
-https://epg.pw/stream/eed37c9d7d82dc884bdfa04703da80f8bdb4e9910fbd2b396c8f72fb66093c75.m3u8
-#EXTINF:-1 tvg-id="tw-gtv-variety" tvg-name="八大综合台" group-title="台湾",八大综合台
-https://epg.pw/stream/adb797f4658363759c5a408dfec1e091e7cfe712fe04afaa3b8d7670efef57e1.m3u8
 #EXTINF:-1 tvg-id="tw-indigenous" tvg-name="原住民族电视台" group-title="台湾",原住民族电视台
 https://streamipcfapp.akamaized.net/live/_definst_/live_720/key_b1500.m3u8
-#EXTINF:-1 tvg-id="tw-pts" tvg-name="公视" group-title="台湾",公视
-https://epg.pw/stream/5c0663273403c40461cd1ae04cc5cfa4bb9d5d626270d5ec1754aeb554c3020b.m3u8
-#EXTINF:-1 tvg-id="tw-set-taiwan" tvg-name="三立台湾台" group-title="台湾",三立台湾台
-https://epg.pw/stream/79a263b6160e568f6d3cd91417334e5b08f1638bf5990da99c65d94589d35fb7.m3u8
-#EXTINF:-1 tvg-id="tw-ttv-news" tvg-name="台视新闻台" group-title="台湾",台视新闻台
-http://38.64.72.148/hls/modn/list/4013/chunklist0.m3u8
-#EXTINF:-1 tvg-id="tw-tvbs-news" tvg-name="TVBS 新闻台" group-title="台湾",TVBS 新闻台
-http://61.221.215.25:8800/hls/9/index.m3u8
-#EXTINF:-1 tvg-id="tw-videoland-sports" tvg-name="纬来体育台" group-title="台湾",纬来体育台
-https://epg.pw/stream/65161be2ecd7c7b2e054dbac30922b2673b4eff6497b77c71bb81215aa826cc4.m3u8
+#EXTINF:-1 tvg-id="tw-tvbs-asia" tvg-name="TVBS 亚洲台" group-title="台湾",TVBS 亚洲台
+http://38.64.72.148/hls/modn/list/4005/playlist.m3u8
+#EXTINF:-1 tvg-id="tw-tvbs-asia" tvg-name="TVBS 亚洲台" group-title="台湾",TVBS 亚洲台 · 备用1
+http://38.64.72.148/hls/modn/list/4005/chunklist1.m3u8

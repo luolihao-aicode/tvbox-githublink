@@ -8,3 +8,8 @@ minimum_height: 720
 switch_margin: 8
 global_concurrency: 30
 per_host_concurrency: 2
+
+# 人工确认的错标或解码不稳定线路，不因短时探测成功而重新进入订阅。
+rejected_streams:
+  78cd79e3d4e0d6b9c36ffbc9: "2026-10-14 标注中视，实测画面为 CCTV-15 音乐"
+  d282191abe2c9e2844097fce: "2026-10-14 TVBS 新闻台 30 秒解码未完成，出现 PPS/无有效帧错误"

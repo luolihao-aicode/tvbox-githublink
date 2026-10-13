@@ -64,6 +64,7 @@ class PolicyConfig(StrictModel):
     switch_margin: float = Field(default=8.0, ge=0, le=100)
     global_concurrency: int = Field(default=30, ge=1)
     per_host_concurrency: int = Field(default=2, ge=1)
+    rejected_streams: dict[str, str] = Field(default_factory=dict)
 
     @model_validator(mode="after")
     def validate_concurrency(self) -> "PolicyConfig":

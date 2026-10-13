@@ -1,0 +1,9 @@
+#EXTM3U
+#EXTINF:-1 tvg-id="tw-ftv-news" tvg-name="民视新闻台" group-title="台湾",民视新闻台
+http://38.64.72.148/hls/modn/list/4012/chunklist1.m3u8
+#EXTINF:-1 tvg-id="tw-indigenous" tvg-name="原住民族电视台" group-title="台湾",原住民族电视台
+https://streamipcfapp.akamaized.net/live/_definst_/live_720/key_b1500.m3u8
+#EXTINF:-1 tvg-id="tw-tvbs-asia" tvg-name="TVBS 亚洲台" group-title="台湾",TVBS 亚洲台
+http://38.64.72.148/hls/modn/list/4005/playlist.m3u8
+#EXTINF:-1 tvg-id="tw-tvbs-asia" tvg-name="TVBS 亚洲台" group-title="台湾",TVBS 亚洲台 · 备用1
+http://38.64.72.148/hls/modn/list/4005/chunklist1.m3u8
