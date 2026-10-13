@@ -29,3 +29,11 @@ def test_thirty_days_without_success_retires_stream(candidate_factory) -> None:
     updated = update_lifecycle(stream, now, PolicyConfig())
 
     assert updated.status is StreamStatus.RETIRED
+
+
+def test_recovered_cooling_source_can_rejoin_candidates(candidate_factory):
+    now = datetime(2026, 10, 14, tzinfo=UTC)
+    stream = candidate_factory('https://stream.example/live.m3u8', 'CCTV-1')
+    stream.status = StreamStatus.COOLING
+    stream.history = [_failure(now - timedelta(days=1)), CheckResult(checked_at=now, success=True)]
+    assert update_lifecycle(stream, now, PolicyConfig()).status is StreamStatus.CANDIDATE

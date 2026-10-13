@@ -59,6 +59,10 @@ def main(argv: Sequence[str] | None = None) -> int:
         print(f"错误：{exc}", file=sys.stderr)
         return 2
     print(f"检测完成：{len(result.candidates)} 个候选源，发布 {len(result.selections)} 个频道")
+    for issue in result.issues:
+        print(f'来源发现问题：{issue.code}', file=sys.stderr)
+    for code, count in result.report.get('filter_reasons', {}).items():
+        print(f'筛选结果：{code}，{count} 个源')
     return 0
 
 

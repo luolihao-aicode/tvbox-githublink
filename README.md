@@ -81,6 +81,8 @@ iptv-manager discover --config-dir config --data-dir data --output-dir output
 
 新发现的源不会立即发布。它必须通过 HTTP 和 `ffprobe` 检测，并至少连续成功两次。默认最低清晰度为 720p；只有单频道显式配置后才允许降级到 540p。
 
+默认已配置 iptv-org 的中国大陆、香港、台湾三个公开社区列表，日常检测不依赖 GitHub 代码搜索是否可用。列表里的英文名称和分辨率注释会映射到频道白名单；发现了线路并不保证该线路通过播放与高清检测。
+
 ## 检测指标
 
 综合评分为 100 分：
@@ -114,7 +116,7 @@ https://用户名.github.io/仓库名/backup.m3u
 
 - `update.yml`：北京时间每天 03:23 自动检测和更新。
 - `discover.yml`：北京时间每周日 02:41 搜索 GitHub 新来源。
-- `pages.yml`：当网页或输出变化时部署 GitHub Pages。
+- `pages.yml`：当网页或输出变化、或每日/每周检测任务成功完成时部署 GitHub Pages，并读取默认分支的最新输出。
 
 在仓库的“设置 → Pages”中，将发布来源选择为 GitHub Actions。工作流使用仓库自带的 `GITHUB_TOKEN`，不需要自行创建个人访问令牌。首次推送后可在 Actions 页面手动运行“每周发现新播放源”，第二天再运行一次“每日检测并更新订阅”，用于完成连续两次检测门槛。
 
@@ -122,6 +124,7 @@ https://用户名.github.io/仓库名/backup.m3u
 
 - `ffprobe` 不存在：安装 FFmpeg，并确认 `ffprobe -version` 可执行。
 - 没有生成频道：检查 `report.json`、频道别名、最低清晰度和连续成功次数。
+- 任务绿色但频道仍为空：查看网页的“运行报告”。`discovered_sources` 为抓到的线路数，`matched_sources` 为白名单命中数；`filter_reasons` 中的 `WAITING_SECOND_SUCCESS` 表示等待第二轮成功，`BELOW_HD_THRESHOLD` 表示低于高清门槛。`issues` 会记录 GitHub 搜索或种子抓取失败，CLI 同时输出失败代码。
 - GitHub 搜索被限流：等待下一次每周任务；系统会保留已有候选和订阅。
 - Actions 无法提交：确认工作流权限允许“读取和写入”。
 - Pages 显示数据加载失败：确认 Pages 来源为 GitHub Actions，且 `pages.yml` 已成功完成。

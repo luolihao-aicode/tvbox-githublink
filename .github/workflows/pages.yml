@@ -8,6 +8,10 @@ on:
       - "output/**"
       - ".github/workflows/pages.yml"
   workflow_dispatch:
+  # GITHUB_TOKEN 的自动提交不会触发 push 工作流；检测完成后显式部署最新结果。
+  workflow_run:
+    workflows: [每日检测并更新订阅, 每周发现新播放源]
+    types: [completed]
 
 permissions:
   contents: read
@@ -20,16 +24,19 @@ concurrency:
 
 jobs:
   build:
+    if: github.event_name != 'workflow_run' || (github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.head_branch == github.event.repository.default_branch)
     runs-on: ubuntu-latest
     steps:
       - name: 检出仓库
         uses: actions/checkout@v6
+        with:
+          ref: ${{ github.event.repository.default_branch }}
 
       - name: 组装静态站点
         run: |
           mkdir -p _site
           cp -R web/. _site/
-          cp output/*.m3u output/status.json _site/
+          cp output/*.m3u output/status.json output/report.json _site/
 
       - name: 上传 Pages 制品
         uses: actions/upload-pages-artifact@v3

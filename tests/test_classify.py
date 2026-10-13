@@ -44,3 +44,12 @@ def test_ambiguous_alias_is_rejected() -> None:
 
     assert match.channel_id is None
     assert match.failure_code == "AMBIGUOUS_CHANNEL"
+
+
+@pytest.mark.parametrize('raw', ['CCTV-1 (720p)', 'CCTV-1 HD (1080p)', 'CCTV-1 [Geo-blocked]'])
+def test_public_playlist_quality_annotations_do_not_hide_channel(raw, channel_rules):
+    assert classify_channel(raw, channel_rules).channel_id == 'cctv-1'
+
+
+def test_public_playlist_english_satellite_name_matches(channel_rules):
+    assert classify_channel('Hunan TV (2160p)', channel_rules).channel_id == 'hunan-satellite'

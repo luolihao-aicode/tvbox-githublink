@@ -69,3 +69,24 @@ def test_ffprobe_url_is_passed_as_a_single_argument() -> None:
 
     assert args[-1] == url
     assert args[0] == "ffprobe"
+
+
+@pytest.mark.asyncio
+async def test_video_headers_alone_do_not_prove_continuous_playback(candidate_factory):
+    candidate = candidate_factory('https://stream.example/live.m3u8', '频道')
+    runner = FakeRunner(ProcessOutput(0, json.dumps({'streams': [
+        {'index': 0, 'codec_type': 'video', 'height': 1080, 'width': 1920}
+    ]}), ''))
+    result = await probe_media(candidate, PolicyConfig(), runner)
+    assert result.continuous_read is False
+
+
+@pytest.mark.asyncio
+async def test_video_packet_timestamps_prove_eight_seconds_of_media(candidate_factory):
+    candidate = candidate_factory('https://stream.example/live.m3u8', '频道')
+    payload = {'streams': [{'index': 0, 'codec_type': 'video', 'height': 1080}],
+               'packets': [{'stream_index': 0, 'pts_time': str(t)} for t in (100, 104, 108)]}
+    runner = FakeRunner(ProcessOutput(0, json.dumps(payload), ''))
+    result = await probe_media(candidate, PolicyConfig(), runner)
+    assert result.continuous_read is True
+    assert '-show_packets' in build_ffprobe_args(str(candidate.url), PolicyConfig())

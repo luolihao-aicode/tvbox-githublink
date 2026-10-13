@@ -21,70 +21,70 @@ channels:
   - {id: cctv-17, name: CCTV-17 农业农村, category: 央视, aliases: [CCTV17, 央视十七套, 农业农村]}
 
   # 主流省级卫视，不收录市县频道
-  - {id: anhui-satellite, name: 安徽卫视, category: 地方频道, aliases: []}
-  - {id: beijing-satellite, name: 北京卫视, category: 地方频道, aliases: [BTV北京卫视]}
+  - {id: anhui-satellite, name: 安徽卫视, category: 地方频道, aliases: [Anhui TV]}
+  - {id: beijing-satellite, name: 北京卫视, category: 地方频道, aliases: [BTV北京卫视, Beijing Satellite TV]}
   - {id: chongqing-satellite, name: 重庆卫视, category: 地方频道, aliases: []}
-  - {id: dragon-satellite, name: 东方卫视, category: 地方频道, aliases: [上海卫视]}
+  - {id: dragon-satellite, name: 东方卫视, category: 地方频道, aliases: [上海卫视, Dragon TV]}
   - {id: fujian-southeast-satellite, name: 东南卫视, category: 地方频道, aliases: [福建东南卫视]}
   - {id: gansu-satellite, name: 甘肃卫视, category: 地方频道, aliases: []}
-  - {id: guangdong-satellite, name: 广东卫视, category: 地方频道, aliases: []}
+  - {id: guangdong-satellite, name: 广东卫视, category: 地方频道, aliases: [Guangdong Satellite TV]}
   - {id: guangxi-satellite, name: 广西卫视, category: 地方频道, aliases: []}
-  - {id: guizhou-satellite, name: 贵州卫视, category: 地方频道, aliases: []}
+  - {id: guizhou-satellite, name: 贵州卫视, category: 地方频道, aliases: [Guizhou TV]}
   - {id: hainan-satellite, name: 海南卫视, category: 地方频道, aliases: [旅游卫视]}
-  - {id: hebei-satellite, name: 河北卫视, category: 地方频道, aliases: []}
-  - {id: heilongjiang-satellite, name: 黑龙江卫视, category: 地方频道, aliases: [龙江卫视]}
+  - {id: hebei-satellite, name: 河北卫视, category: 地方频道, aliases: [Hebei TV]}
+  - {id: heilongjiang-satellite, name: 黑龙江卫视, category: 地方频道, aliases: [龙江卫视, Heilongjiang TV]}
   - {id: henan-satellite, name: 河南卫视, category: 地方频道, aliases: []}
   - {id: hubei-satellite, name: 湖北卫视, category: 地方频道, aliases: []}
-  - {id: hunan-satellite, name: 湖南卫视, category: 地方频道, aliases: [芒果卫视]}
-  - {id: jiangsu-satellite, name: 江苏卫视, category: 地方频道, aliases: []}
-  - {id: jiangxi-satellite, name: 江西卫视, category: 地方频道, aliases: []}
+  - {id: hunan-satellite, name: 湖南卫视, category: 地方频道, aliases: [芒果卫视, Hunan TV]}
+  - {id: jiangsu-satellite, name: 江苏卫视, category: 地方频道, aliases: [Jiangsu Satellite TV]}
+  - {id: jiangxi-satellite, name: 江西卫视, category: 地方频道, aliases: [Jiangxi TV]}
   - {id: jilin-satellite, name: 吉林卫视, category: 地方频道, aliases: []}
-  - {id: liaoning-satellite, name: 辽宁卫视, category: 地方频道, aliases: []}
-  - {id: inner-mongolia-satellite, name: 内蒙古卫视, category: 地方频道, aliases: []}
-  - {id: ningxia-satellite, name: 宁夏卫视, category: 地方频道, aliases: []}
-  - {id: qinghai-satellite, name: 青海卫视, category: 地方频道, aliases: []}
-  - {id: shandong-satellite, name: 山东卫视, category: 地方频道, aliases: []}
+  - {id: liaoning-satellite, name: 辽宁卫视, category: 地方频道, aliases: [Liaoning TV]}
+  - {id: inner-mongolia-satellite, name: 内蒙古卫视, category: 地方频道, aliases: [Nei Monggol TV]}
+  - {id: ningxia-satellite, name: 宁夏卫视, category: 地方频道, aliases: [Ningxia Satellite Channel]}
+  - {id: qinghai-satellite, name: 青海卫视, category: 地方频道, aliases: [Qinghai TV]}
+  - {id: shandong-satellite, name: 山东卫视, category: 地方频道, aliases: [Shandong Satellite TV, Shandong TV]}
   - {id: shanxi-satellite, name: 山西卫视, category: 地方频道, aliases: []}
   - {id: shaanxi-satellite, name: 陕西卫视, category: 地方频道, aliases: []}
-  - {id: shenzhen-satellite, name: 深圳卫视, category: 地方频道, aliases: []}
-  - {id: sichuan-satellite, name: 四川卫视, category: 地方频道, aliases: []}
-  - {id: tianjin-satellite, name: 天津卫视, category: 地方频道, aliases: []}
-  - {id: tibet-satellite, name: 西藏卫视, category: 地方频道, aliases: []}
-  - {id: xinjiang-satellite, name: 新疆卫视, category: 地方频道, aliases: []}
-  - {id: yunnan-satellite, name: 云南卫视, category: 地方频道, aliases: []}
-  - {id: zhejiang-satellite, name: 浙江卫视, category: 地方频道, aliases: []}
+  - {id: shenzhen-satellite, name: 深圳卫视, category: 地方频道, aliases: [Shenzhen Satellite TV]}
+  - {id: sichuan-satellite, name: 四川卫视, category: 地方频道, aliases: [Sichuan Satellite TV]}
+  - {id: tianjin-satellite, name: 天津卫视, category: 地方频道, aliases: [Tianjin TV]}
+  - {id: tibet-satellite, name: 西藏卫视, category: 地方频道, aliases: [Xizang TV Chinese]}
+  - {id: xinjiang-satellite, name: 新疆卫视, category: 地方频道, aliases: [Xinjiang TV 1]}
+  - {id: yunnan-satellite, name: 云南卫视, category: 地方频道, aliases: [Yunnan Satellite TV]}
+  - {id: zhejiang-satellite, name: 浙江卫视, category: 地方频道, aliases: [Zhejiang Satellite TV]}
 
   # 少量知名香港频道
-  - {id: hk-rthk-31, name: 香港电台31, category: 香港, aliases: [港台电视31, RTHK31]}
-  - {id: hk-rthk-32, name: 香港电台32, category: 香港, aliases: [港台电视32, RTHK32]}
-  - {id: hk-tvb-jade, name: TVB 翡翠台, category: 香港, aliases: [翡翠台, 无线翡翠台, TVBJade]}
+  - {id: hk-rthk-31, name: 香港电台31, category: 香港, aliases: [港台电视31, RTHK31, RTHK TV 31]}
+  - {id: hk-rthk-32, name: 香港电台32, category: 香港, aliases: [港台电视32, RTHK32, RTHK TV 32]}
+  - {id: hk-tvb-jade, name: TVB 翡翠台, category: 香港, aliases: [翡翠台, 无线翡翠台, TVBJade, Jade]}
   - {id: hk-tvb-news, name: TVB 新闻台, category: 香港, aliases: [无线新闻台, TVBNews]}
-  - {id: hk-phoenix-chinese, name: 凤凰卫视中文台, category: 香港, aliases: [凤凰中文, 凤凰中文台]}
-  - {id: hk-phoenix-info, name: 凤凰卫视资讯台, category: 香港, aliases: [凤凰资讯, 凤凰资讯台]}
+  - {id: hk-phoenix-chinese, name: 凤凰卫视中文台, category: 香港, aliases: [凤凰中文, 凤凰中文台, Phoenix Chinese Channel]}
+  - {id: hk-phoenix-info, name: 凤凰卫视资讯台, category: 香港, aliases: [凤凰资讯, 凤凰资讯台, Phoenix InfoNews Channel]}
 
   # 台湾知名频道
   - {id: tw-cts, name: 华视, category: 台湾, aliases: [中华电视公司, CTS]}
   - {id: tw-ctv, name: 中视, category: 台湾, aliases: [中国电视公司, CTV]}
   - {id: tw-ttv, name: 台视, category: 台湾, aliases: [台湾电视公司, TTV]}
-  - {id: tw-ftv, name: 民视, category: 台湾, aliases: [民间全民电视公司, FTV]}
+  - {id: tw-ftv, name: 民视, category: 台湾, aliases: [民间全民电视公司, FTV, FTV (Taiwan)]}
   - {id: tw-pts, name: 公视, category: 台湾, aliases: [公共电视, PTS]}
   - {id: tw-pts2, name: 公视台语台, category: 台湾, aliases: [公视台语, PTS Taigi]}
   - {id: tw-taiwan-plus, name: TaiwanPlus, category: 台湾, aliases: [Taiwan Plus]}
-  - {id: tw-set-news, name: 三立新闻台, category: 台湾, aliases: [三立新闻, SET新闻]}
+  - {id: tw-set-news, name: 三立新闻台, category: 台湾, aliases: [三立新闻, SET新闻, SET News]}
   - {id: tw-set-taiwan, name: 三立台湾台, category: 台湾, aliases: [三立台湾]}
   - {id: tw-set-metro, name: 三立都会台, category: 台湾, aliases: [三立都会]}
-  - {id: tw-tvbs-news, name: TVBS 新闻台, category: 台湾, aliases: [TVBS新闻, TVBS NEWS]}
+  - {id: tw-tvbs-news, name: TVBS 新闻台, category: 台湾, aliases: [TVBS新闻, TVBS NEWS, TVBS News]}
   - {id: tw-tvbs, name: TVBS, category: 台湾, aliases: [TVBS欢乐台]}
-  - {id: tw-ebc-news, name: 东森新闻台, category: 台湾, aliases: [东森新闻, EBC新闻]}
-  - {id: tw-ebc-finance, name: 东森财经新闻台, category: 台湾, aliases: [东森财经, 东森财经新闻]}
+  - {id: tw-ebc-news, name: 东森新闻台, category: 台湾, aliases: [东森新闻, EBC新闻, EBC News]}
+  - {id: tw-ebc-finance, name: 东森财经新闻台, category: 台湾, aliases: [东森财经, 东森财经新闻, EBC Financial News]}
   - {id: tw-cti-news, name: 中天新闻台, category: 台湾, aliases: [中天新闻, CTI新闻]}
   - {id: tw-era-news, name: 年代新闻台, category: 台湾, aliases: [年代新闻]}
   - {id: tw-next-news, name: 壹新闻, category: 台湾, aliases: [壹电视新闻台, NEXT TV]}
   - {id: tw-ftv-news, name: 民视新闻台, category: 台湾, aliases: [民视新闻]}
   - {id: tw-global-news, name: 寰宇新闻台, category: 台湾, aliases: [寰宇新闻]}
-  - {id: tw-momo, name: MOMO 综合台, category: 台湾, aliases: [MOMO综合]}
+  - {id: tw-momo, name: MOMO 综合台, category: 台湾, aliases: [MOMO综合, MOMO TV]}
   - {id: tw-dazn-1, name: DAZN 1, category: 台湾, aliases: [ELEVEN SPORTS 1, Eleven体育1]}
   - {id: tw-dazn-2, name: DAZN 2, category: 台湾, aliases: [ELEVEN SPORTS 2, Eleven体育2]}
   - {id: tw-videoland-sports, name: 纬来体育台, category: 台湾, aliases: [纬来体育]}
   - {id: tw-videoland-movie, name: 纬来电影台, category: 台湾, aliases: [纬来电影]}
-  - {id: tw-axn, name: AXN 台湾, category: 台湾, aliases: [AXN Taiwan, AXN]}
+  - {id: tw-axn, name: AXN 台湾, category: 台湾, aliases: [AXN Taiwan, AXN, AXN Asia Taiwan]}

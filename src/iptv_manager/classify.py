@@ -9,6 +9,7 @@ from .models import ChannelCategory, ChannelRule
 
 _QUALITY_SUFFIX = re.compile(r"(?:超高清|高清|标清|uhd|fhd|hd|频道)$", re.IGNORECASE)
 _SEPARATORS = re.compile(r"[\s\-_·]+")
+_ANNOTATION = re.compile(r'\s*(?:\(\d{3,4}[pi]\)|\[(?:Geo-blocked|Not 24/7|Offline)\])$', re.IGNORECASE)
 
 
 @dataclass(frozen=True, slots=True)
@@ -25,6 +26,7 @@ def normalize_channel_name(name: str) -> str:
     previous = None
     while value != previous:
         previous = value
+        value = _ANNOTATION.sub('', value).strip()
         value = _QUALITY_SUFFIX.sub("", value).strip()
     return _SEPARATORS.sub("", value)
 

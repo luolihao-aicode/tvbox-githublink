@@ -67,6 +67,8 @@ async def test_pipeline_publishes_only_twice_verified_hd_source(
 
     assert [item.channel_id for item in result.selections] == ["cctv-1"]
     assert (tmp_path / "output" / "combined.m3u").is_file()
+    persisted = json.loads((data_dir / 'candidates.json').read_text(encoding='utf-8'))
+    assert persisted[0]['status'] == 'active'
 
 
 @pytest.mark.asyncio
@@ -97,3 +99,26 @@ async def test_first_success_is_saved_without_publishing_empty_playlist(
     assert result.selections == []
     assert (tmp_path / "data" / "candidates.json").is_file()
     assert not (tmp_path / "output" / "combined.m3u").exists()
+
+
+@pytest.mark.asyncio
+async def test_empty_discovery_persists_failure_report_without_overwriting_playlist(tmp_path):
+    from iptv_manager.discovery import DiscoveryIssue
+
+    async def discover():
+        return DiscoveryResult(issues=[DiscoveryIssue('https://api.github.com/search/code',
+                                                     'GITHUB_SEARCH_FAILED', 'HTTP 403')])
+    async def http_probe(candidates, policy):
+        return []
+    async def media_probe(candidate, policy):
+        raise AssertionError('没有候选时不得调用媒体检测')
+    output = tmp_path / 'output'
+    output.mkdir()
+    (output / 'combined.m3u').write_text('#EXTM3U\n旧频道\n', encoding='utf-8')
+    await run_pipeline(PipelineOptions(Path('config'), tmp_path / 'data', output),
+                       PipelineDependencies(discover, http_probe, media_probe))
+    report = json.loads((output / 'report.json').read_text(encoding='utf-8'))
+    assert report['discovered_sources'] == 0
+    assert report['issues'][0]['code'] == 'GITHUB_SEARCH_FAILED'
+    assert report['published_channels'] == 0
+    assert (output / 'combined.m3u').read_text(encoding='utf-8') == '#EXTM3U\n旧频道\n'

@@ -19,3 +19,9 @@ def test_parse_m3u_reads_name_group_and_url() -> None:
     assert str(item.url) == "https://a.example/live.m3u8"
     assert item.source_type is SourceType.COMMUNITY
 
+
+def test_comma_inside_quoted_attribute_does_not_become_channel_name():
+    text = '#EXTM3U\n#EXTINF:-1 user-agent="a,b" group-title="央视",CCTV-1 (720p)\nhttps://stream.example/live.m3u8\n'
+    item = parse_m3u(text, 'https://list.example/a.m3u', SourceType.COMMUNITY)[0]
+    assert item.raw_name == 'CCTV-1 (720p)'
+

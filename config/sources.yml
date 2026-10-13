@@ -1,5 +1,12 @@
 # 仅添加无需登录即可公开访问的 M3U/M3U8 列表地址。
-sources: []
+# 社区列表，来源标记不等同于授权认证；每日抓取无需依赖代码搜索权限。
+sources:
+  - url: https://iptv-org.github.io/iptv/countries/cn.m3u
+    type: community
+  - url: https://iptv-org.github.io/iptv/countries/hk.m3u
+    type: community
+  - url: https://iptv-org.github.io/iptv/countries/tw.m3u
+    type: community
 
 # 每周发现任务使用 GitHub 代码搜索；新结果必须先进入候选池。
 github_search:

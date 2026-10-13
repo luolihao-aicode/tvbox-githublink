@@ -39,3 +39,14 @@ def test_pages_workflow_has_minimum_deployment_permissions() -> None:
     assert workflow["permissions"]["pages"] == "write"
     assert workflow["permissions"]["id-token"] == "write"
     assert "deploy" in workflow["jobs"]
+
+
+def test_pages_deploys_latest_output_after_scheduled_update():
+    workflow = _workflow('pages')
+    event = workflow['on']['workflow_run']
+    assert '每日检测并更新订阅' in event['workflows']
+    assert '每周发现新播放源' in event['workflows']
+    assert event['types'] == ['completed']
+    checkout = next(step for step in workflow['jobs']['build']['steps']
+                    if str(step.get('uses', '')).startswith('actions/checkout@'))
+    assert checkout['with']['ref'] == '${{ github.event.repository.default_branch }}'

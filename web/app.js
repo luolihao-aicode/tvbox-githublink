@@ -78,3 +78,16 @@ fetch("status.json", { cache: "no-store" })
     empty.hidden = false;
     empty.textContent = "状态数据加载失败，请稍后刷新。";
   });
+
+fetch('report.json', { cache: 'no-store' })
+  .then((response) => response.ok ? response.json() : null)
+  .then((report) => {
+    if (!report) return;
+    const issueCount = Array.isArray(report.issues) ? report.issues.length : 0;
+    const message = `最近任务：发现 ${report.discovered_sources ?? 0} 条线路，识别 ${report.matched_sources ?? 0} 条，检测成功 ${report.successful_sources ?? 0} 条。`;
+    const detail = document.createElement('p');
+    detail.className = 'summary';
+    detail.textContent = message + (issueCount ? ` 来源抓取有 ${issueCount} 项问题，详情见运行报告。` : '');
+    document.querySelector('.hero > div').append(detail);
+  })
+  .catch(() => {});

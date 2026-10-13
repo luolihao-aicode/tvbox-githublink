@@ -102,6 +102,8 @@ def update_lifecycle(
         failures += 1
     if failures >= 2:
         return stream.model_copy(update={"status": StreamStatus.COOLING})
+    if failures == 0 and history and stream.status in {StreamStatus.COOLING, StreamStatus.RETIRED}:
+        return stream.model_copy(update={'status': StreamStatus.CANDIDATE})
     return stream.model_copy()
 
 

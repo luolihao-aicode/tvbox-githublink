@@ -70,6 +70,7 @@ def render_m3u(
 def build_status(
     selections: Sequence[ChannelSelection],
     checked_at: datetime,
+    measurement_source: str = 'GitHub Actions 节点',
 ) -> dict[str, object]:
     channels: list[dict[str, object]] = []
     for selection in selections:
@@ -96,7 +97,7 @@ def build_status(
     return {
         "schema_version": 1,
         "checked_at": checked_at.isoformat(),
-        "measurement_notice": "延迟和速度由 GitHub Actions 节点测得，不代表用户本地网络体验。",
+        "measurement_notice": f"延迟和速度由{measurement_source}测得，不代表用户本地网络体验。",
         "channels": channels,
     }
 
@@ -105,6 +106,7 @@ def publish_outputs(
     selections: Sequence[ChannelSelection],
     output_dir: Path,
     checked_at: datetime,
+    measurement_source: str = 'GitHub Actions 节点',
 ) -> None:
     if not selections:
         raise OutputValidationError("没有可发布频道，已保留上一版订阅")
@@ -115,7 +117,7 @@ def publish_outputs(
         "combined.m3u": render_m3u(selections, PublishMode.COMBINED),
         "backup.m3u": render_m3u(selections, PublishMode.BACKUP),
         "status.json": json.dumps(
-            build_status(selections, checked_at), ensure_ascii=False, indent=2
+            build_status(selections, checked_at, measurement_source), ensure_ascii=False, indent=2
         )
         + "\n",
         "report.json": json.dumps(

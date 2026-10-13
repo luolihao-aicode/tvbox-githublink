@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import asyncio
 import json
+import math
 from dataclasses import dataclass
 from datetime import UTC, datetime
 from typing import Protocol
@@ -55,9 +56,12 @@ def build_ffprobe_args(url: str, policy: PolicyConfig) -> list[str]:
         "-rw_timeout",
         str(network_timeout),
         "-read_intervals",
-        f"%+{max(1, int(policy.media_probe_seconds))}",
+        f"%+{policy.media_probe_seconds + 0.5}",
+        "-show_packets",
         "-show_streams",
         "-show_format",
+        "-show_entries",
+        "packet=stream_index,pts_time:stream=index,codec_type,codec_name,width,height,bit_rate:format=bit_rate",
         "-of",
         "json",
         url,
@@ -128,6 +132,17 @@ async def probe_media(
         if isinstance(format_data, dict)
         else None
     )
+    timestamps: list[float] = []
+    for packet in payload.get('packets', []):
+        if not isinstance(packet, dict) or packet.get('stream_index') != video.get('index'):
+            continue
+        try:
+            stamp = float(packet.get('pts_time', ''))
+        except (ValueError, TypeError):
+            continue
+        if math.isfinite(stamp):
+            timestamps.append(stamp)
+    continuous = len(timestamps) >= 2 and max(timestamps) - min(timestamps) >= policy.media_probe_seconds
     return CheckResult(
         checked_at=checked_at,
         success=True,
@@ -136,5 +151,5 @@ async def probe_media(
         video_codec=video.get("codec_name"),
         audio_codec=audio.get("codec_name") if audio else None,
         bitrate=stream_bitrate or format_bitrate,
-        continuous_read=True,
+        continuous_read=continuous,
     )

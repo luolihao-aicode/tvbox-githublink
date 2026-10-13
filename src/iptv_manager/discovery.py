@@ -123,7 +123,8 @@ async def search_github(
                         continue
                     if file_data.get("encoding") != "base64":
                         raise ValueError("GitHub 文件编码不是 base64")
-                    raw = base64.b64decode(file_data.get("content", ""), validate=True)
+                    encoded = ''.join(file_data.get('content', '').split())
+                    raw = base64.b64decode(encoded, validate=True)
                     if len(raw) > settings.max_bytes:
                         result.issues.append(
                             DiscoveryIssue(api_url, "SOURCE_TOO_LARGE", "GitHub 文件超过大小限制")

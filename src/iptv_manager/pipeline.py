@@ -1,6 +1,8 @@
 from __future__ import annotations
 
 import json
+import os
+from collections import Counter
 from collections.abc import Awaitable, Callable, Sequence
 from dataclasses import dataclass, field
 from datetime import UTC, datetime
@@ -11,7 +13,7 @@ import httpx
 from .classify import classify_channel
 from .config import load_config
 from .discovery import DiscoveryResult, fetch_seed_sources, search_github
-from .models import CheckResult, PolicyConfig, StreamCandidate
+from .models import CheckResult, PolicyConfig, StreamCandidate, StreamStatus
 from .probe_http import probe_many_http
 from .probe_media import probe_media
 from .publisher import publish_outputs
@@ -52,6 +54,7 @@ class PipelineResult:
     candidates: list[StreamCandidate] = field(default_factory=list)
     selections: list[ChannelSelection] = field(default_factory=list)
     issues: list[object] = field(default_factory=list)
+    report: dict[str, object] = field(default_factory=dict)
 
 
 def _load_candidates(path: Path) -> list[StreamCandidate]:
@@ -132,9 +135,11 @@ async def run_pipeline(
             )
 
     candidates: list[StreamCandidate] = []
+    unknown_names: list[str] = []
     for stream in existing.values():
         match = classify_channel(stream.raw_name, config.channels)
         if match.channel_id is None:
+            unknown_names.append(stream.raw_name)
             continue
         candidates.append(
             stream.model_copy(
@@ -170,6 +175,37 @@ async def run_pipeline(
         updated.append(update_lifecycle(checked, now, config.policy))
 
     selections = select_lines(updated, config.policy)
+    selected_states = {line.stream_id: line.status for choice in selections
+                       for line in (choice.primary, *choice.backups)}
+    for stream in updated:
+        if stream.stream_id in selected_states:
+            stream.status = selected_states[stream.stream_id]
+        elif stream.status in {StreamStatus.ACTIVE, StreamStatus.BACKUP}:
+            stream.status = StreamStatus.CANDIDATE
+    reasons: Counter[str] = Counter()
+    for stream in updated:
+        latest = stream.history[-1]
+        if not latest.success:
+            reasons[latest.failure_code or 'PROBE_FAILED'] += 1
+        elif not latest.continuous_read:
+            reasons['INSUFFICIENT_MEDIA_DURATION'] += 1
+        elif (latest.height or 0) < config.policy.minimum_height:
+            reasons['BELOW_HD_THRESHOLD'] += 1
+        elif len(stream.history) < 2 or not all(item.success for item in stream.history[-2:]):
+            reasons['WAITING_SECOND_SUCCESS'] += 1
+    report = {
+        'schema_version': 1,
+        'checked_at': now.isoformat(),
+        'discovered_sources': len(discovery.candidates),
+        'matched_sources': len(candidates),
+        'successful_sources': sum(stream.history[-1].success for stream in updated),
+        'published_channels': len(selections),
+        'filter_reasons': dict(reasons),
+        'unknown_channel_names': sorted(set(unknown_names))[:100],
+        'issues': [{'source_url': issue.source_url, 'code': issue.code}
+                   for issue in discovery.issues],
+        'message': '检测完成' if selections else '暂无合格频道，请查看发现错误和筛选原因。',
+    }
     if not options.dry_run:
         options.data_dir.mkdir(parents=True, exist_ok=True)
         atomic_write_text(
@@ -182,5 +218,8 @@ async def run_pipeline(
             + "\n",
         )
         if selections:
-            publish_outputs(selections, options.output_dir, now)
-    return PipelineResult(updated, selections, list(discovery.issues))
+            source = 'GitHub Actions 节点' if os.environ.get('GITHUB_ACTIONS') == 'true' else '本次本地检测节点'
+            publish_outputs(selections, options.output_dir, now, source)
+        atomic_write_text(options.output_dir / 'report.json',
+                          json.dumps(report, ensure_ascii=False, indent=2) + '\n')
+    return PipelineResult(updated, selections, list(discovery.issues), report)

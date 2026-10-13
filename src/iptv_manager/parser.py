@@ -29,7 +29,15 @@ def parse_m3u(
         if not line:
             continue
         if line.startswith("#EXTINF:"):
-            _, separator, display_name = line.partition(",")
+            quoted = False
+            separator = ''
+            display_name = ''
+            for index, character in enumerate(line):
+                if character == '"':
+                    quoted = not quoted
+                elif character == ',' and not quoted:
+                    separator, display_name = ',', line[index + 1:]
+                    break
             pending_name = display_name.strip() if separator and display_name.strip() else None
             continue
         if line.startswith("#"):

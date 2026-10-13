@@ -59,3 +59,23 @@ async def test_github_search_follows_pagination_and_parses_public_lists() -> Non
         result = await search_github(config, "test-token", client)
 
     assert [item.raw_name for item in result.candidates] == ["CCTV-one", "CCTV-two"]
+
+
+@pytest.mark.asyncio
+async def test_github_file_with_wrapped_base64_is_decoded() -> None:
+    import base64
+
+    config = AppConfig(sources=[], channels=[], policy=PolicyConfig(),
+                       github_search=GitHubSearchConfig(queries=["extension:m3u"], max_files=1))
+    text = '#EXTM3U\n#EXTINF:-1,CCTV1\nhttps://stream.example/live.m3u8\n'
+    encoded = base64.encodebytes(text.encode()).decode()
+
+    def handler(request):
+        if request.url.path == '/search/code':
+            return httpx.Response(200, json={"items": [{"url": "https://api.github.com/files/one"}]})
+        return httpx.Response(200, json={"size": len(text), "encoding": "base64", "content": encoded})
+
+    async with httpx.AsyncClient(transport=httpx.MockTransport(handler)) as client:
+        result = await search_github(config, 'test-token', client)
+    assert len(result.candidates) == 1
+    assert result.issues == []
