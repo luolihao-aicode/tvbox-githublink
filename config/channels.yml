@@ -110,3 +110,20 @@ channels:
   - {id: tw-ebc-movie, name: 东森电影台, category: 台湾, aliases: [东森电影, 東森電影, 東森電影台]}
   - {id: tw-ebc-kids, name: 东森幼幼台, category: 台湾, aliases: [東森幼幼台, 东森幼幼]}
   - {id: tw-ustv-news, name: 非凡新闻台, category: 台湾, aliases: [非凡新聞台, 非凡新聞, 非凡新闻]}
+  # 1080p 试播检索补充的主流频道；新闻、综合与娱乐不相互混用。
+  - {id: tw-mirror-news, name: 镜新闻, category: 台湾, aliases: [鏡新聞, 镜新闻台]}
+  - {id: tw-set-inews, name: 三立iNEWS, category: 台湾, aliases: [三立iNews新闻, 三立iNews]}
+  - {id: tw-set-drama, name: 三立戏剧台, category: 台湾, aliases: [三立戲劇台, 三立戏剧, 三立戲劇]}
+  - {id: tw-set-variety, name: 三立综合台, category: 台湾, aliases: [三立綜合台, 三立综合, 三立綜合]}
+  - {id: tw-cti-entertainment, name: 中天娱乐台, category: 台湾, aliases: [中天娛樂台, 中天娛樂, 中天娱乐, 中天娱樂]}
+  - {id: tw-cti-asia, name: 中天亚洲台, category: 台湾, aliases: [中天亞洲台, 中天亞洲, 中天亚洲]}
+  - {id: tw-gtv-entertainment, name: 八大娱乐台, category: 台湾, aliases: [八大娛樂台, 八大娛樂, 八大娱乐]}
+  - {id: tw-ebc-western-movie, name: 东森洋片台, category: 台湾, aliases: [東森洋片台, 東森洋片, 东森洋片]}
+  - {id: tw-ebc-super, name: 东森超视, category: 台湾, aliases: [東森超視, 超視, 超视]}
+  - {id: tw-videoland-japan, name: 纬来日本台, category: 台湾, aliases: [緯來日本台, 緯來日本, 纬来日本]}
+  - {id: tw-videoland-variety, name: 纬来综合台, category: 台湾, aliases: [緯來綜合台, 緯來綜合, 纬来综合]}
+  - {id: tw-ustv-business, name: 非凡商业台, category: 台湾, aliases: [非凡商業台, 非凡商業, 非凡商业]}
+  - {id: tw-much, name: 年代MUCH台, category: 台湾, aliases: [年代MUCH, 年代MUCH臺]}
+  - {id: tw-ctv-classic, name: 中视经典台, category: 台湾, aliases: [中視經典台, 中視經典, 中视经典]}
+  - {id: tw-ctv-bravo, name: 中视菁采台, category: 台湾, aliases: [中視菁采台, 中視菁採台, 中视综艺]}
+  - {id: tw-ttv-finance, name: 台视财经台, category: 台湾, aliases: [台視財經台, 台視財經, 台视财经]}

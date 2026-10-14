@@ -1,0 +1,269 @@
+{
+  "checked_at": "2026-10-13T19:10:07.712922+00:00",
+  "mode": "1080p候选试播，非推荐订阅",
+  "published_channels": 3,
+  "published_lines": 4,
+  "missing_channels": [
+    "华视",
+    "中视",
+    "台视",
+    "民视",
+    "公视",
+    "公视台语台",
+    "TaiwanPlus",
+    "三立新闻台",
+    "三立台湾台",
+    "三立都会台",
+    "TVBS 新闻台",
+    "TVBS",
+    "东森新闻台",
+    "东森财经新闻台",
+    "年代新闻台",
+    "壹新闻",
+    "民视新闻台",
+    "寰宇新闻台",
+    "MOMO 综合台",
+    "DAZN 1",
+    "DAZN 2",
+    "纬来体育台",
+    "纬来电影台",
+    "AXN 台湾",
+    "大爱一台",
+    "大爱二台",
+    "客家电视台",
+    "原住民族电视台",
+    "好消息一台",
+    "好消息二台",
+    "华视新闻资讯台",
+    "中视新闻台",
+    "民视第一台",
+    "民视台湾台",
+    "中天综合台",
+    "八大第一台",
+    "八大综合台",
+    "八大戏剧台",
+    "东森综合台",
+    "东森戏剧台",
+    "东森电影台",
+    "东森幼幼台",
+    "非凡新闻台",
+    "镜新闻",
+    "三立iNEWS",
+    "三立戏剧台",
+    "三立综合台",
+    "中天娱乐台",
+    "中天亚洲台",
+    "八大娱乐台",
+    "东森洋片台",
+    "东森超视",
+    "纬来日本台",
+    "纬来综合台",
+    "非凡商业台",
+    "年代MUCH台",
+    "中视经典台",
+    "中视菁采台",
+    "台视财经台"
+  ],
+  "notice": "本地单次基础检测，不保证高清细节或长期流畅；固定子线路可能仍缓冲。",
+  "summary": {
+    "sources": [
+      {
+        "url": "https://iptv-org.github.io/iptv/countries/tw.m3u",
+        "matched": 17
+      },
+      {
+        "url": "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/tw.m3u",
+        "matched": 20
+      },
+      {
+        "url": "https://raw.githubusercontent.com/imDazui/Tvlist-awesome-m3u-m3u8/master/m3u/台湾香港澳门202506.m3u",
+        "matched": 47
+      },
+      {
+        "url": "https://raw.githubusercontent.com/judy-gotv/iptv/main/smart.m3u",
+        "matched": 53
+      },
+      {
+        "url": "https://raw.githubusercontent.com/KJW5487/iptv/main/litv2_20240519.m3u",
+        "matched": 27
+      },
+      {
+        "url": "https://raw.githubusercontent.com/hujingguang/ChinaIPTV/d5be11f539d28b6a2c3a3f25dd746c17deff655c/TaiWan.m3u8",
+        "matched": 5
+      },
+      {
+        "url": "https://raw.githubusercontent.com/KJW5487/iptv/main/hmt.m3u",
+        "matched": 16
+      },
+      {
+        "url": "https://raw.githubusercontent.com/jk2024988/TV2024/main/1080-2.m3u",
+        "matched": 0
+      },
+      {
+        "url": "https://raw.githubusercontent.com/qingwen07/awesome-iptv/main/gang_ao_tai.m3u",
+        "matched": 3
+      },
+      {
+        "url": "https://raw.githubusercontent.com/OneRaddish/iptv/main/TW.m3u",
+        "matched": 53
+      },
+      {
+        "url": "https://raw.githubusercontent.com/gene7299/tvblive/e8a8a0c8395bc377467f3c4d37e5d069615ba712/twtv.m3u8",
+        "matched": 32
+      },
+      {
+        "url": "https://raw.githubusercontent.com/cai23511/yex/master/TW0706.m3u",
+        "matched": 10
+      },
+      {
+        "url": "https://raw.githubusercontent.com/Aria860708/taiwan-tv/main/taiwan-tv.m3u",
+        "matched": 2
+      },
+      {
+        "url": "https://raw.githubusercontent.com/kilirushi/iptv/master/tw.m3u",
+        "matched": 19
+      },
+      {
+        "url": "https://raw.githubusercontent.com/n3rddd/N3RD/master/JN/EXT/LIVE/tv.m3u",
+        "matched": 19
+      },
+      {
+        "url": "https://raw.githubusercontent.com/dalazhi/tvbox/70bfe260e8abd38fc5c370aabff63404a5ca390b/tv/gat0927.m3u8",
+        "matched": 63
+      },
+      {
+        "url": "https://raw.githubusercontent.com/bestK/iptv/main/港澳台.m3u",
+        "matched": 11
+      },
+      {
+        "url": "https://raw.githubusercontent.com/limajj2021/taiwan-iptv/main/playlist_static.m3u",
+        "matched": 9
+      },
+      {
+        "url": "https://raw.githubusercontent.com/lincesling/jmstv.github.io/main/JMSTV-YTB.m3u",
+        "matched": 11
+      },
+      {
+        "url": "https://raw.githubusercontent.com/jk2024988/TV2024/main/tw2.m3u",
+        "matched": 121
+      },
+      {
+        "url": "https://raw.githubusercontent.com/imDazui/Tvlist-awesome-m3u-m3u8/master/m3u/台湾香港海外.m3u",
+        "matched": 42
+      },
+      {
+        "url": "https://raw.githubusercontent.com/Nekori/TV/master/A_TV.m3u",
+        "matched": 2
+      },
+      {
+        "url": "https://raw.githubusercontent.com/jk2024988/TV2024/main/tw.m3u",
+        "matched": 73
+      },
+      {
+        "url": "https://raw.githubusercontent.com/jk2024988/TV2024/main/v10.m3u",
+        "matched": 8
+      },
+      {
+        "url": "https://raw.githubusercontent.com/winterxg/tvb/main/live/4gtv.m3u",
+        "matched": 16
+      }
+    ],
+    "candidate_lines": 515,
+    "filter_reasons": {
+      "NON_PUBLIC_HOST": 239,
+      "'utf-8' codec can't decode byte 0xe2 in position 2: invalid continuation byte": 1,
+      "HTTP_FAILED": 218,
+      "NO_1080_VARIANT": 11,
+      "NON_LIVE_PLAYLIST": 3,
+      "NOT_HLS": 7,
+      "PLACEHOLDER_STREAM": 17,
+      "CONNECT_FAILED": 2,
+      "BELOW_1080": 3,
+      "NON_PUBLIC_URL": 8,
+      "EXCLUDED_OR_DUPLICATE": 1,
+      "FFPROBE_FAILED": 1
+    }
+  },
+  "lines": [
+    {
+      "width": 1920,
+      "height": 1080,
+      "video_codec": "h264",
+      "video_bitrate_estimate": 2209979,
+      "frame_rate": "30/1",
+      "decoded_seconds": 3,
+      "decoded_frames": 90,
+      "decode_warning": false,
+      "decode_notice": "基础解码通过",
+      "checked_at": "2026-10-13T19:09:38.098527+00:00",
+      "first_byte_seconds": 0.13037469999835594,
+      "channel_id": "tw-cti-news",
+      "name": "中天新闻台",
+      "display_name": "中天新闻台 · 线路1 · 1080p · 2.2Mbps",
+      "url": "http://222.128.55.152:9080/live/fc.m3u8",
+      "source_url": "https://raw.githubusercontent.com/jk2024988/TV2024/main/v10.m3u",
+      "content_verified": false,
+      "quality_notice": "检测尺寸至少 1920×1080，真实画质与频道内容待人工试播确认"
+    },
+    {
+      "width": 1920,
+      "height": 1080,
+      "video_codec": "h264",
+      "video_bitrate_estimate": 2587257,
+      "frame_rate": "30000/1001",
+      "decoded_seconds": 3,
+      "decoded_frames": 52,
+      "decode_warning": true,
+      "decode_notice": "基础解码有输出，但存在警告，仅供试播",
+      "checked_at": "2026-10-13T19:05:15.183580+00:00",
+      "first_byte_seconds": 0.5060842999992019,
+      "channel_id": "tw-ttv-news",
+      "name": "台视新闻台",
+      "display_name": "台视新闻台 · 线路1 · 1080p · 2.6Mbps",
+      "url": "http://38.64.72.148/hls/modn/list/4013/chunklist0.m3u8",
+      "source_url": "https://raw.githubusercontent.com/imDazui/Tvlist-awesome-m3u-m3u8/master/m3u/%E5%8F%B0%E6%B9%BE%E9%A6%99%E6%B8%AF%E6%BE%B3%E9%97%A8202506.m3u",
+      "content_verified": false,
+      "quality_notice": "检测尺寸至少 1920×1080，真实画质与频道内容待人工试播确认"
+    },
+    {
+      "width": 1920,
+      "height": 1080,
+      "video_codec": "h264",
+      "video_bitrate_estimate": 1005392,
+      "frame_rate": "30000/1001",
+      "decoded_seconds": 3,
+      "decoded_frames": 47,
+      "decode_warning": true,
+      "decode_notice": "基础解码有输出，但存在警告，仅供试播",
+      "checked_at": "2026-10-13T19:07:52.195022+00:00",
+      "first_byte_seconds": 0.49151849999907427,
+      "channel_id": "tw-ttv-news",
+      "name": "台视新闻台",
+      "display_name": "台视新闻台 · 线路2 · 1080p · 1.0Mbps（低码率）",
+      "url": "http://38.64.72.148/hls/modn/list/4013/chunklist1.m3u8",
+      "source_url": "https://raw.githubusercontent.com/OneRaddish/iptv/main/TW.m3u",
+      "content_verified": false,
+      "quality_notice": "检测尺寸至少 1920×1080，真实画质与频道内容待人工试播确认"
+    },
+    {
+      "width": 1920,
+      "height": 1080,
+      "video_codec": "h264",
+      "video_bitrate_estimate": 2496275,
+      "frame_rate": "30000/1001",
+      "decoded_seconds": 3,
+      "decoded_frames": 51,
+      "decode_warning": true,
+      "decode_notice": "基础解码有输出，但存在警告，仅供试播",
+      "checked_at": "2026-10-13T19:05:22.386885+00:00",
+      "first_byte_seconds": 0.4918848999986949,
+      "channel_id": "tw-tvbs-asia",
+      "name": "TVBS 亚洲台",
+      "display_name": "TVBS 亚洲台 · 线路1 · 1080p · 2.5Mbps",
+      "url": "http://38.64.72.148/hls/modn/list/4005/chunklist0.m3u8",
+      "source_url": "https://iptv-org.github.io/iptv/countries/tw.m3u",
+      "content_verified": false,
+      "quality_notice": "检测尺寸至少 1920×1080，真实画质与频道内容待人工试播确认"
+    }
+  ]
+}

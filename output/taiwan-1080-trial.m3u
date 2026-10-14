@@ -1,0 +1,9 @@
+#EXTM3U
+#EXTINF:-1 tvg-id="tw-cti-news" tvg-name="中天新闻台 · 线路1 · 1080p · 2.2Mbps" group-title="台湾",中天新闻台 · 线路1 · 1080p · 2.2Mbps
+http://222.128.55.152:9080/live/fc.m3u8
+#EXTINF:-1 tvg-id="tw-ttv-news" tvg-name="台视新闻台 · 线路1 · 1080p · 2.6Mbps" group-title="台湾",台视新闻台 · 线路1 · 1080p · 2.6Mbps
+http://38.64.72.148/hls/modn/list/4013/chunklist0.m3u8
+#EXTINF:-1 tvg-id="tw-ttv-news" tvg-name="台视新闻台 · 线路2 · 1080p · 1.0Mbps（低码率）" group-title="台湾",台视新闻台 · 线路2 · 1080p · 1.0Mbps（低码率）
+http://38.64.72.148/hls/modn/list/4013/chunklist1.m3u8
+#EXTINF:-1 tvg-id="tw-tvbs-asia" tvg-name="TVBS 亚洲台 · 线路1 · 1080p · 2.5Mbps" group-title="台湾",TVBS 亚洲台 · 线路1 · 1080p · 2.5Mbps
+http://38.64.72.148/hls/modn/list/4005/chunklist0.m3u8

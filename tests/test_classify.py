@@ -63,3 +63,17 @@ def test_public_playlist_english_satellite_name_matches(channel_rules):
     ('客家電視台', 'tw-hakka'), ('三立新聞', 'tw-set-news')])
 def test_taiwan_source_names_match_explicit_aliases(raw, expected, channel_rules):
     assert classify_channel(raw, channel_rules).channel_id == expected
+
+
+@pytest.mark.parametrize('raw,expected', [
+    ('鏡新聞', 'tw-mirror-news'), ('三立iNEWS', 'tw-set-inews'),
+    ('三立戲劇台', 'tw-set-drama'), ('三立綜合台', 'tw-set-variety'),
+    ('中天娛樂', 'tw-cti-entertainment'), ('中天亞洲台', 'tw-cti-asia'),
+    ('八大娛樂', 'tw-gtv-entertainment'), ('東森洋片台', 'tw-ebc-western-movie'),
+    ('东森超视', 'tw-ebc-super'), ('緯來日本台', 'tw-videoland-japan'),
+    ('緯來綜合台', 'tw-videoland-variety'), ('非凡商業台', 'tw-ustv-business'),
+    ('年代MUCH', 'tw-much'), ('中視經典台', 'tw-ctv-classic'),
+    ('中視菁采台', 'tw-ctv-bravo'), ('台視財經台', 'tw-ttv-finance'),
+])
+def test_more_mainstream_taiwan_channels_match_without_merging_distinct_channels(raw, expected, channel_rules):
+    assert classify_channel(raw, channel_rules).channel_id == expected

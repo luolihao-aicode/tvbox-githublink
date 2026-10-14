@@ -1,0 +1,33 @@
+# 台湾 1080p 试播搜索来源，与每日推荐订阅相互独立。
+# 仅抓取公开列表，不使用账号口令、登录 Cookie 或解密工具。
+sources:
+  - https://iptv-org.github.io/iptv/countries/tw.m3u
+  - https://raw.githubusercontent.com/iptv-org/iptv/master/streams/tw.m3u
+  - https://raw.githubusercontent.com/imDazui/Tvlist-awesome-m3u-m3u8/master/m3u/台湾香港澳门202506.m3u
+  - https://raw.githubusercontent.com/imDazui/Tvlist-awesome-m3u-m3u8/master/m3u/台湾香港海外.m3u
+  - https://raw.githubusercontent.com/judy-gotv/iptv/main/smart.m3u
+  - https://raw.githubusercontent.com/limajj2021/taiwan-iptv/main/playlist_static.m3u
+  - https://raw.githubusercontent.com/Aria860708/taiwan-tv/main/taiwan-tv.m3u
+  - https://raw.githubusercontent.com/bestK/iptv/main/港澳台.m3u
+  - https://raw.githubusercontent.com/OneRaddish/iptv/main/TW.m3u
+  - https://raw.githubusercontent.com/jk2024988/TV2024/main/tw.m3u
+  - https://raw.githubusercontent.com/jk2024988/TV2024/main/tw2.m3u
+  - https://raw.githubusercontent.com/jk2024988/TV2024/main/v10.m3u
+  - https://raw.githubusercontent.com/jk2024988/TV2024/main/1080-2.m3u
+  - https://raw.githubusercontent.com/n3rddd/N3RD/master/JN/EXT/LIVE/tv.m3u
+  - https://raw.githubusercontent.com/kilirushi/iptv/master/tw.m3u
+  - https://raw.githubusercontent.com/KJW5487/iptv/main/hmt.m3u
+  - https://raw.githubusercontent.com/KJW5487/iptv/main/litv2_20240519.m3u
+  - https://raw.githubusercontent.com/winterxg/tvb/main/live/4gtv.m3u
+  - https://raw.githubusercontent.com/qingwen07/awesome-iptv/main/gang_ao_tai.m3u
+  - https://raw.githubusercontent.com/lincesling/jmstv.github.io/main/JMSTV-YTB.m3u
+  - https://raw.githubusercontent.com/Nekori/TV/master/A_TV.m3u
+  - https://raw.githubusercontent.com/cai23511/yex/master/TW0706.m3u
+  - https://raw.githubusercontent.com/hujingguang/ChinaIPTV/d5be11f539d28b6a2c3a3f25dd746c17deff655c/TaiWan.m3u8
+  - https://raw.githubusercontent.com/gene7299/tvblive/e8a8a0c8395bc377467f3c4d37e5d069615ba712/twtv.m3u8
+  - https://raw.githubusercontent.com/dalazhi/tvbox/70bfe260e8abd38fc5c370aabff63404a5ca390b/tv/gat0927.m3u8
+
+# 用户已实测画面较差的低码率子线路，不作为新发现的高清候选重复输出。
+excluded_streams:
+  - 06a90d872e026d1dfc162c75
+  - d59f216eec49996b9349ef52

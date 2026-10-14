@@ -28,6 +28,10 @@ def _parser() -> argparse.ArgumentParser:
                          help='只复检指定分类，其他分类保留原检测记录')
     validate = subparsers.add_parser("validate-output", help="校验已生成订阅")
     validate.add_argument("--output-dir", type=Path, default=Path("output"))
+    trial = subparsers.add_parser('trial-taiwan', help='收集台湾 1080p 候选线路并生成独立试播订阅')
+    trial.add_argument('--config-dir', type=Path, default=Path('config'))
+    trial.add_argument('--sources-file', type=Path, default=Path('config/taiwan_trial_sources.yml'))
+    trial.add_argument('--output-dir', type=Path, default=Path('output'))
     return parser
 
 
@@ -48,6 +52,14 @@ def main(argv: Sequence[str] | None = None) -> int:
     args = _parser().parse_args(argv)
     if args.command == "validate-output":
         return _validate_output(args.output_dir)
+    if args.command == 'trial-taiwan':
+        from .taiwan_trial import run_taiwan_trial
+        try:
+            asyncio.run(run_taiwan_trial(args.config_dir, args.sources_file, args.output_dir))
+        except (ValueError, OSError) as exc:
+            print(f'错误：{exc}', file=sys.stderr)
+            return 2
+        return 0
     options = PipelineOptions(
         config_dir=args.config_dir,
         data_dir=args.data_dir,
