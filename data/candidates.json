@@ -10,7 +10,7 @@
     "source_type": "community",
     "protocol": null,
     "discovered_at": "2026-10-13T17:18:43.578530Z",
-    "last_checked_at": "2026-10-13T23:20:23.103398Z",
+    "last_checked_at": "2026-10-14T22:23:50.267776Z",
     "last_success_at": null,
     "status": "cooling",
     "history": [
@@ -83,6 +83,20 @@
         "audio_codec": null,
         "bitrate": null,
         "continuous_read": false
+      },
+      {
+        "checked_at": "2026-10-14T22:23:50.267776Z",
+        "success": false,
+        "failure_code": "HTTP_TIMEOUT",
+        "first_byte_seconds": null,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": null,
+        "width": null,
+        "height": null,
+        "video_codec": null,
+        "audio_codec": null,
+        "bitrate": null,
+        "continuous_read": false
       }
     ],
     "score": 0.0
@@ -98,7 +112,7 @@
     "source_type": "community",
     "protocol": null,
     "discovered_at": "2026-10-13T17:18:43.578530Z",
-    "last_checked_at": "2026-10-13T23:20:23.103871Z",
+    "last_checked_at": "2026-10-14T22:23:50.268347Z",
     "last_success_at": null,
     "status": "cooling",
     "history": [
@@ -171,6 +185,20 @@
         "audio_codec": null,
         "bitrate": null,
         "continuous_read": false
+      },
+      {
+        "checked_at": "2026-10-14T22:23:50.268347Z",
+        "success": false,
+        "failure_code": "HTTP_TIMEOUT",
+        "first_byte_seconds": null,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": null,
+        "width": null,
+        "height": null,
+        "video_codec": null,
+        "audio_codec": null,
+        "bitrate": null,
+        "continuous_read": false
       }
     ],
     "score": 0.0
@@ -186,7 +214,7 @@
     "source_type": "community",
     "protocol": null,
     "discovered_at": "2026-10-13T17:18:43.039936Z",
-    "last_checked_at": "2026-10-13T23:20:23.104223Z",
+    "last_checked_at": "2026-10-14T22:23:50.268704Z",
     "last_success_at": null,
     "status": "cooling",
     "history": [
@@ -259,6 +287,20 @@
         "audio_codec": null,
         "bitrate": null,
         "continuous_read": false
+      },
+      {
+        "checked_at": "2026-10-14T22:23:50.268704Z",
+        "success": false,
+        "failure_code": "NON_LIVE_PLAYLIST",
+        "first_byte_seconds": null,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": null,
+        "width": null,
+        "height": null,
+        "video_codec": null,
+        "audio_codec": null,
+        "bitrate": null,
+        "continuous_read": false
       }
     ],
     "score": 0.0
@@ -274,8 +316,8 @@
     "source_type": "community",
     "protocol": null,
     "discovered_at": "2026-10-13T17:18:43.039936Z",
-    "last_checked_at": "2026-10-13T23:21:54.055007Z",
-    "last_success_at": "2026-10-13T23:21:54.055007Z",
+    "last_checked_at": "2026-10-14T22:25:45.914690Z",
+    "last_success_at": "2026-10-14T22:25:45.914690Z",
     "status": "active",
     "history": [
       {
@@ -347,6 +389,20 @@
         "audio_codec": "aac",
         "bitrate": null,
         "continuous_read": true
+      },
+      {
+        "checked_at": "2026-10-14T22:25:45.914690Z",
+        "success": true,
+        "failure_code": null,
+        "first_byte_seconds": 0.032912914999997156,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": 3263779.972272821,
+        "width": 1920,
+        "height": 1080,
+        "video_codec": "h264",
+        "audio_codec": "aac",
+        "bitrate": null,
+        "continuous_read": true
       }
     ],
     "score": 96.4
@@ -362,7 +418,7 @@
     "source_type": "community",
     "protocol": null,
     "discovered_at": "2026-10-13T17:18:43.039936Z",
-    "last_checked_at": "2026-10-13T23:20:23.104928Z",
+    "last_checked_at": "2026-10-14T22:23:50.269310Z",
     "last_success_at": null,
     "status": "cooling",
     "history": [
@@ -435,6 +491,20 @@
         "audio_codec": null,
         "bitrate": null,
         "continuous_read": false
+      },
+      {
+        "checked_at": "2026-10-14T22:23:50.269310Z",
+        "success": false,
+        "failure_code": "HTML_RESPONSE",
+        "first_byte_seconds": 0.12850032500000452,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": null,
+        "width": null,
+        "height": null,
+        "video_codec": null,
+        "audio_codec": null,
+        "bitrate": null,
+        "continuous_read": false
       }
     ],
     "score": 0.0
@@ -450,9 +520,9 @@
     "source_type": "community",
     "protocol": null,
     "discovered_at": "2026-10-13T16:57:14.857006Z",
-    "last_checked_at": "2026-10-13T23:21:54.055834Z",
-    "last_success_at": "2026-10-13T23:21:54.055834Z",
-    "status": "candidate",
+    "last_checked_at": "2026-10-14T22:25:45.915658Z",
+    "last_success_at": "2026-10-14T22:25:45.915658Z",
+    "status": "active",
     "history": [
       {
         "checked_at": "2026-10-13T16:57:16.002826Z",
@@ -537,9 +607,23 @@
         "audio_codec": "aac",
         "bitrate": null,
         "continuous_read": true
+      },
+      {
+        "checked_at": "2026-10-14T22:25:45.915658Z",
+        "success": true,
+        "failure_code": null,
+        "first_byte_seconds": 0.6007771529999957,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": 209055.46122077724,
+        "width": 1920,
+        "height": 1080,
+        "video_codec": "h264",
+        "audio_codec": "aac",
+        "bitrate": null,
+        "continuous_read": true
       }
     ],
-    "score": 57.86
+    "score": 63.72
   },
   {
     "stream_id": "0796a646dc1a04631f82a836",
@@ -552,7 +636,7 @@
     "source_type": "community",
     "protocol": null,
     "discovered_at": "2026-10-13T16:57:14.857006Z",
-    "last_checked_at": "2026-10-13T23:20:23.105562Z",
+    "last_checked_at": "2026-10-14T22:25:45.916174Z",
     "last_success_at": "2026-10-13T17:03:20.283425Z",
     "status": "cooling",
     "history": [
@@ -639,9 +723,23 @@
         "audio_codec": null,
         "bitrate": null,
         "continuous_read": false
+      },
+      {
+        "checked_at": "2026-10-14T22:25:45.916174Z",
+        "success": false,
+        "failure_code": "MEDIA_TIMEOUT",
+        "first_byte_seconds": 0.10647411399999385,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": 378200.7665324546,
+        "width": null,
+        "height": null,
+        "video_codec": null,
+        "audio_codec": null,
+        "bitrate": null,
+        "continuous_read": false
       }
     ],
-    "score": 65.87
+    "score": 61.34
   },
   {
     "stream_id": "0c72b109e7ced934f5a7edde",
@@ -654,8 +752,8 @@
     "source_type": "community",
     "protocol": null,
     "discovered_at": "2026-10-13T16:57:14.857006Z",
-    "last_checked_at": "2026-10-13T23:21:54.056386Z",
-    "last_success_at": "2026-10-13T23:21:54.056386Z",
+    "last_checked_at": "2026-10-14T22:25:45.916732Z",
+    "last_success_at": "2026-10-14T22:25:45.916732Z",
     "status": "active",
     "history": [
       {
@@ -741,9 +839,23 @@
         "audio_codec": "aac",
         "bitrate": null,
         "continuous_read": true
+      },
+      {
+        "checked_at": "2026-10-14T22:25:45.916732Z",
+        "success": true,
+        "failure_code": null,
+        "first_byte_seconds": 0.2194004720000038,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": 929732.9179126762,
+        "width": 1280,
+        "height": 720,
+        "video_codec": "h264",
+        "audio_codec": "aac",
+        "bitrate": null,
+        "continuous_read": true
       }
     ],
-    "score": 90.08
+    "score": 90.52
   },
   {
     "stream_id": "0fc9b25eaeaf64a860fe1f0d",
@@ -756,9 +868,9 @@
     "source_type": "community",
     "protocol": null,
     "discovered_at": "2026-10-13T17:18:43.039936Z",
-    "last_checked_at": "2026-10-13T23:21:54.056864Z",
-    "last_success_at": "2026-10-13T23:21:54.056864Z",
-    "status": "candidate",
+    "last_checked_at": "2026-10-14T22:25:46.472184Z",
+    "last_success_at": "2026-10-14T22:25:46.472184Z",
+    "status": "active",
     "history": [
       {
         "checked_at": "2026-10-13T17:20:33.831434Z",
@@ -829,9 +941,55 @@
         "audio_codec": "aac",
         "bitrate": null,
         "continuous_read": true
+      },
+      {
+        "checked_at": "2026-10-14T22:25:46.472184Z",
+        "success": true,
+        "failure_code": null,
+        "first_byte_seconds": 0.0309533310000063,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": 4114516.8399217664,
+        "width": 1920,
+        "height": 1080,
+        "video_codec": "h264",
+        "audio_codec": "aac",
+        "bitrate": null,
+        "continuous_read": true
       }
     ],
-    "score": 74.4
+    "score": 78.07
+  },
+  {
+    "stream_id": "12f3b0ae1396a18c21f1c52e",
+    "channel_id": "tw-ebc-super",
+    "channel_name": "东森超视",
+    "raw_name": "东森超视",
+    "category": "台湾",
+    "url": "https://epg.pw/stream/399d56f2f9e2d86aca7f158f518a9cdbe9b672cf3ad82813361922e06eaf4abe.m3u8",
+    "source_url": "https://raw.githubusercontent.com/imDazui/Tvlist-awesome-m3u-m3u8/master/m3u/%E5%8F%B0%E6%B9%BE%E9%A6%99%E6%B8%AF%E6%BE%B3%E9%97%A8202506.m3u",
+    "source_type": "community",
+    "protocol": null,
+    "discovered_at": "2026-10-14T22:23:49.365293Z",
+    "last_checked_at": "2026-10-14T22:23:50.270853Z",
+    "last_success_at": null,
+    "status": "candidate",
+    "history": [
+      {
+        "checked_at": "2026-10-14T22:23:50.270853Z",
+        "success": false,
+        "failure_code": "PLACEHOLDER_STREAM",
+        "first_byte_seconds": null,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": null,
+        "width": null,
+        "height": null,
+        "video_codec": null,
+        "audio_codec": null,
+        "bitrate": null,
+        "continuous_read": false
+      }
+    ],
+    "score": 0.0
   },
   {
     "stream_id": "12f3d43177609027679a26e8",
@@ -844,7 +1002,7 @@
     "source_type": "community",
     "protocol": null,
     "discovered_at": "2026-10-13T17:18:43.578530Z",
-    "last_checked_at": "2026-10-13T23:20:28.401844Z",
+    "last_checked_at": "2026-10-14T22:23:55.481129Z",
     "last_success_at": null,
     "status": "cooling",
     "history": [
@@ -917,6 +1075,20 @@
         "audio_codec": null,
         "bitrate": null,
         "continuous_read": false
+      },
+      {
+        "checked_at": "2026-10-14T22:23:55.481129Z",
+        "success": false,
+        "failure_code": "HTTP_TIMEOUT",
+        "first_byte_seconds": null,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": null,
+        "width": null,
+        "height": null,
+        "video_codec": null,
+        "audio_codec": null,
+        "bitrate": null,
+        "continuous_read": false
       }
     ],
     "score": 0.0
@@ -932,9 +1104,9 @@
     "source_type": "community",
     "protocol": null,
     "discovered_at": "2026-10-13T16:57:14.857006Z",
-    "last_checked_at": "2026-10-13T23:21:54.859634Z",
-    "last_success_at": "2026-10-13T23:21:54.859634Z",
-    "status": "candidate",
+    "last_checked_at": "2026-10-14T22:25:46.901146Z",
+    "last_success_at": "2026-10-14T22:25:46.901146Z",
+    "status": "active",
     "history": [
       {
         "checked_at": "2026-10-13T16:57:16.007414Z",
@@ -1019,9 +1191,23 @@
         "audio_codec": "aac",
         "bitrate": null,
         "continuous_read": true
+      },
+      {
+        "checked_at": "2026-10-14T22:25:46.901146Z",
+        "success": true,
+        "failure_code": null,
+        "first_byte_seconds": 0.2240419600000081,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": 330179.4289040447,
+        "width": 1280,
+        "height": 720,
+        "video_codec": "h264",
+        "audio_codec": "aac",
+        "bitrate": null,
+        "continuous_read": true
       }
     ],
-    "score": 50.57
+    "score": 55.51
   },
   {
     "stream_id": "15231b28352bfd0ddd58873e",
@@ -1034,7 +1220,7 @@
     "source_type": "community",
     "protocol": null,
     "discovered_at": "2026-10-13T17:18:43.039936Z",
-    "last_checked_at": "2026-10-13T23:20:23.106925Z",
+    "last_checked_at": "2026-10-14T22:23:50.271458Z",
     "last_success_at": null,
     "status": "cooling",
     "history": [
@@ -1107,6 +1293,20 @@
         "audio_codec": null,
         "bitrate": null,
         "continuous_read": false
+      },
+      {
+        "checked_at": "2026-10-14T22:23:50.271458Z",
+        "success": false,
+        "failure_code": "HTML_RESPONSE",
+        "first_byte_seconds": 0.12767724399999736,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": null,
+        "width": null,
+        "height": null,
+        "video_codec": null,
+        "audio_codec": null,
+        "bitrate": null,
+        "continuous_read": false
       }
     ],
     "score": 0.0
@@ -1122,7 +1322,7 @@
     "source_type": "community",
     "protocol": null,
     "discovered_at": "2026-10-13T17:18:43.578530Z",
-    "last_checked_at": "2026-10-13T23:20:28.402298Z",
+    "last_checked_at": "2026-10-14T22:23:55.486018Z",
     "last_success_at": null,
     "status": "cooling",
     "history": [
@@ -1195,6 +1395,20 @@
         "audio_codec": null,
         "bitrate": null,
         "continuous_read": false
+      },
+      {
+        "checked_at": "2026-10-14T22:23:55.486018Z",
+        "success": false,
+        "failure_code": "HTTP_TIMEOUT",
+        "first_byte_seconds": null,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": null,
+        "width": null,
+        "height": null,
+        "video_codec": null,
+        "audio_codec": null,
+        "bitrate": null,
+        "continuous_read": false
       }
     ],
     "score": 0.0
@@ -1210,8 +1424,8 @@
     "source_type": "community",
     "protocol": null,
     "discovered_at": "2026-10-13T17:18:42.484473Z",
-    "last_checked_at": "2026-10-13T23:21:56.292983Z",
-    "last_success_at": "2026-10-13T23:21:56.292983Z",
+    "last_checked_at": "2026-10-14T22:25:47.562052Z",
+    "last_success_at": "2026-10-14T22:25:47.562052Z",
     "status": "active",
     "history": [
       {
@@ -1283,9 +1497,23 @@
         "audio_codec": "aac",
         "bitrate": null,
         "continuous_read": true
+      },
+      {
+        "checked_at": "2026-10-14T22:25:47.562052Z",
+        "success": true,
+        "failure_code": null,
+        "first_byte_seconds": 0.02763126199999988,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": 4200445.453958935,
+        "width": 1920,
+        "height": 1080,
+        "video_codec": "h264",
+        "audio_codec": "aac",
+        "bitrate": null,
+        "continuous_read": true
       }
     ],
-    "score": 85.4
+    "score": 87.23
   },
   {
     "stream_id": "1b4b741d7c6bc443267e3c61",
@@ -1298,7 +1526,7 @@
     "source_type": "community",
     "protocol": null,
     "discovered_at": "2026-10-13T16:57:14.857006Z",
-    "last_checked_at": "2026-10-13T23:20:23.107268Z",
+    "last_checked_at": "2026-10-14T22:23:50.271780Z",
     "last_success_at": null,
     "status": "cooling",
     "history": [
@@ -1385,6 +1613,20 @@
         "audio_codec": null,
         "bitrate": null,
         "continuous_read": false
+      },
+      {
+        "checked_at": "2026-10-14T22:23:50.271780Z",
+        "success": false,
+        "failure_code": "HTTP_TIMEOUT",
+        "first_byte_seconds": null,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": null,
+        "width": null,
+        "height": null,
+        "video_codec": null,
+        "audio_codec": null,
+        "bitrate": null,
+        "continuous_read": false
       }
     ],
     "score": 0.0
@@ -1400,7 +1642,7 @@
     "source_type": "community",
     "protocol": null,
     "discovered_at": "2026-10-13T17:18:43.039936Z",
-    "last_checked_at": "2026-10-13T23:20:23.107697Z",
+    "last_checked_at": "2026-10-14T22:23:50.272076Z",
     "last_success_at": null,
     "status": "cooling",
     "history": [
@@ -1473,6 +1715,20 @@
         "audio_codec": null,
         "bitrate": null,
         "continuous_read": false
+      },
+      {
+        "checked_at": "2026-10-14T22:23:50.272076Z",
+        "success": false,
+        "failure_code": "HTTP_FAILED",
+        "first_byte_seconds": null,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": null,
+        "width": null,
+        "height": null,
+        "video_codec": null,
+        "audio_codec": null,
+        "bitrate": null,
+        "continuous_read": false
       }
     ],
     "score": 0.0
@@ -1488,7 +1744,7 @@
     "source_type": "community",
     "protocol": null,
     "discovered_at": "2026-10-13T16:57:14.857006Z",
-    "last_checked_at": "2026-10-13T23:20:23.108035Z",
+    "last_checked_at": "2026-10-14T22:23:50.272367Z",
     "last_success_at": null,
     "status": "cooling",
     "history": [
@@ -1575,6 +1831,20 @@
         "audio_codec": null,
         "bitrate": null,
         "continuous_read": false
+      },
+      {
+        "checked_at": "2026-10-14T22:23:50.272367Z",
+        "success": false,
+        "failure_code": "HTTP_TIMEOUT",
+        "first_byte_seconds": null,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": null,
+        "width": null,
+        "height": null,
+        "video_codec": null,
+        "audio_codec": null,
+        "bitrate": null,
+        "continuous_read": false
       }
     ],
     "score": 0.0
@@ -1590,7 +1860,7 @@
     "source_type": "community",
     "protocol": null,
     "discovered_at": "2026-10-13T17:18:43.578530Z",
-    "last_checked_at": "2026-10-13T23:20:33.434934Z",
+    "last_checked_at": "2026-10-14T22:24:00.500804Z",
     "last_success_at": null,
     "status": "cooling",
     "history": [
@@ -1663,6 +1933,52 @@
         "audio_codec": null,
         "bitrate": null,
         "continuous_read": false
+      },
+      {
+        "checked_at": "2026-10-14T22:24:00.500804Z",
+        "success": false,
+        "failure_code": "HTTP_TIMEOUT",
+        "first_byte_seconds": null,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": null,
+        "width": null,
+        "height": null,
+        "video_codec": null,
+        "audio_codec": null,
+        "bitrate": null,
+        "continuous_read": false
+      }
+    ],
+    "score": 0.0
+  },
+  {
+    "stream_id": "2619669b37b57ae82c062b3a",
+    "channel_id": "tw-set-variety",
+    "channel_name": "三立综合台",
+    "raw_name": "三立綜合",
+    "category": "台湾",
+    "url": "http://aktv.top/AKTV/live/aktv/null-13/AKTV.m3u8",
+    "source_url": "https://raw.githubusercontent.com/imDazui/Tvlist-awesome-m3u-m3u8/master/m3u/%E5%8F%B0%E6%B9%BE%E9%A6%99%E6%B8%AF%E6%BE%B3%E9%97%A8202506.m3u",
+    "source_type": "community",
+    "protocol": null,
+    "discovered_at": "2026-10-14T22:23:49.365293Z",
+    "last_checked_at": "2026-10-14T22:23:50.398212Z",
+    "last_success_at": null,
+    "status": "candidate",
+    "history": [
+      {
+        "checked_at": "2026-10-14T22:23:50.398212Z",
+        "success": false,
+        "failure_code": "HTML_RESPONSE",
+        "first_byte_seconds": 0.08570707700000924,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": null,
+        "width": null,
+        "height": null,
+        "video_codec": null,
+        "audio_codec": null,
+        "bitrate": null,
+        "continuous_read": false
       }
     ],
     "score": 0.0
@@ -1678,7 +1994,7 @@
     "source_type": "community",
     "protocol": null,
     "discovered_at": "2026-10-13T17:18:43.578530Z",
-    "last_checked_at": "2026-10-13T23:20:33.440397Z",
+    "last_checked_at": "2026-10-14T22:24:00.501639Z",
     "last_success_at": null,
     "status": "cooling",
     "history": [
@@ -1751,6 +2067,20 @@
         "audio_codec": null,
         "bitrate": null,
         "continuous_read": false
+      },
+      {
+        "checked_at": "2026-10-14T22:24:00.501639Z",
+        "success": false,
+        "failure_code": "HTTP_TIMEOUT",
+        "first_byte_seconds": null,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": null,
+        "width": null,
+        "height": null,
+        "video_codec": null,
+        "audio_codec": null,
+        "bitrate": null,
+        "continuous_read": false
       }
     ],
     "score": 0.0
@@ -1766,7 +2096,7 @@
     "source_type": "community",
     "protocol": null,
     "discovered_at": "2026-10-13T17:18:43.039936Z",
-    "last_checked_at": "2026-10-13T23:20:23.108386Z",
+    "last_checked_at": "2026-10-14T22:23:50.272712Z",
     "last_success_at": "2026-10-13T17:24:51.937650Z",
     "status": "cooling",
     "history": [
@@ -1839,9 +2169,23 @@
         "audio_codec": null,
         "bitrate": null,
         "continuous_read": false
+      },
+      {
+        "checked_at": "2026-10-14T22:23:50.272712Z",
+        "success": false,
+        "failure_code": "PLACEHOLDER_STREAM",
+        "first_byte_seconds": null,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": null,
+        "width": null,
+        "height": null,
+        "video_codec": null,
+        "audio_codec": null,
+        "bitrate": null,
+        "continuous_read": false
       }
     ],
-    "score": 60.2
+    "score": 56.53
   },
   {
     "stream_id": "2e0f69566f53d5e9e2c47347",
@@ -1854,7 +2198,7 @@
     "source_type": "community",
     "protocol": null,
     "discovered_at": "2026-10-13T17:18:42.484473Z",
-    "last_checked_at": "2026-10-13T23:21:56.293500Z",
+    "last_checked_at": "2026-10-14T22:25:47.595927Z",
     "last_success_at": null,
     "status": "cooling",
     "history": [
@@ -1927,6 +2271,20 @@
         "audio_codec": null,
         "bitrate": null,
         "continuous_read": false
+      },
+      {
+        "checked_at": "2026-10-14T22:25:47.595927Z",
+        "success": false,
+        "failure_code": "MEDIA_TIMEOUT",
+        "first_byte_seconds": 0.659732034000001,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": 373261.67028091045,
+        "width": null,
+        "height": null,
+        "video_codec": null,
+        "audio_codec": null,
+        "bitrate": null,
+        "continuous_read": false
       }
     ],
     "score": 0.0
@@ -1942,7 +2300,7 @@
     "source_type": "community",
     "protocol": null,
     "discovered_at": "2026-10-13T16:57:15.084995Z",
-    "last_checked_at": "2026-10-13T23:20:23.109062Z",
+    "last_checked_at": "2026-10-14T22:23:50.273276Z",
     "last_success_at": null,
     "status": "cooling",
     "history": [
@@ -2085,6 +2443,20 @@
         "audio_codec": null,
         "bitrate": null,
         "continuous_read": false
+      },
+      {
+        "checked_at": "2026-10-14T22:23:50.273276Z",
+        "success": false,
+        "failure_code": "HTTP_FAILED",
+        "first_byte_seconds": null,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": null,
+        "width": null,
+        "height": null,
+        "video_codec": null,
+        "audio_codec": null,
+        "bitrate": null,
+        "continuous_read": false
       }
     ],
     "score": 0.0
@@ -2100,7 +2472,7 @@
     "source_type": "community",
     "protocol": null,
     "discovered_at": "2026-10-13T17:18:43.039936Z",
-    "last_checked_at": "2026-10-13T23:20:23.109379Z",
+    "last_checked_at": "2026-10-14T22:23:50.935404Z",
     "last_success_at": "2026-10-13T17:24:54.966557Z",
     "status": "cooling",
     "history": [
@@ -2173,9 +2545,23 @@
         "audio_codec": null,
         "bitrate": null,
         "continuous_read": false
+      },
+      {
+        "checked_at": "2026-10-14T22:23:50.935404Z",
+        "success": false,
+        "failure_code": "PLACEHOLDER_STREAM",
+        "first_byte_seconds": null,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": null,
+        "width": null,
+        "height": null,
+        "video_codec": null,
+        "audio_codec": null,
+        "bitrate": null,
+        "continuous_read": false
       }
     ],
-    "score": 53.95
+    "score": 50.28
   },
   {
     "stream_id": "303199fd428f4e7dd32fac1b",
@@ -2188,7 +2574,7 @@
     "source_type": "community",
     "protocol": null,
     "discovered_at": "2026-10-13T17:18:43.039936Z",
-    "last_checked_at": "2026-10-13T23:20:23.376777Z",
+    "last_checked_at": "2026-10-14T22:23:50.937892Z",
     "last_success_at": "2026-10-13T17:24:57.637008Z",
     "status": "cooling",
     "history": [
@@ -2261,9 +2647,23 @@
         "audio_codec": null,
         "bitrate": null,
         "continuous_read": false
+      },
+      {
+        "checked_at": "2026-10-14T22:23:50.937892Z",
+        "success": false,
+        "failure_code": "PLACEHOLDER_STREAM",
+        "first_byte_seconds": null,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": null,
+        "width": null,
+        "height": null,
+        "video_codec": null,
+        "audio_codec": null,
+        "bitrate": null,
+        "continuous_read": false
       }
     ],
-    "score": 60.2
+    "score": 56.53
   },
   {
     "stream_id": "303b76a7487a7b80a6925ce7",
@@ -2276,7 +2676,7 @@
     "source_type": "community",
     "protocol": null,
     "discovered_at": "2026-10-13T17:18:43.578530Z",
-    "last_checked_at": "2026-10-13T23:20:38.476470Z",
+    "last_checked_at": "2026-10-14T22:24:05.520220Z",
     "last_success_at": null,
     "status": "cooling",
     "history": [
@@ -2349,6 +2749,20 @@
         "audio_codec": null,
         "bitrate": null,
         "continuous_read": false
+      },
+      {
+        "checked_at": "2026-10-14T22:24:05.520220Z",
+        "success": false,
+        "failure_code": "HTTP_TIMEOUT",
+        "first_byte_seconds": null,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": null,
+        "width": null,
+        "height": null,
+        "video_codec": null,
+        "audio_codec": null,
+        "bitrate": null,
+        "continuous_read": false
       }
     ],
     "score": 0.0
@@ -2364,7 +2778,7 @@
     "source_type": "community",
     "protocol": null,
     "discovered_at": "2026-10-13T17:18:42.484473Z",
-    "last_checked_at": "2026-10-13T23:20:23.109756Z",
+    "last_checked_at": "2026-10-14T22:23:50.273601Z",
     "last_success_at": null,
     "status": "cooling",
     "history": [
@@ -2437,6 +2851,20 @@
         "audio_codec": null,
         "bitrate": null,
         "continuous_read": false
+      },
+      {
+        "checked_at": "2026-10-14T22:23:50.273601Z",
+        "success": false,
+        "failure_code": "HTTP_TIMEOUT",
+        "first_byte_seconds": null,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": null,
+        "width": null,
+        "height": null,
+        "video_codec": null,
+        "audio_codec": null,
+        "bitrate": null,
+        "continuous_read": false
       }
     ],
     "score": 0.0
@@ -2452,7 +2880,7 @@
     "source_type": "community",
     "protocol": null,
     "discovered_at": "2026-10-13T16:57:14.857006Z",
-    "last_checked_at": "2026-10-13T23:20:23.110083Z",
+    "last_checked_at": "2026-10-14T22:23:50.273977Z",
     "last_success_at": null,
     "status": "cooling",
     "history": [
@@ -2539,6 +2967,20 @@
         "audio_codec": null,
         "bitrate": null,
         "continuous_read": false
+      },
+      {
+        "checked_at": "2026-10-14T22:23:50.273977Z",
+        "success": false,
+        "failure_code": "HTTP_FAILED",
+        "first_byte_seconds": null,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": null,
+        "width": null,
+        "height": null,
+        "video_codec": null,
+        "audio_codec": null,
+        "bitrate": null,
+        "continuous_read": false
       }
     ],
     "score": 0.0
@@ -2554,7 +2996,7 @@
     "source_type": "community",
     "protocol": null,
     "discovered_at": "2026-10-13T17:18:43.578530Z",
-    "last_checked_at": "2026-10-13T23:20:38.477431Z",
+    "last_checked_at": "2026-10-14T22:24:05.521147Z",
     "last_success_at": null,
     "status": "cooling",
     "history": [
@@ -2627,6 +3069,20 @@
         "audio_codec": null,
         "bitrate": null,
         "continuous_read": false
+      },
+      {
+        "checked_at": "2026-10-14T22:24:05.521147Z",
+        "success": false,
+        "failure_code": "HTTP_TIMEOUT",
+        "first_byte_seconds": null,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": null,
+        "width": null,
+        "height": null,
+        "video_codec": null,
+        "audio_codec": null,
+        "bitrate": null,
+        "continuous_read": false
       }
     ],
     "score": 0.0
@@ -2642,7 +3098,7 @@
     "source_type": "community",
     "protocol": null,
     "discovered_at": "2026-10-13T17:18:43.578530Z",
-    "last_checked_at": "2026-10-13T23:20:43.515735Z",
+    "last_checked_at": "2026-10-14T22:24:10.537210Z",
     "last_success_at": null,
     "status": "cooling",
     "history": [
@@ -2715,6 +3171,52 @@
         "audio_codec": null,
         "bitrate": null,
         "continuous_read": false
+      },
+      {
+        "checked_at": "2026-10-14T22:24:10.537210Z",
+        "success": false,
+        "failure_code": "HTTP_TIMEOUT",
+        "first_byte_seconds": null,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": null,
+        "width": null,
+        "height": null,
+        "video_codec": null,
+        "audio_codec": null,
+        "bitrate": null,
+        "continuous_read": false
+      }
+    ],
+    "score": 0.0
+  },
+  {
+    "stream_id": "3b6b133d682ab550b3180e19",
+    "channel_id": "tw-cti-asia",
+    "channel_name": "中天亚洲台",
+    "raw_name": "中天亞洲",
+    "category": "台湾",
+    "url": "http://aktv.top/AKTV/live/aktv/null-12/AKTV.m3u8",
+    "source_url": "https://raw.githubusercontent.com/imDazui/Tvlist-awesome-m3u-m3u8/master/m3u/%E5%8F%B0%E6%B9%BE%E9%A6%99%E6%B8%AF%E6%BE%B3%E9%97%A8202506.m3u",
+    "source_type": "community",
+    "protocol": null,
+    "discovered_at": "2026-10-14T22:23:49.365293Z",
+    "last_checked_at": "2026-10-14T22:23:50.399653Z",
+    "last_success_at": null,
+    "status": "candidate",
+    "history": [
+      {
+        "checked_at": "2026-10-14T22:23:50.399653Z",
+        "success": false,
+        "failure_code": "HTML_RESPONSE",
+        "first_byte_seconds": 0.08053012199999898,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": null,
+        "width": null,
+        "height": null,
+        "video_codec": null,
+        "audio_codec": null,
+        "bitrate": null,
+        "continuous_read": false
       }
     ],
     "score": 0.0
@@ -2730,7 +3232,7 @@
     "source_type": "community",
     "protocol": null,
     "discovered_at": "2026-10-13T16:57:14.857006Z",
-    "last_checked_at": "2026-10-13T23:20:28.117925Z",
+    "last_checked_at": "2026-10-14T22:23:55.280717Z",
     "last_success_at": null,
     "status": "cooling",
     "history": [
@@ -2817,6 +3319,20 @@
         "audio_codec": null,
         "bitrate": null,
         "continuous_read": false
+      },
+      {
+        "checked_at": "2026-10-14T22:23:55.280717Z",
+        "success": false,
+        "failure_code": "HTTP_TIMEOUT",
+        "first_byte_seconds": null,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": null,
+        "width": null,
+        "height": null,
+        "video_codec": null,
+        "audio_codec": null,
+        "bitrate": null,
+        "continuous_read": false
       }
     ],
     "score": 0.0
@@ -2832,7 +3348,7 @@
     "source_type": "community",
     "protocol": null,
     "discovered_at": "2026-10-13T17:18:43.039936Z",
-    "last_checked_at": "2026-10-13T23:20:23.483225Z",
+    "last_checked_at": "2026-10-14T22:23:51.092253Z",
     "last_success_at": "2026-10-13T17:24:57.821143Z",
     "status": "cooling",
     "history": [
@@ -2905,9 +3421,23 @@
         "audio_codec": null,
         "bitrate": null,
         "continuous_read": false
+      },
+      {
+        "checked_at": "2026-10-14T22:23:51.092253Z",
+        "success": false,
+        "failure_code": "PLACEHOLDER_STREAM",
+        "first_byte_seconds": null,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": null,
+        "width": null,
+        "height": null,
+        "video_codec": null,
+        "audio_codec": null,
+        "bitrate": null,
+        "continuous_read": false
       }
     ],
-    "score": 60.2
+    "score": 56.53
   },
   {
     "stream_id": "3dcb45f794fe85ea35e30078",
@@ -2920,7 +3450,7 @@
     "source_type": "community",
     "protocol": null,
     "discovered_at": "2026-10-13T17:18:43.578530Z",
-    "last_checked_at": "2026-10-13T23:20:43.516359Z",
+    "last_checked_at": "2026-10-14T22:24:10.538540Z",
     "last_success_at": null,
     "status": "cooling",
     "history": [
@@ -2993,6 +3523,20 @@
         "audio_codec": null,
         "bitrate": null,
         "continuous_read": false
+      },
+      {
+        "checked_at": "2026-10-14T22:24:10.538540Z",
+        "success": false,
+        "failure_code": "HTTP_TIMEOUT",
+        "first_byte_seconds": null,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": null,
+        "width": null,
+        "height": null,
+        "video_codec": null,
+        "audio_codec": null,
+        "bitrate": null,
+        "continuous_read": false
       }
     ],
     "score": 0.0
@@ -3008,7 +3552,7 @@
     "source_type": "community",
     "protocol": null,
     "discovered_at": "2026-10-13T17:18:43.578530Z",
-    "last_checked_at": "2026-10-13T23:20:48.550024Z",
+    "last_checked_at": "2026-10-14T22:24:15.555433Z",
     "last_success_at": null,
     "status": "cooling",
     "history": [
@@ -3081,6 +3625,20 @@
         "audio_codec": null,
         "bitrate": null,
         "continuous_read": false
+      },
+      {
+        "checked_at": "2026-10-14T22:24:15.555433Z",
+        "success": false,
+        "failure_code": "HTTP_TIMEOUT",
+        "first_byte_seconds": null,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": null,
+        "width": null,
+        "height": null,
+        "video_codec": null,
+        "audio_codec": null,
+        "bitrate": null,
+        "continuous_read": false
       }
     ],
     "score": 0.0
@@ -3096,9 +3654,9 @@
     "source_type": "community",
     "protocol": null,
     "discovered_at": "2026-10-13T16:57:14.857006Z",
-    "last_checked_at": "2026-10-13T23:21:57.648919Z",
-    "last_success_at": "2026-10-13T23:21:57.648919Z",
-    "status": "candidate",
+    "last_checked_at": "2026-10-14T22:25:48.650017Z",
+    "last_success_at": "2026-10-14T22:25:48.650017Z",
+    "status": "active",
     "history": [
       {
         "checked_at": "2026-10-13T16:57:17.725085Z",
@@ -3183,9 +3741,23 @@
         "audio_codec": "aac",
         "bitrate": null,
         "continuous_read": true
+      },
+      {
+        "checked_at": "2026-10-14T22:25:48.650017Z",
+        "success": true,
+        "failure_code": null,
+        "first_byte_seconds": 0.16558762000001082,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": 303696.29592185834,
+        "width": 1280,
+        "height": 720,
+        "video_codec": "h264",
+        "audio_codec": "aac",
+        "bitrate": null,
+        "continuous_read": true
       }
     ],
-    "score": 47.37
+    "score": 53.91
   },
   {
     "stream_id": "4463f954b4c63f3aa363bebb",
@@ -3198,7 +3770,7 @@
     "source_type": "community",
     "protocol": null,
     "discovered_at": "2026-10-13T16:57:14.857006Z",
-    "last_checked_at": "2026-10-13T23:20:23.383469Z",
+    "last_checked_at": "2026-10-14T22:23:50.482582Z",
     "last_success_at": null,
     "status": "cooling",
     "history": [
@@ -3285,6 +3857,20 @@
         "audio_codec": null,
         "bitrate": null,
         "continuous_read": false
+      },
+      {
+        "checked_at": "2026-10-14T22:23:50.482582Z",
+        "success": false,
+        "failure_code": "HTTP_TIMEOUT",
+        "first_byte_seconds": null,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": null,
+        "width": null,
+        "height": null,
+        "video_codec": null,
+        "audio_codec": null,
+        "bitrate": null,
+        "continuous_read": false
       }
     ],
     "score": 0.0
@@ -3300,7 +3886,7 @@
     "source_type": "community",
     "protocol": null,
     "discovered_at": "2026-10-13T17:18:43.039936Z",
-    "last_checked_at": "2026-10-13T23:20:23.590509Z",
+    "last_checked_at": "2026-10-14T22:23:51.233175Z",
     "last_success_at": "2026-10-13T17:25:00.537450Z",
     "status": "cooling",
     "history": [
@@ -3373,9 +3959,23 @@
         "audio_codec": null,
         "bitrate": null,
         "continuous_read": false
+      },
+      {
+        "checked_at": "2026-10-14T22:23:51.233175Z",
+        "success": false,
+        "failure_code": "PLACEHOLDER_STREAM",
+        "first_byte_seconds": null,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": null,
+        "width": null,
+        "height": null,
+        "video_codec": null,
+        "audio_codec": null,
+        "bitrate": null,
+        "continuous_read": false
       }
     ],
-    "score": 60.2
+    "score": 56.53
   },
   {
     "stream_id": "4650e53c2e2cc675f22d4396",
@@ -3388,7 +3988,7 @@
     "source_type": "community",
     "protocol": null,
     "discovered_at": "2026-10-13T16:57:14.857006Z",
-    "last_checked_at": "2026-10-13T23:20:23.457948Z",
+    "last_checked_at": "2026-10-14T22:23:50.564707Z",
     "last_success_at": null,
     "status": "cooling",
     "history": [
@@ -3475,6 +4075,20 @@
         "audio_codec": null,
         "bitrate": null,
         "continuous_read": false
+      },
+      {
+        "checked_at": "2026-10-14T22:23:50.564707Z",
+        "success": false,
+        "failure_code": "HTTP_TIMEOUT",
+        "first_byte_seconds": null,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": null,
+        "width": null,
+        "height": null,
+        "video_codec": null,
+        "audio_codec": null,
+        "bitrate": null,
+        "continuous_read": false
       }
     ],
     "score": 0.0
@@ -3490,7 +4104,7 @@
     "source_type": "community",
     "protocol": null,
     "discovered_at": "2026-10-13T16:57:14.857006Z",
-    "last_checked_at": "2026-10-13T23:20:23.483666Z",
+    "last_checked_at": "2026-10-14T22:23:50.766053Z",
     "last_success_at": null,
     "status": "cooling",
     "history": [
@@ -3577,6 +4191,20 @@
         "audio_codec": null,
         "bitrate": null,
         "continuous_read": false
+      },
+      {
+        "checked_at": "2026-10-14T22:23:50.766053Z",
+        "success": false,
+        "failure_code": "HTTP_TIMEOUT",
+        "first_byte_seconds": null,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": null,
+        "width": null,
+        "height": null,
+        "video_codec": null,
+        "audio_codec": null,
+        "bitrate": null,
+        "continuous_read": false
       }
     ],
     "score": 0.0
@@ -3592,7 +4220,7 @@
     "source_type": "community",
     "protocol": null,
     "discovered_at": "2026-10-13T17:18:43.039936Z",
-    "last_checked_at": "2026-10-13T23:20:23.493291Z",
+    "last_checked_at": "2026-10-14T22:23:50.935807Z",
     "last_success_at": null,
     "status": "cooling",
     "history": [
@@ -3665,6 +4293,52 @@
         "audio_codec": null,
         "bitrate": null,
         "continuous_read": false
+      },
+      {
+        "checked_at": "2026-10-14T22:23:50.935807Z",
+        "success": false,
+        "failure_code": "HTTP_FAILED",
+        "first_byte_seconds": null,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": null,
+        "width": null,
+        "height": null,
+        "video_codec": null,
+        "audio_codec": null,
+        "bitrate": null,
+        "continuous_read": false
+      }
+    ],
+    "score": 0.0
+  },
+  {
+    "stream_id": "4799f08ba57c5d7c1b6b564e",
+    "channel_id": "tw-videoland-variety",
+    "channel_name": "纬来综合台",
+    "raw_name": "纬来综合",
+    "category": "台湾",
+    "url": "https://epg.pw/stream/03ebc1a8a33908af343e09da79d9d8d08246222c793931c98184be5818a788a1.m3u8",
+    "source_url": "https://raw.githubusercontent.com/imDazui/Tvlist-awesome-m3u-m3u8/master/m3u/%E5%8F%B0%E6%B9%BE%E9%A6%99%E6%B8%AF%E6%BE%B3%E9%97%A8202506.m3u",
+    "source_type": "community",
+    "protocol": null,
+    "discovered_at": "2026-10-14T22:23:49.365293Z",
+    "last_checked_at": "2026-10-14T22:23:51.389059Z",
+    "last_success_at": null,
+    "status": "candidate",
+    "history": [
+      {
+        "checked_at": "2026-10-14T22:23:51.389059Z",
+        "success": false,
+        "failure_code": "PLACEHOLDER_STREAM",
+        "first_byte_seconds": null,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": null,
+        "width": null,
+        "height": null,
+        "video_codec": null,
+        "audio_codec": null,
+        "bitrate": null,
+        "continuous_read": false
       }
     ],
     "score": 0.0
@@ -3680,7 +4354,7 @@
     "source_type": "community",
     "protocol": null,
     "discovered_at": "2026-10-13T17:18:43.039936Z",
-    "last_checked_at": "2026-10-13T23:20:23.696453Z",
+    "last_checked_at": "2026-10-14T22:23:51.527113Z",
     "last_success_at": "2026-10-13T17:25:00.895892Z",
     "status": "cooling",
     "history": [
@@ -3753,9 +4427,23 @@
         "audio_codec": null,
         "bitrate": null,
         "continuous_read": false
+      },
+      {
+        "checked_at": "2026-10-14T22:23:51.527113Z",
+        "success": false,
+        "failure_code": "PLACEHOLDER_STREAM",
+        "first_byte_seconds": null,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": null,
+        "width": null,
+        "height": null,
+        "video_codec": null,
+        "audio_codec": null,
+        "bitrate": null,
+        "continuous_read": false
       }
     ],
-    "score": 60.2
+    "score": 56.53
   },
   {
     "stream_id": "4d9e74b5ee7851a1f14465eb",
@@ -3768,8 +4456,8 @@
     "source_type": "community",
     "protocol": null,
     "discovered_at": "2026-10-13T16:57:14.857006Z",
-    "last_checked_at": "2026-10-13T23:21:58.155853Z",
-    "last_success_at": "2026-10-13T17:06:41.558042Z",
+    "last_checked_at": "2026-10-14T22:25:49.304218Z",
+    "last_success_at": "2026-10-14T22:25:49.304218Z",
     "status": "candidate",
     "history": [
       {
@@ -3855,9 +4543,23 @@
         "audio_codec": null,
         "bitrate": null,
         "continuous_read": false
+      },
+      {
+        "checked_at": "2026-10-14T22:25:49.304218Z",
+        "success": true,
+        "failure_code": null,
+        "first_byte_seconds": 1.175678333999997,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": 386360.1163156408,
+        "width": 3840,
+        "height": 2160,
+        "video_codec": "h264",
+        "audio_codec": "aac",
+        "bitrate": null,
+        "continuous_read": true
       }
     ],
-    "score": 88.08
+    "score": 88.89
   },
   {
     "stream_id": "50a35a4ca625567330f99e40",
@@ -3870,7 +4572,7 @@
     "source_type": "community",
     "protocol": null,
     "discovered_at": "2026-10-13T17:18:43.578530Z",
-    "last_checked_at": "2026-10-13T23:20:48.551043Z",
+    "last_checked_at": "2026-10-14T22:24:15.556388Z",
     "last_success_at": null,
     "status": "cooling",
     "history": [
@@ -3943,6 +4645,20 @@
         "audio_codec": null,
         "bitrate": null,
         "continuous_read": false
+      },
+      {
+        "checked_at": "2026-10-14T22:24:15.556388Z",
+        "success": false,
+        "failure_code": "HTTP_TIMEOUT",
+        "first_byte_seconds": null,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": null,
+        "width": null,
+        "height": null,
+        "video_codec": null,
+        "audio_codec": null,
+        "bitrate": null,
+        "continuous_read": false
       }
     ],
     "score": 0.0
@@ -3958,7 +4674,7 @@
     "source_type": "community",
     "protocol": null,
     "discovered_at": "2026-10-13T16:57:14.857006Z",
-    "last_checked_at": "2026-10-13T23:22:05.031767Z",
+    "last_checked_at": "2026-10-14T22:25:52.838869Z",
     "last_success_at": null,
     "status": "cooling",
     "history": [
@@ -4045,6 +4761,20 @@
         "audio_codec": null,
         "bitrate": null,
         "continuous_read": false
+      },
+      {
+        "checked_at": "2026-10-14T22:25:52.838869Z",
+        "success": false,
+        "failure_code": "FFPROBE_FAILED",
+        "first_byte_seconds": 1.383952058999995,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": 227855.00381679673,
+        "width": null,
+        "height": null,
+        "video_codec": null,
+        "audio_codec": null,
+        "bitrate": null,
+        "continuous_read": false
       }
     ],
     "score": 0.0
@@ -4060,7 +4790,7 @@
     "source_type": "community",
     "protocol": null,
     "discovered_at": "2026-10-13T17:18:43.578530Z",
-    "last_checked_at": "2026-10-13T23:20:53.585166Z",
+    "last_checked_at": "2026-10-14T22:24:20.573840Z",
     "last_success_at": null,
     "status": "cooling",
     "history": [
@@ -4133,6 +4863,20 @@
         "audio_codec": null,
         "bitrate": null,
         "continuous_read": false
+      },
+      {
+        "checked_at": "2026-10-14T22:24:20.573840Z",
+        "success": false,
+        "failure_code": "HTTP_TIMEOUT",
+        "first_byte_seconds": null,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": null,
+        "width": null,
+        "height": null,
+        "video_codec": null,
+        "audio_codec": null,
+        "bitrate": null,
+        "continuous_read": false
       }
     ],
     "score": 0.0
@@ -4148,7 +4892,7 @@
     "source_type": "community",
     "protocol": null,
     "discovered_at": "2026-10-13T17:18:42.879973Z",
-    "last_checked_at": "2026-10-13T23:20:23.839258Z",
+    "last_checked_at": "2026-10-14T22:23:51.527562Z",
     "last_success_at": null,
     "status": "cooling",
     "history": [
@@ -4221,6 +4965,20 @@
         "audio_codec": null,
         "bitrate": null,
         "continuous_read": false
+      },
+      {
+        "checked_at": "2026-10-14T22:23:51.527562Z",
+        "success": false,
+        "failure_code": "HTTP_FAILED",
+        "first_byte_seconds": null,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": null,
+        "width": null,
+        "height": null,
+        "video_codec": null,
+        "audio_codec": null,
+        "bitrate": null,
+        "continuous_read": false
       }
     ],
     "score": 0.0
@@ -4236,7 +4994,7 @@
     "source_type": "community",
     "protocol": null,
     "discovered_at": "2026-10-13T17:18:43.578530Z",
-    "last_checked_at": "2026-10-13T23:20:53.585816Z",
+    "last_checked_at": "2026-10-14T22:24:20.575464Z",
     "last_success_at": null,
     "status": "cooling",
     "history": [
@@ -4309,6 +5067,20 @@
         "audio_codec": null,
         "bitrate": null,
         "continuous_read": false
+      },
+      {
+        "checked_at": "2026-10-14T22:24:20.575464Z",
+        "success": false,
+        "failure_code": "HTTP_TIMEOUT",
+        "first_byte_seconds": null,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": null,
+        "width": null,
+        "height": null,
+        "video_codec": null,
+        "audio_codec": null,
+        "bitrate": null,
+        "continuous_read": false
       }
     ],
     "score": 0.0
@@ -4324,7 +5096,7 @@
     "source_type": "community",
     "protocol": null,
     "discovered_at": "2026-10-13T17:18:43.578530Z",
-    "last_checked_at": "2026-10-13T23:20:58.623487Z",
+    "last_checked_at": "2026-10-14T22:24:25.592757Z",
     "last_success_at": null,
     "status": "cooling",
     "history": [
@@ -4397,6 +5169,20 @@
         "audio_codec": null,
         "bitrate": null,
         "continuous_read": false
+      },
+      {
+        "checked_at": "2026-10-14T22:24:25.592757Z",
+        "success": false,
+        "failure_code": "HTTP_TIMEOUT",
+        "first_byte_seconds": null,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": null,
+        "width": null,
+        "height": null,
+        "video_codec": null,
+        "audio_codec": null,
+        "bitrate": null,
+        "continuous_read": false
       }
     ],
     "score": 0.0
@@ -4412,7 +5198,7 @@
     "source_type": "community",
     "protocol": null,
     "discovered_at": "2026-10-13T17:18:43.578530Z",
-    "last_checked_at": "2026-10-13T23:20:58.624117Z",
+    "last_checked_at": "2026-10-14T22:24:25.612552Z",
     "last_success_at": null,
     "status": "cooling",
     "history": [
@@ -4485,6 +5271,20 @@
         "audio_codec": null,
         "bitrate": null,
         "continuous_read": false
+      },
+      {
+        "checked_at": "2026-10-14T22:24:25.612552Z",
+        "success": false,
+        "failure_code": "HTTP_TIMEOUT",
+        "first_byte_seconds": null,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": null,
+        "width": null,
+        "height": null,
+        "video_codec": null,
+        "audio_codec": null,
+        "bitrate": null,
+        "continuous_read": false
       }
     ],
     "score": 0.0
@@ -4500,7 +5300,7 @@
     "source_type": "community",
     "protocol": null,
     "discovered_at": "2026-10-13T16:57:14.974323Z",
-    "last_checked_at": "2026-10-13T23:20:25.049131Z",
+    "last_checked_at": "2026-10-14T22:23:51.774791Z",
     "last_success_at": null,
     "status": "cooling",
     "history": [
@@ -4587,6 +5387,20 @@
         "audio_codec": null,
         "bitrate": null,
         "continuous_read": false
+      },
+      {
+        "checked_at": "2026-10-14T22:23:51.774791Z",
+        "success": false,
+        "failure_code": "HTTP_TIMEOUT",
+        "first_byte_seconds": null,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": null,
+        "width": null,
+        "height": null,
+        "video_codec": null,
+        "audio_codec": null,
+        "bitrate": null,
+        "continuous_read": false
       }
     ],
     "score": 0.0
@@ -4602,9 +5416,9 @@
     "source_type": "community",
     "protocol": null,
     "discovered_at": "2026-10-13T16:57:14.857006Z",
-    "last_checked_at": "2026-10-13T23:22:06.305916Z",
-    "last_success_at": "2026-10-13T23:22:06.305916Z",
-    "status": "candidate",
+    "last_checked_at": "2026-10-14T22:25:54.811678Z",
+    "last_success_at": "2026-10-14T22:25:54.811678Z",
+    "status": "active",
     "history": [
       {
         "checked_at": "2026-10-13T16:57:18.991569Z",
@@ -4689,9 +5503,23 @@
         "audio_codec": "aac",
         "bitrate": null,
         "continuous_read": true
+      },
+      {
+        "checked_at": "2026-10-14T22:25:54.811678Z",
+        "success": true,
+        "failure_code": null,
+        "first_byte_seconds": 0.15880750599998805,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": 303355.7889256647,
+        "width": 1280,
+        "height": 720,
+        "video_codec": "h264",
+        "audio_codec": "aac",
+        "bitrate": null,
+        "continuous_read": true
       }
     ],
-    "score": 47.37
+    "score": 53.91
   },
   {
     "stream_id": "608d5b661ecac066530ce06e",
@@ -4704,7 +5532,7 @@
     "source_type": "community",
     "protocol": null,
     "discovered_at": "2026-10-13T16:57:14.857006Z",
-    "last_checked_at": "2026-10-13T23:20:26.413353Z",
+    "last_checked_at": "2026-10-14T22:23:51.947224Z",
     "last_success_at": null,
     "status": "cooling",
     "history": [
@@ -4791,6 +5619,20 @@
         "audio_codec": null,
         "bitrate": null,
         "continuous_read": false
+      },
+      {
+        "checked_at": "2026-10-14T22:23:51.947224Z",
+        "success": false,
+        "failure_code": "HTML_RESPONSE",
+        "first_byte_seconds": 0.10023587400000622,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": null,
+        "width": null,
+        "height": null,
+        "video_codec": null,
+        "audio_codec": null,
+        "bitrate": null,
+        "continuous_read": false
       }
     ],
     "score": 0.0
@@ -4806,7 +5648,7 @@
     "source_type": "community",
     "protocol": null,
     "discovered_at": "2026-10-13T17:18:42.484473Z",
-    "last_checked_at": "2026-10-13T23:20:26.486603Z",
+    "last_checked_at": "2026-10-14T22:23:52.048061Z",
     "last_success_at": null,
     "status": "cooling",
     "history": [
@@ -4879,6 +5721,20 @@
         "audio_codec": null,
         "bitrate": null,
         "continuous_read": false
+      },
+      {
+        "checked_at": "2026-10-14T22:23:52.048061Z",
+        "success": false,
+        "failure_code": "HTTP_FAILED",
+        "first_byte_seconds": null,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": null,
+        "width": null,
+        "height": null,
+        "video_codec": null,
+        "audio_codec": null,
+        "bitrate": null,
+        "continuous_read": false
       }
     ],
     "score": 0.0
@@ -4894,7 +5750,7 @@
     "source_type": "community",
     "protocol": null,
     "discovered_at": "2026-10-13T17:18:43.578530Z",
-    "last_checked_at": "2026-10-13T23:21:03.660934Z",
+    "last_checked_at": "2026-10-14T22:24:30.624794Z",
     "last_success_at": null,
     "status": "cooling",
     "history": [
@@ -4967,6 +5823,20 @@
         "audio_codec": null,
         "bitrate": null,
         "continuous_read": false
+      },
+      {
+        "checked_at": "2026-10-14T22:24:30.624794Z",
+        "success": false,
+        "failure_code": "HTTP_TIMEOUT",
+        "first_byte_seconds": null,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": null,
+        "width": null,
+        "height": null,
+        "video_codec": null,
+        "audio_codec": null,
+        "bitrate": null,
+        "continuous_read": false
       }
     ],
     "score": 0.0
@@ -4982,7 +5852,7 @@
     "source_type": "community",
     "protocol": null,
     "discovered_at": "2026-10-13T17:18:42.484473Z",
-    "last_checked_at": "2026-10-13T23:20:26.619916Z",
+    "last_checked_at": "2026-10-14T22:23:52.154288Z",
     "last_success_at": null,
     "status": "cooling",
     "history": [
@@ -5055,6 +5925,20 @@
         "audio_codec": null,
         "bitrate": null,
         "continuous_read": false
+      },
+      {
+        "checked_at": "2026-10-14T22:23:52.154288Z",
+        "success": false,
+        "failure_code": "HTTP_FAILED",
+        "first_byte_seconds": null,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": null,
+        "width": null,
+        "height": null,
+        "video_codec": null,
+        "audio_codec": null,
+        "bitrate": null,
+        "continuous_read": false
       }
     ],
     "score": 0.0
@@ -5070,7 +5954,7 @@
     "source_type": "community",
     "protocol": null,
     "discovered_at": "2026-10-13T17:18:43.039936Z",
-    "last_checked_at": "2026-10-13T23:20:26.657196Z",
+    "last_checked_at": "2026-10-14T22:23:52.230410Z",
     "last_success_at": "2026-10-13T17:25:03.389420Z",
     "status": "cooling",
     "history": [
@@ -5143,9 +6027,23 @@
         "audio_codec": null,
         "bitrate": null,
         "continuous_read": false
+      },
+      {
+        "checked_at": "2026-10-14T22:23:52.230410Z",
+        "success": false,
+        "failure_code": "PLACEHOLDER_STREAM",
+        "first_byte_seconds": null,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": null,
+        "width": null,
+        "height": null,
+        "video_codec": null,
+        "audio_codec": null,
+        "bitrate": null,
+        "continuous_read": false
       }
     ],
-    "score": 56.45
+    "score": 52.78
   },
   {
     "stream_id": "692dcce77ae48601151e4215",
@@ -5158,7 +6056,7 @@
     "source_type": "community",
     "protocol": null,
     "discovered_at": "2026-10-13T17:18:43.578530Z",
-    "last_checked_at": "2026-10-13T23:21:03.661479Z",
+    "last_checked_at": "2026-10-14T22:24:30.627431Z",
     "last_success_at": null,
     "status": "cooling",
     "history": [
@@ -5231,6 +6129,20 @@
         "audio_codec": null,
         "bitrate": null,
         "continuous_read": false
+      },
+      {
+        "checked_at": "2026-10-14T22:24:30.627431Z",
+        "success": false,
+        "failure_code": "HTTP_TIMEOUT",
+        "first_byte_seconds": null,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": null,
+        "width": null,
+        "height": null,
+        "video_codec": null,
+        "audio_codec": null,
+        "bitrate": null,
+        "continuous_read": false
       }
     ],
     "score": 0.0
@@ -5246,7 +6158,7 @@
     "source_type": "community",
     "protocol": null,
     "discovered_at": "2026-10-13T17:18:43.578530Z",
-    "last_checked_at": "2026-10-13T23:21:08.703156Z",
+    "last_checked_at": "2026-10-14T22:24:35.640826Z",
     "last_success_at": null,
     "status": "cooling",
     "history": [
@@ -5319,6 +6231,20 @@
         "audio_codec": null,
         "bitrate": null,
         "continuous_read": false
+      },
+      {
+        "checked_at": "2026-10-14T22:24:35.640826Z",
+        "success": false,
+        "failure_code": "HTTP_TIMEOUT",
+        "first_byte_seconds": null,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": null,
+        "width": null,
+        "height": null,
+        "video_codec": null,
+        "audio_codec": null,
+        "bitrate": null,
+        "continuous_read": false
       }
     ],
     "score": 0.0
@@ -5334,7 +6260,7 @@
     "source_type": "community",
     "protocol": null,
     "discovered_at": "2026-10-13T16:57:14.857006Z",
-    "last_checked_at": "2026-10-13T23:20:28.118453Z",
+    "last_checked_at": "2026-10-14T22:23:55.281718Z",
     "last_success_at": null,
     "status": "cooling",
     "history": [
@@ -5421,6 +6347,20 @@
         "audio_codec": null,
         "bitrate": null,
         "continuous_read": false
+      },
+      {
+        "checked_at": "2026-10-14T22:23:55.281718Z",
+        "success": false,
+        "failure_code": "HTTP_TIMEOUT",
+        "first_byte_seconds": null,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": null,
+        "width": null,
+        "height": null,
+        "video_codec": null,
+        "audio_codec": null,
+        "bitrate": null,
+        "continuous_read": false
       }
     ],
     "score": 0.0
@@ -5436,7 +6376,7 @@
     "source_type": "community",
     "protocol": null,
     "discovered_at": "2026-10-13T16:57:15.084995Z",
-    "last_checked_at": "2026-10-13T23:20:28.119572Z",
+    "last_checked_at": "2026-10-14T22:23:53.072620Z",
     "last_success_at": null,
     "status": "cooling",
     "history": [
@@ -5579,6 +6519,20 @@
         "audio_codec": null,
         "bitrate": null,
         "continuous_read": false
+      },
+      {
+        "checked_at": "2026-10-14T22:23:53.072620Z",
+        "success": false,
+        "failure_code": "HTTP_FAILED",
+        "first_byte_seconds": null,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": null,
+        "width": null,
+        "height": null,
+        "video_codec": null,
+        "audio_codec": null,
+        "bitrate": null,
+        "continuous_read": false
       }
     ],
     "score": 0.0
@@ -5594,7 +6548,7 @@
     "source_type": "community",
     "protocol": null,
     "discovered_at": "2026-10-13T17:18:43.039936Z",
-    "last_checked_at": "2026-10-13T23:20:28.203892Z",
+    "last_checked_at": "2026-10-14T22:23:53.145418Z",
     "last_success_at": "2026-10-13T17:25:03.671957Z",
     "status": "cooling",
     "history": [
@@ -5667,9 +6621,23 @@
         "audio_codec": null,
         "bitrate": null,
         "continuous_read": false
+      },
+      {
+        "checked_at": "2026-10-14T22:23:53.145418Z",
+        "success": false,
+        "failure_code": "PLACEHOLDER_STREAM",
+        "first_byte_seconds": null,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": null,
+        "width": null,
+        "height": null,
+        "video_codec": null,
+        "audio_codec": null,
+        "bitrate": null,
+        "continuous_read": false
       }
     ],
-    "score": 56.45
+    "score": 52.78
   },
   {
     "stream_id": "73da4220582ed0bacd97a169",
@@ -5682,7 +6650,7 @@
     "source_type": "community",
     "protocol": null,
     "discovered_at": "2026-10-13T16:57:14.857006Z",
-    "last_checked_at": "2026-10-13T23:20:28.120045Z",
+    "last_checked_at": "2026-10-14T22:23:53.304570Z",
     "last_success_at": null,
     "status": "cooling",
     "history": [
@@ -5769,6 +6737,20 @@
         "audio_codec": null,
         "bitrate": null,
         "continuous_read": false
+      },
+      {
+        "checked_at": "2026-10-14T22:23:53.304570Z",
+        "success": false,
+        "failure_code": "HTTP_TIMEOUT",
+        "first_byte_seconds": null,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": null,
+        "width": null,
+        "height": null,
+        "video_codec": null,
+        "audio_codec": null,
+        "bitrate": null,
+        "continuous_read": false
       }
     ],
     "score": 0.0
@@ -5784,7 +6766,7 @@
     "source_type": "community",
     "protocol": null,
     "discovered_at": "2026-10-13T16:57:14.857006Z",
-    "last_checked_at": "2026-10-13T23:20:28.126389Z",
+    "last_checked_at": "2026-10-14T22:23:54.024021Z",
     "last_success_at": null,
     "status": "cooling",
     "history": [
@@ -5871,6 +6853,20 @@
         "audio_codec": null,
         "bitrate": null,
         "continuous_read": false
+      },
+      {
+        "checked_at": "2026-10-14T22:23:54.024021Z",
+        "success": false,
+        "failure_code": "HTTP_FAILED",
+        "first_byte_seconds": null,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": null,
+        "width": null,
+        "height": null,
+        "video_codec": null,
+        "audio_codec": null,
+        "bitrate": null,
+        "continuous_read": false
       }
     ],
     "score": 0.0
@@ -5886,7 +6882,7 @@
     "source_type": "community",
     "protocol": null,
     "discovered_at": "2026-10-13T17:18:43.039936Z",
-    "last_checked_at": "2026-10-13T23:20:28.204386Z",
+    "last_checked_at": "2026-10-14T22:23:54.482846Z",
     "last_success_at": null,
     "status": "cooling",
     "history": [
@@ -5959,6 +6955,52 @@
         "audio_codec": null,
         "bitrate": null,
         "continuous_read": false
+      },
+      {
+        "checked_at": "2026-10-14T22:23:54.482846Z",
+        "success": false,
+        "failure_code": "HTTP_FAILED",
+        "first_byte_seconds": null,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": null,
+        "width": null,
+        "height": null,
+        "video_codec": null,
+        "audio_codec": null,
+        "bitrate": null,
+        "continuous_read": false
+      }
+    ],
+    "score": 0.0
+  },
+  {
+    "stream_id": "76b23a34b27b0bc95ec2348f",
+    "channel_id": "tw-ebc-western-movie",
+    "channel_name": "东森洋片台",
+    "raw_name": "东森洋片",
+    "category": "台湾",
+    "url": "https://smt.goiptv.us.ci/ettvwestern/playlist.m3u8",
+    "source_url": "https://raw.githubusercontent.com/judy-gotv/iptv/main/smart.m3u",
+    "source_type": "community",
+    "protocol": null,
+    "discovered_at": "2026-10-14T22:23:49.617120Z",
+    "last_checked_at": "2026-10-14T22:24:35.641748Z",
+    "last_success_at": null,
+    "status": "candidate",
+    "history": [
+      {
+        "checked_at": "2026-10-14T22:24:35.641748Z",
+        "success": false,
+        "failure_code": "HTTP_TIMEOUT",
+        "first_byte_seconds": null,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": null,
+        "width": null,
+        "height": null,
+        "video_codec": null,
+        "audio_codec": null,
+        "bitrate": null,
+        "continuous_read": false
       }
     ],
     "score": 0.0
@@ -5974,9 +7016,9 @@
     "source_type": "community",
     "protocol": null,
     "discovered_at": "2026-10-13T16:57:14.974323Z",
-    "last_checked_at": "2026-10-13T23:20:28.384791Z",
-    "last_success_at": "2026-10-13T16:59:29.144212Z",
-    "status": "cooling",
+    "last_checked_at": "2026-10-14T22:25:55.625192Z",
+    "last_success_at": "2026-10-14T22:25:55.625192Z",
+    "status": "candidate",
     "history": [
       {
         "checked_at": "2026-10-13T16:57:43.986576Z",
@@ -6061,9 +7103,23 @@
         "audio_codec": null,
         "bitrate": null,
         "continuous_read": false
+      },
+      {
+        "checked_at": "2026-10-14T22:25:55.625192Z",
+        "success": true,
+        "failure_code": null,
+        "first_byte_seconds": 0.2259602020000102,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": 344183.1144516951,
+        "width": 432,
+        "height": 240,
+        "video_codec": "h264",
+        "audio_codec": "aac",
+        "bitrate": null,
+        "continuous_read": true
       }
     ],
-    "score": 43.46
+    "score": 49.32
   },
   {
     "stream_id": "78cd79e3d4e0d6b9c36ffbc9",
@@ -6076,7 +7132,7 @@
     "source_type": "community",
     "protocol": null,
     "discovered_at": "2026-10-13T17:18:43.039936Z",
-    "last_checked_at": "2026-10-13T23:20:28.402277Z",
+    "last_checked_at": "2026-10-14T22:23:55.282113Z",
     "last_success_at": "2026-10-13T17:46:24.874273Z",
     "status": "cooling",
     "history": [
@@ -6149,9 +7205,23 @@
         "audio_codec": null,
         "bitrate": null,
         "continuous_read": false
+      },
+      {
+        "checked_at": "2026-10-14T22:23:55.282113Z",
+        "success": false,
+        "failure_code": "MANUAL_REJECTION",
+        "first_byte_seconds": null,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": null,
+        "width": null,
+        "height": null,
+        "video_codec": null,
+        "audio_codec": null,
+        "bitrate": null,
+        "continuous_read": false
       }
     ],
-    "score": 74.4
+    "score": 68.9
   },
   {
     "stream_id": "7a5cbca0044001e9f6942477",
@@ -6164,7 +7234,7 @@
     "source_type": "community",
     "protocol": null,
     "discovered_at": "2026-10-13T16:57:14.857006Z",
-    "last_checked_at": "2026-10-13T23:20:33.122597Z",
+    "last_checked_at": "2026-10-14T22:24:00.283416Z",
     "last_success_at": null,
     "status": "cooling",
     "history": [
@@ -6251,6 +7321,20 @@
         "audio_codec": null,
         "bitrate": null,
         "continuous_read": false
+      },
+      {
+        "checked_at": "2026-10-14T22:24:00.283416Z",
+        "success": false,
+        "failure_code": "HTTP_TIMEOUT",
+        "first_byte_seconds": null,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": null,
+        "width": null,
+        "height": null,
+        "video_codec": null,
+        "audio_codec": null,
+        "bitrate": null,
+        "continuous_read": false
       }
     ],
     "score": 0.0
@@ -6266,7 +7350,7 @@
     "source_type": "community",
     "protocol": null,
     "discovered_at": "2026-10-13T17:18:43.578530Z",
-    "last_checked_at": "2026-10-13T23:21:08.703764Z",
+    "last_checked_at": "2026-10-14T22:24:40.659796Z",
     "last_success_at": null,
     "status": "cooling",
     "history": [
@@ -6339,6 +7423,20 @@
         "audio_codec": null,
         "bitrate": null,
         "continuous_read": false
+      },
+      {
+        "checked_at": "2026-10-14T22:24:40.659796Z",
+        "success": false,
+        "failure_code": "HTTP_TIMEOUT",
+        "first_byte_seconds": null,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": null,
+        "width": null,
+        "height": null,
+        "video_codec": null,
+        "audio_codec": null,
+        "bitrate": null,
+        "continuous_read": false
       }
     ],
     "score": 0.0
@@ -6354,7 +7452,7 @@
     "source_type": "community",
     "protocol": null,
     "discovered_at": "2026-10-13T17:18:42.879973Z",
-    "last_checked_at": "2026-10-13T23:20:28.416469Z",
+    "last_checked_at": "2026-10-14T22:23:55.482395Z",
     "last_success_at": null,
     "status": "cooling",
     "history": [
@@ -6427,6 +7525,20 @@
         "audio_codec": null,
         "bitrate": null,
         "continuous_read": false
+      },
+      {
+        "checked_at": "2026-10-14T22:23:55.482395Z",
+        "success": false,
+        "failure_code": "HTTP_FAILED",
+        "first_byte_seconds": null,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": null,
+        "width": null,
+        "height": null,
+        "video_codec": null,
+        "audio_codec": null,
+        "bitrate": null,
+        "continuous_read": false
       }
     ],
     "score": 0.0
@@ -6442,7 +7554,7 @@
     "source_type": "community",
     "protocol": null,
     "discovered_at": "2026-10-13T17:18:43.039936Z",
-    "last_checked_at": "2026-10-13T23:20:28.459958Z",
+    "last_checked_at": "2026-10-14T22:23:55.485050Z",
     "last_success_at": null,
     "status": "cooling",
     "history": [
@@ -6515,6 +7627,20 @@
         "audio_codec": null,
         "bitrate": null,
         "continuous_read": false
+      },
+      {
+        "checked_at": "2026-10-14T22:23:55.485050Z",
+        "success": false,
+        "failure_code": "HTML_RESPONSE",
+        "first_byte_seconds": 0.07797097300000644,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": null,
+        "width": null,
+        "height": null,
+        "video_codec": null,
+        "audio_codec": null,
+        "bitrate": null,
+        "continuous_read": false
       }
     ],
     "score": 0.0
@@ -6530,7 +7656,7 @@
     "source_type": "community",
     "protocol": null,
     "discovered_at": "2026-10-13T17:18:42.484473Z",
-    "last_checked_at": "2026-10-13T23:20:28.548118Z",
+    "last_checked_at": "2026-10-14T22:23:55.486491Z",
     "last_success_at": null,
     "status": "cooling",
     "history": [
@@ -6603,6 +7729,20 @@
         "audio_codec": null,
         "bitrate": null,
         "continuous_read": false
+      },
+      {
+        "checked_at": "2026-10-14T22:23:55.486491Z",
+        "success": false,
+        "failure_code": "HTTP_FAILED",
+        "first_byte_seconds": null,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": null,
+        "width": null,
+        "height": null,
+        "video_codec": null,
+        "audio_codec": null,
+        "bitrate": null,
+        "continuous_read": false
       }
     ],
     "score": 0.0
@@ -6618,7 +7758,7 @@
     "source_type": "community",
     "protocol": null,
     "discovered_at": "2026-10-13T17:18:43.039936Z",
-    "last_checked_at": "2026-10-13T23:20:28.549577Z",
+    "last_checked_at": "2026-10-14T22:23:55.558769Z",
     "last_success_at": null,
     "status": "cooling",
     "history": [
@@ -6691,6 +7831,20 @@
         "audio_codec": null,
         "bitrate": null,
         "continuous_read": false
+      },
+      {
+        "checked_at": "2026-10-14T22:23:55.558769Z",
+        "success": false,
+        "failure_code": "HTML_RESPONSE",
+        "first_byte_seconds": 0.06423141000000498,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": null,
+        "width": null,
+        "height": null,
+        "video_codec": null,
+        "audio_codec": null,
+        "bitrate": null,
+        "continuous_read": false
       }
     ],
     "score": 0.0
@@ -6706,8 +7860,8 @@
     "source_type": "community",
     "protocol": null,
     "discovered_at": "2026-10-13T16:57:14.857006Z",
-    "last_checked_at": "2026-10-13T23:22:06.851337Z",
-    "last_success_at": "2026-10-13T23:22:06.851337Z",
+    "last_checked_at": "2026-10-14T22:25:58.929468Z",
+    "last_success_at": "2026-10-14T22:25:58.929468Z",
     "status": "candidate",
     "history": [
       {
@@ -6793,9 +7947,23 @@
         "audio_codec": "aac",
         "bitrate": null,
         "continuous_read": true
+      },
+      {
+        "checked_at": "2026-10-14T22:25:58.929468Z",
+        "success": true,
+        "failure_code": null,
+        "first_byte_seconds": 1.4305730469999958,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": 109486.42475681004,
+        "width": 1920,
+        "height": 1080,
+        "video_codec": "h264",
+        "audio_codec": "aac",
+        "bitrate": null,
+        "continuous_read": false
       }
     ],
-    "score": 92.65
+    "score": 90.51
   },
   {
     "stream_id": "7e71a7305df0e993262ec5a2",
@@ -6808,7 +7976,7 @@
     "source_type": "community",
     "protocol": null,
     "discovered_at": "2026-10-13T17:18:43.578530Z",
-    "last_checked_at": "2026-10-13T23:21:13.743552Z",
+    "last_checked_at": "2026-10-14T22:24:40.660483Z",
     "last_success_at": null,
     "status": "cooling",
     "history": [
@@ -6881,6 +8049,84 @@
         "audio_codec": null,
         "bitrate": null,
         "continuous_read": false
+      },
+      {
+        "checked_at": "2026-10-14T22:24:40.660483Z",
+        "success": false,
+        "failure_code": "HTTP_TIMEOUT",
+        "first_byte_seconds": null,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": null,
+        "width": null,
+        "height": null,
+        "video_codec": null,
+        "audio_codec": null,
+        "bitrate": null,
+        "continuous_read": false
+      }
+    ],
+    "score": 0.0
+  },
+  {
+    "stream_id": "7fa730e116f341dcba328945",
+    "channel_id": "tw-ctv-classic",
+    "channel_name": "中视经典台",
+    "raw_name": "中视经典",
+    "category": "台湾",
+    "url": "https://smt.goiptv.us.ci/zhongshi_twn/playlist.m3u8",
+    "source_url": "https://raw.githubusercontent.com/judy-gotv/iptv/main/smart.m3u",
+    "source_type": "community",
+    "protocol": null,
+    "discovered_at": "2026-10-14T22:23:49.617120Z",
+    "last_checked_at": "2026-10-14T22:24:45.678836Z",
+    "last_success_at": null,
+    "status": "candidate",
+    "history": [
+      {
+        "checked_at": "2026-10-14T22:24:45.678836Z",
+        "success": false,
+        "failure_code": "HTTP_TIMEOUT",
+        "first_byte_seconds": null,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": null,
+        "width": null,
+        "height": null,
+        "video_codec": null,
+        "audio_codec": null,
+        "bitrate": null,
+        "continuous_read": false
+      }
+    ],
+    "score": 0.0
+  },
+  {
+    "stream_id": "800f5dd3e5711149174dae0d",
+    "channel_id": "tw-gtv-entertainment",
+    "channel_name": "八大娱乐台",
+    "raw_name": "八大娱乐台",
+    "category": "台湾",
+    "url": "https://smt.goiptv.us.ci/badaentertain/playlist.m3u8",
+    "source_url": "https://raw.githubusercontent.com/judy-gotv/iptv/main/smart.m3u",
+    "source_type": "community",
+    "protocol": null,
+    "discovered_at": "2026-10-14T22:23:49.617120Z",
+    "last_checked_at": "2026-10-14T22:24:45.679319Z",
+    "last_success_at": null,
+    "status": "candidate",
+    "history": [
+      {
+        "checked_at": "2026-10-14T22:24:45.679319Z",
+        "success": false,
+        "failure_code": "HTTP_TIMEOUT",
+        "first_byte_seconds": null,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": null,
+        "width": null,
+        "height": null,
+        "video_codec": null,
+        "audio_codec": null,
+        "bitrate": null,
+        "continuous_read": false
       }
     ],
     "score": 0.0
@@ -6896,7 +8142,7 @@
     "source_type": "community",
     "protocol": null,
     "discovered_at": "2026-10-13T17:18:42.484473Z",
-    "last_checked_at": "2026-10-13T23:20:28.739413Z",
+    "last_checked_at": "2026-10-14T22:23:56.429467Z",
     "last_success_at": null,
     "status": "cooling",
     "history": [
@@ -6969,6 +8215,20 @@
         "audio_codec": null,
         "bitrate": null,
         "continuous_read": false
+      },
+      {
+        "checked_at": "2026-10-14T22:23:56.429467Z",
+        "success": false,
+        "failure_code": "HTTP_FAILED",
+        "first_byte_seconds": null,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": null,
+        "width": null,
+        "height": null,
+        "video_codec": null,
+        "audio_codec": null,
+        "bitrate": null,
+        "continuous_read": false
       }
     ],
     "score": 0.0
@@ -6984,7 +8244,7 @@
     "source_type": "community",
     "protocol": null,
     "discovered_at": "2026-10-13T17:18:43.578530Z",
-    "last_checked_at": "2026-10-13T23:21:13.744174Z",
+    "last_checked_at": "2026-10-14T22:24:50.696490Z",
     "last_success_at": null,
     "status": "cooling",
     "history": [
@@ -7057,6 +8317,20 @@
         "audio_codec": null,
         "bitrate": null,
         "continuous_read": false
+      },
+      {
+        "checked_at": "2026-10-14T22:24:50.696490Z",
+        "success": false,
+        "failure_code": "HTTP_TIMEOUT",
+        "first_byte_seconds": null,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": null,
+        "width": null,
+        "height": null,
+        "video_codec": null,
+        "audio_codec": null,
+        "bitrate": null,
+        "continuous_read": false
       }
     ],
     "score": 0.0
@@ -7072,8 +8346,8 @@
     "source_type": "community",
     "protocol": null,
     "discovered_at": "2026-10-13T17:18:43.039936Z",
-    "last_checked_at": "2026-10-13T23:22:07.027045Z",
-    "last_success_at": "2026-10-13T23:22:07.027045Z",
+    "last_checked_at": "2026-10-14T22:25:59.056021Z",
+    "last_success_at": "2026-10-14T22:25:59.056021Z",
     "status": "candidate",
     "history": [
       {
@@ -7145,9 +8419,55 @@
         "audio_codec": "aac",
         "bitrate": null,
         "continuous_read": true
+      },
+      {
+        "checked_at": "2026-10-14T22:25:59.056021Z",
+        "success": true,
+        "failure_code": null,
+        "first_byte_seconds": 0.30191988799998626,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": 374039.9309981064,
+        "width": 854,
+        "height": 480,
+        "video_codec": "h264",
+        "audio_codec": "aac",
+        "bitrate": null,
+        "continuous_read": true
       }
     ],
     "score": 82.0
+  },
+  {
+    "stream_id": "859ddd05d0c6e2bb43363071",
+    "channel_id": "tw-cti-entertainment",
+    "channel_name": "中天娱乐台",
+    "raw_name": "中天娱乐",
+    "category": "台湾",
+    "url": "https://smt.goiptv.us.ci/ctient/playlist.m3u8",
+    "source_url": "https://raw.githubusercontent.com/judy-gotv/iptv/main/smart.m3u",
+    "source_type": "community",
+    "protocol": null,
+    "discovered_at": "2026-10-14T22:23:49.617120Z",
+    "last_checked_at": "2026-10-14T22:24:50.697003Z",
+    "last_success_at": null,
+    "status": "candidate",
+    "history": [
+      {
+        "checked_at": "2026-10-14T22:24:50.697003Z",
+        "success": false,
+        "failure_code": "HTTP_TIMEOUT",
+        "first_byte_seconds": null,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": null,
+        "width": null,
+        "height": null,
+        "video_codec": null,
+        "audio_codec": null,
+        "bitrate": null,
+        "continuous_read": false
+      }
+    ],
+    "score": 0.0
   },
   {
     "stream_id": "86ef6b05eff5a7a7ac4505bb",
@@ -7160,7 +8480,7 @@
     "source_type": "community",
     "protocol": null,
     "discovered_at": "2026-10-13T17:18:43.039936Z",
-    "last_checked_at": "2026-10-13T23:20:29.126125Z",
+    "last_checked_at": "2026-10-14T22:23:57.609305Z",
     "last_success_at": null,
     "status": "cooling",
     "history": [
@@ -7233,6 +8553,20 @@
         "audio_codec": null,
         "bitrate": null,
         "continuous_read": false
+      },
+      {
+        "checked_at": "2026-10-14T22:23:57.609305Z",
+        "success": false,
+        "failure_code": "HTTP_FAILED",
+        "first_byte_seconds": null,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": null,
+        "width": null,
+        "height": null,
+        "video_codec": null,
+        "audio_codec": null,
+        "bitrate": null,
+        "continuous_read": false
       }
     ],
     "score": 0.0
@@ -7248,8 +8582,8 @@
     "source_type": "community",
     "protocol": null,
     "discovered_at": "2026-10-13T17:02:59.110704Z",
-    "last_checked_at": "2026-10-13T23:22:09.300433Z",
-    "last_success_at": "2026-10-13T23:22:09.300433Z",
+    "last_checked_at": "2026-10-14T22:26:00.604195Z",
+    "last_success_at": "2026-10-14T22:26:00.604195Z",
     "status": "active",
     "history": [
       {
@@ -7293,6 +8627,20 @@
         "audio_codec": "aac",
         "bitrate": null,
         "continuous_read": true
+      },
+      {
+        "checked_at": "2026-10-14T22:26:00.604195Z",
+        "success": true,
+        "failure_code": null,
+        "first_byte_seconds": 0.3758302990000004,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": 205399.24226582865,
+        "width": 1920,
+        "height": 1080,
+        "video_codec": "h264",
+        "audio_codec": "aac",
+        "bitrate": null,
+        "continuous_read": true
       }
     ],
     "score": 96.4
@@ -7308,7 +8656,7 @@
     "source_type": "community",
     "protocol": null,
     "discovered_at": "2026-10-13T16:57:14.974323Z",
-    "last_checked_at": "2026-10-13T23:20:29.275338Z",
+    "last_checked_at": "2026-10-14T22:23:58.306322Z",
     "last_success_at": null,
     "status": "cooling",
     "history": [
@@ -7395,6 +8743,20 @@
         "audio_codec": null,
         "bitrate": null,
         "continuous_read": false
+      },
+      {
+        "checked_at": "2026-10-14T22:23:58.306322Z",
+        "success": false,
+        "failure_code": "HTTP_FAILED",
+        "first_byte_seconds": null,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": null,
+        "width": null,
+        "height": null,
+        "video_codec": null,
+        "audio_codec": null,
+        "bitrate": null,
+        "continuous_read": false
       }
     ],
     "score": 0.0
@@ -7410,7 +8772,7 @@
     "source_type": "community",
     "protocol": null,
     "discovered_at": "2026-10-13T16:57:14.857006Z",
-    "last_checked_at": "2026-10-13T23:20:33.123527Z",
+    "last_checked_at": "2026-10-14T22:24:00.285481Z",
     "last_success_at": null,
     "status": "cooling",
     "history": [
@@ -7497,6 +8859,20 @@
         "audio_codec": null,
         "bitrate": null,
         "continuous_read": false
+      },
+      {
+        "checked_at": "2026-10-14T22:24:00.285481Z",
+        "success": false,
+        "failure_code": "HTTP_TIMEOUT",
+        "first_byte_seconds": null,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": null,
+        "width": null,
+        "height": null,
+        "video_codec": null,
+        "audio_codec": null,
+        "bitrate": null,
+        "continuous_read": false
       }
     ],
     "score": 0.0
@@ -7512,7 +8888,7 @@
     "source_type": "community",
     "protocol": null,
     "discovered_at": "2026-10-13T17:18:43.039936Z",
-    "last_checked_at": "2026-10-13T23:20:30.050927Z",
+    "last_checked_at": "2026-10-14T22:23:59.333203Z",
     "last_success_at": null,
     "status": "cooling",
     "history": [
@@ -7585,6 +8961,20 @@
         "audio_codec": null,
         "bitrate": null,
         "continuous_read": false
+      },
+      {
+        "checked_at": "2026-10-14T22:23:59.333203Z",
+        "success": false,
+        "failure_code": "HTTP_FAILED",
+        "first_byte_seconds": null,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": null,
+        "width": null,
+        "height": null,
+        "video_codec": null,
+        "audio_codec": null,
+        "bitrate": null,
+        "continuous_read": false
       }
     ],
     "score": 0.0
@@ -7600,7 +8990,7 @@
     "source_type": "community",
     "protocol": null,
     "discovered_at": "2026-10-13T16:57:14.857006Z",
-    "last_checked_at": "2026-10-13T23:20:38.126746Z",
+    "last_checked_at": "2026-10-14T22:24:05.289884Z",
     "last_success_at": null,
     "status": "cooling",
     "history": [
@@ -7687,6 +9077,20 @@
         "audio_codec": null,
         "bitrate": null,
         "continuous_read": false
+      },
+      {
+        "checked_at": "2026-10-14T22:24:05.289884Z",
+        "success": false,
+        "failure_code": "HTTP_TIMEOUT",
+        "first_byte_seconds": null,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": null,
+        "width": null,
+        "height": null,
+        "video_codec": null,
+        "audio_codec": null,
+        "bitrate": null,
+        "continuous_read": false
       }
     ],
     "score": 0.0
@@ -7702,8 +9106,8 @@
     "source_type": "community",
     "protocol": null,
     "discovered_at": "2026-10-13T16:57:14.857006Z",
-    "last_checked_at": "2026-10-13T23:22:09.891307Z",
-    "last_success_at": "2026-10-13T23:22:09.891307Z",
+    "last_checked_at": "2026-10-14T22:26:01.196627Z",
+    "last_success_at": "2026-10-14T22:26:01.196627Z",
     "status": "active",
     "history": [
       {
@@ -7789,9 +9193,23 @@
         "audio_codec": "aac",
         "bitrate": null,
         "continuous_read": true
+      },
+      {
+        "checked_at": "2026-10-14T22:26:01.196627Z",
+        "success": true,
+        "failure_code": null,
+        "first_byte_seconds": 1.4285796290000121,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": 911197.1756617472,
+        "width": 3840,
+        "height": 2160,
+        "video_codec": "hevc",
+        "audio_codec": "aac",
+        "bitrate": null,
+        "continuous_read": true
       }
     ],
-    "score": 97.38
+    "score": 96.93
   },
   {
     "stream_id": "950effb0108dba851259e283",
@@ -7804,7 +9222,7 @@
     "source_type": "community",
     "protocol": null,
     "discovered_at": "2026-10-13T16:57:15.084995Z",
-    "last_checked_at": "2026-10-13T23:20:31.274153Z",
+    "last_checked_at": "2026-10-14T22:24:00.285110Z",
     "last_success_at": null,
     "status": "cooling",
     "history": [
@@ -7947,6 +9365,20 @@
         "audio_codec": null,
         "bitrate": null,
         "continuous_read": false
+      },
+      {
+        "checked_at": "2026-10-14T22:24:00.285110Z",
+        "success": false,
+        "failure_code": "HTTP_FAILED",
+        "first_byte_seconds": null,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": null,
+        "width": null,
+        "height": null,
+        "video_codec": null,
+        "audio_codec": null,
+        "bitrate": null,
+        "continuous_read": false
       }
     ],
     "score": 0.0
@@ -7962,8 +9394,8 @@
     "source_type": "community",
     "protocol": null,
     "discovered_at": "2026-10-13T16:57:15.084995Z",
-    "last_checked_at": "2026-10-13T23:22:11.162596Z",
-    "last_success_at": "2026-10-13T17:58:23.405849Z",
+    "last_checked_at": "2026-10-14T22:26:04.368837Z",
+    "last_success_at": "2026-10-14T22:26:04.368837Z",
     "status": "candidate",
     "history": [
       {
@@ -8105,9 +9537,23 @@
         "audio_codec": null,
         "bitrate": null,
         "continuous_read": false
+      },
+      {
+        "checked_at": "2026-10-14T22:26:04.368837Z",
+        "success": true,
+        "failure_code": null,
+        "first_byte_seconds": 0.4314167619999978,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": 285067.2249510795,
+        "width": 1280,
+        "height": 720,
+        "video_codec": "h264",
+        "audio_codec": "aac",
+        "bitrate": null,
+        "continuous_read": true
       }
     ],
-    "score": 87.7
+    "score": 88.2
   },
   {
     "stream_id": "966e482692413cd8de0929b1",
@@ -8120,8 +9566,8 @@
     "source_type": "community",
     "protocol": null,
     "discovered_at": "2026-10-13T16:57:14.857006Z",
-    "last_checked_at": "2026-10-13T23:22:12.270621Z",
-    "last_success_at": "2026-10-13T23:22:12.270621Z",
+    "last_checked_at": "2026-10-14T22:26:04.392479Z",
+    "last_success_at": "2026-10-14T22:26:04.392479Z",
     "status": "active",
     "history": [
       {
@@ -8207,9 +9653,23 @@
         "audio_codec": "aac",
         "bitrate": null,
         "continuous_read": true
+      },
+      {
+        "checked_at": "2026-10-14T22:26:04.392479Z",
+        "success": true,
+        "failure_code": null,
+        "first_byte_seconds": 0.21260219300000927,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": 304106.18593535305,
+        "width": 1280,
+        "height": 720,
+        "video_codec": "h264",
+        "audio_codec": "aac",
+        "bitrate": null,
+        "continuous_read": true
       }
     ],
-    "score": 82.42
+    "score": 84.0
   },
   {
     "stream_id": "9a817f69864b40ec836e371c",
@@ -8222,7 +9682,7 @@
     "source_type": "community",
     "protocol": null,
     "discovered_at": "2026-10-13T17:18:43.578530Z",
-    "last_checked_at": "2026-10-13T23:21:18.781510Z",
+    "last_checked_at": "2026-10-14T22:24:55.720588Z",
     "last_success_at": null,
     "status": "cooling",
     "history": [
@@ -8295,6 +9755,20 @@
         "audio_codec": null,
         "bitrate": null,
         "continuous_read": false
+      },
+      {
+        "checked_at": "2026-10-14T22:24:55.720588Z",
+        "success": false,
+        "failure_code": "HTTP_TIMEOUT",
+        "first_byte_seconds": null,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": null,
+        "width": null,
+        "height": null,
+        "video_codec": null,
+        "audio_codec": null,
+        "bitrate": null,
+        "continuous_read": false
       }
     ],
     "score": 0.0
@@ -8310,7 +9784,7 @@
     "source_type": "community",
     "protocol": null,
     "discovered_at": "2026-10-13T17:18:42.484473Z",
-    "last_checked_at": "2026-10-13T23:20:32.000020Z",
+    "last_checked_at": "2026-10-14T22:24:00.510357Z",
     "last_success_at": null,
     "status": "cooling",
     "history": [
@@ -8383,6 +9857,20 @@
         "audio_codec": null,
         "bitrate": null,
         "continuous_read": false
+      },
+      {
+        "checked_at": "2026-10-14T22:24:00.510357Z",
+        "success": false,
+        "failure_code": "HTTP_FAILED",
+        "first_byte_seconds": null,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": null,
+        "width": null,
+        "height": null,
+        "video_codec": null,
+        "audio_codec": null,
+        "bitrate": null,
+        "continuous_read": false
       }
     ],
     "score": 0.0
@@ -8398,7 +9886,7 @@
     "source_type": "community",
     "protocol": null,
     "discovered_at": "2026-10-13T17:18:43.039936Z",
-    "last_checked_at": "2026-10-13T23:20:32.289507Z",
+    "last_checked_at": "2026-10-14T22:24:00.561788Z",
     "last_success_at": null,
     "status": "cooling",
     "history": [
@@ -8471,6 +9959,20 @@
         "audio_codec": null,
         "bitrate": null,
         "continuous_read": false
+      },
+      {
+        "checked_at": "2026-10-14T22:24:00.561788Z",
+        "success": false,
+        "failure_code": "HTTP_FAILED",
+        "first_byte_seconds": null,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": null,
+        "width": null,
+        "height": null,
+        "video_codec": null,
+        "audio_codec": null,
+        "bitrate": null,
+        "continuous_read": false
       }
     ],
     "score": 0.0
@@ -8486,9 +9988,9 @@
     "source_type": "community",
     "protocol": null,
     "discovered_at": "2026-10-13T16:57:14.857006Z",
-    "last_checked_at": "2026-10-13T23:22:12.927167Z",
-    "last_success_at": "2026-10-13T23:22:12.927167Z",
-    "status": "candidate",
+    "last_checked_at": "2026-10-14T22:26:05.102198Z",
+    "last_success_at": "2026-10-14T22:26:05.102198Z",
+    "status": "active",
     "history": [
       {
         "checked_at": "2026-10-13T16:57:20.725924Z",
@@ -8573,9 +10075,23 @@
         "audio_codec": "aac",
         "bitrate": null,
         "continuous_read": true
+      },
+      {
+        "checked_at": "2026-10-14T22:26:05.102198Z",
+        "success": true,
+        "failure_code": null,
+        "first_byte_seconds": 0.20611075300000437,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": 929454.4473812333,
+        "width": 1920,
+        "height": 1080,
+        "video_codec": "h264",
+        "audio_codec": "aac",
+        "bitrate": null,
+        "continuous_read": true
       }
     ],
-    "score": 50.57
+    "score": 57.11
   },
   {
     "stream_id": "a6438d5b99f2c95068b2638c",
@@ -8588,7 +10104,7 @@
     "source_type": "community",
     "protocol": null,
     "discovered_at": "2026-10-13T17:18:43.578530Z",
-    "last_checked_at": "2026-10-13T23:21:18.782152Z",
+    "last_checked_at": "2026-10-14T22:24:55.721080Z",
     "last_success_at": null,
     "status": "cooling",
     "history": [
@@ -8661,6 +10177,20 @@
         "audio_codec": null,
         "bitrate": null,
         "continuous_read": false
+      },
+      {
+        "checked_at": "2026-10-14T22:24:55.721080Z",
+        "success": false,
+        "failure_code": "HTTP_TIMEOUT",
+        "first_byte_seconds": null,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": null,
+        "width": null,
+        "height": null,
+        "video_codec": null,
+        "audio_codec": null,
+        "bitrate": null,
+        "continuous_read": false
       }
     ],
     "score": 0.0
@@ -8676,7 +10206,7 @@
     "source_type": "community",
     "protocol": null,
     "discovered_at": "2026-10-13T17:18:43.578530Z",
-    "last_checked_at": "2026-10-13T23:21:23.820538Z",
+    "last_checked_at": "2026-10-14T22:25:00.737008Z",
     "last_success_at": null,
     "status": "cooling",
     "history": [
@@ -8749,6 +10279,52 @@
         "audio_codec": null,
         "bitrate": null,
         "continuous_read": false
+      },
+      {
+        "checked_at": "2026-10-14T22:25:00.737008Z",
+        "success": false,
+        "failure_code": "HTTP_TIMEOUT",
+        "first_byte_seconds": null,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": null,
+        "width": null,
+        "height": null,
+        "video_codec": null,
+        "audio_codec": null,
+        "bitrate": null,
+        "continuous_read": false
+      }
+    ],
+    "score": 0.0
+  },
+  {
+    "stream_id": "a701778de4e626e1f4ba663d",
+    "channel_id": "tw-set-variety",
+    "channel_name": "三立综合台",
+    "raw_name": "三立综合台",
+    "category": "台湾",
+    "url": "https://smt.goiptv.us.ci/sanlizhonghe/playlist.m3u8",
+    "source_url": "https://raw.githubusercontent.com/judy-gotv/iptv/main/smart.m3u",
+    "source_type": "community",
+    "protocol": null,
+    "discovered_at": "2026-10-14T22:23:49.617120Z",
+    "last_checked_at": "2026-10-14T22:25:00.737499Z",
+    "last_success_at": null,
+    "status": "candidate",
+    "history": [
+      {
+        "checked_at": "2026-10-14T22:25:00.737499Z",
+        "success": false,
+        "failure_code": "HTTP_TIMEOUT",
+        "first_byte_seconds": null,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": null,
+        "width": null,
+        "height": null,
+        "video_codec": null,
+        "audio_codec": null,
+        "bitrate": null,
+        "continuous_read": false
       }
     ],
     "score": 0.0
@@ -8764,7 +10340,7 @@
     "source_type": "community",
     "protocol": null,
     "discovered_at": "2026-10-13T16:57:14.857006Z",
-    "last_checked_at": "2026-10-13T23:20:33.123139Z",
+    "last_checked_at": "2026-10-14T22:24:02.082336Z",
     "last_success_at": null,
     "status": "cooling",
     "history": [
@@ -8851,6 +10427,20 @@
         "audio_codec": null,
         "bitrate": null,
         "continuous_read": false
+      },
+      {
+        "checked_at": "2026-10-14T22:24:02.082336Z",
+        "success": false,
+        "failure_code": "HTTP_TIMEOUT",
+        "first_byte_seconds": null,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": null,
+        "width": null,
+        "height": null,
+        "video_codec": null,
+        "audio_codec": null,
+        "bitrate": null,
+        "continuous_read": false
       }
     ],
     "score": 0.0
@@ -8866,7 +10456,7 @@
     "source_type": "community",
     "protocol": null,
     "discovered_at": "2026-10-13T16:57:15.084995Z",
-    "last_checked_at": "2026-10-13T23:20:33.123941Z",
+    "last_checked_at": "2026-10-14T22:24:05.290407Z",
     "last_success_at": null,
     "status": "cooling",
     "history": [
@@ -9009,6 +10599,52 @@
         "audio_codec": null,
         "bitrate": null,
         "continuous_read": false
+      },
+      {
+        "checked_at": "2026-10-14T22:24:05.290407Z",
+        "success": false,
+        "failure_code": "HTTP_FAILED",
+        "first_byte_seconds": null,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": null,
+        "width": null,
+        "height": null,
+        "video_codec": null,
+        "audio_codec": null,
+        "bitrate": null,
+        "continuous_read": false
+      }
+    ],
+    "score": 0.0
+  },
+  {
+    "stream_id": "ab29850df1fa0f7472bb533d",
+    "channel_id": "tw-videoland-variety",
+    "channel_name": "纬来综合台",
+    "raw_name": "纬来综合",
+    "category": "台湾",
+    "url": "https://smt.goiptv.us.ci/videolandzonghe/playlist.m3u8",
+    "source_url": "https://raw.githubusercontent.com/judy-gotv/iptv/main/smart.m3u",
+    "source_type": "community",
+    "protocol": null,
+    "discovered_at": "2026-10-14T22:23:49.617120Z",
+    "last_checked_at": "2026-10-14T22:25:05.757220Z",
+    "last_success_at": null,
+    "status": "candidate",
+    "history": [
+      {
+        "checked_at": "2026-10-14T22:25:05.757220Z",
+        "success": false,
+        "failure_code": "HTTP_TIMEOUT",
+        "first_byte_seconds": null,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": null,
+        "width": null,
+        "height": null,
+        "video_codec": null,
+        "audio_codec": null,
+        "bitrate": null,
+        "continuous_read": false
       }
     ],
     "score": 0.0
@@ -9024,7 +10660,7 @@
     "source_type": "community",
     "protocol": null,
     "discovered_at": "2026-10-13T17:18:43.578530Z",
-    "last_checked_at": "2026-10-13T23:21:23.821157Z",
+    "last_checked_at": "2026-10-14T22:25:05.758312Z",
     "last_success_at": null,
     "status": "cooling",
     "history": [
@@ -9097,6 +10733,20 @@
         "audio_codec": null,
         "bitrate": null,
         "continuous_read": false
+      },
+      {
+        "checked_at": "2026-10-14T22:25:05.758312Z",
+        "success": false,
+        "failure_code": "HTTP_TIMEOUT",
+        "first_byte_seconds": null,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": null,
+        "width": null,
+        "height": null,
+        "video_codec": null,
+        "audio_codec": null,
+        "bitrate": null,
+        "continuous_read": false
       }
     ],
     "score": 0.0
@@ -9112,7 +10762,7 @@
     "source_type": "community",
     "protocol": null,
     "discovered_at": "2026-10-13T17:18:43.039936Z",
-    "last_checked_at": "2026-10-13T23:20:33.206343Z",
+    "last_checked_at": "2026-10-14T22:24:05.520781Z",
     "last_success_at": null,
     "status": "cooling",
     "history": [
@@ -9185,6 +10835,20 @@
         "audio_codec": null,
         "bitrate": null,
         "continuous_read": false
+      },
+      {
+        "checked_at": "2026-10-14T22:24:05.520781Z",
+        "success": false,
+        "failure_code": "HTML_RESPONSE",
+        "first_byte_seconds": 0.053649862000000326,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": null,
+        "width": null,
+        "height": null,
+        "video_codec": null,
+        "audio_codec": null,
+        "bitrate": null,
+        "continuous_read": false
       }
     ],
     "score": 0.0
@@ -9200,7 +10864,7 @@
     "source_type": "community",
     "protocol": null,
     "discovered_at": "2026-10-13T17:18:43.039936Z",
-    "last_checked_at": "2026-10-13T23:20:33.435431Z",
+    "last_checked_at": "2026-10-14T22:24:05.521477Z",
     "last_success_at": "2026-10-13T17:25:08.214811Z",
     "status": "cooling",
     "history": [
@@ -9273,9 +10937,23 @@
         "audio_codec": null,
         "bitrate": null,
         "continuous_read": false
+      },
+      {
+        "checked_at": "2026-10-14T22:24:05.521477Z",
+        "success": false,
+        "failure_code": "PLACEHOLDER_STREAM",
+        "first_byte_seconds": null,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": null,
+        "width": null,
+        "height": null,
+        "video_codec": null,
+        "audio_codec": null,
+        "bitrate": null,
+        "continuous_read": false
       }
     ],
-    "score": 56.45
+    "score": 52.78
   },
   {
     "stream_id": "ad978229b29288e98d877522",
@@ -9288,7 +10966,7 @@
     "source_type": "community",
     "protocol": null,
     "discovered_at": "2026-10-13T17:18:43.578530Z",
-    "last_checked_at": "2026-10-13T23:21:28.858601Z",
+    "last_checked_at": "2026-10-14T22:25:10.774949Z",
     "last_success_at": null,
     "status": "cooling",
     "history": [
@@ -9361,6 +11039,20 @@
         "audio_codec": null,
         "bitrate": null,
         "continuous_read": false
+      },
+      {
+        "checked_at": "2026-10-14T22:25:10.774949Z",
+        "success": false,
+        "failure_code": "HTTP_TIMEOUT",
+        "first_byte_seconds": null,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": null,
+        "width": null,
+        "height": null,
+        "video_codec": null,
+        "audio_codec": null,
+        "bitrate": null,
+        "continuous_read": false
       }
     ],
     "score": 0.0
@@ -9376,7 +11068,7 @@
     "source_type": "community",
     "protocol": null,
     "discovered_at": "2026-10-13T17:18:42.879973Z",
-    "last_checked_at": "2026-10-13T23:20:33.482997Z",
+    "last_checked_at": "2026-10-14T22:24:06.589885Z",
     "last_success_at": null,
     "status": "cooling",
     "history": [
@@ -9449,6 +11141,20 @@
         "audio_codec": null,
         "bitrate": null,
         "continuous_read": false
+      },
+      {
+        "checked_at": "2026-10-14T22:24:06.589885Z",
+        "success": false,
+        "failure_code": "HTTP_FAILED",
+        "first_byte_seconds": null,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": null,
+        "width": null,
+        "height": null,
+        "video_codec": null,
+        "audio_codec": null,
+        "bitrate": null,
+        "continuous_read": false
       }
     ],
     "score": 0.0
@@ -9464,7 +11170,7 @@
     "source_type": "community",
     "protocol": null,
     "discovered_at": "2026-10-13T17:18:43.039936Z",
-    "last_checked_at": "2026-10-13T23:20:33.595128Z",
+    "last_checked_at": "2026-10-14T22:24:06.610004Z",
     "last_success_at": null,
     "status": "cooling",
     "history": [
@@ -9537,6 +11243,84 @@
         "audio_codec": null,
         "bitrate": null,
         "continuous_read": false
+      },
+      {
+        "checked_at": "2026-10-14T22:24:06.610004Z",
+        "success": false,
+        "failure_code": "NON_LIVE_PLAYLIST",
+        "first_byte_seconds": null,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": null,
+        "width": null,
+        "height": null,
+        "video_codec": null,
+        "audio_codec": null,
+        "bitrate": null,
+        "continuous_read": false
+      }
+    ],
+    "score": 0.0
+  },
+  {
+    "stream_id": "b377864a1611ff0686fe46f1",
+    "channel_id": "tw-ttv-finance",
+    "channel_name": "台视财经台",
+    "raw_name": "台視財經",
+    "category": "台湾",
+    "url": "http://litv.zapi.us.kg/?id=4gtv-4gtv056",
+    "source_url": "https://raw.githubusercontent.com/imDazui/Tvlist-awesome-m3u-m3u8/master/m3u/%E5%8F%B0%E6%B9%BE%E9%A6%99%E6%B8%AF%E6%BE%B3%E9%97%A8202506.m3u",
+    "source_type": "community",
+    "protocol": null,
+    "discovered_at": "2026-10-14T22:23:49.365293Z",
+    "last_checked_at": "2026-10-14T22:24:06.898360Z",
+    "last_success_at": null,
+    "status": "candidate",
+    "history": [
+      {
+        "checked_at": "2026-10-14T22:24:06.898360Z",
+        "success": false,
+        "failure_code": "HTTP_FAILED",
+        "first_byte_seconds": null,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": null,
+        "width": null,
+        "height": null,
+        "video_codec": null,
+        "audio_codec": null,
+        "bitrate": null,
+        "continuous_read": false
+      }
+    ],
+    "score": 0.0
+  },
+  {
+    "stream_id": "b60d71ea245f0beaa58c77de",
+    "channel_id": "tw-cti-asia",
+    "channel_name": "中天亚洲台",
+    "raw_name": "中天亚洲",
+    "category": "台湾",
+    "url": "https://smt.goiptv.us.ci/ctiasia_twn/playlist.m3u8",
+    "source_url": "https://raw.githubusercontent.com/judy-gotv/iptv/main/smart.m3u",
+    "source_type": "community",
+    "protocol": null,
+    "discovered_at": "2026-10-14T22:23:49.617120Z",
+    "last_checked_at": "2026-10-14T22:25:10.775422Z",
+    "last_success_at": null,
+    "status": "candidate",
+    "history": [
+      {
+        "checked_at": "2026-10-14T22:25:10.775422Z",
+        "success": false,
+        "failure_code": "HTTP_TIMEOUT",
+        "first_byte_seconds": null,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": null,
+        "width": null,
+        "height": null,
+        "video_codec": null,
+        "audio_codec": null,
+        "bitrate": null,
+        "continuous_read": false
       }
     ],
     "score": 0.0
@@ -9552,7 +11336,7 @@
     "source_type": "community",
     "protocol": null,
     "discovered_at": "2026-10-13T16:57:14.857006Z",
-    "last_checked_at": "2026-10-13T23:20:33.971883Z",
+    "last_checked_at": "2026-10-14T22:24:08.113224Z",
     "last_success_at": null,
     "status": "cooling",
     "history": [
@@ -9639,6 +11423,20 @@
         "audio_codec": null,
         "bitrate": null,
         "continuous_read": false
+      },
+      {
+        "checked_at": "2026-10-14T22:24:08.113224Z",
+        "success": false,
+        "failure_code": "HTTP_TIMEOUT",
+        "first_byte_seconds": null,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": null,
+        "width": null,
+        "height": null,
+        "video_codec": null,
+        "audio_codec": null,
+        "bitrate": null,
+        "continuous_read": false
       }
     ],
     "score": 0.0
@@ -9654,7 +11452,7 @@
     "source_type": "community",
     "protocol": null,
     "discovered_at": "2026-10-13T17:18:43.039936Z",
-    "last_checked_at": "2026-10-13T23:20:34.383032Z",
+    "last_checked_at": "2026-10-14T22:24:10.294151Z",
     "last_success_at": null,
     "status": "cooling",
     "history": [
@@ -9727,6 +11525,20 @@
         "audio_codec": null,
         "bitrate": null,
         "continuous_read": false
+      },
+      {
+        "checked_at": "2026-10-14T22:24:10.294151Z",
+        "success": false,
+        "failure_code": "NON_LIVE_PLAYLIST",
+        "first_byte_seconds": null,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": null,
+        "width": null,
+        "height": null,
+        "video_codec": null,
+        "audio_codec": null,
+        "bitrate": null,
+        "continuous_read": false
       }
     ],
     "score": 0.0
@@ -9742,7 +11554,7 @@
     "source_type": "community",
     "protocol": null,
     "discovered_at": "2026-10-13T17:18:43.578530Z",
-    "last_checked_at": "2026-10-13T23:21:28.859203Z",
+    "last_checked_at": "2026-10-14T22:25:15.798060Z",
     "last_success_at": null,
     "status": "cooling",
     "history": [
@@ -9815,6 +11627,20 @@
         "audio_codec": null,
         "bitrate": null,
         "continuous_read": false
+      },
+      {
+        "checked_at": "2026-10-14T22:25:15.798060Z",
+        "success": false,
+        "failure_code": "HTTP_TIMEOUT",
+        "first_byte_seconds": null,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": null,
+        "width": null,
+        "height": null,
+        "video_codec": null,
+        "audio_codec": null,
+        "bitrate": null,
+        "continuous_read": false
       }
     ],
     "score": 0.0
@@ -9830,9 +11656,9 @@
     "source_type": "community",
     "protocol": null,
     "discovered_at": "2026-10-13T16:57:14.857006Z",
-    "last_checked_at": "2026-10-13T23:22:13.584751Z",
-    "last_success_at": "2026-10-13T23:22:13.584751Z",
-    "status": "candidate",
+    "last_checked_at": "2026-10-14T22:26:06.275434Z",
+    "last_success_at": "2026-10-14T22:26:06.275434Z",
+    "status": "active",
     "history": [
       {
         "checked_at": "2026-10-13T16:57:22.153017Z",
@@ -9917,9 +11743,55 @@
         "audio_codec": "aac",
         "bitrate": null,
         "continuous_read": true
+      },
+      {
+        "checked_at": "2026-10-14T22:26:06.275434Z",
+        "success": true,
+        "failure_code": null,
+        "first_byte_seconds": 0.21290456799999902,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": 927325.6751977488,
+        "width": 1280,
+        "height": 720,
+        "video_codec": "h264",
+        "audio_codec": "aac",
+        "bitrate": null,
+        "continuous_read": true
       }
     ],
-    "score": 47.37
+    "score": 53.91
+  },
+  {
+    "stream_id": "ba3e1918a49670fb48c48e6f",
+    "channel_id": "tw-ctv-classic",
+    "channel_name": "中视经典台",
+    "raw_name": "中視經典",
+    "category": "台湾",
+    "url": "http://litv.zapi.us.kg/?id=4gtv-4gtv080",
+    "source_url": "https://raw.githubusercontent.com/imDazui/Tvlist-awesome-m3u-m3u8/master/m3u/%E5%8F%B0%E6%B9%BE%E9%A6%99%E6%B8%AF%E6%BE%B3%E9%97%A8202506.m3u",
+    "source_type": "community",
+    "protocol": null,
+    "discovered_at": "2026-10-14T22:23:49.365293Z",
+    "last_checked_at": "2026-10-14T22:24:10.539076Z",
+    "last_success_at": null,
+    "status": "candidate",
+    "history": [
+      {
+        "checked_at": "2026-10-14T22:24:10.539076Z",
+        "success": false,
+        "failure_code": "HTTP_FAILED",
+        "first_byte_seconds": null,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": null,
+        "width": null,
+        "height": null,
+        "video_codec": null,
+        "audio_codec": null,
+        "bitrate": null,
+        "continuous_read": false
+      }
+    ],
+    "score": 0.0
   },
   {
     "stream_id": "ba8a7c92bb741defba19f512",
@@ -9932,7 +11804,7 @@
     "source_type": "community",
     "protocol": null,
     "discovered_at": "2026-10-13T16:57:14.857006Z",
-    "last_checked_at": "2026-10-13T23:20:35.282769Z",
+    "last_checked_at": "2026-10-14T22:24:10.955428Z",
     "last_success_at": null,
     "status": "cooling",
     "history": [
@@ -10019,6 +11891,20 @@
         "audio_codec": null,
         "bitrate": null,
         "continuous_read": false
+      },
+      {
+        "checked_at": "2026-10-14T22:24:10.955428Z",
+        "success": false,
+        "failure_code": "HTTP_TIMEOUT",
+        "first_byte_seconds": null,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": null,
+        "width": null,
+        "height": null,
+        "video_codec": null,
+        "audio_codec": null,
+        "bitrate": null,
+        "continuous_read": false
       }
     ],
     "score": 0.0
@@ -10034,7 +11920,7 @@
     "source_type": "community",
     "protocol": null,
     "discovered_at": "2026-10-13T17:18:43.578530Z",
-    "last_checked_at": "2026-10-13T23:21:33.898987Z",
+    "last_checked_at": "2026-10-14T22:25:15.798551Z",
     "last_success_at": null,
     "status": "cooling",
     "history": [
@@ -10107,6 +11993,20 @@
         "audio_codec": null,
         "bitrate": null,
         "continuous_read": false
+      },
+      {
+        "checked_at": "2026-10-14T22:25:15.798551Z",
+        "success": false,
+        "failure_code": "HTTP_TIMEOUT",
+        "first_byte_seconds": null,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": null,
+        "width": null,
+        "height": null,
+        "video_codec": null,
+        "audio_codec": null,
+        "bitrate": null,
+        "continuous_read": false
       }
     ],
     "score": 0.0
@@ -10122,7 +12022,7 @@
     "source_type": "community",
     "protocol": null,
     "discovered_at": "2026-10-13T16:57:14.857006Z",
-    "last_checked_at": "2026-10-13T23:20:38.127300Z",
+    "last_checked_at": "2026-10-14T22:24:13.413931Z",
     "last_success_at": null,
     "status": "cooling",
     "history": [
@@ -10209,6 +12109,20 @@
         "audio_codec": null,
         "bitrate": null,
         "continuous_read": false
+      },
+      {
+        "checked_at": "2026-10-14T22:24:13.413931Z",
+        "success": false,
+        "failure_code": "HTTP_TIMEOUT",
+        "first_byte_seconds": null,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": null,
+        "width": null,
+        "height": null,
+        "video_codec": null,
+        "audio_codec": null,
+        "bitrate": null,
+        "continuous_read": false
       }
     ],
     "score": 0.0
@@ -10224,9 +12138,9 @@
     "source_type": "community",
     "protocol": null,
     "discovered_at": "2026-10-13T16:57:14.857006Z",
-    "last_checked_at": "2026-10-13T23:22:14.097967Z",
-    "last_success_at": "2026-10-13T23:22:14.097967Z",
-    "status": "candidate",
+    "last_checked_at": "2026-10-14T22:26:06.414201Z",
+    "last_success_at": "2026-10-14T22:26:06.414201Z",
+    "status": "active",
     "history": [
       {
         "checked_at": "2026-10-13T16:57:16.845547Z",
@@ -10311,9 +12225,23 @@
         "audio_codec": "aac",
         "bitrate": null,
         "continuous_read": true
+      },
+      {
+        "checked_at": "2026-10-14T22:26:06.414201Z",
+        "success": true,
+        "failure_code": null,
+        "first_byte_seconds": 0.20071668100000295,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": 946608.7064564776,
+        "width": 1280,
+        "height": 720,
+        "video_codec": "h264",
+        "audio_codec": "aac",
+        "bitrate": null,
+        "continuous_read": true
       }
     ],
-    "score": 47.37
+    "score": 53.91
   },
   {
     "stream_id": "c7a060205cd6475b4c5aea32",
@@ -10326,7 +12254,7 @@
     "source_type": "community",
     "protocol": null,
     "discovered_at": "2026-10-13T17:18:43.039936Z",
-    "last_checked_at": "2026-10-13T23:20:38.477842Z",
+    "last_checked_at": "2026-10-14T22:24:15.557395Z",
     "last_success_at": null,
     "status": "cooling",
     "history": [
@@ -10399,6 +12327,20 @@
         "audio_codec": null,
         "bitrate": null,
         "continuous_read": false
+      },
+      {
+        "checked_at": "2026-10-14T22:24:15.557395Z",
+        "success": false,
+        "failure_code": "HTTP_FAILED",
+        "first_byte_seconds": null,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": null,
+        "width": null,
+        "height": null,
+        "video_codec": null,
+        "audio_codec": null,
+        "bitrate": null,
+        "continuous_read": false
       }
     ],
     "score": 0.0
@@ -10414,9 +12356,9 @@
     "source_type": "community",
     "protocol": null,
     "discovered_at": "2026-10-13T16:57:14.857006Z",
-    "last_checked_at": "2026-10-13T23:22:14.578112Z",
-    "last_success_at": "2026-10-13T23:22:14.578112Z",
-    "status": "candidate",
+    "last_checked_at": "2026-10-14T22:26:06.959945Z",
+    "last_success_at": "2026-10-14T22:26:06.959945Z",
+    "status": "active",
     "history": [
       {
         "checked_at": "2026-10-13T16:57:22.422464Z",
@@ -10501,9 +12443,23 @@
         "audio_codec": "aac",
         "bitrate": null,
         "continuous_read": true
+      },
+      {
+        "checked_at": "2026-10-14T22:26:06.959945Z",
+        "success": true,
+        "failure_code": null,
+        "first_byte_seconds": 0.16158076300000346,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": 904913.7104331793,
+        "width": 1280,
+        "height": 720,
+        "video_codec": "h264",
+        "audio_codec": "aac",
+        "bitrate": null,
+        "continuous_read": true
       }
     ],
-    "score": 47.37
+    "score": 53.91
   },
   {
     "stream_id": "c9a0d6b55f9892d1142d3492",
@@ -10516,7 +12472,7 @@
     "source_type": "community",
     "protocol": null,
     "discovered_at": "2026-10-13T17:18:43.039936Z",
-    "last_checked_at": "2026-10-13T23:20:39.116767Z",
+    "last_checked_at": "2026-10-14T22:24:15.957457Z",
     "last_success_at": "2026-10-13T17:25:09.624869Z",
     "status": "cooling",
     "history": [
@@ -10589,9 +12545,23 @@
         "audio_codec": null,
         "bitrate": null,
         "continuous_read": false
+      },
+      {
+        "checked_at": "2026-10-14T22:24:15.957457Z",
+        "success": false,
+        "failure_code": "PLACEHOLDER_STREAM",
+        "first_byte_seconds": null,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": null,
+        "width": null,
+        "height": null,
+        "video_codec": null,
+        "audio_codec": null,
+        "bitrate": null,
+        "continuous_read": false
       }
     ],
-    "score": 56.45
+    "score": 52.78
   },
   {
     "stream_id": "c9d6c76d164999e27847d66d",
@@ -10604,7 +12574,7 @@
     "source_type": "community",
     "protocol": null,
     "discovered_at": "2026-10-13T17:18:42.484473Z",
-    "last_checked_at": "2026-10-13T23:20:39.226159Z",
+    "last_checked_at": "2026-10-14T22:24:16.026240Z",
     "last_success_at": null,
     "status": "cooling",
     "history": [
@@ -10677,6 +12647,20 @@
         "audio_codec": null,
         "bitrate": null,
         "continuous_read": false
+      },
+      {
+        "checked_at": "2026-10-14T22:24:16.026240Z",
+        "success": false,
+        "failure_code": "HTTP_FAILED",
+        "first_byte_seconds": null,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": null,
+        "width": null,
+        "height": null,
+        "video_codec": null,
+        "audio_codec": null,
+        "bitrate": null,
+        "continuous_read": false
       }
     ],
     "score": 0.0
@@ -10692,7 +12676,7 @@
     "source_type": "community",
     "protocol": null,
     "discovered_at": "2026-10-13T16:57:14.857006Z",
-    "last_checked_at": "2026-10-13T23:20:39.405405Z",
+    "last_checked_at": "2026-10-14T22:24:16.027690Z",
     "last_success_at": null,
     "status": "cooling",
     "history": [
@@ -10779,6 +12763,20 @@
         "audio_codec": null,
         "bitrate": null,
         "continuous_read": false
+      },
+      {
+        "checked_at": "2026-10-14T22:24:16.027690Z",
+        "success": false,
+        "failure_code": "HTTP_FAILED",
+        "first_byte_seconds": null,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": null,
+        "width": null,
+        "height": null,
+        "video_codec": null,
+        "audio_codec": null,
+        "bitrate": null,
+        "continuous_read": false
       }
     ],
     "score": 0.0
@@ -10794,7 +12792,7 @@
     "source_type": "community",
     "protocol": null,
     "discovered_at": "2026-10-13T17:18:43.578530Z",
-    "last_checked_at": "2026-10-13T23:21:33.899561Z",
+    "last_checked_at": "2026-10-14T22:25:20.816068Z",
     "last_success_at": null,
     "status": "cooling",
     "history": [
@@ -10867,6 +12865,20 @@
         "audio_codec": null,
         "bitrate": null,
         "continuous_read": false
+      },
+      {
+        "checked_at": "2026-10-14T22:25:20.816068Z",
+        "success": false,
+        "failure_code": "HTTP_TIMEOUT",
+        "first_byte_seconds": null,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": null,
+        "width": null,
+        "height": null,
+        "video_codec": null,
+        "audio_codec": null,
+        "bitrate": null,
+        "continuous_read": false
       }
     ],
     "score": 0.0
@@ -10882,7 +12894,7 @@
     "source_type": "community",
     "protocol": null,
     "discovered_at": "2026-10-13T17:18:43.578530Z",
-    "last_checked_at": "2026-10-13T23:21:38.936907Z",
+    "last_checked_at": "2026-10-14T22:25:20.832769Z",
     "last_success_at": null,
     "status": "cooling",
     "history": [
@@ -10955,6 +12967,20 @@
         "audio_codec": null,
         "bitrate": null,
         "continuous_read": false
+      },
+      {
+        "checked_at": "2026-10-14T22:25:20.832769Z",
+        "success": false,
+        "failure_code": "HTTP_TIMEOUT",
+        "first_byte_seconds": null,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": null,
+        "width": null,
+        "height": null,
+        "video_codec": null,
+        "audio_codec": null,
+        "bitrate": null,
+        "continuous_read": false
       }
     ],
     "score": 0.0
@@ -10970,7 +12996,7 @@
     "source_type": "community",
     "protocol": null,
     "discovered_at": "2026-10-13T17:18:43.039936Z",
-    "last_checked_at": "2026-10-13T23:20:40.284333Z",
+    "last_checked_at": "2026-10-14T22:24:16.673992Z",
     "last_success_at": "2026-10-13T17:46:31.941389Z",
     "status": "cooling",
     "history": [
@@ -11043,9 +13069,55 @@
         "audio_codec": null,
         "bitrate": null,
         "continuous_read": false
+      },
+      {
+        "checked_at": "2026-10-14T22:24:16.673992Z",
+        "success": false,
+        "failure_code": "MANUAL_REJECTION",
+        "first_byte_seconds": null,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": null,
+        "width": null,
+        "height": null,
+        "video_codec": null,
+        "audio_codec": null,
+        "bitrate": null,
+        "continuous_read": false
       }
     ],
-    "score": 71.2
+    "score": 65.7
+  },
+  {
+    "stream_id": "d3abfd04a9f164fe65660724",
+    "channel_id": "tw-videoland-japan",
+    "channel_name": "纬来日本台",
+    "raw_name": "纬来日本",
+    "category": "台湾",
+    "url": "https://smt.goiptv.us.ci/videolandjapan/playlist.m3u8",
+    "source_url": "https://raw.githubusercontent.com/judy-gotv/iptv/main/smart.m3u",
+    "source_type": "community",
+    "protocol": null,
+    "discovered_at": "2026-10-14T22:23:49.617120Z",
+    "last_checked_at": "2026-10-14T22:25:25.837188Z",
+    "last_success_at": null,
+    "status": "candidate",
+    "history": [
+      {
+        "checked_at": "2026-10-14T22:25:25.837188Z",
+        "success": false,
+        "failure_code": "HTTP_TIMEOUT",
+        "first_byte_seconds": null,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": null,
+        "width": null,
+        "height": null,
+        "video_codec": null,
+        "audio_codec": null,
+        "bitrate": null,
+        "continuous_read": false
+      }
+    ],
+    "score": 0.0
   },
   {
     "stream_id": "d59f216eec49996b9349ef52",
@@ -11058,8 +13130,8 @@
     "source_type": "community",
     "protocol": null,
     "discovered_at": "2026-10-13T17:18:43.039936Z",
-    "last_checked_at": "2026-10-13T23:22:15.134185Z",
-    "last_success_at": "2026-10-13T23:22:15.134185Z",
+    "last_checked_at": "2026-10-14T22:26:07.100262Z",
+    "last_success_at": "2026-10-14T22:26:07.100262Z",
     "status": "backup",
     "history": [
       {
@@ -11131,9 +13203,23 @@
         "audio_codec": "aac",
         "bitrate": null,
         "continuous_read": true
+      },
+      {
+        "checked_at": "2026-10-14T22:26:07.100262Z",
+        "success": true,
+        "failure_code": null,
+        "first_byte_seconds": 0.023095124000008127,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": 4826891.183978802,
+        "width": 1920,
+        "height": 1080,
+        "video_codec": "h264",
+        "audio_codec": "aac",
+        "bitrate": null,
+        "continuous_read": true
       }
     ],
-    "score": 85.4
+    "score": 87.23
   },
   {
     "stream_id": "d899f48b14e7e6fb82388572",
@@ -11146,7 +13232,7 @@
     "source_type": "community",
     "protocol": null,
     "discovered_at": "2026-10-13T17:18:43.578530Z",
-    "last_checked_at": "2026-10-13T23:21:38.937466Z",
+    "last_checked_at": "2026-10-14T22:25:25.848014Z",
     "last_success_at": null,
     "status": "cooling",
     "history": [
@@ -11219,6 +13305,20 @@
         "audio_codec": null,
         "bitrate": null,
         "continuous_read": false
+      },
+      {
+        "checked_at": "2026-10-14T22:25:25.848014Z",
+        "success": false,
+        "failure_code": "HTTP_TIMEOUT",
+        "first_byte_seconds": null,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": null,
+        "width": null,
+        "height": null,
+        "video_codec": null,
+        "audio_codec": null,
+        "bitrate": null,
+        "continuous_read": false
       }
     ],
     "score": 0.0
@@ -11234,7 +13334,7 @@
     "source_type": "community",
     "protocol": null,
     "discovered_at": "2026-10-13T16:57:14.857006Z",
-    "last_checked_at": "2026-10-13T23:20:40.510860Z",
+    "last_checked_at": "2026-10-14T22:24:20.574362Z",
     "last_success_at": null,
     "status": "cooling",
     "history": [
@@ -11321,6 +13421,52 @@
         "audio_codec": null,
         "bitrate": null,
         "continuous_read": false
+      },
+      {
+        "checked_at": "2026-10-14T22:24:20.574362Z",
+        "success": false,
+        "failure_code": "HTTP_TIMEOUT",
+        "first_byte_seconds": null,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": null,
+        "width": null,
+        "height": null,
+        "video_codec": null,
+        "audio_codec": null,
+        "bitrate": null,
+        "continuous_read": false
+      }
+    ],
+    "score": 0.0
+  },
+  {
+    "stream_id": "dbefba05ea305d690901d500",
+    "channel_id": "tw-set-drama",
+    "channel_name": "三立戏剧台",
+    "raw_name": "三立戏剧台",
+    "category": "台湾",
+    "url": "https://smt.goiptv.us.ci/sanlixiju_twn/playlist.m3u8",
+    "source_url": "https://raw.githubusercontent.com/judy-gotv/iptv/main/smart.m3u",
+    "source_type": "community",
+    "protocol": null,
+    "discovered_at": "2026-10-14T22:23:49.617120Z",
+    "last_checked_at": "2026-10-14T22:25:30.855777Z",
+    "last_success_at": null,
+    "status": "candidate",
+    "history": [
+      {
+        "checked_at": "2026-10-14T22:25:30.855777Z",
+        "success": false,
+        "failure_code": "HTTP_TIMEOUT",
+        "first_byte_seconds": null,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": null,
+        "width": null,
+        "height": null,
+        "video_codec": null,
+        "audio_codec": null,
+        "bitrate": null,
+        "continuous_read": false
       }
     ],
     "score": 0.0
@@ -11336,7 +13482,7 @@
     "source_type": "community",
     "protocol": null,
     "discovered_at": "2026-10-13T17:18:43.039936Z",
-    "last_checked_at": "2026-10-13T23:20:40.707144Z",
+    "last_checked_at": "2026-10-14T22:24:25.581115Z",
     "last_success_at": "2026-10-13T17:25:12.210287Z",
     "status": "cooling",
     "history": [
@@ -11409,9 +13555,23 @@
         "audio_codec": null,
         "bitrate": null,
         "continuous_read": false
+      },
+      {
+        "checked_at": "2026-10-14T22:24:25.581115Z",
+        "success": false,
+        "failure_code": "PLACEHOLDER_STREAM",
+        "first_byte_seconds": null,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": null,
+        "width": null,
+        "height": null,
+        "video_codec": null,
+        "audio_codec": null,
+        "bitrate": null,
+        "continuous_read": false
       }
     ],
-    "score": 58.33
+    "score": 54.66
   },
   {
     "stream_id": "e1bd6b2ff48a70fc4d1fcffa",
@@ -11424,7 +13584,7 @@
     "source_type": "community",
     "protocol": null,
     "discovered_at": "2026-10-13T16:57:14.974323Z",
-    "last_checked_at": "2026-10-13T23:20:40.969929Z",
+    "last_checked_at": "2026-10-14T22:24:25.593373Z",
     "last_success_at": null,
     "status": "cooling",
     "history": [
@@ -11511,6 +13671,20 @@
         "audio_codec": null,
         "bitrate": null,
         "continuous_read": false
+      },
+      {
+        "checked_at": "2026-10-14T22:24:25.593373Z",
+        "success": false,
+        "failure_code": "HTTP_TIMEOUT",
+        "first_byte_seconds": null,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": null,
+        "width": null,
+        "height": null,
+        "video_codec": null,
+        "audio_codec": null,
+        "bitrate": null,
+        "continuous_read": false
       }
     ],
     "score": 0.0
@@ -11526,7 +13700,7 @@
     "source_type": "community",
     "protocol": null,
     "discovered_at": "2026-10-13T17:18:43.039936Z",
-    "last_checked_at": "2026-10-13T23:20:43.131293Z",
+    "last_checked_at": "2026-10-14T22:24:25.612949Z",
     "last_success_at": "2026-10-13T17:25:17.627863Z",
     "status": "cooling",
     "history": [
@@ -11599,9 +13773,23 @@
         "audio_codec": null,
         "bitrate": null,
         "continuous_read": false
+      },
+      {
+        "checked_at": "2026-10-14T22:24:25.612949Z",
+        "success": false,
+        "failure_code": "PLACEHOLDER_STREAM",
+        "first_byte_seconds": null,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": null,
+        "width": null,
+        "height": null,
+        "video_codec": null,
+        "audio_codec": null,
+        "bitrate": null,
+        "continuous_read": false
       }
     ],
-    "score": 58.33
+    "score": 54.66
   },
   {
     "stream_id": "e78ab0b887581da061f00e7d",
@@ -11614,9 +13802,9 @@
     "source_type": "community",
     "protocol": null,
     "discovered_at": "2026-10-13T16:57:14.857006Z",
-    "last_checked_at": "2026-10-13T23:22:16.084363Z",
-    "last_success_at": "2026-10-13T23:22:16.084363Z",
-    "status": "candidate",
+    "last_checked_at": "2026-10-14T22:26:07.437782Z",
+    "last_success_at": "2026-10-14T22:26:07.437782Z",
+    "status": "active",
     "history": [
       {
         "checked_at": "2026-10-13T16:57:23.862949Z",
@@ -11701,9 +13889,23 @@
         "audio_codec": "aac",
         "bitrate": null,
         "continuous_read": true
+      },
+      {
+        "checked_at": "2026-10-14T22:26:07.437782Z",
+        "success": true,
+        "failure_code": null,
+        "first_byte_seconds": 0.19983076899998764,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": 966253.6516084152,
+        "width": 1280,
+        "height": 720,
+        "video_codec": "h264",
+        "audio_codec": "aac",
+        "bitrate": null,
+        "continuous_read": true
       }
     ],
-    "score": 47.37
+    "score": 53.91
   },
   {
     "stream_id": "e86acc53f0412ed55b3c8faf",
@@ -11716,7 +13918,7 @@
     "source_type": "community",
     "protocol": null,
     "discovered_at": "2026-10-13T17:18:43.039936Z",
-    "last_checked_at": "2026-10-13T23:22:16.107206Z",
+    "last_checked_at": "2026-10-14T22:26:07.694179Z",
     "last_success_at": null,
     "status": "cooling",
     "history": [
@@ -11789,6 +13991,20 @@
         "audio_codec": null,
         "bitrate": null,
         "continuous_read": false
+      },
+      {
+        "checked_at": "2026-10-14T22:26:07.694179Z",
+        "success": false,
+        "failure_code": "FFPROBE_FAILED",
+        "first_byte_seconds": 0.3639698070000037,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": 273243.74755998823,
+        "width": null,
+        "height": null,
+        "video_codec": null,
+        "audio_codec": null,
+        "bitrate": null,
+        "continuous_read": false
       }
     ],
     "score": 0.0
@@ -11804,7 +14020,7 @@
     "source_type": "community",
     "protocol": null,
     "discovered_at": "2026-10-13T17:18:43.578530Z",
-    "last_checked_at": "2026-10-13T23:21:43.974997Z",
+    "last_checked_at": "2026-10-14T22:25:30.859070Z",
     "last_success_at": null,
     "status": "cooling",
     "history": [
@@ -11877,6 +14093,20 @@
         "audio_codec": null,
         "bitrate": null,
         "continuous_read": false
+      },
+      {
+        "checked_at": "2026-10-14T22:25:30.859070Z",
+        "success": false,
+        "failure_code": "HTTP_TIMEOUT",
+        "first_byte_seconds": null,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": null,
+        "width": null,
+        "height": null,
+        "video_codec": null,
+        "audio_codec": null,
+        "bitrate": null,
+        "continuous_read": false
       }
     ],
     "score": 0.0
@@ -11892,7 +14122,7 @@
     "source_type": "community",
     "protocol": null,
     "discovered_at": "2026-10-13T16:57:15.084995Z",
-    "last_checked_at": "2026-10-13T23:20:43.516872Z",
+    "last_checked_at": "2026-10-14T22:24:27.597740Z",
     "last_success_at": null,
     "status": "cooling",
     "history": [
@@ -12035,6 +14265,20 @@
         "audio_codec": null,
         "bitrate": null,
         "continuous_read": false
+      },
+      {
+        "checked_at": "2026-10-14T22:24:27.597740Z",
+        "success": false,
+        "failure_code": "HTTP_FAILED",
+        "first_byte_seconds": null,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": null,
+        "width": null,
+        "height": null,
+        "video_codec": null,
+        "audio_codec": null,
+        "bitrate": null,
+        "continuous_read": false
       }
     ],
     "score": 0.0
@@ -12050,7 +14294,7 @@
     "source_type": "community",
     "protocol": null,
     "discovered_at": "2026-10-13T16:57:15.084995Z",
-    "last_checked_at": "2026-10-13T23:20:43.595321Z",
+    "last_checked_at": "2026-10-14T22:24:27.619516Z",
     "last_success_at": null,
     "status": "cooling",
     "history": [
@@ -12193,6 +14437,20 @@
         "audio_codec": null,
         "bitrate": null,
         "continuous_read": false
+      },
+      {
+        "checked_at": "2026-10-14T22:24:27.619516Z",
+        "success": false,
+        "failure_code": "HTTP_TIMEOUT",
+        "first_byte_seconds": null,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": null,
+        "width": null,
+        "height": null,
+        "video_codec": null,
+        "audio_codec": null,
+        "bitrate": null,
+        "continuous_read": false
       }
     ],
     "score": 0.0
@@ -12208,7 +14466,7 @@
     "source_type": "community",
     "protocol": null,
     "discovered_at": "2026-10-13T16:57:14.857006Z",
-    "last_checked_at": "2026-10-13T23:20:43.609158Z",
+    "last_checked_at": "2026-10-14T22:24:30.615414Z",
     "last_success_at": null,
     "status": "cooling",
     "history": [
@@ -12295,6 +14553,20 @@
         "audio_codec": null,
         "bitrate": null,
         "continuous_read": false
+      },
+      {
+        "checked_at": "2026-10-14T22:24:30.615414Z",
+        "success": false,
+        "failure_code": "HTTP_FAILED",
+        "first_byte_seconds": null,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": null,
+        "width": null,
+        "height": null,
+        "video_codec": null,
+        "audio_codec": null,
+        "bitrate": null,
+        "continuous_read": false
       }
     ],
     "score": 0.0
@@ -12310,7 +14582,7 @@
     "source_type": "community",
     "protocol": null,
     "discovered_at": "2026-10-13T16:57:15.084995Z",
-    "last_checked_at": "2026-10-13T23:20:45.151922Z",
+    "last_checked_at": "2026-10-14T22:24:30.625245Z",
     "last_success_at": null,
     "status": "cooling",
     "history": [
@@ -12453,6 +14725,20 @@
         "audio_codec": null,
         "bitrate": null,
         "continuous_read": false
+      },
+      {
+        "checked_at": "2026-10-14T22:24:30.625245Z",
+        "success": false,
+        "failure_code": "HTTP_FAILED",
+        "first_byte_seconds": null,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": null,
+        "width": null,
+        "height": null,
+        "video_codec": null,
+        "audio_codec": null,
+        "bitrate": null,
+        "continuous_read": false
       }
     ],
     "score": 0.0
@@ -12468,7 +14754,7 @@
     "source_type": "community",
     "protocol": null,
     "discovered_at": "2026-10-13T17:18:43.578530Z",
-    "last_checked_at": "2026-10-13T23:21:43.975641Z",
+    "last_checked_at": "2026-10-14T22:25:35.873862Z",
     "last_success_at": null,
     "status": "cooling",
     "history": [
@@ -12541,6 +14827,20 @@
         "audio_codec": null,
         "bitrate": null,
         "continuous_read": false
+      },
+      {
+        "checked_at": "2026-10-14T22:25:35.873862Z",
+        "success": false,
+        "failure_code": "HTTP_TIMEOUT",
+        "first_byte_seconds": null,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": null,
+        "width": null,
+        "height": null,
+        "video_codec": null,
+        "audio_codec": null,
+        "bitrate": null,
+        "continuous_read": false
       }
     ],
     "score": 0.0
@@ -12556,7 +14856,7 @@
     "source_type": "community",
     "protocol": null,
     "discovered_at": "2026-10-13T17:18:43.039936Z",
-    "last_checked_at": "2026-10-13T23:20:45.512685Z",
+    "last_checked_at": "2026-10-14T22:24:30.783929Z",
     "last_success_at": "2026-10-13T17:25:19.769022Z",
     "status": "cooling",
     "history": [
@@ -12629,9 +14929,23 @@
         "audio_codec": null,
         "bitrate": null,
         "continuous_read": false
+      },
+      {
+        "checked_at": "2026-10-14T22:24:30.783929Z",
+        "success": false,
+        "failure_code": "PLACEHOLDER_STREAM",
+        "first_byte_seconds": null,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": null,
+        "width": null,
+        "height": null,
+        "video_codec": null,
+        "audio_codec": null,
+        "bitrate": null,
+        "continuous_read": false
       }
     ],
-    "score": 60.2
+    "score": 56.53
   },
   {
     "stream_id": "f274d43a6e292933e7722553",
@@ -12644,7 +14958,7 @@
     "source_type": "community",
     "protocol": null,
     "discovered_at": "2026-10-13T17:18:42.484473Z",
-    "last_checked_at": "2026-10-13T23:22:16.284312Z",
+    "last_checked_at": "2026-10-14T22:26:07.785289Z",
     "last_success_at": null,
     "status": "cooling",
     "history": [
@@ -12717,9 +15031,55 @@
         "audio_codec": null,
         "bitrate": null,
         "continuous_read": false
+      },
+      {
+        "checked_at": "2026-10-14T22:26:07.785289Z",
+        "success": false,
+        "failure_code": "FFPROBE_FAILED",
+        "first_byte_seconds": 0.5987945909999866,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": 373390.0903384391,
+        "width": null,
+        "height": null,
+        "video_codec": null,
+        "audio_codec": null,
+        "bitrate": null,
+        "continuous_read": false
       }
     ],
     "score": 0.0
+  },
+  {
+    "stream_id": "f4c219405626ace3d37fc2ee",
+    "channel_id": "tw-cti-entertainment",
+    "channel_name": "中天娱乐台",
+    "raw_name": "中天娱乐",
+    "category": "台湾",
+    "url": "http://61.221.215.25:8800/hls/47/index.m3u8",
+    "source_url": "https://raw.githubusercontent.com/imDazui/Tvlist-awesome-m3u-m3u8/master/m3u/%E5%8F%B0%E6%B9%BE%E9%A6%99%E6%B8%AF%E6%BE%B3%E9%97%A8202506.m3u",
+    "source_type": "community",
+    "protocol": null,
+    "discovered_at": "2026-10-14T22:23:49.365293Z",
+    "last_checked_at": "2026-10-14T22:26:08.202930Z",
+    "last_success_at": "2026-10-14T22:26:08.202930Z",
+    "status": "candidate",
+    "history": [
+      {
+        "checked_at": "2026-10-14T22:26:08.202930Z",
+        "success": true,
+        "failure_code": null,
+        "first_byte_seconds": 0.285688848999996,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": 1311.390203778511,
+        "width": 1280,
+        "height": 720,
+        "video_codec": "h264",
+        "audio_codec": "aac",
+        "bitrate": null,
+        "continuous_read": true
+      }
+    ],
+    "score": 93.2
   },
   {
     "stream_id": "f539556d9f5a01c2ee70c78b",
@@ -12732,7 +15092,7 @@
     "source_type": "community",
     "protocol": null,
     "discovered_at": "2026-10-13T17:18:43.578530Z",
-    "last_checked_at": "2026-10-13T23:21:49.013577Z",
+    "last_checked_at": "2026-10-14T22:25:35.874348Z",
     "last_success_at": null,
     "status": "cooling",
     "history": [
@@ -12805,6 +15165,20 @@
         "audio_codec": null,
         "bitrate": null,
         "continuous_read": false
+      },
+      {
+        "checked_at": "2026-10-14T22:25:35.874348Z",
+        "success": false,
+        "failure_code": "HTTP_TIMEOUT",
+        "first_byte_seconds": null,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": null,
+        "width": null,
+        "height": null,
+        "video_codec": null,
+        "audio_codec": null,
+        "bitrate": null,
+        "continuous_read": false
       }
     ],
     "score": 0.0
@@ -12820,7 +15194,7 @@
     "source_type": "community",
     "protocol": null,
     "discovered_at": "2026-10-13T17:18:43.039936Z",
-    "last_checked_at": "2026-10-13T23:20:46.321951Z",
+    "last_checked_at": "2026-10-14T22:24:32.929491Z",
     "last_success_at": null,
     "status": "cooling",
     "history": [
@@ -12893,6 +15267,52 @@
         "audio_codec": null,
         "bitrate": null,
         "continuous_read": false
+      },
+      {
+        "checked_at": "2026-10-14T22:24:32.929491Z",
+        "success": false,
+        "failure_code": "HTTP_FAILED",
+        "first_byte_seconds": null,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": null,
+        "width": null,
+        "height": null,
+        "video_codec": null,
+        "audio_codec": null,
+        "bitrate": null,
+        "continuous_read": false
+      }
+    ],
+    "score": 0.0
+  },
+  {
+    "stream_id": "f606ddde641b5ab45d81816c",
+    "channel_id": "tw-much",
+    "channel_name": "年代MUCH台",
+    "raw_name": "年代much",
+    "category": "台湾",
+    "url": "https://epg.pw/stream/811e09d2c2770631c5621144d8e610cfa14a4b55154ca84556b5dab9b5c49317.m3u8",
+    "source_url": "https://raw.githubusercontent.com/imDazui/Tvlist-awesome-m3u-m3u8/master/m3u/%E5%8F%B0%E6%B9%BE%E9%A6%99%E6%B8%AF%E6%BE%B3%E9%97%A8202506.m3u",
+    "source_type": "community",
+    "protocol": null,
+    "discovered_at": "2026-10-14T22:23:49.365293Z",
+    "last_checked_at": "2026-10-14T22:24:33.104862Z",
+    "last_success_at": null,
+    "status": "candidate",
+    "history": [
+      {
+        "checked_at": "2026-10-14T22:24:33.104862Z",
+        "success": false,
+        "failure_code": "PLACEHOLDER_STREAM",
+        "first_byte_seconds": null,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": null,
+        "width": null,
+        "height": null,
+        "video_codec": null,
+        "audio_codec": null,
+        "bitrate": null,
+        "continuous_read": false
       }
     ],
     "score": 0.0
@@ -12908,7 +15328,7 @@
     "source_type": "community",
     "protocol": null,
     "discovered_at": "2026-10-13T17:18:43.578530Z",
-    "last_checked_at": "2026-10-13T23:21:49.014192Z",
+    "last_checked_at": "2026-10-14T22:25:40.892313Z",
     "last_success_at": null,
     "status": "cooling",
     "history": [
@@ -12981,6 +15401,20 @@
         "audio_codec": null,
         "bitrate": null,
         "continuous_read": false
+      },
+      {
+        "checked_at": "2026-10-14T22:25:40.892313Z",
+        "success": false,
+        "failure_code": "HTTP_TIMEOUT",
+        "first_byte_seconds": null,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": null,
+        "width": null,
+        "height": null,
+        "video_codec": null,
+        "audio_codec": null,
+        "bitrate": null,
+        "continuous_read": false
       }
     ],
     "score": 0.0
@@ -12996,7 +15430,7 @@
     "source_type": "community",
     "protocol": null,
     "discovered_at": "2026-10-13T17:18:43.039936Z",
-    "last_checked_at": "2026-10-13T23:20:47.644269Z",
+    "last_checked_at": "2026-10-14T22:24:33.978378Z",
     "last_success_at": "2026-10-13T17:25:20.417321Z",
     "status": "cooling",
     "history": [
@@ -13069,9 +15503,23 @@
         "audio_codec": null,
         "bitrate": null,
         "continuous_read": false
+      },
+      {
+        "checked_at": "2026-10-14T22:24:33.978378Z",
+        "success": false,
+        "failure_code": "PLACEHOLDER_STREAM",
+        "first_byte_seconds": null,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": null,
+        "width": null,
+        "height": null,
+        "video_codec": null,
+        "audio_codec": null,
+        "bitrate": null,
+        "continuous_read": false
       }
     ],
-    "score": 60.2
+    "score": 56.53
   },
   {
     "stream_id": "f7e63987ad217f8e2684aeb4",
@@ -13084,8 +15532,8 @@
     "source_type": "community",
     "protocol": null,
     "discovered_at": "2026-10-13T16:57:14.857006Z",
-    "last_checked_at": "2026-10-13T23:22:16.564108Z",
-    "last_success_at": "2026-10-13T23:22:16.564108Z",
+    "last_checked_at": "2026-10-14T22:26:11.802570Z",
+    "last_success_at": "2026-10-14T22:26:11.802570Z",
     "status": "active",
     "history": [
       {
@@ -13171,9 +15619,23 @@
         "audio_codec": "aac",
         "bitrate": null,
         "continuous_read": true
+      },
+      {
+        "checked_at": "2026-10-14T22:26:11.802570Z",
+        "success": true,
+        "failure_code": null,
+        "first_byte_seconds": 0.04041854999999828,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": 21278206.81900961,
+        "width": 1280,
+        "height": 720,
+        "video_codec": "h264",
+        "audio_codec": "aac",
+        "bitrate": null,
+        "continuous_read": true
       }
     ],
-    "score": 92.58
+    "score": 92.66
   },
   {
     "stream_id": "f83c190f8bc52f947ee70d18",
@@ -13186,8 +15648,8 @@
     "source_type": "community",
     "protocol": null,
     "discovered_at": "2026-10-13T16:57:14.857006Z",
-    "last_checked_at": "2026-10-13T23:22:18.735367Z",
-    "last_success_at": "2026-10-13T23:22:18.735367Z",
+    "last_checked_at": "2026-10-14T22:26:12.196870Z",
+    "last_success_at": "2026-10-14T22:26:12.196870Z",
     "status": "active",
     "history": [
       {
@@ -13273,9 +15735,23 @@
         "audio_codec": "aac",
         "bitrate": null,
         "continuous_read": true
+      },
+      {
+        "checked_at": "2026-10-14T22:26:12.196870Z",
+        "success": true,
+        "failure_code": null,
+        "first_byte_seconds": 0.2119908749999979,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": 902835.5762514045,
+        "width": 1280,
+        "height": 720,
+        "video_codec": "h264",
+        "audio_codec": "aac",
+        "bitrate": null,
+        "continuous_read": true
       }
     ],
-    "score": 90.7
+    "score": 91.06
   },
   {
     "stream_id": "f8d75f496b9bc2ea8ad9ddb4",
@@ -13288,7 +15764,7 @@
     "source_type": "community",
     "protocol": null,
     "discovered_at": "2026-10-13T16:57:14.857006Z",
-    "last_checked_at": "2026-10-13T23:20:48.550573Z",
+    "last_checked_at": "2026-10-14T22:24:34.827179Z",
     "last_success_at": null,
     "status": "cooling",
     "history": [
@@ -13375,6 +15851,20 @@
         "audio_codec": null,
         "bitrate": null,
         "continuous_read": false
+      },
+      {
+        "checked_at": "2026-10-14T22:24:34.827179Z",
+        "success": false,
+        "failure_code": "HTTP_FAILED",
+        "first_byte_seconds": null,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": null,
+        "width": null,
+        "height": null,
+        "video_codec": null,
+        "audio_codec": null,
+        "bitrate": null,
+        "continuous_read": false
       }
     ],
     "score": 0.0
@@ -13390,7 +15880,7 @@
     "source_type": "community",
     "protocol": null,
     "discovered_at": "2026-10-13T17:18:43.039936Z",
-    "last_checked_at": "2026-10-13T23:20:48.551480Z",
+    "last_checked_at": "2026-10-14T22:24:34.870346Z",
     "last_success_at": null,
     "status": "cooling",
     "history": [
@@ -13463,6 +15953,20 @@
         "audio_codec": null,
         "bitrate": null,
         "continuous_read": false
+      },
+      {
+        "checked_at": "2026-10-14T22:24:34.870346Z",
+        "success": false,
+        "failure_code": "HTTP_FAILED",
+        "first_byte_seconds": null,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": null,
+        "width": null,
+        "height": null,
+        "video_codec": null,
+        "audio_codec": null,
+        "bitrate": null,
+        "continuous_read": false
       }
     ],
     "score": 0.0
@@ -13478,9 +15982,9 @@
     "source_type": "community",
     "protocol": null,
     "discovered_at": "2026-10-13T16:57:14.857006Z",
-    "last_checked_at": "2026-10-13T23:22:19.349391Z",
-    "last_success_at": "2026-10-13T23:22:19.349391Z",
-    "status": "candidate",
+    "last_checked_at": "2026-10-14T22:26:12.868602Z",
+    "last_success_at": "2026-10-14T22:26:12.868602Z",
+    "status": "active",
     "history": [
       {
         "checked_at": "2026-10-13T16:57:25.521456Z",
@@ -13565,9 +16069,23 @@
         "audio_codec": "aac",
         "bitrate": null,
         "continuous_read": true
+      },
+      {
+        "checked_at": "2026-10-14T22:26:12.868602Z",
+        "success": true,
+        "failure_code": null,
+        "first_byte_seconds": 0.16010162099999548,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": 901052.7188980813,
+        "width": 1280,
+        "height": 720,
+        "video_codec": "h264",
+        "audio_codec": "aac",
+        "bitrate": null,
+        "continuous_read": true
       }
     ],
-    "score": 47.37
+    "score": 53.91
   },
   {
     "stream_id": "fc960b6562477539828baa82",
@@ -13580,7 +16098,7 @@
     "source_type": "community",
     "protocol": null,
     "discovered_at": "2026-10-13T16:57:14.857006Z",
-    "last_checked_at": "2026-10-13T23:20:48.829136Z",
+    "last_checked_at": "2026-10-14T22:24:35.327905Z",
     "last_success_at": null,
     "status": "cooling",
     "history": [
@@ -13667,6 +16185,52 @@
         "audio_codec": null,
         "bitrate": null,
         "continuous_read": false
+      },
+      {
+        "checked_at": "2026-10-14T22:24:35.327905Z",
+        "success": false,
+        "failure_code": "HTML_RESPONSE",
+        "first_byte_seconds": 0.05377882200001238,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": null,
+        "width": null,
+        "height": null,
+        "video_codec": null,
+        "audio_codec": null,
+        "bitrate": null,
+        "continuous_read": false
+      }
+    ],
+    "score": 0.0
+  },
+  {
+    "stream_id": "fd2f7b0ca84ebe15b3f505f1",
+    "channel_id": "tw-ebc-super",
+    "channel_name": "东森超视",
+    "raw_name": "东森超视",
+    "category": "台湾",
+    "url": "https://smt.goiptv.us.ci/ettvsuper/playlist.m3u8",
+    "source_url": "https://raw.githubusercontent.com/judy-gotv/iptv/main/smart.m3u",
+    "source_type": "community",
+    "protocol": null,
+    "discovered_at": "2026-10-14T22:23:49.617120Z",
+    "last_checked_at": "2026-10-14T22:25:40.892809Z",
+    "last_success_at": null,
+    "status": "candidate",
+    "history": [
+      {
+        "checked_at": "2026-10-14T22:25:40.892809Z",
+        "success": false,
+        "failure_code": "HTTP_TIMEOUT",
+        "first_byte_seconds": null,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": null,
+        "width": null,
+        "height": null,
+        "video_codec": null,
+        "audio_codec": null,
+        "bitrate": null,
+        "continuous_read": false
       }
     ],
     "score": 0.0
@@ -13682,8 +16246,8 @@
     "source_type": "community",
     "protocol": null,
     "discovered_at": "2026-10-13T17:18:42.484473Z",
-    "last_checked_at": "2026-10-13T23:22:19.669774Z",
-    "last_success_at": "2026-10-13T23:22:19.669774Z",
+    "last_checked_at": "2026-10-14T22:26:13.076883Z",
+    "last_success_at": "2026-10-14T22:26:13.076883Z",
     "status": "active",
     "history": [
       {
@@ -13755,8 +16319,22 @@
         "audio_codec": "aac",
         "bitrate": null,
         "continuous_read": true
+      },
+      {
+        "checked_at": "2026-10-14T22:26:13.076883Z",
+        "success": true,
+        "failure_code": null,
+        "first_byte_seconds": 0.9384214169999865,
+        "startup_seconds": null,
+        "transfer_bytes_per_second": 185986.6106931222,
+        "width": 1280,
+        "height": 720,
+        "video_codec": "h264",
+        "audio_codec": "aac",
+        "bitrate": null,
+        "continuous_read": true
       }
     ],
-    "score": 91.7
+    "score": 91.95
   }
 ]

@@ -1,22 +1,23 @@
 {
   "schema_version": 1,
-  "checked_at": "2026-10-13T23:20:21.944207+00:00",
-  "discovered_sources": 295,
-  "matched_sources": 143,
-  "checked_sources": 143,
-  "successful_sources": 23,
-  "published_channels": 9,
+  "checked_at": "2026-10-14T22:23:48.794764+00:00",
+  "discovered_sources": 315,
+  "matched_sources": 161,
+  "checked_sources": 161,
+  "successful_sources": 27,
+  "published_channels": 20,
   "filter_reasons": {
-    "HTTP_TIMEOUT": 59,
+    "HTTP_TIMEOUT": 66,
     "NON_LIVE_PLAYLIST": 3,
-    "HTML_RESPONSE": 7,
-    "WAITING_SECOND_SUCCESS": 12,
-    "HTTP_FAILED": 31,
-    "PLACEHOLDER_STREAM": 12,
-    "MEDIA_TIMEOUT": 3,
+    "HTML_RESPONSE": 9,
+    "MEDIA_TIMEOUT": 2,
+    "PLACEHOLDER_STREAM": 17,
+    "HTTP_FAILED": 32,
+    "WAITING_SECOND_SUCCESS": 3,
     "FFPROBE_FAILED": 3,
+    "BELOW_HD_THRESHOLD": 2,
     "MANUAL_REJECTION": 2,
-    "BELOW_HD_THRESHOLD": 1
+    "INSUFFICIENT_MEDIA_DURATION": 1
   },
   "unknown_channel_names": [
     "ABN China (720p)",
@@ -72,6 +73,7 @@
     "Golden Jade (1080p)",
     "Guangxi Variety & Travel Channel",
     "Guangzhou TV",
+    "HBO Asia Taiwan (1080p)",
     "HOY Infotainment (1080p) [Geo-blocked]",
     "HOY TV (1080p) [Geo-blocked]",
     "Harbin Comprehensive News Channel",
@@ -117,8 +119,7 @@
     "QTV-5",
     "QTV-6",
     "RTHK TV 33 (1080p) [Geo-blocked]",
-    "RTHK TV 34 (1080p) [Geo-blocked]",
-    "RTHK TV 35 (1080p) [Geo-blocked]"
+    "RTHK TV 34 (1080p) [Geo-blocked]"
   ],
   "issues": [],
   "message": "检测完成"
