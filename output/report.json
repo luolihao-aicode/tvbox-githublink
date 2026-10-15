@@ -1,23 +1,22 @@
 {
   "schema_version": 1,
-  "checked_at": "2026-10-14T22:23:48.794764+00:00",
-  "discovered_sources": 315,
+  "checked_at": "2026-10-15T22:28:34.140018+00:00",
+  "discovered_sources": 316,
   "matched_sources": 161,
   "checked_sources": 161,
   "successful_sources": 27,
-  "published_channels": 20,
+  "published_channels": 23,
   "filter_reasons": {
-    "HTTP_TIMEOUT": 66,
+    "HTTP_TIMEOUT": 80,
     "NON_LIVE_PLAYLIST": 3,
     "HTML_RESPONSE": 9,
     "MEDIA_TIMEOUT": 2,
-    "PLACEHOLDER_STREAM": 17,
     "HTTP_FAILED": 32,
-    "WAITING_SECOND_SUCCESS": 3,
-    "FFPROBE_FAILED": 3,
+    "PLACEHOLDER_STREAM": 4,
     "BELOW_HD_THRESHOLD": 2,
     "MANUAL_REJECTION": 2,
-    "INSUFFICIENT_MEDIA_DURATION": 1
+    "INSUFFICIENT_MEDIA_DURATION": 1,
+    "FFPROBE_FAILED": 2
   },
   "unknown_channel_names": [
     "ABN China (720p)",
@@ -63,6 +62,7 @@
     "Chuzhou Public Channel (400p)",
     "Chuzhou Science & Education Channel (400p)",
     "Dali TV (720p)",
+    "Discovery Asia Taiwan (1080p)",
     "Documentary Humanities Channel (1080p)",
     "Dongguan Comprehensive News Channel",
     "Dragon TV International",
@@ -118,8 +118,7 @@
     "QTV-4",
     "QTV-5",
     "QTV-6",
-    "RTHK TV 33 (1080p) [Geo-blocked]",
-    "RTHK TV 34 (1080p) [Geo-blocked]"
+    "RTHK TV 33 (1080p) [Geo-blocked]"
   ],
   "issues": [],
   "message": "检测完成"
