@@ -1,22 +1,22 @@
 {
   "schema_version": 1,
-  "checked_at": "2026-10-15T22:28:34.140018+00:00",
+  "checked_at": "2026-10-16T22:08:57.380197+00:00",
   "discovered_sources": 316,
   "matched_sources": 161,
   "checked_sources": 161,
-  "successful_sources": 27,
-  "published_channels": 23,
+  "successful_sources": 25,
+  "published_channels": 21,
   "filter_reasons": {
-    "HTTP_TIMEOUT": 80,
+    "HTTP_TIMEOUT": 65,
     "NON_LIVE_PLAYLIST": 3,
     "HTML_RESPONSE": 9,
-    "MEDIA_TIMEOUT": 2,
-    "HTTP_FAILED": 32,
-    "PLACEHOLDER_STREAM": 4,
+    "HTTP_FAILED": 34,
+    "MEDIA_TIMEOUT": 3,
+    "PLACEHOLDER_STREAM": 17,
+    "FFPROBE_FAILED": 3,
     "BELOW_HD_THRESHOLD": 2,
     "MANUAL_REJECTION": 2,
-    "INSUFFICIENT_MEDIA_DURATION": 1,
-    "FFPROBE_FAILED": 2
+    "WAITING_SECOND_SUCCESS": 1
   },
   "unknown_channel_names": [
     "ABN China (720p)",
