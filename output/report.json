@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "checked_at": "2026-10-17T20:54:58.479044+00:00",
+  "checked_at": "2026-10-17T21:32:29.577945+00:00",
   "discovered_sources": 316,
   "matched_sources": 161,
   "checked_sources": 161,
@@ -10,10 +10,10 @@
     "HTTP_TIMEOUT": 65,
     "NON_LIVE_PLAYLIST": 3,
     "HTML_RESPONSE": 9,
-    "WAITING_SECOND_SUCCESS": 1,
-    "MEDIA_TIMEOUT": 4,
+    "HTTP_FAILED": 34,
+    "MEDIA_TIMEOUT": 3,
     "PLACEHOLDER_STREAM": 17,
-    "HTTP_FAILED": 33,
+    "WAITING_SECOND_SUCCESS": 1,
     "FFPROBE_FAILED": 3,
     "BELOW_HD_THRESHOLD": 2,
     "MANUAL_REJECTION": 2
@@ -120,15 +120,6 @@
     "QTV-6",
     "RTHK TV 33 (1080p) [Geo-blocked]"
   ],
-  "issues": [
-    {
-      "source_url": "https://api.github.com/search/code",
-      "code": "GITHUB_SEARCH_FAILED"
-    },
-    {
-      "source_url": "https://api.github.com/search/code",
-      "code": "GITHUB_SEARCH_FAILED"
-    }
-  ],
+  "issues": [],
   "message": "检测完成"
 }
