@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "checked_at": "2026-10-23T22:22:44.174528+00:00",
+  "checked_at": "2026-10-24T21:09:01.958510+00:00",
   "measurement_notice": "延迟和速度由GitHub Actions 节点测得，不代表用户本地网络体验。",
   "channels": [
     {
@@ -9,13 +9,13 @@
       "category": "央视",
       "source_type": "community",
       "protocol": null,
-      "height": 720,
+      "height": 1080,
       "video_codec": "h264",
-      "latency_seconds": 0.15353310199999726,
-      "availability_percent": 94.12,
-      "score": 90.66,
+      "latency_seconds": 0.0633944470000074,
+      "availability_percent": 94.44,
+      "score": 90.99,
       "status": "active",
-      "last_checked_at": "2026-10-23T22:25:05.770416+00:00"
+      "last_checked_at": "2026-10-24T21:33:29.820607+00:00"
     },
     {
       "channel_id": "cctv-10",
@@ -25,11 +25,11 @@
       "protocol": null,
       "height": 720,
       "video_codec": "h264",
-      "latency_seconds": 0.11115966900000274,
-      "availability_percent": 70.59,
-      "score": 77.02,
+      "latency_seconds": 0.06150501699994493,
+      "availability_percent": 72.22,
+      "score": 77.92,
       "status": "active",
-      "last_checked_at": "2026-10-23T22:25:12.938677+00:00"
+      "last_checked_at": "2026-10-24T21:43:06.829112+00:00"
     },
     {
       "channel_id": "cctv-11",
@@ -39,11 +39,11 @@
       "protocol": null,
       "height": 720,
       "video_codec": "h264",
-      "latency_seconds": 0.15650322999999844,
-      "availability_percent": 70.59,
-      "score": 77.02,
+      "latency_seconds": 0.06627195600003688,
+      "availability_percent": 72.22,
+      "score": 77.92,
       "status": "active",
-      "last_checked_at": "2026-10-23T22:25:06.612430+00:00"
+      "last_checked_at": "2026-10-24T21:36:57.324424+00:00"
     },
     {
       "channel_id": "cctv-12",
@@ -53,11 +53,11 @@
       "protocol": null,
       "height": 720,
       "video_codec": "h264",
-      "latency_seconds": 0.15706581199999903,
+      "latency_seconds": 0.06134932700000206,
       "availability_percent": 100.0,
-      "score": 92.1,
+      "score": 92.16,
       "status": "active",
-      "last_checked_at": "2026-10-23T22:24:41.360304+00:00"
+      "last_checked_at": "2026-10-24T21:19:46.537760+00:00"
     },
     {
       "channel_id": "cctv-13",
@@ -65,13 +65,13 @@
       "category": "央视",
       "source_type": "community",
       "protocol": null,
-      "height": 720,
+      "height": 1080,
       "video_codec": "h264",
-      "latency_seconds": 0.17105565599999295,
-      "availability_percent": 70.59,
-      "score": 78.62,
+      "latency_seconds": 0.06508048700000302,
+      "availability_percent": 72.22,
+      "score": 79.65,
       "status": "active",
-      "last_checked_at": "2026-10-23T22:24:41.913434+00:00"
+      "last_checked_at": "2026-10-24T21:20:38.822810+00:00"
     },
     {
       "channel_id": "cctv-14",
@@ -79,13 +79,13 @@
       "category": "央视",
       "source_type": "community",
       "protocol": null,
-      "height": 720,
+      "height": 1080,
       "video_codec": "h264",
-      "latency_seconds": 0.1451901350000071,
-      "availability_percent": 70.59,
-      "score": 77.29,
+      "latency_seconds": 0.06044643399997085,
+      "availability_percent": 72.22,
+      "score": 78.41,
       "status": "active",
-      "last_checked_at": "2026-10-23T22:25:07.205589+00:00"
+      "last_checked_at": "2026-10-24T21:38:40.545470+00:00"
     },
     {
       "channel_id": "cctv-15",
@@ -93,13 +93,13 @@
       "category": "央视",
       "source_type": "community",
       "protocol": null,
-      "height": 720,
+      "height": 1080,
       "video_codec": "h264",
-      "latency_seconds": 0.14641224999999736,
+      "latency_seconds": 0.06094384599998648,
       "availability_percent": 100.0,
-      "score": 94.27,
+      "score": 94.8,
       "status": "active",
-      "last_checked_at": "2026-10-23T22:25:09.819361+00:00"
+      "last_checked_at": "2026-10-24T21:42:51.201401+00:00"
     },
     {
       "channel_id": "cctv-17",
@@ -107,13 +107,13 @@
       "category": "央视",
       "source_type": "community",
       "protocol": null,
-      "height": 720,
+      "height": 1080,
       "video_codec": "h264",
-      "latency_seconds": 0.8655586509999864,
-      "availability_percent": 70.59,
-      "score": 79.69,
+      "latency_seconds": 0.15159619900003918,
+      "availability_percent": 72.22,
+      "score": 80.63,
       "status": "active",
-      "last_checked_at": "2026-10-23T22:25:06.561825+00:00"
+      "last_checked_at": "2026-10-24T21:35:04.625730+00:00"
     },
     {
       "channel_id": "cctv-2",
@@ -123,11 +123,11 @@
       "protocol": null,
       "height": 720,
       "video_codec": "h264",
-      "latency_seconds": 0.11482449300000042,
-      "availability_percent": 70.59,
-      "score": 77.29,
+      "latency_seconds": 0.06469094099998074,
+      "availability_percent": 72.22,
+      "score": 78.17,
       "status": "active",
-      "last_checked_at": "2026-10-23T22:24:46.757572+00:00"
+      "last_checked_at": "2026-10-24T21:25:00.212847+00:00"
     },
     {
       "channel_id": "cctv-3",
@@ -135,13 +135,13 @@
       "category": "央视",
       "source_type": "community",
       "protocol": null,
-      "height": 720,
+      "height": 1080,
       "video_codec": "h264",
-      "latency_seconds": 0.11076196899999502,
+      "latency_seconds": 0.0635572350000757,
       "availability_percent": 100.0,
-      "score": 93.26,
+      "score": 93.43,
       "status": "active",
-      "last_checked_at": "2026-10-23T22:25:12.412654+00:00"
+      "last_checked_at": "2026-10-24T21:42:53.501802+00:00"
     },
     {
       "channel_id": "cctv-7",
@@ -151,11 +151,11 @@
       "protocol": null,
       "height": 720,
       "video_codec": "h264",
-      "latency_seconds": 0.11422083899999791,
-      "availability_percent": 70.59,
-      "score": 77.02,
+      "latency_seconds": 0.06444811500000469,
+      "availability_percent": 72.22,
+      "score": 77.92,
       "status": "active",
-      "last_checked_at": "2026-10-23T22:24:52.491312+00:00"
+      "last_checked_at": "2026-10-24T21:27:48.935721+00:00"
     },
     {
       "channel_id": "cctv-8",
@@ -165,11 +165,11 @@
       "protocol": null,
       "height": 720,
       "video_codec": "h264",
-      "latency_seconds": 0.15325478500000145,
-      "availability_percent": 70.59,
-      "score": 77.82,
+      "latency_seconds": 0.060602749000054246,
+      "availability_percent": 72.22,
+      "score": 78.66,
       "status": "active",
-      "last_checked_at": "2026-10-23T22:25:08.768258+00:00"
+      "last_checked_at": "2026-10-24T21:41:24.700543+00:00"
     },
     {
       "channel_id": "guangdong-satellite",
@@ -179,11 +179,11 @@
       "protocol": null,
       "height": 720,
       "video_codec": "h264",
-      "latency_seconds": 0.2659071380000029,
+      "latency_seconds": 0.1628599339999255,
       "availability_percent": 100.0,
-      "score": 92.98,
+      "score": 92.99,
       "status": "active",
-      "last_checked_at": "2026-10-23T22:25:10.437495+00:00"
+      "last_checked_at": "2026-10-24T21:42:51.965673+00:00"
     },
     {
       "channel_id": "hk-tvb-jade",
@@ -193,11 +193,11 @@
       "protocol": null,
       "height": 1080,
       "video_codec": "h264",
-      "latency_seconds": 0.4851365569999899,
+      "latency_seconds": 0.4515154540000026,
       "availability_percent": 100.0,
       "score": 96.4,
       "status": "active",
-      "last_checked_at": "2026-10-23T22:24:59.599022+00:00"
+      "last_checked_at": "2026-10-24T21:31:45.620706+00:00"
     },
     {
       "channel_id": "hunan-satellite",
@@ -207,11 +207,11 @@
       "protocol": null,
       "height": 2160,
       "video_codec": "hevc",
-      "latency_seconds": 1.4787414949999942,
+      "latency_seconds": 0.9194885029999682,
       "availability_percent": 100.0,
-      "score": 95.79,
+      "score": 95.92,
       "status": "active",
-      "last_checked_at": "2026-10-23T22:25:01.378563+00:00"
+      "last_checked_at": "2026-10-24T21:33:02.505863+00:00"
     },
     {
       "channel_id": "tw-cti-entertainment",
@@ -221,11 +221,11 @@
       "protocol": null,
       "height": 720,
       "video_codec": "h264",
-      "latency_seconds": 0.3964443710000012,
+      "latency_seconds": 0.3567165649999424,
       "availability_percent": 100.0,
       "score": 93.2,
       "status": "active",
-      "last_checked_at": "2026-10-23T22:25:09.286922+00:00"
+      "last_checked_at": "2026-10-24T21:42:32.130193+00:00"
     },
     {
       "channel_id": "tw-ftv-news",
@@ -235,11 +235,11 @@
       "protocol": null,
       "height": 1080,
       "video_codec": "h264",
-      "latency_seconds": 0.13688477499999863,
+      "latency_seconds": 0.10917432600000154,
       "availability_percent": 100.0,
       "score": 96.4,
       "status": "active",
-      "last_checked_at": "2026-10-23T22:24:41.358868+00:00"
+      "last_checked_at": "2026-10-24T21:19:06.917279+00:00"
     },
     {
       "channel_id": "tw-indigenous",
@@ -249,11 +249,11 @@
       "protocol": null,
       "height": 720,
       "video_codec": "h264",
-      "latency_seconds": 1.1378406540000015,
+      "latency_seconds": 1.1623706210000364,
       "availability_percent": 100.0,
-      "score": 90.39,
+      "score": 90.33,
       "status": "active",
-      "last_checked_at": "2026-10-23T22:25:13.466675+00:00"
+      "last_checked_at": "2026-10-24T21:44:01.040844+00:00"
     },
     {
       "channel_id": "tw-ttv-news",
@@ -263,11 +263,11 @@
       "protocol": null,
       "height": 1080,
       "video_codec": "h264",
-      "latency_seconds": 0.13639008100000183,
-      "availability_percent": 87.5,
-      "score": 89.53,
+      "latency_seconds": 0.10901418299999932,
+      "availability_percent": 88.24,
+      "score": 89.93,
       "status": "active",
-      "last_checked_at": "2026-10-23T22:24:41.360881+00:00"
+      "last_checked_at": "2026-10-24T21:20:17.284366+00:00"
     },
     {
       "channel_id": "tw-tvbs-asia",
@@ -277,11 +277,11 @@
       "protocol": null,
       "height": 1080,
       "video_codec": "h264",
-      "latency_seconds": 0.12707872400000042,
-      "availability_percent": 93.75,
-      "score": 92.71,
+      "latency_seconds": 0.10553955299999984,
+      "availability_percent": 94.12,
+      "score": 92.93,
       "status": "active",
-      "last_checked_at": "2026-10-23T22:24:43.115988+00:00"
+      "last_checked_at": "2026-10-24T21:21:09.850153+00:00"
     }
   ]
 }
