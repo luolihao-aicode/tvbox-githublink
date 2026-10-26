@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "checked_at": "2026-10-25T21:54:40.763892+00:00",
+  "checked_at": "2026-10-26T23:11:26.850032+00:00",
   "measurement_notice": "延迟和速度由GitHub Actions 节点测得，不代表用户本地网络体验。",
   "channels": [
     {
@@ -11,11 +11,11 @@
       "protocol": null,
       "height": 1080,
       "video_codec": "h264",
-      "latency_seconds": 0.4275493740000087,
+      "latency_seconds": 0.34217625799999496,
       "availability_percent": 100.0,
       "score": 96.4,
       "status": "active",
-      "last_checked_at": "2026-10-25T22:06:47.539907+00:00"
+      "last_checked_at": "2026-10-26T23:25:33.880625+00:00"
     },
     {
       "channel_id": "beijing-satellite",
@@ -25,11 +25,11 @@
       "protocol": null,
       "height": 1080,
       "video_codec": "h264",
-      "latency_seconds": 0.5039441339999939,
+      "latency_seconds": 0.38103192500000205,
       "availability_percent": 100.0,
       "score": 96.4,
       "status": "active",
-      "last_checked_at": "2026-10-25T22:10:40.672488+00:00"
+      "last_checked_at": "2026-10-26T23:25:37.993057+00:00"
     },
     {
       "channel_id": "cctv-1",
@@ -37,13 +37,13 @@
       "category": "央视",
       "source_type": "community",
       "protocol": null,
-      "height": 720,
+      "height": 1080,
       "video_codec": "h264",
-      "latency_seconds": 0.13217052799996054,
-      "availability_percent": 94.74,
-      "score": 91.1,
+      "latency_seconds": 0.13892704800002775,
+      "availability_percent": 95.0,
+      "score": 91.37,
       "status": "active",
-      "last_checked_at": "2026-10-25T22:21:08.043675+00:00"
+      "last_checked_at": "2026-10-26T23:35:16.990443+00:00"
     },
     {
       "channel_id": "cctv-10",
@@ -53,11 +53,11 @@
       "protocol": null,
       "height": 1080,
       "video_codec": "h264",
-      "latency_seconds": 0.4340380940000017,
+      "latency_seconds": 0.3607254530000006,
       "availability_percent": 100.0,
       "score": 96.4,
       "status": "active",
-      "last_checked_at": "2026-10-25T22:05:04.461780+00:00"
+      "last_checked_at": "2026-10-26T23:20:48.684263+00:00"
     },
     {
       "channel_id": "cctv-11",
@@ -67,11 +67,11 @@
       "protocol": null,
       "height": 1080,
       "video_codec": "h264",
-      "latency_seconds": 0.5035838109999986,
+      "latency_seconds": 0.619635996999989,
       "availability_percent": 100.0,
-      "score": 96.4,
+      "score": 95.15,
       "status": "active",
-      "last_checked_at": "2026-10-25T22:09:30.250262+00:00"
+      "last_checked_at": "2026-10-26T23:35:55.923611+00:00"
     },
     {
       "channel_id": "cctv-12",
@@ -81,11 +81,11 @@
       "protocol": null,
       "height": 720,
       "video_codec": "h264",
-      "latency_seconds": 0.13081750700000327,
+      "latency_seconds": 0.13186090700000364,
       "availability_percent": 100.0,
-      "score": 92.21,
+      "score": 92.26,
       "status": "active",
-      "last_checked_at": "2026-10-25T22:06:04.859583+00:00"
+      "last_checked_at": "2026-10-26T23:21:39.290821+00:00"
     },
     {
       "channel_id": "cctv-13",
@@ -95,11 +95,11 @@
       "protocol": null,
       "height": 1080,
       "video_codec": "h264",
-      "latency_seconds": 0.5840750770000085,
+      "latency_seconds": 0.4252918170000015,
       "availability_percent": 100.0,
       "score": 96.4,
       "status": "active",
-      "last_checked_at": "2026-10-25T22:05:42.148236+00:00"
+      "last_checked_at": "2026-10-26T23:21:22.021748+00:00"
     },
     {
       "channel_id": "cctv-14",
@@ -109,11 +109,11 @@
       "protocol": null,
       "height": 1080,
       "video_codec": "h264",
-      "latency_seconds": 0.5060386719999883,
+      "latency_seconds": 0.38115503800000283,
       "availability_percent": 100.0,
       "score": 96.4,
       "status": "active",
-      "last_checked_at": "2026-10-25T22:14:15.802284+00:00"
+      "last_checked_at": "2026-10-26T23:28:47.479636+00:00"
     },
     {
       "channel_id": "cctv-15",
@@ -123,11 +123,11 @@
       "protocol": null,
       "height": 720,
       "video_codec": "h264",
-      "latency_seconds": 0.1308847779999951,
+      "latency_seconds": 0.1385878109999794,
       "availability_percent": 100.0,
-      "score": 94.48,
+      "score": 94.27,
       "status": "active",
-      "last_checked_at": "2026-10-25T22:31:08.284649+00:00"
+      "last_checked_at": "2026-10-26T23:44:43.925844+00:00"
     },
     {
       "channel_id": "cctv-16",
@@ -137,11 +137,11 @@
       "protocol": null,
       "height": 1080,
       "video_codec": "h264",
-      "latency_seconds": 0.5195420920000231,
+      "latency_seconds": 0.33845760599999153,
       "availability_percent": 100.0,
       "score": 96.4,
       "status": "active",
-      "last_checked_at": "2026-10-25T22:12:14.755581+00:00"
+      "last_checked_at": "2026-10-26T23:27:42.944044+00:00"
     },
     {
       "channel_id": "cctv-17",
@@ -151,11 +151,11 @@
       "protocol": null,
       "height": 1080,
       "video_codec": "h264",
-      "latency_seconds": 0.5196298259999992,
+      "latency_seconds": 0.5818797919999952,
       "availability_percent": 100.0,
       "score": 96.4,
       "status": "active",
-      "last_checked_at": "2026-10-25T22:09:02.840315+00:00"
+      "last_checked_at": "2026-10-26T23:30:52.062074+00:00"
     },
     {
       "channel_id": "cctv-2",
@@ -165,11 +165,11 @@
       "protocol": null,
       "height": 1080,
       "video_codec": "h264",
-      "latency_seconds": 0.5071375669999725,
+      "latency_seconds": 0.3819633809999914,
       "availability_percent": 100.0,
       "score": 96.4,
       "status": "active",
-      "last_checked_at": "2026-10-25T22:15:20.657768+00:00"
+      "last_checked_at": "2026-10-26T23:29:50.839198+00:00"
     },
     {
       "channel_id": "cctv-3",
@@ -179,11 +179,11 @@
       "protocol": null,
       "height": 720,
       "video_codec": "h264",
-      "latency_seconds": 0.13173595199998545,
+      "latency_seconds": 0.8195355739999286,
       "availability_percent": 100.0,
-      "score": 93.42,
+      "score": 93.41,
       "status": "active",
-      "last_checked_at": "2026-10-25T22:31:11.423431+00:00"
+      "last_checked_at": "2026-10-26T23:44:45.522037+00:00"
     },
     {
       "channel_id": "cctv-4",
@@ -193,11 +193,11 @@
       "protocol": null,
       "height": 1080,
       "video_codec": "h264",
-      "latency_seconds": 0.4466353380000214,
+      "latency_seconds": 0.410494295999996,
       "availability_percent": 100.0,
       "score": 96.4,
       "status": "active",
-      "last_checked_at": "2026-10-25T22:13:51.424369+00:00"
+      "last_checked_at": "2026-10-26T23:28:23.970253+00:00"
     },
     {
       "channel_id": "cctv-5",
@@ -207,11 +207,11 @@
       "protocol": null,
       "height": 1080,
       "video_codec": "h264",
-      "latency_seconds": 0.5637905910000143,
+      "latency_seconds": 0.4281863419999752,
       "availability_percent": 100.0,
       "score": 96.4,
       "status": "active",
-      "last_checked_at": "2026-10-25T22:11:29.608871+00:00"
+      "last_checked_at": "2026-10-26T23:26:16.379840+00:00"
     },
     {
       "channel_id": "cctv-5-plus",
@@ -221,11 +221,11 @@
       "protocol": null,
       "height": 1080,
       "video_codec": "h264",
-      "latency_seconds": 0.4260016919999998,
+      "latency_seconds": 0.3447831839999935,
       "availability_percent": 100.0,
       "score": 96.4,
       "status": "active",
-      "last_checked_at": "2026-10-25T22:17:05.445567+00:00"
+      "last_checked_at": "2026-10-26T23:31:29.790246+00:00"
     },
     {
       "channel_id": "cctv-6",
@@ -235,11 +235,11 @@
       "protocol": null,
       "height": 1080,
       "video_codec": "h264",
-      "latency_seconds": 0.5213768010000308,
+      "latency_seconds": 0.3868321010000386,
       "availability_percent": 100.0,
       "score": 96.4,
       "status": "active",
-      "last_checked_at": "2026-10-25T22:23:58.689618+00:00"
+      "last_checked_at": "2026-10-26T23:37:53.287970+00:00"
     },
     {
       "channel_id": "cctv-7",
@@ -249,11 +249,11 @@
       "protocol": null,
       "height": 1080,
       "video_codec": "h264",
-      "latency_seconds": 0.43287498099999766,
+      "latency_seconds": 0.350435860999994,
       "availability_percent": 100.0,
       "score": 96.4,
       "status": "active",
-      "last_checked_at": "2026-10-25T22:14:03.432284+00:00"
+      "last_checked_at": "2026-10-26T23:38:28.365244+00:00"
     },
     {
       "channel_id": "cctv-8",
@@ -263,11 +263,11 @@
       "protocol": null,
       "height": 1080,
       "video_codec": "h264",
-      "latency_seconds": 0.578313713,
+      "latency_seconds": 0.3591164309999897,
       "availability_percent": 100.0,
       "score": 96.4,
       "status": "active",
-      "last_checked_at": "2026-10-25T22:04:43.958915+00:00"
+      "last_checked_at": "2026-10-26T23:24:29.524700+00:00"
     },
     {
       "channel_id": "cctv-9",
@@ -277,11 +277,11 @@
       "protocol": null,
       "height": 1080,
       "video_codec": "h264",
-      "latency_seconds": 0.48904201599998487,
+      "latency_seconds": 0.3469878349999931,
       "availability_percent": 100.0,
       "score": 96.4,
       "status": "active",
-      "last_checked_at": "2026-10-25T22:08:39.570229+00:00"
+      "last_checked_at": "2026-10-26T23:25:42.997714+00:00"
     },
     {
       "channel_id": "chongqing-satellite",
@@ -291,11 +291,11 @@
       "protocol": null,
       "height": 1080,
       "video_codec": "h264",
-      "latency_seconds": 0.5658111239999926,
+      "latency_seconds": 0.4092111490000008,
       "availability_percent": 100.0,
       "score": 96.4,
       "status": "active",
-      "last_checked_at": "2026-10-25T22:05:43.480042+00:00"
+      "last_checked_at": "2026-10-26T23:21:25.374812+00:00"
     },
     {
       "channel_id": "dragon-satellite",
@@ -305,11 +305,11 @@
       "protocol": null,
       "height": 1080,
       "video_codec": "h264",
-      "latency_seconds": 0.52105782000001,
+      "latency_seconds": 0.38503379799999493,
       "availability_percent": 100.0,
       "score": 96.4,
       "status": "active",
-      "last_checked_at": "2026-10-25T22:14:57.454978+00:00"
+      "last_checked_at": "2026-10-26T23:29:30.374241+00:00"
     },
     {
       "channel_id": "fujian-southeast-satellite",
@@ -319,11 +319,11 @@
       "protocol": null,
       "height": 1080,
       "video_codec": "h264",
-      "latency_seconds": 0.49554685699996526,
+      "latency_seconds": 0.3813974839999901,
       "availability_percent": 100.0,
       "score": 96.4,
       "status": "active",
-      "last_checked_at": "2026-10-25T22:15:56.094989+00:00"
+      "last_checked_at": "2026-10-26T23:32:19.133354+00:00"
     },
     {
       "channel_id": "gansu-satellite",
@@ -333,11 +333,11 @@
       "protocol": null,
       "height": 1080,
       "video_codec": "h264",
-      "latency_seconds": 0.5190201359999946,
+      "latency_seconds": 0.3536403880000307,
       "availability_percent": 100.0,
       "score": 96.4,
       "status": "active",
-      "last_checked_at": "2026-10-25T22:21:25.261765+00:00"
+      "last_checked_at": "2026-10-26T23:35:30.691242+00:00"
     },
     {
       "channel_id": "guangdong-satellite",
@@ -347,11 +347,11 @@
       "protocol": null,
       "height": 720,
       "video_codec": "h264",
-      "latency_seconds": 0.26096533800000543,
+      "latency_seconds": 0.16674528099997588,
       "availability_percent": 100.0,
-      "score": 93.0,
+      "score": 93.01,
       "status": "active",
-      "last_checked_at": "2026-10-25T22:31:10.223186+00:00"
+      "last_checked_at": "2026-10-26T23:44:44.509703+00:00"
     },
     {
       "channel_id": "guangxi-satellite",
@@ -361,11 +361,11 @@
       "protocol": null,
       "height": 1080,
       "video_codec": "h264",
-      "latency_seconds": 0.43941422600005353,
+      "latency_seconds": 0.34526310399996873,
       "availability_percent": 100.0,
       "score": 96.4,
       "status": "active",
-      "last_checked_at": "2026-10-25T22:15:25.122962+00:00"
+      "last_checked_at": "2026-10-26T23:44:25.238857+00:00"
     },
     {
       "channel_id": "guizhou-satellite",
@@ -375,11 +375,11 @@
       "protocol": null,
       "height": 1080,
       "video_codec": "h264",
-      "latency_seconds": 0.521766490999994,
+      "latency_seconds": 0.38078577700002825,
       "availability_percent": 100.0,
       "score": 96.4,
       "status": "active",
-      "last_checked_at": "2026-10-25T22:15:26.512871+00:00"
+      "last_checked_at": "2026-10-26T23:29:52.040758+00:00"
     },
     {
       "channel_id": "hainan-satellite",
@@ -389,11 +389,11 @@
       "protocol": null,
       "height": 1080,
       "video_codec": "h264",
-      "latency_seconds": 0.573521693999993,
+      "latency_seconds": 0.43091131699998186,
       "availability_percent": 100.0,
       "score": 96.4,
       "status": "active",
-      "last_checked_at": "2026-10-25T22:08:56.370393+00:00"
+      "last_checked_at": "2026-10-26T23:24:08.711442+00:00"
     },
     {
       "channel_id": "hebei-satellite",
@@ -403,11 +403,11 @@
       "protocol": null,
       "height": 1080,
       "video_codec": "h264",
-      "latency_seconds": 0.42327842800000326,
+      "latency_seconds": 0.3868037350000577,
       "availability_percent": 100.0,
       "score": 96.4,
       "status": "active",
-      "last_checked_at": "2026-10-25T22:28:27.763319+00:00"
+      "last_checked_at": "2026-10-26T23:42:09.111363+00:00"
     },
     {
       "channel_id": "heilongjiang-satellite",
@@ -417,11 +417,11 @@
       "protocol": null,
       "height": 1080,
       "video_codec": "h264",
-      "latency_seconds": 0.5036374219999971,
+      "latency_seconds": 0.38037273499998037,
       "availability_percent": 100.0,
       "score": 96.4,
       "status": "active",
-      "last_checked_at": "2026-10-25T22:11:56.191833+00:00"
+      "last_checked_at": "2026-10-26T23:26:43.182162+00:00"
     },
     {
       "channel_id": "henan-satellite",
@@ -431,11 +431,11 @@
       "protocol": null,
       "height": 1080,
       "video_codec": "h264",
-      "latency_seconds": 0.43596669000000077,
+      "latency_seconds": 0.35824423000001104,
       "availability_percent": 100.0,
       "score": 96.4,
       "status": "active",
-      "last_checked_at": "2026-10-25T22:06:17.462430+00:00"
+      "last_checked_at": "2026-10-26T23:21:48.693438+00:00"
     },
     {
       "channel_id": "hk-phoenix-info",
@@ -445,11 +445,11 @@
       "protocol": null,
       "height": 720,
       "video_codec": "hevc",
-      "latency_seconds": 0.5139714409999669,
+      "latency_seconds": 0.44204717399998117,
       "availability_percent": 100.0,
       "score": 93.2,
       "status": "active",
-      "last_checked_at": "2026-10-25T22:21:01.687264+00:00"
+      "last_checked_at": "2026-10-26T23:35:11.745613+00:00"
     },
     {
       "channel_id": "hk-tvb-jade",
@@ -459,11 +459,11 @@
       "protocol": null,
       "height": 1080,
       "video_codec": "h264",
-      "latency_seconds": 0.47443245000005163,
+      "latency_seconds": 0.39597279299999855,
       "availability_percent": 100.0,
       "score": 96.4,
       "status": "active",
-      "last_checked_at": "2026-10-25T22:19:29.449188+00:00"
+      "last_checked_at": "2026-10-26T23:33:39.223420+00:00"
     },
     {
       "channel_id": "hubei-satellite",
@@ -471,13 +471,13 @@
       "category": "地方频道",
       "source_type": "community",
       "protocol": null,
-      "height": 1080,
+      "height": 720,
       "video_codec": "h264",
-      "latency_seconds": 0.426894485000048,
+      "latency_seconds": 2.971170467999997,
       "availability_percent": 100.0,
-      "score": 96.4,
+      "score": 86.95,
       "status": "active",
-      "last_checked_at": "2026-10-25T22:31:50.998017+00:00"
+      "last_checked_at": "2026-10-26T23:28:05.606358+00:00"
     },
     {
       "channel_id": "hunan-satellite",
@@ -487,11 +487,11 @@
       "protocol": null,
       "height": 2160,
       "video_codec": "hevc",
-      "latency_seconds": 0.62646260300005,
+      "latency_seconds": 1.175933456999985,
       "availability_percent": 100.0,
-      "score": 96.03,
+      "score": 95.94,
       "status": "active",
-      "last_checked_at": "2026-10-25T22:20:41.049806+00:00"
+      "last_checked_at": "2026-10-26T23:34:53.133015+00:00"
     },
     {
       "channel_id": "inner-mongolia-satellite",
@@ -501,11 +501,25 @@
       "protocol": null,
       "height": 1080,
       "video_codec": "h264",
-      "latency_seconds": 0.9053105549999998,
+      "latency_seconds": 0.873420560999989,
       "availability_percent": 100.0,
       "score": 96.4,
       "status": "active",
-      "last_checked_at": "2026-10-25T22:10:24.477980+00:00"
+      "last_checked_at": "2026-10-26T23:25:26.669593+00:00"
+    },
+    {
+      "channel_id": "jiangsu-satellite",
+      "name": "江苏卫视",
+      "category": "地方频道",
+      "source_type": "community",
+      "protocol": null,
+      "height": 1080,
+      "video_codec": "h264",
+      "latency_seconds": 0.3606727100000171,
+      "availability_percent": 66.67,
+      "score": 78.07,
+      "status": "active",
+      "last_checked_at": "2026-10-26T23:33:06.875221+00:00"
     },
     {
       "channel_id": "jiangxi-satellite",
@@ -515,11 +529,11 @@
       "protocol": null,
       "height": 720,
       "video_codec": "h264",
-      "latency_seconds": 1.624604614999953,
+      "latency_seconds": 1.3532184930000426,
       "availability_percent": 100.0,
-      "score": 87.58,
+      "score": 88.2,
       "status": "active",
-      "last_checked_at": "2026-10-25T22:16:47.367704+00:00"
+      "last_checked_at": "2026-10-26T23:31:15.431714+00:00"
     },
     {
       "channel_id": "jilin-satellite",
@@ -529,11 +543,11 @@
       "protocol": null,
       "height": 1080,
       "video_codec": "h264",
-      "latency_seconds": 0.5193098320000047,
+      "latency_seconds": 0.36105873900001484,
       "availability_percent": 100.0,
       "score": 96.4,
       "status": "active",
-      "last_checked_at": "2026-10-25T22:12:28.730729+00:00"
+      "last_checked_at": "2026-10-26T23:27:10.847493+00:00"
     },
     {
       "channel_id": "liaoning-satellite",
@@ -543,11 +557,11 @@
       "protocol": null,
       "height": 1080,
       "video_codec": "h264",
-      "latency_seconds": 0.4394644820000053,
+      "latency_seconds": 0.3689795989999993,
       "availability_percent": 100.0,
       "score": 96.4,
       "status": "active",
-      "last_checked_at": "2026-10-25T22:06:04.633284+00:00"
+      "last_checked_at": "2026-10-26T23:21:37.131732+00:00"
     },
     {
       "channel_id": "ningxia-satellite",
@@ -557,11 +571,11 @@
       "protocol": null,
       "height": 1080,
       "video_codec": "h264",
-      "latency_seconds": 0.43959823600005166,
+      "latency_seconds": 0.3602367429999731,
       "availability_percent": 100.0,
       "score": 96.4,
       "status": "active",
-      "last_checked_at": "2026-10-25T22:17:09.322609+00:00"
+      "last_checked_at": "2026-10-26T23:31:33.969375+00:00"
     },
     {
       "channel_id": "qinghai-satellite",
@@ -571,11 +585,11 @@
       "protocol": null,
       "height": 1080,
       "video_codec": "h264",
-      "latency_seconds": 0.44683804600003896,
+      "latency_seconds": 0.3637243819999867,
       "availability_percent": 100.0,
       "score": 96.4,
       "status": "active",
-      "last_checked_at": "2026-10-25T22:20:30.602996+00:00"
+      "last_checked_at": "2026-10-26T23:34:41.700345+00:00"
     },
     {
       "channel_id": "shaanxi-satellite",
@@ -585,11 +599,11 @@
       "protocol": null,
       "height": 1080,
       "video_codec": "h264",
-      "latency_seconds": 0.4359197100000074,
+      "latency_seconds": 0.3711175370000035,
       "availability_percent": 100.0,
       "score": 96.4,
       "status": "active",
-      "last_checked_at": "2026-10-25T22:10:44.214988+00:00"
+      "last_checked_at": "2026-10-26T23:25:42.217137+00:00"
     },
     {
       "channel_id": "shandong-satellite",
@@ -599,11 +613,11 @@
       "protocol": null,
       "height": 1080,
       "video_codec": "h264",
-      "latency_seconds": 0.4240516760000048,
+      "latency_seconds": 0.34667086000000324,
       "availability_percent": 100.0,
       "score": 96.4,
       "status": "active",
-      "last_checked_at": "2026-10-25T22:07:08.123643+00:00"
+      "last_checked_at": "2026-10-26T23:22:37.224070+00:00"
     },
     {
       "channel_id": "shanxi-satellite",
@@ -613,11 +627,11 @@
       "protocol": null,
       "height": 1080,
       "video_codec": "h264",
-      "latency_seconds": 0.4278201109999884,
+      "latency_seconds": 0.35435423600000604,
       "availability_percent": 100.0,
       "score": 96.4,
       "status": "active",
-      "last_checked_at": "2026-10-25T22:12:00.407036+00:00"
+      "last_checked_at": "2026-10-26T23:26:44.133584+00:00"
     },
     {
       "channel_id": "shenzhen-satellite",
@@ -627,11 +641,11 @@
       "protocol": null,
       "height": 1080,
       "video_codec": "h264",
-      "latency_seconds": 0.4474803130000282,
+      "latency_seconds": 0.36364515100001427,
       "availability_percent": 100.0,
       "score": 96.4,
       "status": "active",
-      "last_checked_at": "2026-10-25T22:19:52.933653+00:00"
+      "last_checked_at": "2026-10-26T23:34:03.471573+00:00"
     },
     {
       "channel_id": "sichuan-satellite",
@@ -641,11 +655,11 @@
       "protocol": null,
       "height": 1080,
       "video_codec": "h264",
-      "latency_seconds": 0.4399909799999904,
+      "latency_seconds": 0.36663402599999984,
       "availability_percent": 100.0,
       "score": 96.4,
       "status": "active",
-      "last_checked_at": "2026-10-25T22:05:10.963950+00:00"
+      "last_checked_at": "2026-10-26T23:20:48.684916+00:00"
     },
     {
       "channel_id": "tianjin-satellite",
@@ -655,11 +669,11 @@
       "protocol": null,
       "height": 1080,
       "video_codec": "h264",
-      "latency_seconds": 0.429675216999982,
-      "availability_percent": 100.0,
-      "score": 96.4,
+      "latency_seconds": 0.3511747489999948,
+      "availability_percent": 66.67,
+      "score": 78.07,
       "status": "active",
-      "last_checked_at": "2026-10-25T22:09:24.212516+00:00"
+      "last_checked_at": "2026-10-26T23:30:03.176973+00:00"
     },
     {
       "channel_id": "tibet-satellite",
@@ -669,11 +683,11 @@
       "protocol": null,
       "height": 1080,
       "video_codec": "h264",
-      "latency_seconds": 0.4329008230000113,
+      "latency_seconds": 0.36306607699998494,
       "availability_percent": 100.0,
       "score": 96.4,
       "status": "active",
-      "last_checked_at": "2026-10-25T22:17:35.812321+00:00"
+      "last_checked_at": "2026-10-26T23:31:57.980043+00:00"
     },
     {
       "channel_id": "tw-cti-entertainment",
@@ -683,11 +697,11 @@
       "protocol": null,
       "height": 720,
       "video_codec": "h264",
-      "latency_seconds": 0.38515537399996447,
+      "latency_seconds": 0.31199479500003235,
       "availability_percent": 100.0,
       "score": 93.2,
       "status": "active",
-      "last_checked_at": "2026-10-25T22:30:46.158678+00:00"
+      "last_checked_at": "2026-10-26T23:44:20.040177+00:00"
     },
     {
       "channel_id": "tw-ftv-news",
@@ -697,11 +711,11 @@
       "protocol": null,
       "height": 1080,
       "video_codec": "h264",
-      "latency_seconds": 0.26263711999999373,
+      "latency_seconds": 0.15121080500000517,
       "availability_percent": 100.0,
       "score": 96.4,
       "status": "active",
-      "last_checked_at": "2026-10-25T22:05:28.173513+00:00"
+      "last_checked_at": "2026-10-26T23:21:01.853643+00:00"
     },
     {
       "channel_id": "tw-indigenous",
@@ -711,11 +725,11 @@
       "protocol": null,
       "height": 720,
       "video_codec": "h264",
-      "latency_seconds": 1.1376989589999766,
+      "latency_seconds": 1.0468174809999482,
       "availability_percent": 100.0,
-      "score": 90.28,
+      "score": 90.24,
       "status": "active",
-      "last_checked_at": "2026-10-25T22:32:05.649396+00:00"
+      "last_checked_at": "2026-10-26T23:45:36.474172+00:00"
     },
     {
       "channel_id": "tw-ttv-news",
@@ -725,11 +739,11 @@
       "protocol": null,
       "height": 1080,
       "video_codec": "h264",
-      "latency_seconds": 0.14455314100000294,
-      "availability_percent": 88.89,
-      "score": 90.29,
+      "latency_seconds": 0.0676793650000036,
+      "availability_percent": 89.47,
+      "score": 90.61,
       "status": "active",
-      "last_checked_at": "2026-10-25T22:06:41.884977+00:00"
+      "last_checked_at": "2026-10-26T23:22:10.309635+00:00"
     },
     {
       "channel_id": "tw-tvbs-asia",
@@ -739,11 +753,11 @@
       "protocol": null,
       "height": 1080,
       "video_codec": "h264",
-      "latency_seconds": 0.12602037499999597,
-      "availability_percent": 94.44,
-      "score": 93.12,
+      "latency_seconds": 0.0698805990000011,
+      "availability_percent": 94.74,
+      "score": 93.3,
       "status": "active",
-      "last_checked_at": "2026-10-25T22:07:34.705582+00:00"
+      "last_checked_at": "2026-10-26T23:23:00.766942+00:00"
     },
     {
       "channel_id": "xinjiang-satellite",
@@ -753,11 +767,11 @@
       "protocol": null,
       "height": 1080,
       "video_codec": "h264",
-      "latency_seconds": 0.6355015089999938,
+      "latency_seconds": 0.46582635800001526,
       "availability_percent": 100.0,
       "score": 96.4,
       "status": "active",
-      "last_checked_at": "2026-10-25T22:16:53.811711+00:00"
+      "last_checked_at": "2026-10-26T23:31:22.949694+00:00"
     },
     {
       "channel_id": "yunnan-satellite",
@@ -767,11 +781,11 @@
       "protocol": null,
       "height": 1080,
       "video_codec": "h264",
-      "latency_seconds": 0.5073127740000132,
+      "latency_seconds": 0.3805754769999794,
       "availability_percent": 100.0,
       "score": 96.4,
       "status": "active",
-      "last_checked_at": "2026-10-25T22:14:52.969946+00:00"
+      "last_checked_at": "2026-10-26T23:29:18.348866+00:00"
     },
     {
       "channel_id": "zhejiang-satellite",
@@ -781,11 +795,11 @@
       "protocol": null,
       "height": 1080,
       "video_codec": "h264",
-      "latency_seconds": 0.5950395500000099,
+      "latency_seconds": 1.0568114479999977,
       "availability_percent": 100.0,
-      "score": 96.4,
+      "score": 95.15,
       "status": "active",
-      "last_checked_at": "2026-10-25T22:04:43.957324+00:00"
+      "last_checked_at": "2026-10-26T23:20:22.777261+00:00"
     }
   ]
 }
