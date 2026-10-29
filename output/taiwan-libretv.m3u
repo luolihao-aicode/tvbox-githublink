@@ -7,6 +7,8 @@ http://38.64.72.148/hls/modn/list/4012/chunklist1.m3u8
 http://38.64.72.148/hls/modn/list/4012/chunklist0.m3u8
 #EXTINF:-1 tvg-id="tw-ftv-news" tvg-name="民视新闻台" group-title="台湾",民视新闻台 · 备用2
 http://38.64.72.148/hls/modn/list/4012/playlist.m3u8
+#EXTINF:-1 tvg-id="tw-hakka" tvg-name="客家电视台" group-title="台湾",客家电视台
+https://h5cul1yar48um3t.wcetv.com/hls/hakkatv.m3u8
 #EXTINF:-1 tvg-id="tw-indigenous" tvg-name="原住民族电视台" group-title="台湾",原住民族电视台
 https://streamipcfapp.akamaized.net/live/_definst_/live_720/key_b1500.m3u8
 #EXTINF:-1 tvg-id="tw-ttv-news" tvg-name="台视新闻台" group-title="台湾",台视新闻台

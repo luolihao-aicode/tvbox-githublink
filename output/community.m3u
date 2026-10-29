@@ -61,8 +61,6 @@ http://112.27.5.218:9901/tsfile/live/faacts/0117_1.m3u8?key=txiptv
 http://119.62.24.75:50085/tsfile/live/0120_1.m3u8?key=txiptv
 #EXTINF:-1 tvg-id="henan-satellite" tvg-name="河南卫视" group-title="地方频道",河南卫视
 http://119.62.24.75:50085/tsfile/live/0137_1.m3u8?key=txiptv
-#EXTINF:-1 tvg-id="hk-phoenix-chinese" tvg-name="凤凰卫视中文台" group-title="香港",凤凰卫视中文台
-http://bobohome.ignorelist.com:20247/fengshows?id=2.m3u8
 #EXTINF:-1 tvg-id="hk-phoenix-info" tvg-name="凤凰卫视资讯台" group-title="香港",凤凰卫视资讯台
 http://183.236.161.115:8960/live1171.m3u8
 #EXTINF:-1 tvg-id="hk-tvb-jade" tvg-name="TVB 翡翠台" group-title="香港",TVB 翡翠台
@@ -92,17 +90,21 @@ http://112.27.5.218:9901/tsfile/live/faacts/0131_1.m3u8?key=txiptv
 #EXTINF:-1 tvg-id="shanxi-satellite" tvg-name="山西卫视" group-title="地方频道",山西卫视
 http://39.164.138.145:9082/hls/58/index.m3u8
 #EXTINF:-1 tvg-id="shenzhen-satellite" tvg-name="深圳卫视" group-title="地方频道",深圳卫视
-http://39.150.102.131:19901/tsfile/live/0126_1.m3u8
+http://60.16.0.36:5757/hls/22/index.m3u8
 #EXTINF:-1 tvg-id="sichuan-satellite" tvg-name="四川卫视" group-title="地方频道",四川卫视
 http://39.150.102.131:19901/tsfile/live/0123_1.m3u8
 #EXTINF:-1 tvg-id="tianjin-satellite" tvg-name="天津卫视" group-title="地方频道",天津卫视
-http://221.14.142.118:9003/hls/27/index.m3u8
+http://39.164.138.145:8899/hls/50/index.m3u8
 #EXTINF:-1 tvg-id="tibet-satellite" tvg-name="西藏卫视" group-title="地方频道",西藏卫视
 http://39.150.102.131:19901/tsfile/live/0111_1.m3u8
+#EXTINF:-1 tvg-id="tw-axn" tvg-name="AXN 台湾" group-title="台湾",AXN 台湾
+http://125.227.210.55:4050/VideoInput/play.ts
 #EXTINF:-1 tvg-id="tw-cti-entertainment" tvg-name="中天娱乐台" group-title="台湾",中天娱乐台
 http://61.221.215.25:8800/hls/47/index.m3u8
 #EXTINF:-1 tvg-id="tw-ftv-news" tvg-name="民视新闻台" group-title="台湾",民视新闻台
 http://38.64.72.148/hls/modn/list/4012/chunklist1.m3u8
+#EXTINF:-1 tvg-id="tw-hakka" tvg-name="客家电视台" group-title="台湾",客家电视台
+https://h5cul1yar48um3t.wcetv.com/hls/hakkatv.m3u8
 #EXTINF:-1 tvg-id="tw-indigenous" tvg-name="原住民族电视台" group-title="台湾",原住民族电视台
 https://streamipcfapp.akamaized.net/live/_definst_/live_720/key_b1500.m3u8
 #EXTINF:-1 tvg-id="tw-ttv-news" tvg-name="台视新闻台" group-title="台湾",台视新闻台
