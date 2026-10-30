@@ -1,23 +1,24 @@
 {
   "schema_version": 1,
-  "checked_at": "2026-10-29T23:24:13.910288+00:00",
-  "discovered_sources": 321,
-  "matched_sources": 4269,
-  "checked_sources": 4269,
-  "successful_sources": 385,
+  "checked_at": "2026-10-30T23:03:31.115112+00:00",
+  "discovered_sources": 323,
+  "matched_sources": 4270,
+  "checked_sources": 4270,
+  "successful_sources": 452,
   "published_channels": 59,
   "filter_reasons": {
-    "HTTP_TIMEOUT": 2743,
-    "HTTP_FAILED": 827,
-    "WAITING_SECOND_SUCCESS": 53,
-    "MEDIA_TIMEOUT": 255,
-    "INSUFFICIENT_MEDIA_DURATION": 26,
+    "HTTP_TIMEOUT": 2712,
+    "WAITING_SECOND_SUCCESS": 101,
+    "HTTP_FAILED": 834,
+    "MEDIA_TIMEOUT": 210,
+    "INSUFFICIENT_MEDIA_DURATION": 31,
     "NON_LIVE_PLAYLIST": 4,
-    "HTML_RESPONSE": 22,
-    "FFPROBE_FAILED": 20,
+    "HTML_RESPONSE": 23,
+    "FFPROBE_FAILED": 21,
     "INVALID_HLS": 11,
+    "BELOW_HD_THRESHOLD": 8,
     "MANUAL_REJECTION": 2,
-    "BELOW_HD_THRESHOLD": 6
+    "FIRST_BYTE_TIMEOUT": 1
   },
   "unknown_channel_names": [
     "ABN China (720p)",
@@ -105,6 +106,7 @@
     "Jilin Lifestyle Channel",
     "Jilin Movie Channel",
     "Jilin Rural Channel",
+    "Jingmen Comprehensive News Channel",
     "Jiuquan TV News Comprehensive Channel (576p)",
     "Kangba TV",
     "Lanzhou Comprehensive News Channel",
@@ -118,8 +120,7 @@
     "Pet Club TV (1080p)",
     "Pingxiang TV News Channel (576p) [Not 24/7]",
     "QTV-1",
-    "QTV-2",
-    "QTV-3"
+    "QTV-2"
   ],
   "issues": [],
   "message": "检测完成"
