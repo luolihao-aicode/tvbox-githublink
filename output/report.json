@@ -1,23 +1,24 @@
 {
   "schema_version": 1,
-  "checked_at": "2026-10-31T21:50:29.639430+00:00",
+  "checked_at": "2026-10-31T22:35:54.430165+00:00",
   "discovered_sources": 323,
   "matched_sources": 4270,
   "checked_sources": 4270,
-  "successful_sources": 433,
+  "successful_sources": 457,
   "published_channels": 58,
   "filter_reasons": {
-    "HTTP_TIMEOUT": 2717,
-    "HTTP_FAILED": 855,
-    "MEDIA_TIMEOUT": 203,
-    "INSUFFICIENT_MEDIA_DURATION": 27,
+    "HTTP_TIMEOUT": 2713,
+    "HTTP_FAILED": 850,
+    "MEDIA_TIMEOUT": 189,
+    "INSUFFICIENT_MEDIA_DURATION": 28,
+    "WAITING_SECOND_SUCCESS": 74,
     "NON_LIVE_PLAYLIST": 4,
     "HTML_RESPONSE": 23,
-    "FFPROBE_FAILED": 22,
-    "WAITING_SECOND_SUCCESS": 63,
+    "FFPROBE_FAILED": 18,
+    "FIRST_BYTE_TIMEOUT": 3,
     "INVALID_HLS": 11,
-    "MANUAL_REJECTION": 2,
-    "BELOW_HD_THRESHOLD": 6
+    "BELOW_HD_THRESHOLD": 7,
+    "MANUAL_REJECTION": 2
   },
   "unknown_channel_names": [
     "ABN China (720p)",
@@ -121,15 +122,6 @@
     "QTV-1",
     "QTV-2"
   ],
-  "issues": [
-    {
-      "source_url": "https://api.github.com/search/code",
-      "code": "GITHUB_SEARCH_FAILED"
-    },
-    {
-      "source_url": "https://api.github.com/search/code",
-      "code": "GITHUB_SEARCH_FAILED"
-    }
-  ],
+  "issues": [],
   "message": "检测完成"
 }

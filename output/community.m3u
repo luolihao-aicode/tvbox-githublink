@@ -2,7 +2,7 @@
 #EXTINF:-1 tvg-id="anhui-satellite" tvg-name="安徽卫视" group-title="地方频道",安徽卫视
 http://119.62.24.75:50085/tsfile/live/0122_1.m3u8?key=txiptv
 #EXTINF:-1 tvg-id="beijing-satellite" tvg-name="北京卫视" group-title="地方频道",北京卫视
-http://39.150.102.131:19901/tsfile/live/0122_1.m3u8
+http://39.164.138.145:8899/hls/36/index.m3u8
 #EXTINF:-1 tvg-id="cctv-1" tvg-name="CCTV-1 综合" group-title="央视",CCTV-1 综合
 http://74.91.26.218:82/live/cctv1hd.m3u8
 #EXTINF:-1 tvg-id="cctv-10" tvg-name="CCTV-10 科教" group-title="央视",CCTV-10 科教
