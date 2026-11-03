@@ -1,23 +1,23 @@
 {
   "schema_version": 1,
-  "checked_at": "2026-11-01T22:55:28.633917+00:00",
-  "discovered_sources": 323,
+  "checked_at": "2026-11-03T01:40:53.094138+00:00",
+  "discovered_sources": 325,
   "matched_sources": 4270,
   "checked_sources": 4270,
-  "successful_sources": 457,
-  "published_channels": 61,
+  "successful_sources": 336,
+  "published_channels": 58,
   "filter_reasons": {
-    "HTTP_TIMEOUT": 2715,
-    "MEDIA_TIMEOUT": 183,
-    "HTTP_FAILED": 832,
-    "INSUFFICIENT_MEDIA_DURATION": 17,
+    "HTTP_TIMEOUT": 2782,
+    "HTTP_FAILED": 890,
+    "MEDIA_TIMEOUT": 193,
+    "INSUFFICIENT_MEDIA_DURATION": 18,
+    "WAITING_SECOND_SUCCESS": 39,
     "NON_LIVE_PLAYLIST": 4,
     "HTML_RESPONSE": 23,
-    "FFPROBE_FAILED": 26,
-    "WAITING_SECOND_SUCCESS": 60,
     "PLACEHOLDER_STREAM": 17,
+    "FFPROBE_FAILED": 12,
     "INVALID_HLS": 11,
-    "BELOW_HD_THRESHOLD": 7,
+    "BELOW_HD_THRESHOLD": 6,
     "MANUAL_REJECTION": 2
   },
   "unknown_channel_names": [
@@ -64,6 +64,7 @@
     "Chuzhou News Channel (1080p)",
     "Chuzhou Public Channel (400p)",
     "Chuzhou Science & Education Channel (400p)",
+    "Cinemax Asia Taiwan (1080p)",
     "Dali TV (720p)",
     "Discovery Asia Taiwan (1080p)",
     "Documentary Humanities Channel (1080p)",
@@ -119,8 +120,7 @@
     "PTS 3",
     "Pet Club TV (1080p)",
     "Pingxiang TV News Channel (576p) [Not 24/7]",
-    "QTV-1",
-    "QTV-2"
+    "QTV-1"
   ],
   "issues": [],
   "message": "检测完成"
