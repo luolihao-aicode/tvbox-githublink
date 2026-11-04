@@ -81,7 +81,7 @@ class CatalogSource(StrictModel):
     lastSuccess: str | None
     availability: float | None = Field(ge=0, le=1)
     environmentLimited: bool = False
-    measurementStatus: Literal['verified', 'historicalEnvironmentLimited'] = 'verified'
+    measurementStatus: Literal['verified', 'historicalEnvironmentLimited', 'candidateUnverified'] = 'verified'
 
     @field_validator('url')
     @classmethod

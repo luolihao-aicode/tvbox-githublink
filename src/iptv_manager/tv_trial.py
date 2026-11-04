@@ -9,7 +9,7 @@ import math
 import ipaddress
 import socket
 import re
-from collections import Counter
+from collections import Counter, defaultdict
 from datetime import UTC, datetime
 from fractions import Fraction
 from pathlib import Path
@@ -316,7 +316,63 @@ def write_outputs(lines: list[dict], output_dir: Path, now: datetime, summary: d
     return report
 
 
-async def run(sources_file: Path, output_dir: Path, work_dir: Path) -> dict:
+def load_discovered_candidates(path: Path) -> list[dict]:
+    """周发现与日检测的候选池只作为待复检输入，不继承其可用结论。"""
+    if not path.is_file():
+        return []
+    if path.stat().st_size > 64_000_000:
+        raise ValueError('发现候选池超过大小上限')
+    try:
+        rows = json.loads(path.read_text(encoding='utf-8'))
+    except (UnicodeError, json.JSONDecodeError) as exc:
+        raise ValueError('发现候选池格式无效，保留旧目录') from exc
+    if not isinstance(rows, list):
+        raise ValueError('发现候选池必须为数组')
+    rules = [rule for rule in load_config(Path('config')).channels if rule.id in TARGET_IDS]
+    found = {}
+    for row in rows:
+        if not isinstance(row, dict) or row.get('channel_id') not in TARGET_IDS:
+            continue
+        url, origin = row.get('url'), row.get('source_url')
+        if not isinstance(url, str) or len(url) > 8192 or not safe_url(url):
+            continue
+        if not isinstance(origin, str) or not _public_url(origin):
+            continue
+        raw_name = row.get('raw_name') or row.get('channel_name')
+        if not isinstance(raw_name, str):
+            continue
+        match = classify_channel(raw_name, rules)
+        if match.channel_id != row['channel_id']:
+            continue
+        found.setdefault(make_stream_id(url), {'channel_id': match.channel_id, 'name': match.channel_name,
+                         'url': url, 'source_url': origin, 'raw_name': raw_name})
+    return list(found.values())
+
+
+def budget_candidates(candidates: list[dict], maximum: int = 420) -> list[dict]:
+    if maximum < 1:
+        raise ValueError('候选检测上限必须大于零')
+    counts = Counter()
+    channels = defaultdict(list)
+    seen = set()
+    for item in candidates:
+        cid = item['channel_id']
+        key = (cid, urlsplit(item['url']).netloc)
+        if cid not in TARGET_IDS or item['url'] in seen or counts[key] >= 2 or len(channels[cid]) >= 30:
+            continue
+        seen.add(item['url']);counts[key] += 1;channels[cid].append(item)
+    result = []
+    for offset in range(30):
+        for cid in TARGET_IDS:
+            if offset < len(channels[cid]):
+                result.append(channels[cid][offset])
+                if len(result) >= maximum:
+                    return result
+    return result
+
+
+async def run(sources_file: Path, output_dir: Path, work_dir: Path, *,
+              candidates_file: Path = Path('data/candidates.json'), maximum_candidates: int = 420) -> dict:
     settings = yaml.safe_load(sources_file.read_text(encoding='utf-8'))
     sources = settings['sources']
     rejected_hosts = settings.get('rejected_hosts', {})
@@ -337,6 +393,7 @@ async def run(sources_file: Path, output_dir: Path, work_dir: Path) -> dict:
                 host, None, family=socket.AF_INET, type=socket.SOCK_STREAM))
         if not await asyncio.shield(ipv4_checks[host]):
             raise ValueError('NO_IPV4_ADDRESS')
+    discovered_pool = load_discovered_candidates(candidates_file)
     candidates = {}
     fetched = []
     async with httpx.AsyncClient(timeout=8, event_hooks={'request': [trial_guard]}, headers={'User-Agent': 'Mozilla/5.0 personal-stream-trial'}) as client:
@@ -352,22 +409,17 @@ async def run(sources_file: Path, output_dir: Path, work_dir: Path) -> dict:
             except Exception as exc:
                 fetched.append({'url': url, 'error': type(exc).__name__})
         await asyncio.gather(*(fetch(url) for url in sources))
-        if not any('matched' in x for x in fetched):
+        for item in discovered_pool:
+            candidates.setdefault(make_stream_id(item['url']), item)
+        if not any('matched' in x for x in fetched) and not candidates:
             raise ValueError('所有来源抓取失败；保留原试播文件')
         work_dir.mkdir(parents=True, exist_ok=True)
         (work_dir / 'candidates.json').write_text(json.dumps(list(candidates.values()), ensure_ascii=False, indent=2), encoding='utf-8')
         candidates = {sid: item for sid, item in candidates.items()
                       if urlsplit(item['url']).hostname not in rejected_hosts and item['url'] not in rejected_streams}
-        # 同频道同主机只检测两条入口，避免同源别名把网络时间耗尽。
-        per_host_channel = Counter()
-        limited_candidates = {}
-        for sid, item in candidates.items():
-            key = (item['channel_id'], urlsplit(item['url']).netloc)
-            per_host_channel[key] += 1
-            if per_host_channel[key] <= 2:
-                limited_candidates[sid] = item
-        candidates = limited_candidates
-        print(f'公开列表 {len(fetched)} 份，14 台去重候选 {len(candidates)} 条', flush=True)
+        candidates = {make_stream_id(item['url']): item for item in
+                      budget_candidates(list(candidates.values()), maximum=maximum_candidates)}
+        print(f'公开列表 {len(fetched)} 份，发现池安全候选 {len(discovered_pool)} 条，本轮检测 {len(candidates)} 条', flush=True)
         failures = []
         lines = []
         concurrency = asyncio.Semaphore(16)
@@ -401,6 +453,7 @@ async def run(sources_file: Path, output_dir: Path, work_dir: Path) -> dict:
         await asyncio.gather(*(check(sid, item) for sid, item in candidates.items()))
     (work_dir / 'all-results.json').write_text(json.dumps(lines, ensure_ascii=False, indent=2), encoding='utf-8')
     summary = {'sources': fetched, 'candidates': len(candidates), 'rejected_hosts': rejected_hosts,
+               'discovered_pool_candidates': len(discovered_pool), 'candidate_budget': maximum_candidates,
                'failure_counts': dict(Counter(x['reason'] for x in failures)), 'failures': failures}
     result = write_outputs(lines, output_dir, datetime.now(UTC), summary)
     print(f"已输出 {result['published_channels']} 台/{result['published_lines']} 线路，缺台：{result['missing_channels']}", flush=True)
@@ -412,8 +465,11 @@ def main():
     parser.add_argument('--sources', type=Path, default=Path('config/tv_trial_sources.yml'))
     parser.add_argument('--output-dir', type=Path, default=Path('output'))
     parser.add_argument('--work-dir', type=Path, default=Path('artifacts/tv-test'))
+    parser.add_argument('--candidates-file', type=Path, default=Path('data/candidates.json'))
+    parser.add_argument('--max-candidates', type=int, default=420)
     args = parser.parse_args()
-    asyncio.run(run(args.sources, args.output_dir, args.work_dir))
+    asyncio.run(run(args.sources, args.output_dir, args.work_dir,
+                    candidates_file=args.candidates_file, maximum_candidates=args.max_candidates))
 
 
 if __name__ == '__main__':
