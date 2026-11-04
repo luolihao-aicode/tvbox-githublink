@@ -32,10 +32,11 @@ class MainActivity:Activity() {
     private val worker=Executors.newSingleThreadExecutor()
     private var catalog:Catalog?=null
     private var loadMessage="正在加载频道目录…"
-    private var category="全部"
+    private var category="央视"
     private var query=""
     private var page=0
     private var refreshEpoch=0
+    private var statusEpoch=0
     private var screen="channels"
     val panelVisible:Boolean get()=::overlay.isInitialized && overlay.visibility==View.VISIBLE
     override fun onCreate(savedInstanceState:Bundle?) {
@@ -45,6 +46,7 @@ class MainActivity:Activity() {
         window.decorView.systemUiVisibility=View.SYSTEM_UI_FLAG_FULLSCREEN or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
         store=LocalStore(this);log=DiagnosticLog(this)
         repository=CatalogRepository(CatalogCache(File(filesDir,"catalog-cache")))
+        seedTrialCache()
         root=FrameLayout(this).apply{setBackgroundColor(Color.BLACK)}
         val video=PlayerView(this).apply{useController=false;isFocusable=false;keepScreenOn=true}
         root.addView(video,FrameLayout.LayoutParams(-1,-1))
@@ -53,7 +55,11 @@ class MainActivity:Activity() {
         overlay=LinearLayout(this).apply{orientation=LinearLayout.VERTICAL;setPadding(dp(26),dp(18),dp(26),dp(18));setBackgroundColor(0xF2111D2B.toInt())}
         root.addView(overlay,FrameLayout.LayoutParams(-1,-1))
         setContentView(root)
-        engine=PlaybackEngine(this,video,store,log){status.text=it}
+        engine=PlaybackEngine(this,video,store,log){message->
+            status.text=message;status.visibility=View.VISIBLE
+            val token=++statusEpoch
+            root.postDelayed({if(!isDestroyed && token==statusEpoch && engine.state=="PLAYING")status.visibility=View.GONE},4000)
+        }
         showChannels();refreshCatalog()
     }
     override fun onStart() {super.onStart();if(::engine.isInitialized && engine.activePlayerCount==0)engine.channel?.let{engine.play(it)}}
@@ -64,10 +70,12 @@ class MainActivity:Activity() {
     private fun shape(color:Int)=GradientDrawable().apply{setColor(color);cornerRadius=dp(7).toFloat()}
     private fun button(value:String,idValue:Int=View.NO_ID,click:()->Unit)=Button(this).apply {
         id=idValue;text=value;textSize=16f;isAllCaps=false;setTextColor(Color.WHITE);isFocusable=true;isFocusableInTouchMode=true
-        background=StateListDrawable().apply{addState(intArrayOf(android.R.attr.state_focused),shape(0xFF087E8B.toInt()));addState(intArrayOf(android.R.attr.state_pressed),shape(0xFF087E8B.toInt()));addState(intArrayOf(),shape(0xFF26384B.toInt()))}
+        background=StateListDrawable().apply{addState(intArrayOf(android.R.attr.state_focused),shape(0xFF087E8B.toInt()));addState(intArrayOf(android.R.attr.state_pressed),shape(0xFF087E8B.toInt()));addState(intArrayOf(android.R.attr.state_activated),shape(0xFF244B59.toInt()));addState(intArrayOf(),shape(0xFF192A3B.toInt()))}
         setPadding(dp(14),dp(6),dp(14),dp(6));minHeight=dp(44);setOnClickListener{click()}
     }
     private fun toolbar(title:String) {
+        overlay.layoutParams=FrameLayout.LayoutParams(-1,-1)
+        overlay.contentDescription=title
         overlay.removeAllViews();overlay.visibility=View.VISIBLE
         overlay.addView(text(title,26).apply{setTypeface(null,Typeface.BOLD)})
         val row=LinearLayout(this).apply{orientation=LinearLayout.HORIZONTAL}
@@ -79,37 +87,44 @@ class MainActivity:Activity() {
     }
     private fun hidePanel(){overlay.visibility=View.GONE;root.isFocusableInTouchMode=true;root.requestFocus()}
     fun showChannels() {
-        screen="channels";toolbar("智选直播")
-        val search=EditText(this).apply {
-            hint="搜索频道名称";setTextColor(Color.WHITE);setHintTextColor(0xFFADB9C7.toInt());textSize=17f;isSingleLine=true;setText(query)
-            contentDescription="搜索频道名称";setSelectAllOnFocus(true)
-        }
-        overlay.addView(search,LinearLayout.LayoutParams(-1,dp(48)))
+        val previousFocus=if(screen=="channels")currentFocus?.contentDescription?.toString() else null
+        screen="channels";overlay.removeAllViews();overlay.visibility=View.VISIBLE
+        overlay.layoutParams=FrameLayout.LayoutParams(dp(450),-1,Gravity.START)
+        overlay.contentDescription="频道侧栏"
+        overlay.addView(text("智选直播",25).apply{setTypeface(null,Typeface.BOLD)})
+        val all=catalog?.channels?:emptyList()
+        val labels=channelCategories(all)
+        if(category !in labels)category=labels.first()
         val body=LinearLayout(this).apply{orientation=LinearLayout.HORIZONTAL}
         val categories=LinearLayout(this).apply{orientation=LinearLayout.VERTICAL}
         val categoryScroll=ScrollView(this).apply{addView(categories)}
-        body.addView(categoryScroll,LinearLayout.LayoutParams(dp(175),-1))
+        body.addView(categoryScroll,LinearLayout.LayoutParams(dp(106),-1))
         val channelColumn=LinearLayout(this).apply{orientation=LinearLayout.VERTICAL}
         body.addView(channelColumn,LinearLayout.LayoutParams(0,-1,1f))
         overlay.addView(body,LinearLayout.LayoutParams(-1,0,1f))
         var firstChannel:View?=null
+        val categoryButtons=mutableMapOf<String,Button>()
+        val channelButtons=mutableMapOf<String,Button>()
         fun renderList() {
+            firstChannel=null;channelButtons.clear()
             channelColumn.removeAllViews()
-            val all=catalog?.channels?:emptyList()
-            val filtered=all.filter { c ->
-                (when(category){"全部"->true;"收藏"->store.favorites().contains(c.id);"最近"->store.recent().contains(c.id);else->c.group==category}) && c.name.contains(query,true)
-            }.let { list -> if(category=="最近")list.sortedBy{store.recent().indexOf(it.id)} else list }
+            categoryButtons.forEach{(label,b)->b.isActivated=label==category}
+            val filtered=menuChannels(all,category,query,store.favorites(),store.recent())
             page=clampChannelPage(page,filtered.size)
-            channelColumn.addView(text("$category · ${filtered.size} 个频道 · OK 播放，返回键关闭菜单",15))
+            channelColumn.addView(text(if(query.isBlank())"$category  ·  ${filtered.size} 个频道" else "搜索：$query  ·  ${filtered.size} 个频道",14))
             if(filtered.isEmpty()) {
-                channelColumn.addView(text(if(all.isEmpty()) "当前没有已授权的可用频道。\n服务端默认拒绝未经确认授权的来源，因此空目录属于正常保护状态。\n可在设置中填写自己的已授权 HTTPS 目录。\n\n$loadMessage" else "没有匹配频道。试试其他分类、搜索词，或收藏正在观看的频道。",19))
+                channelColumn.addView(text(if(all.isEmpty()) "频道暂未加载\n请检查电视网络，稍后重新打开应用。" else "此分类暂无频道。\n可按左键换分类。",17))
             } else {
                 val entries=LinearLayout(this).apply{orientation=LinearLayout.VERTICAL;id=CHANNEL_LIST_ID}
-                firstChannel=null
                 filtered.drop(page*80).take(80).forEach { channel ->
-                    val b=button("${if(store.favorites().contains(channel.id))"★ " else ""}${channel.name}  ·  ${channel.sources.size} 源") {engine.play(channel);hidePanel()}
+                    val b=button("${if(channel.id==engine.channel?.id)"▶ " else ""}${channel.name}") {engine.play(channel);hidePanel()}.apply {
+                        contentDescription="频道：${channel.name}";textSize=18f;gravity=Gravity.CENTER_VERTICAL or Gravity.START
+                        isActivated=channel.id==engine.channel?.id
+                        setOnKeyListener{_,code,event->if(code==KeyEvent.KEYCODE_DPAD_LEFT && event.action==KeyEvent.ACTION_DOWN){categoryButtons[category]?.requestFocus();true}else false}
+                    }
                     if(firstChannel==null)firstChannel=b
-                    entries.addView(b,LinearLayout.LayoutParams(-1,dp(49)).apply{setMargins(dp(4),dp(3),dp(4),dp(3))})
+                    channelButtons[channel.id]=b
+                    entries.addView(b,LinearLayout.LayoutParams(-1,dp(49)).apply{setMargins(dp(4),dp(2),0,dp(2))})
                 }
                 channelColumn.addView(ScrollView(this).apply{addView(entries)},LinearLayout.LayoutParams(-1,0,1f))
                 if(filtered.size>80) {
@@ -120,21 +135,37 @@ class MainActivity:Activity() {
                 }
             }
         }
-        (listOf("全部","收藏","最近")+(catalog?.channels?.map{it.group}?.distinct()?.sorted()?:emptyList())).distinct().forEach { label ->
-            categories.addView(button(if(category==label)"● $label" else label){category=label;page=0;showChannels()},LinearLayout.LayoutParams(-1,dp(47)).apply{setMargins(0,dp(3),dp(8),dp(3))})
+        labels.forEach { label ->
+            val b=button(label){firstChannel?.requestFocus()}.apply {
+                contentDescription="分类：$label";textSize=17f
+                setOnFocusChangeListener{_,focused->if(focused && category!=label){category=label;page=0;renderList()}}
+                setOnKeyListener{_,code,event->if(code==KeyEvent.KEYCODE_DPAD_RIGHT && event.action==KeyEvent.ACTION_DOWN){firstChannel?.requestFocus();true}else false}
+            }
+            categoryButtons[label]=b
+            categories.addView(b,LinearLayout.LayoutParams(-1,dp(47)).apply{setMargins(0,dp(2),dp(6),dp(2))})
         }
-        search.addTextChangedListener(object:TextWatcher {override fun beforeTextChanged(s:CharSequence?,start:Int,count:Int,after:Int){};override fun onTextChanged(s:CharSequence?,start:Int,before:Int,count:Int){query=s.toString();page=0;renderList()};override fun afterTextChanged(s:Editable?){} })
         renderList()
-        engine.channel?.let { selected ->
-            overlay.addView(button(if(store.favorites().contains(selected.id))"★ 取消收藏 ${selected.name}" else "☆ 收藏 ${selected.name}"){store.toggleFavorite(selected.id);showChannels()},LinearLayout.LayoutParams(-1,dp(44)))
-        }
-        (firstChannel?:findViewById<View>(SETTINGS_ID)).requestFocus()
+        overlay.addView(text("← 分类  → 频道  OK 播放  返回 全屏",12))
+        val restored=if(previousFocus?.startsWith("分类：")==true)categoryButtons[previousFocus.removePrefix("分类：")] else channelButtons.values.firstOrNull{it.contentDescription==previousFocus}
+        (restored?:channelButtons[engine.channel?.id]?:firstChannel?:categoryButtons[category]?:findViewById<View>(SETTINGS_ID)).requestFocus()
+    }
+    private fun showSearch() {
+        screen="search";toolbar("搜索频道")
+        val input=EditText(this).apply{hint="输入频道名称";setText(query);textSize=20f;setTextColor(Color.WHITE);isSingleLine=true;contentDescription="搜索频道名称"}
+        overlay.addView(input,LinearLayout.LayoutParams(-1,dp(54)))
+        overlay.addView(button("显示搜索结果"){query=input.text.toString().trim();category="全部";page=0;showChannels()},LinearLayout.LayoutParams(-1,dp(48)))
+        overlay.addView(button("清除搜索"){query="";showChannels()},LinearLayout.LayoutParams(-1,dp(48)))
+        input.requestFocus()
     }
     fun showSettings() {
         screen="settings";toolbar("设置")
         val content=LinearLayout(this).apply{orientation=LinearLayout.VERTICAL}
         val scroll=ScrollView(this).apply{addView(content)}
         overlay.addView(scroll,LinearLayout.LayoutParams(-1,0,1f))
+        content.addView(button("载入央视与四个卫视试播频道") {
+            store.configUrl=LocalStore.TV_TRIAL_URL;seedTrialCache();catalog=repository.cached(store.configUrl)?.catalog
+            query="";category="央视";page=0;showChannels();refreshCatalog()
+        }.apply{contentDescription="载入试播频道"},LinearLayout.LayoutParams(-1,dp(48)))
         content.addView(text("频道目录地址（HTTPS）",19))
         val address=EditText(this).apply{setText(store.configUrl);textSize=17f;setTextColor(Color.WHITE);isSingleLine=true;inputType=android.text.InputType.TYPE_CLASS_TEXT or android.text.InputType.TYPE_TEXT_VARIATION_URI;setSelectAllOnFocus(true);contentDescription="HTTPS频道目录地址"}
         content.addView(address,LinearLayout.LayoutParams(-1,dp(54)))
@@ -191,8 +222,16 @@ class MainActivity:Activity() {
             }
         }
     }
+    private fun seedTrialCache() {
+        if(store.configUrl!=LocalStore.TV_TRIAL_URL || repository.cached(store.configUrl)!=null)return
+        try {
+            val body=assets.open("tv-test.json").bufferedReader(Charsets.UTF_8).use{it.readText()}
+            CatalogCache(File(filesDir,"catalog-cache")).save(store.configUrl,body,"")
+            log.event("bundled_trial_loaded")
+        } catch(_:Exception) {log.event("bundled_trial_unavailable")}
+    }
     override fun onKeyDown(keyCode:Int,event:KeyEvent):Boolean {
-        if(keyCode==KeyEvent.KEYCODE_BACK){if(panelVisible)hidePanel() else finish();return true}
+        if(keyCode==KeyEvent.KEYCODE_BACK){if(panelVisible){if(screen=="channels")hidePanel() else showChannels()} else finish();return true}
         if(!panelVisible) {
             when(keyCode) {
                 KeyEvent.KEYCODE_DPAD_CENTER,KeyEvent.KEYCODE_ENTER,KeyEvent.KEYCODE_MENU->{showChannels();return true}

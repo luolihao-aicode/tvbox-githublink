@@ -119,7 +119,7 @@ class PlaybackEngine(private val context:Context,private val view:PlayerView,pri
                 updateQuality{it.copy(successes=it.successes+1,firstFrameMs=firstFrameMs?:0,lastPlayed=System.currentTimeMillis())}
             }
             state="PLAYING";log.event("first_frame","source=${source?.id} ms=$firstFrameMs reason=$lastReason")
-            onStatus("${channel?.name} · 播放中 · 首帧 ${firstFrameMs}ms")
+            onStatus("${channel?.name} · 播放中")
             preflightBackup()
         }
         override fun onPlayerError(error:PlaybackException) {
@@ -139,11 +139,12 @@ class PlaybackEngine(private val context:Context,private val view:PlayerView,pri
         player!!.repeatMode=if(selected.url=="asset:///diagnostic.mp4")Player.REPEAT_MODE_ONE else Player.REPEAT_MODE_OFF
         player!!.prepare();player!!.playWhenReady=true
         log.event("prepare","source=${selected.id} url=${redactUrl(selected.url)} rebuild=$rebuild buffer=${if(stable)"stable" else "balanced"}")
-        onStatus("${channel?.name} · 正在连接 ${selected.id}")
+        onStatus("${channel?.name} · 正在载入")
     }
     private fun recover(reason:String,fatalDecode:Boolean=false) {
         if(recovering || closed || state=="EXHAUSTED")return
-        val action=policy?.failure(SystemClock.elapsedRealtime(),fatalDecode)?:return
+        // 短时间反复缓冲表明该线路不适合本机网络，有备源时直接换源。
+        val action=policy?.failure(SystemClock.elapsedRealtime(),fatalDecode || reason=="frequent_buffering")?:return
         if(action.kind==ActionKind.WAIT) {
             recovering=true;val token=epoch
             handler.postDelayed({if(token==epoch && !closed){recovering=false;recover(reason,fatalDecode)}},action.delayMs);return

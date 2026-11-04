@@ -1,0 +1,36 @@
+# 公开社区列表仅为发现出处，不表示拥有频道分发授权。
+# 此配置仅供个人试播模块，不加入正式 sources.yml 或 usage_rights.yml。
+sources:
+  - https://iptv-org.github.io/iptv/countries/cn.m3u
+  - https://raw.githubusercontent.com/iptv-org/iptv/master/streams/cn.m3u
+  - https://raw.githubusercontent.com/fanmingming/live/main/tv/m3u/demo.m3u
+  - https://raw.githubusercontent.com/zilong7728/Collect-IPTV/main/best_sorted.m3u
+  - https://raw.githubusercontent.com/zilong7728/Collect-IPTV/main/best_sorted.m3u8
+  - https://raw.githubusercontent.com/BurningC4/Chinese-IPTV/master/TV-IPV4.m3u
+  - https://raw.githubusercontent.com/YanG-1989/m3u/main/Gather.m3u
+  - https://raw.githubusercontent.com/kimwang1978/collect-tv-txt/main/merged_output.txt
+  - https://raw.githubusercontent.com/kaige-cai/live/main/iptv.m3u
+  - https://raw.githubusercontent.com/leyan1987/iptv/main/iptv.txt
+  - https://raw.githubusercontent.com/suxuang/myIPTV/main/ipv4.m3u
+  - https://raw.githubusercontent.com/Guovin/iptv-api/gd/output/ipv4/result.m3u
+  - https://raw.githubusercontent.com/vbskycn/iptv/master/tv/iptv4.txt
+  - https://raw.githubusercontent.com/YueChan/Live/main/APTV.m3u
+  - https://raw.githubusercontent.com/vamoschuck/TV/main/M3U
+  - https://raw.githubusercontent.com/PizazzGY/TV/master/output/user_result.m3u
+
+# 本次实际下载多个频道截图后确认：以下主机将不同台名统一指向同一购物广告。
+rejected_hosts:
+  207.56.13.146: 2026-11-04三路截图均为同一购物广告，无对应台标，排除全部频道。
+
+# 台标复核为CCTV-8K超高清，不能冒充CCTV-8电视剧。
+rejected_streams:
+  - http://63.141.230.178:82/gslb/zbdq5.m3u8?id=cctv8k
+  # 这两个入口实际重定向到同一购物广告 applive/102。
+  - http://107.150.60.122/live/cctv3hd.m3u8
+  - http://74.91.26.218:82/live/cctv6hd.m3u8
+  - http://173.208.212.130:8181/1080p/cctv4.m3u8
+
+# 只匹配公开主机与路径，不保存其临时查询参数；防止其它别名入口回添广告。
+rejected_media_routes:
+  - http://204.12.234.154:88/applive/102.m3u8
+  - http://204.12.234.154:88/applive/mkt.m3u8

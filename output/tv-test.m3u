@@ -1,0 +1,75 @@
+#EXTM3U
+#EXTINF:-1 tvg-id="cctv-1" tvg-name="CCTV-1 综合" group-title="央视",CCTV-1 综合
+http://74.91.26.218:82/live/cctv1hd.m3u8
+#EXTINF:-1 tvg-id="cctv-1" tvg-name="CCTV-1 综合" group-title="央视",CCTV-1 综合 · 备用1
+http://198.204.228.26/live/cctv1hd.m3u8
+#EXTINF:-1 tvg-id="cctv-1" tvg-name="CCTV-1 综合" group-title="央视",CCTV-1 综合 · 备用2
+http://204.12.221.218:8181/3m1080p/cctv1.m3u8
+#EXTINF:-1 tvg-id="cctv-2" tvg-name="CCTV-2 财经" group-title="央视",CCTV-2 财经
+http://107.150.60.122/live/cctv2hd.m3u8
+#EXTINF:-1 tvg-id="cctv-2" tvg-name="CCTV-2 财经" group-title="央视",CCTV-2 财经 · 备用1
+http://204.12.221.218:8181/3m1080p/cctv2.m3u8
+#EXTINF:-1 tvg-id="cctv-2" tvg-name="CCTV-2 财经" group-title="央视",CCTV-2 财经 · 备用2
+http://bztv.tvbus.cc:8081/cdnlive/cctv2.m3u8
+#EXTINF:-1 tvg-id="cctv-3" tvg-name="CCTV-3 综艺" group-title="央视",CCTV-3 综艺
+http://69.30.245.50/live/cctv3.m3u8
+#EXTINF:-1 tvg-id="cctv-3" tvg-name="CCTV-3 综艺" group-title="央视",CCTV-3 综艺 · 备用1
+http://63.141.230.178:82/gslb/zbdq5.m3u8?id=cctv3hd
+#EXTINF:-1 tvg-id="cctv-3" tvg-name="CCTV-3 综艺" group-title="央视",CCTV-3 综艺 · 备用2
+http://74.91.26.218:82/live/cctv3hd.m3u8
+#EXTINF:-1 tvg-id="cctv-4" tvg-name="CCTV-4 中文国际" group-title="央视",CCTV-4 中文国际
+http://107.150.60.122/live/cctv4hd.m3u8
+#EXTINF:-1 tvg-id="cctv-4" tvg-name="CCTV-4 中文国际" group-title="央视",CCTV-4 中文国际 · 备用1
+http://74.91.26.218:82/live/cctv4hd.m3u8
+#EXTINF:-1 tvg-id="cctv-5" tvg-name="CCTV-5 体育" group-title="央视",CCTV-5 体育
+http://107.150.60.122/live/cctv5hd.m3u8
+#EXTINF:-1 tvg-id="cctv-6" tvg-name="CCTV-6 电影" group-title="央视",CCTV-6 电影
+http://63.141.230.178:82/gslb/zbdq5.m3u8?id=cctv6hd
+#EXTINF:-1 tvg-id="cctv-6" tvg-name="CCTV-6 电影" group-title="央视",CCTV-6 电影 · 备用1
+http://69.30.245.50/live/cctv6.m3u8
+#EXTINF:-1 tvg-id="cctv-6" tvg-name="CCTV-6 电影" group-title="央视",CCTV-6 电影 · 备用2
+http://198.204.228.26/live/cctv6hd.m3u8
+#EXTINF:-1 tvg-id="cctv-7" tvg-name="CCTV-7 国防军事" group-title="央视",CCTV-7 国防军事
+http://107.150.60.122/live/cctv7hd.m3u8
+#EXTINF:-1 tvg-id="cctv-7" tvg-name="CCTV-7 国防军事" group-title="央视",CCTV-7 国防军事 · 备用1
+http://69.30.245.50/live/cctv7.m3u8
+#EXTINF:-1 tvg-id="cctv-7" tvg-name="CCTV-7 国防军事" group-title="央视",CCTV-7 国防军事 · 备用2
+http://63.141.230.178:82/gslb/zbdq5.m3u8?id=cctv7hd
+#EXTINF:-1 tvg-id="cctv-8" tvg-name="CCTV-8 电视剧" group-title="央视",CCTV-8 电视剧
+http://69.30.245.50/live/cctv8.m3u8
+#EXTINF:-1 tvg-id="cctv-8" tvg-name="CCTV-8 电视剧" group-title="央视",CCTV-8 电视剧 · 备用1
+http://bztv.tvbus.cc:8081/cdnlive/cctv8.m3u8
+#EXTINF:-1 tvg-id="cctv-8" tvg-name="CCTV-8 电视剧" group-title="央视",CCTV-8 电视剧 · 备用2
+http://74.91.26.218:82/live/cctv8hd.m3u8
+#EXTINF:-1 tvg-id="cctv-9" tvg-name="CCTV-9 纪录" group-title="央视",CCTV-9 纪录
+http://107.150.60.122/live/cctv9hd.m3u8
+#EXTINF:-1 tvg-id="cctv-9" tvg-name="CCTV-9 纪录" group-title="央视",CCTV-9 纪录 · 备用1
+http://63.141.230.178:82/gslb/zbdq5.m3u8?id=cctv9hd
+#EXTINF:-1 tvg-id="cctv-9" tvg-name="CCTV-9 纪录" group-title="央视",CCTV-9 纪录 · 备用2
+http://192.151.150.154/live/cctv9hd.m3u8
+#EXTINF:-1 tvg-id="cctv-10" tvg-name="CCTV-10 科教" group-title="央视",CCTV-10 科教
+http://69.30.245.50/live/cctv10.m3u8
+#EXTINF:-1 tvg-id="cctv-10" tvg-name="CCTV-10 科教" group-title="央视",CCTV-10 科教 · 备用1
+http://bztv.tvbus.cc:8081/cdnlive/cctv10.m3u8
+#EXTINF:-1 tvg-id="cctv-10" tvg-name="CCTV-10 科教" group-title="央视",CCTV-10 科教 · 备用2
+http://74.91.26.218:82/live/cctv10hd.m3u8
+#EXTINF:-1 tvg-id="hunan-satellite" tvg-name="湖南卫视" group-title="地方台",湖南卫视
+http://63.141.230.178:82/gslb/zbdq5.m3u8?id=hnwshd
+#EXTINF:-1 tvg-id="hunan-satellite" tvg-name="湖南卫视" group-title="地方台",湖南卫视 · 备用1
+http://107.150.60.122/live/hnwshd.m3u8
+#EXTINF:-1 tvg-id="hunan-satellite" tvg-name="湖南卫视" group-title="地方台",湖南卫视 · 备用2
+http://74.91.26.218:82/live/hnwshd.m3u8
+#EXTINF:-1 tvg-id="jiangsu-satellite" tvg-name="江苏卫视" group-title="地方台",江苏卫视
+http://107.150.60.122/live/jswshd.m3u8
+#EXTINF:-1 tvg-id="jiangsu-satellite" tvg-name="江苏卫视" group-title="地方台",江苏卫视 · 备用1
+http://63.141.230.178:82/gslb/zbdq5.m3u8?id=jswshd
+#EXTINF:-1 tvg-id="zhejiang-satellite" tvg-name="浙江卫视" group-title="地方台",浙江卫视
+http://107.150.60.122/live/zjwshd.m3u8
+#EXTINF:-1 tvg-id="zhejiang-satellite" tvg-name="浙江卫视" group-title="地方台",浙江卫视 · 备用1
+http://63.141.230.178:82/gslb/zbdq5.m3u8?id=zjwshd
+#EXTINF:-1 tvg-id="zhejiang-satellite" tvg-name="浙江卫视" group-title="地方台",浙江卫视 · 备用2
+https://ali-m-l.cztv.com/channels/lantian/channel001/1080p.m3u8
+#EXTINF:-1 tvg-id="beijing-satellite" tvg-name="北京卫视" group-title="地方台",北京卫视
+http://107.150.60.122/live/bjwshd.m3u8
+#EXTINF:-1 tvg-id="beijing-satellite" tvg-name="北京卫视" group-title="地方台",北京卫视 · 备用1
+http://63.141.230.178:82/gslb/zbdq5.m3u8?id=bjwshd

@@ -4,6 +4,26 @@ import org.junit.Assert.*
 import org.junit.Test
 
 class PlaybackPolicyTest {
+    @Test fun backupOrderTriesDifferentOriginBeforeAliasesOfPrimary() {
+        val sources=listOf(source("a",99.0).copy(originGroup="shared"),source("alias",98.0).copy(originGroup="shared"),source("other",70.0))
+        assertEquals(listOf("a","other","alias"),SourceSelector.rank(sources,emptyMap(),"wifi").map{it.id})
+    }
+    @Test fun repeatedShortBufferingIsDetectedBeforeContinuousTimeout() {
+        val h=PlaybackHealthMonitor();h.begin(0);h.firstFrame(100)
+        for(time in listOf(1000L,6000L)) {
+            assertNull(h.observe(HealthSample(time,buffering=true)))
+            assertNull(h.observe(HealthSample(time+1000,ready=true,positionMs=time,renderedFrames=(time/40).toInt())))
+        }
+        assertEquals("frequent_buffering",h.observe(HealthSample(11000,buffering=true)))
+    }
+    @Test fun oldBufferingAndPauseDoNotCountAsFrequentStalls() {
+        val h=PlaybackHealthMonitor();h.begin(0);h.firstFrame(100)
+        for(time in listOf(1000L,70000L,140000L)) {
+            assertNull(h.observe(HealthSample(time,buffering=true)))
+            assertNull(h.observe(HealthSample(time+1000,ready=true,positionMs=time,renderedFrames=(time/40).toInt())))
+        }
+        assertNull(h.observe(HealthSample(141100,paused=true,buffering=true)))
+    }
     private fun source(id: String, score: Double = 80.0) = Source(id, "https://example.org/$id.m3u8", "hls", score, originGroup = id)
     @Test fun localSuccessOutweighsServerScoreForCurrentNetwork() {
         val stats = mapOf("wifi:b" to Quality(successes = 5, watchedMs = 120000))

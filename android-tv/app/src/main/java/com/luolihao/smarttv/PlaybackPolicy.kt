@@ -2,7 +2,7 @@ package com.luolihao.smarttv
 
 data class Source(val id:String,val url:String,val type:String,val score:Double,val resolution:String?=null,val videoCodec:String?=null,val lastChecked:String?=null,val originGroup:String="")
 data class Quality(val successes:Int=0,val failures:Int=0,val watchedMs:Long=0,val firstFrameMs:Long=0,val stalls:Int=0,val switches:Int=0,val lastPlayed:Long=0)
-data class PolicyConfig(val firstFrameTimeoutMs:Long=12000,val prepareTimeoutMs:Long=15000,val bufferTimeoutMs:Long=12000,val stallTimeoutMs:Long=12000,val cooldownMs:Long=2000,val quarantineMs:Long=60000)
+data class PolicyConfig(val firstFrameTimeoutMs:Long=12000,val prepareTimeoutMs:Long=15000,val bufferTimeoutMs:Long=12000,val stallTimeoutMs:Long=12000,val cooldownMs:Long=2000,val quarantineMs:Long=60000,val stallWindowMs:Long=60000,val maxStallsInWindow:Int=3)
 data class PlaybackPreferences(val preflightEnabled:Boolean=false)
 enum class ActionKind { RETRY, REBUILD, SWITCH, WAIT, EXHAUSTED }
 data class RecoveryAction(val kind:ActionKind,val sourceId:String?=null,val delayMs:Long=0)
@@ -29,10 +29,19 @@ class RecoveryPolicy(val sources:List<Source>,val config:PolicyConfig=PolicyConf
  }
 }
 object SourceSelector {
- fun rank(sources:List<Source>,stats:Map<String,Quality>,network:String)=sources.sortedByDescending {
+ fun rank(sources:List<Source>,stats:Map<String,Quality>,network:String):List<Source> {
+  val ranked=sources.sortedByDescending {
    val q=stats["$network:${it.id}"]
    val measured=if(q==null) 0.0 else (q.successes*35.0-q.failures*45.0-q.stalls*8.0-q.firstFrameMs/1000.0).coerceIn(-200.0,200.0)
    it.score*0.3+measured
+  }
+  val origins=mutableSetOf<String>()
+  val preferred=mutableListOf<Source>();val aliases=mutableListOf<Source>()
+  ranked.forEach { source ->
+    val origin=source.originGroup.ifBlank{source.id}
+    if(origins.add(origin))preferred.add(source)else aliases.add(source)
+  }
+  return preferred+aliases
  }
 }
 data class HealthSample(val now:Long,val ready:Boolean=false,val buffering:Boolean=false,val hasVideo:Boolean=true,val audioAdvancing:Boolean=false,val positionMs:Long=0,val renderedFrames:Int=0,val paused:Boolean=false)
@@ -44,13 +53,22 @@ class PlaybackHealthMonitor(val config:PolicyConfig=PolicyConfig()) {
  private var lastFrameMovement=0L
  private var position=-1L
  private var frames=-1
- fun begin(now:Long) {started=now;firstFrameMs=null;bufferingAt=null;lastMovement=now;lastFrameMovement=now;position=-1;frames=-1}
+ private val stallStarts=java.util.ArrayDeque<Long>()
+ fun begin(now:Long) {started=now;firstFrameMs=null;bufferingAt=null;stallStarts.clear();lastMovement=now;lastFrameMovement=now;position=-1;frames=-1}
  fun firstFrame(now:Long) {if(firstFrameMs==null) firstFrameMs=now-started;lastFrameMovement=now}
  fun observe(s:HealthSample):String? {
    if(s.paused) {bufferingAt=null;lastMovement=s.now;lastFrameMovement=s.now;return null}
    if(s.hasVideo && firstFrameMs==null && s.now-started>=config.firstFrameTimeoutMs) return "first_frame_timeout"
    if(!s.ready && firstFrameMs==null && s.now-started>=config.prepareTimeoutMs) return "prepare_timeout"
-   if(s.buffering) {if(bufferingAt==null) bufferingAt=s.now;if(s.now-bufferingAt!!>=config.bufferTimeoutMs)return "continuous_buffering"} else bufferingAt=null
+   while(stallStarts.isNotEmpty() && s.now-stallStarts.first>config.stallWindowMs)stallStarts.removeFirst()
+   if(s.buffering) {
+     if(bufferingAt==null) {
+       bufferingAt=s.now
+       if(firstFrameMs!=null)stallStarts.addLast(s.now)
+     }
+     if(stallStarts.size>=config.maxStallsInWindow)return "frequent_buffering"
+     if(s.now-bufferingAt!!>=config.bufferTimeoutMs)return "continuous_buffering"
+   } else bufferingAt=null
    if(s.positionMs!=position) {position=s.positionMs;lastMovement=s.now}
    if(s.renderedFrames!=frames) {frames=s.renderedFrames;lastFrameMovement=s.now}
    if(s.ready && s.hasVideo && firstFrameMs!=null && !s.buffering && s.now-lastMovement>=config.stallTimeoutMs && s.now-lastFrameMovement>=config.stallTimeoutMs) return "video_progress_stalled"

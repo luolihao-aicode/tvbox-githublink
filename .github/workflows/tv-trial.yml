@@ -1,0 +1,42 @@
+name: 更新央视与卫视试播目录
+
+on:
+  schedule:
+    - cron: '7 20 * * *' # 北京时间每天 04:07
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: iptv-generated-data
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+          cache: pip
+      - name: 安装检测工具
+        run: |
+          sudo apt-get update
+          sudo apt-get install --yes ffmpeg
+          python -m pip install '.[dev]'
+      - name: 运行试播回归测试
+        run: python -m pytest tests/test_tv_trial.py -q
+      - name: 检测指定十四台并保护旧有效目录
+        run: python -m iptv_manager.tv_trial
+      - name: 保存检测结果
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add output/tv-test.json output/tv-test.m3u output/tv-test-report.json
+          if ! git diff --cached --quiet; then
+            git commit -m 'chore: 更新央视与卫视个人试播目录'
+            git push
+          fi

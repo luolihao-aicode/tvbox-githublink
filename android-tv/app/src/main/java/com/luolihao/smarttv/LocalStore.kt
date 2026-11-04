@@ -5,9 +5,12 @@ import org.json.JSONObject
 import java.io.File
 
 class LocalStore(context:Context) {
+    companion object { const val TV_TRIAL_URL="https://luolihao-aicode.github.io/tvbox-githublink/tv-test.json" }
     private val prefs=context.getSharedPreferences("smart-tv",Context.MODE_PRIVATE)
     var configUrl:String
-        get()=prefs.getString("config_url","https://luolihao-aicode.github.io/tvbox-githublink/channels.json")!!
+        get()=prefs.getString("config_url",TV_TRIAL_URL)!!.let {
+            if(it=="https://luolihao-aicode.github.io/tvbox-githublink/channels.json")TV_TRIAL_URL else it
+        }
         set(value){prefs.edit().putString("config_url",validateConfigUrl(value)).apply()}
     var preflight:Boolean
         get()=prefs.getBoolean("preflight",false)
