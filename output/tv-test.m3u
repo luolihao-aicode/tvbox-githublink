@@ -67,8 +67,6 @@ http://63.141.230.178:82/gslb/zbdq5.m3u8?id=jswshd
 http://107.150.60.122/live/zjwshd.m3u8
 #EXTINF:-1 tvg-id="zhejiang-satellite" tvg-name="浙江卫视" group-title="地方台",浙江卫视 · 备用1
 http://63.141.230.178:82/gslb/zbdq5.m3u8?id=zjwshd
-#EXTINF:-1 tvg-id="zhejiang-satellite" tvg-name="浙江卫视" group-title="地方台",浙江卫视 · 备用2
-https://ali-m-l.cztv.com/channels/lantian/channel001/1080p.m3u8
 #EXTINF:-1 tvg-id="beijing-satellite" tvg-name="北京卫视" group-title="地方台",北京卫视
 http://107.150.60.122/live/bjwshd.m3u8
 #EXTINF:-1 tvg-id="beijing-satellite" tvg-name="北京卫视" group-title="地方台",北京卫视 · 备用1

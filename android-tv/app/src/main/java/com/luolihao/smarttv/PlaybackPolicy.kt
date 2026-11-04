@@ -12,12 +12,12 @@ class RecoveryPolicy(val sources:List<Source>,val config:PolicyConfig=PolicyConf
  private var attempts=0
  private var lastAction:Long?=null
  private var exhausted=false
- fun failure(now:Long,fatalDecode:Boolean=false):RecoveryAction {
+ fun failure(now:Long,fatalDecode:Boolean=false,preferBackup:Boolean=false):RecoveryAction {
    if(exhausted || sources.isEmpty()) return RecoveryAction(ActionKind.EXHAUSTED)
    val elapsed=lastAction?.let{now-it}
    if(elapsed!=null && elapsed<config.cooldownMs) return RecoveryAction(ActionKind.WAIT,delayMs=config.cooldownMs-elapsed)
    lastAction=now
-   if(!fatalDecode && attempts<2) {
+   if(!fatalDecode && !(preferBackup && sources.size>1) && attempts<2) {
      attempts++
      return RecoveryAction(if(attempts==1) ActionKind.RETRY else ActionKind.REBUILD,sources[index].id,500L*(1L shl attempts))
    }
@@ -27,6 +27,35 @@ class RecoveryPolicy(val sources:List<Source>,val config:PolicyConfig=PolicyConf
    index=next;attempts=0
    return RecoveryAction(ActionKind.SWITCH,sources[index].id,500)
  }
+}
+fun shouldPreferBackup(reason:String,hasFirstFrame:Boolean):Boolean = !hasFirstFrame && reason in setOf(
+ "first_frame_timeout","prepare_timeout",
+ "player_error_ERROR_CODE_IO_NETWORK_CONNECTION_FAILED","player_error_ERROR_CODE_IO_NETWORK_CONNECTION_TIMEOUT"
+)
+class PlaybackAttemptProgress {
+ var attempts=0;private set
+ var failures=0;private set
+ private var waitingSince:Long?=null
+ private var completedWaitMs=0L
+ private var sourceHasFirstFrame=false
+ private var currentSourceId:String?=null
+ fun begin(now:Long,sourceId:String?=null) {
+   if(currentSourceId!=sourceId)sourceHasFirstFrame=false
+   currentSourceId=sourceId;finish(now);attempts++;waitingSince=now
+ }
+ fun firstFrame(now:Long) {finish(now);sourceHasFirstFrame=true}
+ fun shouldPreferBackup(reason:String)=shouldPreferBackup(reason,sourceHasFirstFrame)
+ fun failed(now:Long) {finish(now);failures++}
+ fun finish(now:Long) {waitingSince?.let{completedWaitMs+=(now-it).coerceAtLeast(0)};waitingSince=null}
+ fun firstFrameWaitMs(now:Long):Long=completedWaitMs+(waitingSince?.let{(now-it).coerceAtLeast(0)}?:0L)
+}
+class NetworkAttemptProgress(private val startedAt:Long) {
+ private val bytes=java.util.concurrent.atomic.AtomicLong()
+ private val firstTransfer=java.util.concurrent.atomic.AtomicLong(-1)
+ val transferredBytes:Long get()=bytes.get()
+ val firstTransferMs:Long? get()=firstTransfer.get().takeIf{it>=0}
+ fun transferStarted(now:Long) {firstTransfer.compareAndSet(-1,(now-startedAt).coerceAtLeast(0))}
+ fun bytesTransferred(count:Int) {bytes.addAndGet(count.toLong())}
 }
 object SourceSelector {
  fun rank(sources:List<Source>,stats:Map<String,Quality>,network:String):List<Source> {

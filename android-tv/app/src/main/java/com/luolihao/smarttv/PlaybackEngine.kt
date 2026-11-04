@@ -19,6 +19,9 @@ import androidx.media3.exoplayer.ExoPlayer
 import androidx.media3.exoplayer.source.DefaultMediaSourceFactory
 import androidx.media3.datasource.DefaultDataSource
 import androidx.media3.datasource.DefaultHttpDataSource
+import androidx.media3.datasource.DataSource
+import androidx.media3.datasource.DataSpec
+import androidx.media3.datasource.TransferListener
 import androidx.media3.ui.PlayerView
 import java.net.HttpURLConnection
 import java.net.URL
@@ -30,6 +33,33 @@ class PlaybackEngine(private val context:Context,private val view:PlayerView,pri
     private val worker=Executors.newSingleThreadExecutor()
     private val config=PolicyConfig()
     private val monitor=PlaybackHealthMonitor(config)
+    private var progress=PlaybackAttemptProgress()
+    private class HttpAttempt(val sourceId:String,val number:Int,val progress:NetworkAttemptProgress)
+    private class HttpTransfer(val attempt:HttpAttempt,val startedAt:Long,val url:String)
+    @Volatile private var httpAttempt=HttpAttempt("none",0,NetworkAttemptProgress(0))
+    private val transfers=java.util.IdentityHashMap<DataSource,HttpTransfer>()
+    private val transferListener=object:TransferListener {
+        override fun onTransferInitializing(source:DataSource,dataSpec:DataSpec,isNetwork:Boolean) {
+            if(!isNetwork)return
+            val transfer=HttpTransfer(httpAttempt,SystemClock.elapsedRealtime(),redactUrl(dataSpec.uri.toString()))
+            synchronized(transfers){transfers[source]=transfer}
+            log.event("http_transfer_initializing","source=${transfer.attempt.sourceId} attempt=${transfer.attempt.number} url=${transfer.url}")
+        }
+        override fun onTransferStart(source:DataSource,dataSpec:DataSpec,isNetwork:Boolean) {
+            val transfer=synchronized(transfers){transfers[source]}?:return
+            val now=SystemClock.elapsedRealtime()
+            transfer.attempt.progress.transferStarted(now)
+            log.event("http_transfer_start","source=${transfer.attempt.sourceId} attempt=${transfer.attempt.number} url=${transfer.url} elapsed_ms=${now-transfer.startedAt}")
+        }
+        override fun onBytesTransferred(source:DataSource,dataSpec:DataSpec,isNetwork:Boolean,bytesTransferred:Int) {
+            val transfer=synchronized(transfers){transfers[source]}?:return
+            transfer.attempt.progress.bytesTransferred(bytesTransferred)
+        }
+        override fun onTransferEnd(source:DataSource,dataSpec:DataSpec,isNetwork:Boolean) {
+            val transfer=synchronized(transfers){transfers.remove(source)}?:return
+            log.event("http_transfer_end","source=${transfer.attempt.sourceId} attempt=${transfer.attempt.number} url=${transfer.url} elapsed_ms=${SystemClock.elapsedRealtime()-transfer.startedAt} attempt_bytes=${transfer.attempt.progress.transferredBytes}")
+        }
+    }
     private var policy:RecoveryPolicy?=null
     private var player:ExoPlayer?=null
     var channel:Channel?=null;private set
@@ -83,7 +113,7 @@ class PlaybackEngine(private val context:Context,private val view:PlayerView,pri
         flushWatch();epoch++;recovering=false;preflightEpoch=-1;lastReason="用户选台";lastError="无";lastErrorDetail="无"
         channel=selected;network=networkKey();stable=store.stableBuffer
         val ranked=SourceSelector.rank(selected.sources,store.qualities(),network)
-        policy=RecoveryPolicy(ranked,config);store.viewed(selected.id)
+        policy=RecoveryPolicy(ranked,config);progress=PlaybackAttemptProgress();store.viewed(selected.id)
         log.event("channel_selected","channel=${selected.id} candidates=${ranked.size} network=$network")
         if(ranked.isEmpty()){state="EXHAUSTED";onStatus("此频道没有可用来源");return}
         prepare(ranked.first(),rebuild=true)
@@ -91,7 +121,7 @@ class PlaybackEngine(private val context:Context,private val view:PlayerView,pri
     private fun makePlayer():ExoPlayer {
         // 一个活跃播放器；备用检查仅HTTP请求，永不创建第二个解码器。
         val load=DefaultLoadControl.Builder().setBufferDurationsMs(if(stable)20000 else 10000,if(stable)45000 else 25000,1500,if(stable)5000 else 3000).setTargetBufferBytes(24*1024*1024).setPrioritizeTimeOverSizeThresholds(false).build()
-        val http=DefaultHttpDataSource.Factory().setConnectTimeoutMs(7000).setReadTimeoutMs(7000).setAllowCrossProtocolRedirects(false).setUserAgent("SmartLiveTV/1.0")
+        val http=DefaultHttpDataSource.Factory().setConnectTimeoutMs(7000).setReadTimeoutMs(7000).setAllowCrossProtocolRedirects(false).setUserAgent("SmartLiveTV/1.0").setTransferListener(transferListener)
         return ExoPlayer.Builder(context,DefaultRenderersFactory(context).setEnableDecoderFallback(true))
             .setLoadControl(load).setMediaSourceFactory(DefaultMediaSourceFactory(DefaultDataSource.Factory(context,http))).build().apply {
                 setWakeMode(androidx.media3.common.C.WAKE_MODE_NETWORK)
@@ -114,12 +144,13 @@ class PlaybackEngine(private val context:Context,private val view:PlayerView,pri
         }
         override fun onRenderedFirstFrame() {
             if(recovering || closed)return
-            monitor.firstFrame(SystemClock.elapsedRealtime());firstFrameMs=monitor.firstFrameMs;firstFrames++
+            val now=SystemClock.elapsedRealtime()
+            monitor.firstFrame(now);progress.firstFrame(now);firstFrameMs=monitor.firstFrameMs;firstFrames++
             if(!sessionFirstFrame) {
                 sessionFirstFrame=true;watchedAt=SystemClock.elapsedRealtime()
                 updateQuality{it.copy(successes=it.successes+1,firstFrameMs=firstFrameMs?:0,lastPlayed=System.currentTimeMillis())}
             }
-            state="PLAYING";log.event("first_frame","source=${source?.id} ms=$firstFrameMs reason=$lastReason")
+            state="PLAYING";log.event("first_frame","source=${source?.id} ms=$firstFrameMs reason=$lastReason ${progressDetail(now)}")
             onStatus("${channel?.name} · 播放中")
             preflightBackup()
         }
@@ -136,26 +167,31 @@ class PlaybackEngine(private val context:Context,private val view:PlayerView,pri
         flushWatch()
         if(rebuild) {player?.removeListener(listener);view.player=null;player?.release();player=null;player=makePlayer();view.player=player}
         source=selected;sessionFirstFrame=false;firstFrameMs=null;tracksKnown=false;hasVideo=true;lastPosition=0;actualFrameRate=null;fpsAt=0;fpsFrames=0
-        monitor.begin(SystemClock.elapsedRealtime());state="PREPARING";recovering=false
+        val now=SystemClock.elapsedRealtime()
+        monitor.begin(now);progress.begin(now,selected.id);state="PREPARING";recovering=false
+        httpAttempt=HttpAttempt(selected.id,progress.attempts,NetworkAttemptProgress(now))
+        synchronized(transfers){transfers.clear()}
         val mime=when(selected.type){"hls"->MimeTypes.APPLICATION_M3U8;"dash"->MimeTypes.APPLICATION_MPD;else->MimeTypes.VIDEO_MP4}
         player!!.setMediaItem(MediaItem.Builder().setUri(selected.url).setMimeType(mime).build())
         player!!.repeatMode=if(selected.url=="asset:///diagnostic.mp4")Player.REPEAT_MODE_ONE else Player.REPEAT_MODE_OFF
         player!!.prepare();player!!.playWhenReady=true
-        log.event("prepare","source=${selected.id} url=${redactUrl(selected.url)} rebuild=$rebuild buffer=${if(stable)"stable" else "balanced"}")
+        log.event("prepare","source=${selected.id} url=${redactUrl(selected.url)} rebuild=$rebuild buffer=${if(stable)"stable" else "balanced"} ${progressDetail(now)}")
         onStatus("${channel?.name} · 正在载入")
     }
     private fun recover(reason:String,fatalDecode:Boolean=false) {
         if(recovering || closed || state=="EXHAUSTED")return
         // 短时间反复缓冲表明该线路不适合本机网络，有备源时直接换源。
-        val action=policy?.failure(SystemClock.elapsedRealtime(),fatalDecode || reason=="frequent_buffering")?:return
+        val now=SystemClock.elapsedRealtime()
+        val action=policy?.failure(now,fatalDecode || reason=="frequent_buffering",progress.shouldPreferBackup(reason))?:return
         if(action.kind==ActionKind.WAIT) {
             recovering=true;val token=epoch
             handler.postDelayed({if(token==epoch && !closed){recovering=false;recover(reason,fatalDecode)}},action.delayMs);return
         }
+        progress.failed(now)
         flushWatch();lastReason=reason;lastError=if(lastError=="无")reason else lastError
         updateQuality{it.copy(failures=it.failures+1,switches=it.switches+if(action.kind==ActionKind.SWITCH)1 else 0,lastPlayed=System.currentTimeMillis())}
         stable=true;state="RECOVERING";recovering=true;player?.stop()
-        log.event("recovery","reason=$reason action=${action.kind} next=${action.sourceId} delay=${action.delayMs}")
+        log.event("recovery","reason=$reason action=${action.kind} next=${action.sourceId} delay=${action.delayMs} ${progressDetail(now)}")
         if(action.kind==ActionKind.EXHAUSTED){state="EXHAUSTED";recovering=false;onStatus("所有来源均不可用。请换台或稍后从频道列表重试");return}
         onStatus("播放恢复中：${when(action.kind){ActionKind.RETRY->"重试当前源";ActionKind.REBUILD->"重建解码会话";else->"切换备用源"}}")
         val token=epoch
@@ -239,14 +275,16 @@ class PlaybackEngine(private val context:Context,private val view:PlayerView,pri
         return """频道：${channel?.name?:"未选择"}    状态：$state
 线路：${(policy?.index?:0)+1}/${policy?.sources?.size?:0}  ${source?.url?.let(::redactUrl)?:"无"}
 首帧：${firstFrameMs?.let{"${it}ms"}?:"未出现"}    已渲染帧：${p?.videoDecoderCounters?.renderedOutputBufferCount?:0}
-画面：${f?.width?:0}×${f?.height?:0}  ${f?.sampleMimeType?:"未识别视频"}
-缓存：${p?.totalBufferedDuration?:0}ms    协议：${source?.type?:"未知"}
+尝试：${progress.attempts}次  失败：${progress.failures}次  首帧累计等待：${progress.firstFrameWaitMs(SystemClock.elapsedRealtime())/1000}秒
+画面：${f?.width?:0}×${f?.height?:0}  ${f?.sampleMimeType?:"未识别视频"}  ${source?.type?:"未知协议"}
+缓存：${p?.totalBufferedDuration?:0}ms  收到：${httpAttempt.progress.transferredBytes}B  首传输：${httpAttempt.progress.firstTransferMs?.let{"${it}ms"}?:"未开始"}
 恢复原因：$lastReason
 错误码：$lastError
 失败类型：$lastErrorDetail
 本机网络：$network
 本页不上传日志，也不包含访问令牌。"""
     }
+    private fun progressDetail(now:Long)="attempt=${progress.attempts} failures=${progress.failures} first_frame_wait_ms=${progress.firstFrameWaitMs(now)} http_bytes=${httpAttempt.progress.transferredBytes} first_transfer_ms=${httpAttempt.progress.firstTransferMs}"
     private fun stateLabel()=when(state){"PLAYING"->"播放中";"PREPARING"->"等待首帧";"BUFFERING"->"缓冲中";"RECOVERING"->"恢复中";"EXHAUSTED"->"来源耗尽";else->"待机"}
     private fun networkKey():String {
         val n=connectivity.activeNetwork?:return "offline"
@@ -255,6 +293,6 @@ class PlaybackEngine(private val context:Context,private val view:PlayerView,pri
         val route=connectivity.getLinkProperties(n)?.routes?.firstOrNull{it.isDefaultRoute}?.gateway?.hostAddress?:"unknown"
         return "$transport:${sha256(route).take(8)}"
     }
-    fun stop() {suspended=true;flushWatch();epoch++;player?.removeListener(listener);view.player=null;player?.release();player=null;state="IDLE";watchedAt=0;sessionFirstFrame=false;recovering=false;log.event("player_released")}
+    fun stop() {suspended=true;progress.finish(SystemClock.elapsedRealtime());flushWatch();epoch++;player?.removeListener(listener);view.player=null;player?.release();player=null;state="IDLE";watchedAt=0;sessionFirstFrame=false;recovering=false;log.event("player_released")}
     fun close(){closed=true;stop();handler.removeCallbacksAndMessages(null);try{connectivity.unregisterNetworkCallback(callback)}catch(_:Exception){};worker.shutdownNow()}
 }

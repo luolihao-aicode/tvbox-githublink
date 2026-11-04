@@ -24,6 +24,10 @@ rejected_hosts:
 
 # 台标复核为CCTV-8K超高清，不能冒充CCTV-8电视剧。
 rejected_streams:
+  # 2026-11-04 物理直连复核：旧节目日期、清单多分钟不推进，不当作实时直播。
+  - https://ali-m-l.cztv.com/channels/lantian/channel001/1080p.m3u8
+  - http://ali-m-l.cztv.com/channels/lantian/channel001/1080p.m3u8
+  - http://ali-m-l.cztv.com/channels/lantian/channel01/1080p.m3u8
   - http://63.141.230.178:82/gslb/zbdq5.m3u8?id=cctv8k
   # 这两个入口实际重定向到同一购物广告 applive/102。
   - http://107.150.60.122/live/cctv3hd.m3u8

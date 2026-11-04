@@ -12,6 +12,23 @@ import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
 class TvPlaybackTest {
+    @Test fun silentHttpPrimarySwitchesToVideoBackupWithinOneStartupTimeout() {
+        val server=java.net.ServerSocket(0,1,java.net.InetAddress.getByName("127.0.0.1"))
+        val release=java.util.concurrent.CountDownLatch(1)
+        val worker=kotlin.concurrent.thread(isDaemon=true) {
+            try{server.accept().use{release.await(30,java.util.concurrent.TimeUnit.SECONDS)}}catch(_:Exception){}
+        }
+        try {
+            instrumentation.runOnMainSync {
+                val dead=Source("silent-http-primary","http://127.0.0.1:${server.localPort}/live.m3u8","hls",100.0)
+                val good=Source("silent-http-backup","asset:///diagnostic.mp4","progressive",90.0)
+                for(source in listOf(dead,good))LocalStore(activity).updateQuality("${activity.engine.network}:${source.id}"){Quality()}
+                activity.engine.play(Channel("silent-http-test","静默网络恢复测试","诊断","",listOf(dead,good)))
+            }
+            waitFor(20000){activity.engine.source?.id=="silent-http-backup" && activity.engine.firstFrameMs!=null}
+            instrumentation.runOnMainSync{assertEquals(1,activity.engine.activePlayerCount)}
+        } finally {release.countDown();server.close();worker.join(1000)}
+    }
     private val instrumentation=InstrumentationRegistry.getInstrumentation()
     private lateinit var activity:MainActivity
     @Before fun launch() {

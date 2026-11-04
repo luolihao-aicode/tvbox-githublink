@@ -22,6 +22,7 @@ from .catalog import catalog_content_hash, public_stream_url, render_catalog_m3u
 from .classify import classify_channel
 from .config import load_config
 from .normalize import make_stream_id
+from .hls_freshness import verify_live_progress, verify_program_time
 from .probe_http import _fetch_sample
 from .probe_media import SubprocessRunner
 from .storage import atomic_write_text
@@ -81,6 +82,25 @@ def extract_candidates(text: str, source_url: str) -> list[dict]:
     return result
 
 
+async def wait_for_playlist_refresh(seconds: float) -> None:
+    await asyncio.sleep(seconds)
+
+
+async def validate_manifest_references(client: httpx.AsyncClient, text: str, base_url: str) -> None:
+    refs = re.findall(r'\bURI="([^"]+)"', text)
+    refs += [v.strip() for v in text.splitlines() if v.strip() and not v.strip().startswith('#')]
+    for ref in refs:
+        resolved = urljoin(base_url, ref)
+        if not safe_url(resolved):
+            raise ValueError('UNSAFE_HLS_REFERENCE')
+        for hook in client.event_hooks.get('request', []):
+            await hook(httpx.Request('GET', resolved))
+    if re.search(r'#EXT-X-(?:SESSION-)?KEY:.*METHOD=(?!NONE)', text):
+        raise ValueError('ENCRYPTED_HLS_EXCLUDED')
+    if '#EXT-X-MEDIA:' in text and 'TYPE=AUDIO' in text and 'URI=' in text:
+        raise ValueError('SEPARATE_AUDIO_NOT_SAMPLED')
+
+
 async def collect_hls_sample(client: httpx.AsyncClient, url: str, directory: Path) -> dict:
     """校验整条清单引用后下载三个完整分片；媒体工具只读本地文件。"""
     initial = url
@@ -99,18 +119,7 @@ async def collect_hls_sample(client: httpx.AsyncClient, url: str, directory: Pat
         if '#EXT-X-ENDLIST' in text or '#EXT-X-PLAYLIST-TYPE:VOD' in text:
             raise ValueError('NOT_LIVE')
         manifests.append({'url': response.url, 'text': text})
-        refs = re.findall(r'\bURI="([^"]+)"', text)
-        refs += [v.strip() for v in text.splitlines() if v.strip() and not v.strip().startswith('#')]
-        for ref in refs:
-            resolved = urljoin(response.url, ref)
-            if not safe_url(resolved):
-                raise ValueError('UNSAFE_HLS_REFERENCE')
-            for hook in client.event_hooks.get('request', []):
-                await hook(httpx.Request('GET', resolved))
-        if re.search(r'#EXT-X-(?:SESSION-)?KEY:.*METHOD=(?!NONE)', text):
-            raise ValueError('ENCRYPTED_HLS_EXCLUDED')
-        if '#EXT-X-MEDIA:' in text and 'TYPE=AUDIO' in text and 'URI=' in text:
-            raise ValueError('SEPARATE_AUDIO_NOT_SAMPLED')
+        await validate_manifest_references(client, text, response.url)
         if '#EXT-X-STREAM-INF:' in text:
             variants = []
             attrs = ''
@@ -127,6 +136,20 @@ async def collect_hls_sample(client: httpx.AsyncClient, url: str, directory: Pat
                 raise ValueError('NO_VARIANT')
             url = max(variants)[1]
             continue
+        verify_program_time(text)
+        duration = re.search(r'#EXT-X-TARGETDURATION:(\d+(?:\.\d+)?)', text)
+        wait = float(duration[1]) + 1 if duration else 9
+        if wait > 20:
+            raise ValueError('LIVE_FRESHNESS_UNCONFIRMED')
+        await wait_for_playlist_refresh(max(wait, 2))
+        refreshed = await _fetch_sample(client, url, 512001)
+        if len(refreshed.body) > 512000:
+            raise ValueError('MANIFEST_TOO_LARGE')
+        updated_text = refreshed.body.decode('utf-8-sig')
+        verify_live_progress(text, updated_text)
+        await validate_manifest_references(client, updated_text, refreshed.url)
+        response, text = refreshed, updated_text
+        manifests.append({'url': response.url, 'text': text})
         segment_urls = [urljoin(response.url, v.strip()) for v in text.splitlines() if v.strip() and not v.strip().startswith('#')]
         if len(segment_urls) < 3:
             raise ValueError('FEWER_THAN_THREE_SEGMENTS')

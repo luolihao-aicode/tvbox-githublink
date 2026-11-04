@@ -3,7 +3,7 @@
   "notice": "个人试播，未确认分发授权；不属于正式推荐订阅；不得商用或据此宣称授权。",
   "distribution_authorization_confirmed": false,
   "published_channels": 14,
-  "published_lines": 37,
+  "published_lines": 36,
   "missing_channels": [],
   "measurement_limit": "当前电脑网络的单次三分片下载、ffprobe参数与3秒音视频解码；非移动宽带电视实测，不证明长期稳定或真实高清细节。",
   "score_notice": "评分仅按实测帧尺寸与解码警告排序；没有长期可用率数据。",
@@ -3003,44 +3003,6 @@
       "visual_verification": "2026-11-04 已人工查看本次采样台标，与所列频道相符；不证明实时节目表或长期内容"
     },
     {
-      "channel_id": "zhejiang-satellite",
-      "name": "浙江卫视",
-      "url": "https://ali-m-l.cztv.com/channels/lantian/channel001/1080p.m3u8",
-      "source_url": "https://raw.githubusercontent.com/Guovin/iptv-api/gd/output/ipv4/result.m3u",
-      "raw_name": "浙江卫视",
-      "sample_path": "artifacts\\tv-test\\a723224ec6febc7e749e6a10\\sample.ts",
-      "playback_url": "https://ali-m-l.cztv.com/channels/lantian/channel001/1080p.m3u8",
-      "first_byte_seconds": 0.577,
-      "sample_bytes": 5536224,
-      "segments_checked": 3,
-      "segment_urls": [
-        "https://ali-m-l.cztv.com/channels/lantian/channel001/1080p/0/000090a4669a13c9_4e437e8_1bcb5c.ts",
-        "https://ali-m-l.cztv.com/channels/lantian/channel001/1080p/0/000090a4669a13c9_5000344_1f1d08.ts",
-        "https://ali-m-l.cztv.com/channels/lantian/channel001/1080p/0/000090a4669a13c9_51f204c_19917c.ts"
-      ],
-      "media_sequence": "359977910",
-      "width": 1920,
-      "height": 1080,
-      "video_codec": "h264",
-      "frame_rate": "25/1",
-      "video_bitrate_estimate": 2020748,
-      "decoded_seconds": 3,
-      "decoded_frames": 70,
-      "decode_warning": false,
-      "decode_warning_excerpt": "",
-      "screenshot": "artifacts\\tv-test\\a723224ec6febc7e749e6a10\\frame.jpg",
-      "checked_at": "2026-11-04T14:36:42.190035Z",
-      "sample_sha256": "f1f40599b32821255706b3956ebd354a1df50151c8c8cd920cadc6b25f0044f3",
-      "entry_url": "https://ali-m-l.cztv.com/channels/lantian/channel001/1080p.m3u8",
-      "pinned_to_measured_variant": true,
-      "origin_group": "trial_6c1851eb3316c2b7",
-      "media_url_without_query": "https://ali-m-l.cztv.com/channels/lantian/channel001/1080p.m3u8",
-      "server_redirect_query_removed": false,
-      "content_verified": true,
-      "upstream_independence_confirmed": false,
-      "visual_verification": "2026-11-04 已人工查看本次采样台标，与所列频道相符；不证明实时节目表或长期内容"
-    },
-    {
       "channel_id": "beijing-satellite",
       "name": "北京卫视",
       "url": "http://107.150.60.122/live/bjwshd.m3u8",
@@ -3117,5 +3079,13 @@
       "visual_verification": "2026-11-04 已人工查看本次采样台标，与所列频道相符；不证明实时节目表或长期内容"
     }
   ],
-  "visual_verification_contact_sheet": "artifacts/tv-test/all-selected-contact-sheet.jpg"
+  "visual_verification_contact_sheet": "artifacts/tv-test/all-selected-contact-sheet.jpg",
+  "direct_audit": {
+    "report": "tv-direct-report.json",
+    "live_channels_passed": 0,
+    "removed_frozen_urls": [
+      "https://ali-m-l.cztv.com/channels/lantian/channel001/1080p.m3u8"
+    ],
+    "notice": "先前采样使用电脑网络隧道，保留候选不代表已验证国内无代理直连可播放。"
+  }
 }

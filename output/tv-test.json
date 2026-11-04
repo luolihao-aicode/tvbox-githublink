@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "minClientVersion": 1,
-  "generatedAt": "2026-11-04T14:46:32.186996Z",
-  "contentHash": "cf70074950f8ed63328a943c9d2bfc095bfd0a251095b87a253a5ac1291296f0",
+  "generatedAt": "2026-11-04T15:36:54.158288Z",
+  "contentHash": "2a92827724dde4cef59e694f8d7103afa884a5af23c1a70ae9b38512491a06df",
   "channels": [
     {
       "id": "cctv-1",
@@ -612,21 +612,6 @@
           "lastChecked": "2026-11-04T14:36:57.385102Z",
           "lastSuccess": "2026-11-04T14:36:57.385102Z",
           "originGroup": "trial_77a3c1eb83df5164",
-          "availability": null,
-          "environmentLimited": false,
-          "measurementStatus": "verified"
-        },
-        {
-          "id": "a723224ec6febc7e749e6a10",
-          "url": "https://ali-m-l.cztv.com/channels/lantian/channel001/1080p.m3u8",
-          "type": "hls",
-          "score": 80,
-          "resolution": "1920x1080",
-          "videoCodec": "h264",
-          "frameRate": 25,
-          "lastChecked": "2026-11-04T14:36:42.190035Z",
-          "lastSuccess": "2026-11-04T14:36:42.190035Z",
-          "originGroup": "trial_6c1851eb3316c2b7",
           "availability": null,
           "environmentLimited": false,
           "measurementStatus": "verified"

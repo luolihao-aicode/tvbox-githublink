@@ -53,6 +53,94 @@ class PlaybackPolicyTest {
         assertEquals(ActionKind.REBUILD,p.failure(5000).kind)
         assertEquals(ActionKind.EXHAUSTED,p.failure(10000).kind)
     }
+    @Test fun startupTimeoutShouldTryBackupInsteadOfRetryingTheSameUnreachableSource() {
+        val p=RecoveryPolicy(listOf(source("a"),source("b"),source("c")))
+        val next=p.failure(12000,preferBackup=shouldPreferBackup("first_frame_timeout",hasFirstFrame=false))
+        assertEquals(ActionKind.SWITCH,next.kind)
+        assertEquals("b",next.sourceId)
+        assertEquals("c",p.failure(24500,preferBackup=true).sourceId)
+        assertEquals(ActionKind.EXHAUSTED,p.failure(37000,preferBackup=true).kind)
+        assertEquals(ActionKind.EXHAUSTED,p.failure(100000,preferBackup=true).kind)
+    }
+    @Test fun singleSourceFirstFrameTimeoutRetainsFiniteRetryAndRebuildBudget() {
+        val p=RecoveryPolicy(listOf(source("a")))
+        assertEquals(ActionKind.RETRY,p.failure(12000,preferBackup=true).kind)
+        assertEquals(ActionKind.REBUILD,p.failure(25000,preferBackup=true).kind)
+        assertEquals(ActionKind.EXHAUSTED,p.failure(39000,preferBackup=true).kind)
+    }
+    @Test fun startupTimeoutDoesNotBypassRecoveryCooldown() {
+        val p=RecoveryPolicy(listOf(source("a"),source("b")))
+        assertEquals(ActionKind.SWITCH,p.failure(12000,preferBackup=true).kind)
+        assertEquals(ActionKind.WAIT,p.failure(12500,preferBackup=true).kind)
+        assertEquals(ActionKind.EXHAUSTED,p.failure(14000,preferBackup=true).kind)
+    }
+    @Test fun onlyStartupTimeoutsAndStartupConnectionErrorsPreferBackup() {
+        for(reason in listOf("first_frame_timeout","prepare_timeout","player_error_ERROR_CODE_IO_NETWORK_CONNECTION_FAILED","player_error_ERROR_CODE_IO_NETWORK_CONNECTION_TIMEOUT")) {
+            assertTrue(reason,shouldPreferBackup(reason,hasFirstFrame=false))
+        }
+        for(reason in listOf("player_error_ERROR_CODE_IO_UNSPECIFIED","player_error_ERROR_CODE_IO_BAD_HTTP_STATUS","continuous_buffering","video_progress_stalled")) {
+            assertFalse(reason,shouldPreferBackup(reason,hasFirstFrame=false))
+        }
+        assertFalse(shouldPreferBackup("player_error_ERROR_CODE_IO_NETWORK_CONNECTION_TIMEOUT",hasFirstFrame=true))
+    }
+    @Test fun connectionErrorsAfterFirstFrameKeepRetryAndRebuildBudget() {
+        val p=RecoveryPolicy(listOf(source("a"),source("b")))
+        val prefer=shouldPreferBackup("player_error_ERROR_CODE_IO_NETWORK_CONNECTION_TIMEOUT",hasFirstFrame=true)
+        assertEquals(ActionKind.RETRY,p.failure(12000,preferBackup=prefer).kind)
+        assertEquals(ActionKind.REBUILD,p.failure(25000,preferBackup=prefer).kind)
+        assertEquals(ActionKind.SWITCH,p.failure(39000,preferBackup=prefer).kind)
+    }
+    @Test fun retryAndRebuildOfPreviouslyRenderedSourceKeepTheRecoveryBudget() {
+        val p=RecoveryPolicy(listOf(source("a"),source("b")))
+        val progress=PlaybackAttemptProgress()
+        val reason="player_error_ERROR_CODE_IO_NETWORK_CONNECTION_TIMEOUT"
+        progress.begin(0,"a");progress.firstFrame(100)
+        assertEquals(ActionKind.RETRY,p.failure(12000,preferBackup=progress.shouldPreferBackup(reason)).kind)
+        progress.failed(12000);progress.begin(13000,"a")
+        assertEquals(ActionKind.REBUILD,p.failure(25000,preferBackup=progress.shouldPreferBackup(reason)).kind)
+        progress.failed(25000);progress.begin(27000,"a")
+        assertEquals(ActionKind.SWITCH,p.failure(39000,preferBackup=progress.shouldPreferBackup(reason)).kind)
+        progress.failed(39000);progress.begin(39500,"b")
+        assertTrue(progress.shouldPreferBackup(reason))
+    }
+    @Test fun diagnosticsAccumulateOnlyFirstFrameWaitAcrossAttemptsAndCountRealFailures() {
+        val progress=PlaybackAttemptProgress()
+        progress.begin(1000)
+        assertEquals(1,progress.attempts)
+        assertEquals(3000L,progress.firstFrameWaitMs(4000))
+        progress.failed(13000)
+        assertEquals(1,progress.failures)
+        assertEquals(12000L,progress.firstFrameWaitMs(13500))
+        progress.begin(13500)
+        progress.firstFrame(15500)
+        assertEquals(2,progress.attempts)
+        assertEquals(14000L,progress.firstFrameWaitMs(30000))
+        progress.failed(30000)
+        assertEquals(2,progress.failures)
+        assertEquals(14000L,progress.firstFrameWaitMs(31000))
+    }
+    @Test fun stoppingAnAttemptFreezesDiagnosticWaitWithoutCountingAFailure() {
+        val progress=PlaybackAttemptProgress()
+        progress.begin(1000);progress.finish(4000)
+        assertEquals(3000L,progress.firstFrameWaitMs(10000))
+        assertEquals(0,progress.failures)
+    }
+    @Test fun networkDiagnosticsCountAllReadsAndKeepFirstTransferTimeAcrossSegments() {
+        val progress=NetworkAttemptProgress(1000)
+        assertNull(progress.firstTransferMs)
+        progress.transferStarted(1300);progress.bytesTransferred(100)
+        progress.transferStarted(2000);progress.bytesTransferred(250)
+        assertEquals(300L,progress.firstTransferMs)
+        assertEquals(350L,progress.transferredBytes)
+    }
+    @Test fun newNetworkAttemptDoesNotInheritPreviousBytesOrResponseTime() {
+        val previous=NetworkAttemptProgress(1000)
+        previous.transferStarted(1300);previous.bytesTransferred(100)
+        val current=NetworkAttemptProgress(2000)
+        previous.bytesTransferred(200)
+        assertNull(current.firstTransferMs)
+        assertEquals(0L,current.transferredBytes)
+    }
     @Test fun decoderFailureSkipsDirectlyToBackupAndQuarantinesSource() {
         val p=RecoveryPolicy(listOf(source("a"),source("b")))
         assertEquals("b",p.failure(0,fatalDecode=true).sourceId)

@@ -72,11 +72,18 @@ async def test_public_entry_can_follow_normal_server_redirect_without_publishing
     async def public(host):
         return True
     monkeypatch.setattr(safety, '_resolve_public_host', public)
+    async def no_wait(seconds):
+        pass
+    monkeypatch.setattr('iptv_manager.tv_trial.wait_for_playlist_refresh', no_wait)
+    manifests = 0
     async def handler(request):
+        nonlocal manifests
         if request.url.path == '/entry.m3u8':
             return httpx.Response(302, headers={'location': 'https://cdn.example/media.m3u8?tm=123&key=server-issued'})
         if request.url.path == '/media.m3u8':
-            return httpx.Response(200, text='#EXTM3U\n#EXTINF:6,\na.ts\n#EXTINF:6,\nb.ts\n#EXTINF:6,\nc.ts\n')
+            manifests += 1
+            # 新要求会复取清单；夹具必须模拟向前推进的直播，保留原重定向与脱敏断言。
+            return httpx.Response(200, text=f'#EXTM3U\n#EXT-X-MEDIA-SEQUENCE:{manifests}\n#EXTINF:6,\na{manifests}.ts\n#EXTINF:6,\nb{manifests}.ts\n#EXTINF:6,\nc{manifests}.ts\n')
         return httpx.Response(200, content=b'G' * 188)
     async with httpx.AsyncClient(transport=httpx.MockTransport(handler), event_hooks={'request': [safety._request_guard(set())]}) as client:
         sample = await collect_hls_sample(client, 'https://media.example/entry.m3u8', tmp_path)
