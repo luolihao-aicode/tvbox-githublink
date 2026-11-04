@@ -60,7 +60,7 @@ class MainActivity:Activity() {
             val token=++statusEpoch
             root.postDelayed({if(!isDestroyed && token==statusEpoch && engine.state=="PLAYING")status.visibility=View.GONE},4000)
         }
-        showChannels();refreshCatalog()
+        hidePanel();refreshCatalog()
     }
     override fun onStart() {super.onStart();if(::engine.isInitialized && engine.activePlayerCount==0)engine.channel?.let{engine.play(it)}}
     override fun onStop(){if(::engine.isInitialized)engine.stop();super.onStop()}
@@ -87,6 +87,7 @@ class MainActivity:Activity() {
     }
     private fun hidePanel(){overlay.visibility=View.GONE;root.isFocusableInTouchMode=true;root.requestFocus()}
     fun showChannels() {
+        if(!panelVisible)engine.channel?.let{category=when(it.group){"卫视","地方频道"->"地方台";else->it.group}}
         val previousFocus=if(screen=="channels")currentFocus?.contentDescription?.toString() else null
         screen="channels";overlay.removeAllViews();overlay.visibility=View.VISIBLE
         overlay.layoutParams=FrameLayout.LayoutParams(dp(450),-1,Gravity.START)
@@ -117,7 +118,7 @@ class MainActivity:Activity() {
             } else {
                 val entries=LinearLayout(this).apply{orientation=LinearLayout.VERTICAL;id=CHANNEL_LIST_ID}
                 filtered.drop(page*80).take(80).forEach { channel ->
-                    val b=button("${if(channel.id==engine.channel?.id)"▶ " else ""}${channel.name}") {engine.play(channel);hidePanel()}.apply {
+                    val b=button("${if(channel.id==engine.channel?.id)"▶ " else ""}${channel.name}") {engine.play(channel);showChannels()}.apply {
                         contentDescription="频道：${channel.name}";textSize=18f;gravity=Gravity.CENTER_VERTICAL or Gravity.START
                         isActivated=channel.id==engine.channel?.id
                         setOnKeyListener{_,code,event->if(code==KeyEvent.KEYCODE_DPAD_LEFT && event.action==KeyEvent.ACTION_DOWN){categoryButtons[category]?.requestFocus();true}else false}
@@ -210,17 +211,24 @@ class MainActivity:Activity() {
     }
     private fun refreshCatalog() {
         val url=store.configUrl;val token=++refreshEpoch
-        repository.cached(url)?.let{catalog=it.catalog;loadMessage="已加载本地有效缓存；正在检查目录更新";if(screen=="channels" && panelVisible)showChannels()}
+        repository.cached(url)?.let{catalog=it.catalog;loadMessage="已加载本地有效缓存；正在检查目录更新";startInitialChannel();if(screen=="channels" && panelVisible)showChannels()}
         worker.execute {
             val result=repository.refresh(url)
             runOnUiThread {
                 if(!isDestroyed && token==refreshEpoch) {
                     catalog=result.catalog;loadMessage=result.message
+                    startInitialChannel()
                     log.event("catalog_refresh","channels=${result.catalog?.channels?.size?:0} cached=${result.cached} status=${result.message}")
                     if(panelVisible && screen=="channels")showChannels()
                 }
             }
         }
+    }
+    private fun startInitialChannel() {
+        if(engine.channel!=null)return
+        val channels=catalog?.channels?:return
+        val selected=store.recent().firstNotNullOfOrNull{id->channels.firstOrNull{it.id==id}}?:channels.firstOrNull()?:return
+        engine.play(selected)
     }
     private fun seedTrialCache() {
         if(store.configUrl!=LocalStore.TV_TRIAL_URL || repository.cached(store.configUrl)!=null)return
@@ -235,8 +243,7 @@ class MainActivity:Activity() {
         if(!panelVisible) {
             when(keyCode) {
                 KeyEvent.KEYCODE_DPAD_CENTER,KeyEvent.KEYCODE_ENTER,KeyEvent.KEYCODE_MENU->{showChannels();return true}
-                KeyEvent.KEYCODE_DPAD_UP,KeyEvent.KEYCODE_CHANNEL_UP->{changeChannel(1);return true}
-                KeyEvent.KEYCODE_DPAD_DOWN,KeyEvent.KEYCODE_CHANNEL_DOWN->{changeChannel(-1);return true}
+                KeyEvent.KEYCODE_DPAD_UP,KeyEvent.KEYCODE_DPAD_DOWN,KeyEvent.KEYCODE_DPAD_LEFT,KeyEvent.KEYCODE_DPAD_RIGHT->return true
                 KeyEvent.KEYCODE_MEDIA_PLAY_PAUSE->{showChannels();return true}
             }
         }

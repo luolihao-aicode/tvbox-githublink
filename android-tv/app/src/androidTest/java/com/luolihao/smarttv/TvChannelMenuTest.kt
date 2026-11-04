@@ -35,6 +35,8 @@ class TvChannelMenuTest {
         LocalStore(context).configUrl=url
         activity=instrumentation.startActivitySync(Intent(context,MainActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)) as MainActivity
         instrumentation.waitForIdleSync()
+        instrumentation.runOnMainSync{assertFalse("启动时菜单应隐藏",activity.panelVisible)}
+        key(KeyEvent.KEYCODE_DPAD_CENTER)
     }
     @After fun close() {
         instrumentation.runOnMainSync{activity.finish()}
@@ -65,7 +67,11 @@ class TvChannelMenuTest {
         key(KeyEvent.KEYCODE_DPAD_LEFT)
         instrumentation.runOnMainSync{assertEquals("分类：地方台",activity.currentFocus?.contentDescription)}
         key(KeyEvent.KEYCODE_DPAD_RIGHT);key(KeyEvent.KEYCODE_DPAD_CENTER)
-        instrumentation.runOnMainSync{assertEquals("湖南卫视",activity.engine.channel?.name);assertFalse(activity.panelVisible);assertEquals(1,activity.engine.activePlayerCount)}
+        instrumentation.runOnMainSync{assertEquals("湖南卫视",activity.engine.channel?.name);assertTrue(activity.panelVisible);assertEquals(1,activity.engine.activePlayerCount)}
+        key(KeyEvent.KEYCODE_DPAD_DOWN)
+        instrumentation.runOnMainSync{assertEquals("湖南卫视",activity.engine.channel?.name)}
+        key(KeyEvent.KEYCODE_BACK)
+        instrumentation.runOnMainSync{assertFalse(activity.panelVisible)}
         key(KeyEvent.KEYCODE_DPAD_CENTER)
         instrumentation.runOnMainSync{assertTrue(activity.panelVisible);assertEquals("频道：湖南卫视",activity.currentFocus?.contentDescription)}
         key(KeyEvent.KEYCODE_BACK)
@@ -81,6 +87,8 @@ class TvChannelMenuTest {
         LocalStore(instrumentation.targetContext).configUrl=LocalStore.TV_TRIAL_URL
         activity=instrumentation.startActivitySync(Intent(instrumentation.targetContext,MainActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)) as MainActivity
         instrumentation.waitForIdleSync()
+        instrumentation.runOnMainSync{assertFalse(activity.panelVisible);assertNotNull(activity.engine.channel)}
+        key(KeyEvent.KEYCODE_DPAD_CENTER)
         instrumentation.runOnMainSync {
             assertNotNull(find("频道：CCTV-1 综合"))
             val saved=CatalogCache(File(activity.filesDir,"catalog-cache")).read(LocalStore.TV_TRIAL_URL)
