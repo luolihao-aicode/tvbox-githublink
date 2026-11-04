@@ -90,3 +90,26 @@ async def test_video_packet_timestamps_prove_eight_seconds_of_media(candidate_fa
     result = await probe_media(candidate, PolicyConfig(), runner)
     assert result.continuous_read is True
     assert '-show_packets' in build_ffprobe_args(str(candidate.url), PolicyConfig())
+
+
+@pytest.mark.asyncio
+async def test_real_frame_rate_and_packet_bitrate_are_collected_without_audio_inflation(candidate_factory):
+    candidate = candidate_factory('https://stream.example/live.m3u8', '测试')
+    payload = {'streams': [{'index': 0, 'codec_type': 'video', 'width': 1920, 'height': 1080,
+                            'avg_frame_rate': '30000/1001'},
+                           {'index': 1, 'codec_type': 'audio', 'codec_name': 'aac'}],
+               'packets': [{'stream_index': 0, 'pts_time': str(t), 'size': '100000'} for t in (0, 4, 8)]
+                          + [{'stream_index': 1, 'pts_time': '0', 'size': '9000000'}]}
+    result = await probe_media(candidate, PolicyConfig(), FakeRunner(ProcessOutput(0, json.dumps(payload), '')))
+    assert result.frame_rate == pytest.approx(29.97002997)
+    assert result.bitrate == 300_000
+
+
+@pytest.mark.asyncio
+async def test_missing_bitrate_and_invalid_frame_rate_remain_unknown(candidate_factory):
+    payload = {'streams': [{'index': 0, 'codec_type': 'video', 'height': 1080,
+                            'avg_frame_rate': '0/0'}]}
+    result = await probe_media(candidate_factory('https://stream.example/live.m3u8', '测试'),
+                               PolicyConfig(), FakeRunner(ProcessOutput(0, json.dumps(payload), '')))
+    assert result.frame_rate is None
+    assert result.bitrate is None

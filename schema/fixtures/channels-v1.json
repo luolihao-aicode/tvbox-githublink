@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "minClientVersion": 1,
+  "generatedAt": "2026-11-04T00:00:00Z",
+  "contentHash": "6c32f768aa9170baa13e80fbc24344a38193f5d775500239ea3d27412013fe1e",
+  "channels": [
+    {
+      "id": "fixture-channel",
+      "name": "测试频道 📺",
+      "group": "测试",
+      "logo": "",
+      "sources": [
+        {
+          "id": "fixture-source",
+          "url": "https://fixture.example/live.m3u8",
+          "type": "hls",
+          "score": 87,
+          "resolution": "1920x1080",
+          "videoCodec": null,
+          "frameRate": 29.97,
+          "lastChecked": null,
+          "originGroup": "fixture-origin",
+          "lastSuccess": null,
+          "availability": 0.333333
+        }
+      ]
+    }
+  ]
+}

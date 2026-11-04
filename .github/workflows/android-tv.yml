@@ -1,0 +1,48 @@
+name: 构建 Android TV 测试安装包
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'android-tv/**'
+      - '.github/workflows/android-tv.yml'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: android-tv-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - name: 检出源码
+        uses: actions/checkout@v6
+      - name: 配置 Java 17
+        uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '17'
+      - name: 配置 Android SDK
+        uses: android-actions/setup-android@v3
+      - name: 配置 Gradle 缓存
+        uses: gradle/actions/setup-gradle@v4
+      - name: 安装编译平台
+        run: sdkmanager 'platforms;android-36' 'build-tools;36.0.0'
+      - name: 测试、静态检查与构建 Debug APK
+        working-directory: android-tv
+        run: |
+          chmod +x gradlew
+          ./gradlew --no-daemon testDebugUnitTest lintDebug assembleDebug
+      - name: 保存 APK 与验证报告
+        uses: actions/upload-artifact@v4
+        with:
+          name: SmartIPTV-AndroidTV-debug
+          path: |
+            android-tv/app/build/outputs/apk/debug/*.apk
+            android-tv/app/build/reports/
+          if-no-files-found: error
+          retention-days: 14

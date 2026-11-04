@@ -5,6 +5,7 @@ import json
 import math
 from dataclasses import dataclass
 from datetime import UTC, datetime
+from fractions import Fraction
 from typing import Protocol
 
 from .models import CheckResult, PolicyConfig, StreamCandidate
@@ -61,7 +62,7 @@ def build_ffprobe_args(url: str, policy: PolicyConfig) -> list[str]:
         "-show_streams",
         "-show_format",
         "-show_entries",
-        "packet=stream_index,pts_time:stream=index,codec_type,codec_name,width,height,bit_rate:format=bit_rate",
+        "packet=stream_index,pts_time,size:stream=index,codec_type,codec_name,width,height,bit_rate,avg_frame_rate:format=bit_rate",
         "-of",
         "json",
         url,
@@ -133,6 +134,8 @@ async def probe_media(
         else None
     )
     timestamps: list[float] = []
+    video_bytes = 0
+    sized_packets = 0
     for packet in payload.get('packets', []):
         if not isinstance(packet, dict) or packet.get('stream_index') != video.get('index'):
             continue
@@ -142,7 +145,18 @@ async def probe_media(
             continue
         if math.isfinite(stamp):
             timestamps.append(stamp)
+            size = _as_nonnegative_int(packet.get('size'))
+            if size is not None:
+                video_bytes += size
+                sized_packets += 1
     continuous = len(timestamps) >= 2 and max(timestamps) - min(timestamps) >= policy.media_probe_seconds
+    span = max(timestamps) - min(timestamps) if len(timestamps) >= 2 else 0
+    measured_bitrate = round(video_bytes * 8 / span) if span > 0 and sized_packets == len(timestamps) else None
+    try:
+        rate = float(Fraction(str(video.get('avg_frame_rate', '0/0'))))
+        frame_rate = rate if math.isfinite(rate) and rate > 0 else None
+    except (ValueError, ZeroDivisionError, OverflowError):
+        frame_rate = None
     return CheckResult(
         checked_at=checked_at,
         success=True,
@@ -150,6 +164,7 @@ async def probe_media(
         height=_as_nonnegative_int(video.get("height")),
         video_codec=video.get("codec_name"),
         audio_codec=audio.get("codec_name") if audio else None,
-        bitrate=stream_bitrate or format_bitrate,
+        bitrate=stream_bitrate or measured_bitrate or format_bitrate,
+        frame_rate=frame_rate,
         continuous_read=continuous,
     )

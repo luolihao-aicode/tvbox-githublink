@@ -133,3 +133,36 @@ async def test_redirect_to_known_placeholder_is_rejected(candidate_factory):
     async with httpx.AsyncClient(transport=httpx.MockTransport(handler)) as client:
         result = await probe_http(candidate, client, PolicyConfig())
     assert result.failure_code == 'PLACEHOLDER_STREAM'
+
+@pytest.mark.asyncio
+async def test_hls_samples_three_recent_segments_and_rejects_later_interruption(candidate_factory):
+    candidate = candidate_factory('https://stream.example/live.m3u8', 'CCTV-1')
+    requested = []
+    def handler(request):
+        requested.append(request.url.path)
+        if request.url.path.endswith('.m3u8'):
+            return httpx.Response(200, text='#EXTM3U\n' + ''.join(f'#EXTINF:4,\ns{i}.ts\n' for i in range(4)))
+        if request.url.path == '/s2.ts':
+            return httpx.Response(503)
+        return httpx.Response(200, content=b'\x47' + b'\x00' * 187)
+    async with httpx.AsyncClient(transport=httpx.MockTransport(handler)) as client:
+        result = await probe_http(candidate, client, PolicyConfig())
+    assert not result.success
+    assert '/s1.ts' in requested
+    assert '/s2.ts' in requested
+    assert '/s0.ts' not in requested
+
+
+@pytest.mark.asyncio
+async def test_hls_success_samples_recent_three_segments(candidate_factory):
+    candidate = candidate_factory('https://stream.example/live.m3u8', 'CCTV-1')
+    requested = []
+    def handler(request):
+        requested.append(request.url.path)
+        if request.url.path.endswith('.m3u8'):
+            return httpx.Response(200, text='#EXTM3U\n' + ''.join(f'#EXTINF:4,\ns{i}.ts\n' for i in range(5)))
+        return httpx.Response(200, content=b'\x47' + b'\x00' * 187)
+    async with httpx.AsyncClient(transport=httpx.MockTransport(handler)) as client:
+        result = await probe_http(candidate, client, PolicyConfig())
+    assert result.success
+    assert requested == ['/live.m3u8', '/s2.ts', '/s3.ts', '/s4.ts']

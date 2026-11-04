@@ -65,6 +65,8 @@ class PolicyConfig(StrictModel):
     global_concurrency: int = Field(default=30, ge=1)
     per_host_concurrency: int = Field(default=2, ge=1)
     rejected_streams: dict[str, str] = Field(default_factory=dict)
+    score_freshness_days: float = Field(default=7.0, gt=0)
+    recent_failure_penalty: float = Field(default=8.0, ge=0, le=100)
 
     @model_validator(mode="after")
     def validate_concurrency(self) -> "PolicyConfig":
@@ -83,9 +85,11 @@ class CheckResult(StrictModel):
     width: int | None = Field(default=None, ge=0)
     height: int | None = Field(default=None, ge=0)
     video_codec: str | None = None
+    frame_rate: float | None = Field(default=None, ge=0)
     audio_codec: str | None = None
     bitrate: int | None = Field(default=None, ge=0)
     continuous_read: bool = False
+    final_url: HttpUrl | None = None
 
 
 class StreamCandidate(StrictModel):

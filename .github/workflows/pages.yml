@@ -37,6 +37,8 @@ jobs:
           mkdir -p _site
           cp -R web/. _site/
           cp output/*.m3u output/status.json output/report.json _site/
+          cp output/channels.json output/catalog-manifest.json _site/
+          cp -R output/catalog-versions _site/
           if [ -f output/taiwan-1080-trial.json ]; then cp output/taiwan-1080-trial.json _site/; fi
 
       - name: 上传 Pages 制品

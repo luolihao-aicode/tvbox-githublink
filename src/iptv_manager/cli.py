@@ -28,6 +28,8 @@ def _parser() -> argparse.ArgumentParser:
                          help='只复检指定分类，其他分类保留原检测记录')
     validate = subparsers.add_parser("validate-output", help="校验已生成订阅")
     validate.add_argument("--output-dir", type=Path, default=Path("output"))
+    catalog = subparsers.add_parser('validate-catalog', help='校验 Android TV 目录及成对发布')
+    catalog.add_argument('--output-dir', type=Path, default=Path('output'))
     trial = subparsers.add_parser('trial-taiwan', help='收集台湾 1080p 候选线路并生成独立试播订阅')
     trial.add_argument('--config-dir', type=Path, default=Path('config'))
     trial.add_argument('--sources-file', type=Path, default=Path('config/taiwan_trial_sources.yml'))
@@ -50,6 +52,23 @@ def _validate_output(output_dir: Path) -> int:
 
 def main(argv: Sequence[str] | None = None) -> int:
     args = _parser().parse_args(argv)
+    if args.command == 'validate-catalog':
+        from .catalog import validate_catalog_release, validate_channel_catalog
+        import json
+        try:
+            published = validate_catalog_release(args.output_dir)
+            stable = json.loads((args.output_dir / 'channels.json').read_text(encoding='utf-8'))
+            validate_channel_catalog(stable)
+            if stable != published:
+                raise ValueError('稳定路径目录与发布清单不符')
+            from .catalog import render_catalog_m3u
+            if (args.output_dir / 'all.m3u').read_text(encoding='utf-8') != render_catalog_m3u(stable):
+                raise ValueError('稳定路径 M3U 与目录不符')
+        except (OSError, ValueError, KeyError, TypeError) as exc:
+            print(f'目录校验失败：{exc}', file=sys.stderr)
+            return 2
+        print('Android TV 目录与成对发布校验通过')
+        return 0
     if args.command == "validate-output":
         return _validate_output(args.output_dir)
     if args.command == 'trial-taiwan':

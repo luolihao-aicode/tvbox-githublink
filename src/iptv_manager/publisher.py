@@ -10,6 +10,8 @@ from urllib.parse import urlsplit
 from .models import ChannelCategory, SourceType, StreamCandidate
 from .scoring import ChannelSelection
 from .storage import atomic_write_text
+from .catalog import (build_channel_catalog, validate_channel_catalog, publish_channel_catalog,
+                      validate_catalog_release, load_usage_rights)
 
 
 class OutputValidationError(ValueError):

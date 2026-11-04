@@ -1,0 +1,219 @@
+{
+  "$defs": {
+    "CatalogChannel": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "minLength": 1,
+          "title": "Id",
+          "type": "string"
+        },
+        "name": {
+          "minLength": 1,
+          "title": "Name",
+          "type": "string"
+        },
+        "group": {
+          "title": "Group",
+          "type": "string"
+        },
+        "logo": {
+          "const": "",
+          "title": "Logo",
+          "type": "string"
+        },
+        "sources": {
+          "items": {
+            "$ref": "#/$defs/CatalogSource"
+          },
+          "minItems": 1,
+          "title": "Sources",
+          "type": "array"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "group",
+        "logo",
+        "sources"
+      ],
+      "title": "CatalogChannel",
+      "type": "object"
+    },
+    "CatalogSource": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "minLength": 1,
+          "title": "Id",
+          "type": "string"
+        },
+        "url": {
+          "format": "uri",
+          "maxLength": 2083,
+          "minLength": 1,
+          "title": "Url",
+          "type": "string"
+        },
+        "type": {
+          "enum": [
+            "hls",
+            "dash",
+            "progressive"
+          ],
+          "title": "Type",
+          "type": "string"
+        },
+        "score": {
+          "maximum": 100,
+          "minimum": 0,
+          "title": "Score",
+          "type": "integer"
+        },
+        "resolution": {
+          "anyOf": [
+            {
+              "pattern": "^\\d+x\\d+$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Resolution"
+        },
+        "videoCodec": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Videocodec"
+        },
+        "frameRate": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Framerate"
+        },
+        "lastChecked": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Lastchecked"
+        },
+        "originGroup": {
+          "minLength": 1,
+          "title": "Origingroup",
+          "type": "string"
+        },
+        "lastSuccess": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Lastsuccess"
+        },
+        "availability": {
+          "anyOf": [
+            {
+              "maximum": 1,
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Availability"
+        },
+        "environmentLimited": {
+          "default": false,
+          "title": "Environmentlimited",
+          "type": "boolean"
+        },
+        "measurementStatus": {
+          "default": "verified",
+          "enum": [
+            "verified",
+            "historicalEnvironmentLimited"
+          ],
+          "title": "Measurementstatus",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "url",
+        "type",
+        "score",
+        "resolution",
+        "videoCodec",
+        "frameRate",
+        "lastChecked",
+        "originGroup",
+        "lastSuccess",
+        "availability"
+      ],
+      "title": "CatalogSource",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": {
+      "const": 1,
+      "title": "Schemaversion",
+      "type": "integer"
+    },
+    "minClientVersion": {
+      "const": 1,
+      "title": "Minclientversion",
+      "type": "integer"
+    },
+    "generatedAt": {
+      "title": "Generatedat",
+      "type": "string"
+    },
+    "contentHash": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Contenthash",
+      "type": "string"
+    },
+    "channels": {
+      "items": {
+        "$ref": "#/$defs/CatalogChannel"
+      },
+      "title": "Channels",
+      "type": "array"
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "minClientVersion",
+    "generatedAt",
+    "contentHash",
+    "channels"
+  ],
+  "title": "ChannelCatalog",
+  "type": "object"
+}

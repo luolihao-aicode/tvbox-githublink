@@ -94,15 +94,19 @@ async def _probe_hls(
     tags = {line.strip().upper() for line in text.splitlines() if line.strip().startswith('#')}
     if '#EXT-X-ENDLIST' in tags or '#EXT-X-PLAYLIST-TYPE:VOD' in tags:
         raise ProbeRejected('NON_LIVE_PLAYLIST')
-    uri = _playlist_uri(text)
-    if uri is None:
+    uris = [line.strip() for line in text.splitlines() if line.strip() and not line.strip().startswith('#')]
+    if not uris:
         return False, sample
-    child_url = normalize_url(urljoin(sample.url or playlist_url, uri))
-    child = await _fetch_sample(client, child_url, STREAM_SAMPLE_LIMIT)
-    if _looks_like_html(child) or not child.body:
-        return False, child
-    if child.body.lstrip().startswith(b"#EXTM3U"):
-        return await _probe_hls(client, child_url, child, depth + 1)
+    is_master = any(tag.startswith('#EXT-X-STREAM-INF:') for tag in tags)
+    # 主清单选择一个变体；媒体清单顺序采样最近三个分片，避免首片正常掩盖后续断流。
+    chosen = uris[:1] if is_master else uris[-3:]
+    for uri in chosen:
+        child_url = normalize_url(urljoin(sample.url or playlist_url, uri))
+        child = await _fetch_sample(client, child_url, STREAM_SAMPLE_LIMIT)
+        if _looks_like_html(child) or not child.body:
+            return False, child
+        if child.body.lstrip().startswith(b"#EXTM3U"):
+            return await _probe_hls(client, child_url, child, depth + 1)
     return True, child
 
 
@@ -159,6 +163,7 @@ async def probe_http(
             ),
             first_byte_seconds=sample.first_byte_seconds,
             transfer_bytes_per_second=speed,
+            final_url=sample.url or str(candidate.url),
         )
     except ProbeRejected as exc:
         return CheckResult(checked_at=checked_at, success=False, failure_code=exc.code)
@@ -168,6 +173,8 @@ async def probe_http(
             success=False,
             failure_code="HTTP_TIMEOUT",
         )
+    except httpx.ConnectError:
+        return CheckResult(checked_at=checked_at, success=False, failure_code="ENVIRONMENT_LIMITED")
     except (httpx.HTTPError, ValueError):
         return CheckResult(
             checked_at=checked_at,

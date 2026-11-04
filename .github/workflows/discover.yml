@@ -52,6 +52,9 @@ jobs:
             echo "尚无连续两次检测合格的频道，本次只保存候选历史"
           fi
 
+      - name: 校验智能频道目录与同步订阅
+        run: iptv-manager validate-catalog --output-dir output
+
       - name: 提交发现和检测结果
         run: |
           git config user.name "github-actions[bot]"

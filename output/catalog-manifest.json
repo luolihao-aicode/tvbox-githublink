@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "contentHash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "channels": "catalog-versions/3e682066fcc17524b2bdc9ba8abb612d66a17d8ae1824814fda870d5114146de/channels.json",
+  "playlist": "catalog-versions/3e682066fcc17524b2bdc9ba8abb612d66a17d8ae1824814fda870d5114146de/all.m3u",
+  "previous": null,
+  "changes": {
+    "added": [],
+    "removed": [],
+    "modified": []
+  }
+}

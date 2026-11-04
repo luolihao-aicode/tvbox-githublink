@@ -18,7 +18,8 @@ from .discovery import DiscoveryResult, fetch_seed_sources, search_github
 from .models import ChannelCategory, CheckResult, PolicyConfig, StreamCandidate, StreamStatus
 from .probe_http import probe_many_http
 from .probe_media import probe_media
-from .publisher import publish_outputs
+from .publisher import (publish_outputs, build_channel_catalog, publish_channel_catalog,
+                        load_usage_rights, validate_catalog_release)
 from .scoring import (
     ChannelSelection,
     append_history,
@@ -27,6 +28,7 @@ from .scoring import (
     update_lifecycle,
 )
 from .storage import atomic_write_text
+from .catalog import ENVIRONMENT_UNKNOWN_CODES
 
 DiscoverFn = Callable[[], Awaitable[DiscoveryResult]]
 HttpProbeFn = Callable[[list[StreamCandidate], PolicyConfig], Awaitable[list[CheckResult]]]
@@ -80,6 +82,7 @@ def _merge_check(http_result: CheckResult, media_result: CheckResult) -> CheckRe
             update={
                 "first_byte_seconds": http_result.first_byte_seconds,
                 "transfer_bytes_per_second": http_result.transfer_bytes_per_second,
+                "final_url": http_result.final_url,
             }
         )
     return media_result.model_copy(
@@ -87,6 +90,7 @@ def _merge_check(http_result: CheckResult, media_result: CheckResult) -> CheckRe
             "first_byte_seconds": http_result.first_byte_seconds,
             "transfer_bytes_per_second": http_result.transfer_bytes_per_second,
             "success": True,
+            "final_url": http_result.final_url,
         }
     )
 
@@ -181,14 +185,33 @@ async def run_pipeline(
         if result.success:
             changes["last_success_at"] = result.checked_at
         checked = stream.model_copy(update=changes)
-        checked.score = calculate_score(checked.history, config.policy)
+        checked.score = calculate_score(checked.history, config.policy, now=now)
         return update_lifecycle(checked, now, config.policy)
 
     checked_items = await asyncio.gather(*(check_one(stream, check) for stream, check
                                           in zip(to_check, http_results, strict=True)))
     updated = [*untouched, *checked_items]
+    for stream in untouched:
+        stream.score = calculate_score(stream.history, config.policy, now=now)
 
     selections = select_lines(updated, config.policy)
+    usage_rights = load_usage_rights(options.config_dir / 'usage_rights.yml')
+    catalog = build_channel_catalog(updated, config.policy, usage_rights, now)
+    retain_catalog = False
+    catalog_all_unknown = not catalog['channels'] or all(
+        source['environmentLimited'] for channel in catalog['channels'] for source in channel['sources'])
+    probes_all_unknown = not updated or all(
+        stream.history and stream.history[-1].failure_code in ENVIRONMENT_UNKNOWN_CODES for stream in updated)
+    if catalog_all_unknown and probes_all_unknown and (options.output_dir / 'catalog-manifest.json').exists():
+        previous_catalog = validate_catalog_release(options.output_dir)
+        grants = {grant['streamId'] for grant in usage_rights['grants'] if grant['allowed']}
+        grants -= {grant['streamId'] for grant in usage_rights['grants'] if not grant['allowed']}
+        previous_ids = {source['id'] for channel in previous_catalog['channels'] for source in channel['sources']}
+        current_ids = {source['id'] for channel in catalog['channels'] for source in channel['sources']}
+        # 本轮全部探测失败时保留仍有授权的已发布版本；撤销许可则绝不保留。
+        retain_catalog = (bool(previous_ids) and previous_ids <= grants
+                          and not (previous_ids & config.policy.rejected_streams.keys())
+                          and (not updated or previous_ids <= current_ids))
     selected_states = {line.stream_id: line.status for choice in selections
                        for line in (choice.primary, *choice.backups)}
     for stream in updated:
@@ -218,6 +241,9 @@ async def run_pipeline(
         'successful_sources': sum(stream.history[-1].success for stream in updated
                                   if stream.history and (not options.categories or stream.category in options.categories)),
         'published_channels': len(selections),
+        'android_catalog_channels': len(catalog['channels']),
+        'android_catalog_retained_previous': retain_catalog,
+        'android_catalog_notice': '仅显式授权且合格的源纳入目录；公开访问不代表授权。空目录需要补充真实授权记录。',
         'filter_reasons': dict(reasons),
         'unknown_channel_names': sorted(set(unknown_names))[:100],
         'issues': [{'source_url': issue.source_url, 'code': issue.code}
@@ -238,6 +264,8 @@ async def run_pipeline(
         if selections:
             source = 'GitHub Actions 节点' if os.environ.get('GITHUB_ACTIONS') == 'true' else '本次本地检测节点'
             publish_outputs(selections, options.output_dir, now, source)
+        if not retain_catalog:
+            publish_channel_catalog(catalog, options.output_dir)
         atomic_write_text(options.output_dir / 'report.json',
                           json.dumps(report, ensure_ascii=False, indent=2) + '\n')
     return PipelineResult(updated, selections, list(discovery.issues), report)

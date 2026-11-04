@@ -1,0 +1,6 @@
+# Android TV 目录授权登记。公开访问或来源标记 official 均不等于取得许可。
+# 每个条目必须包含 streamId、evidenceUrl、purpose、allowed。
+# purpose 应记录允许访问、测试、在本应用使用并公开发布地址的具体范围；请勿填写秘密。
+# 没有可核实的授权记录时保持空数组，Android TV 目录会有效但为空。
+schemaVersion: 1
+grants: []

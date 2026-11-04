@@ -59,6 +59,8 @@ def _bitrate_score(bitrate: int | None, height: int | None) -> float:
 def calculate_score(
     history: Sequence[CheckResult],
     policy: PolicyConfig,
+    *,
+    now: datetime | None = None,
 ) -> float:
     recent = list(history[-policy.history_limit :])
     if not recent:
@@ -77,6 +79,15 @@ def calculate_score(
         quality = 0.0
     stability = sum(item.success and item.continuous_read for item in recent) / len(recent)
     score = availability * 40 + speed * 25 + quality * 20 + stability * 15
+    latest = max(recent, key=lambda item: item.checked_at)
+    age_days = max(0.0, ((now or latest.checked_at) - latest.checked_at).total_seconds() / 86400)
+    score *= max(0.0, 1.0 - age_days / policy.score_freshness_days)
+    failures = 0
+    for item in reversed(recent):
+        if item.success:
+            break
+        failures += 1
+    score -= failures * policy.recent_failure_penalty
     return round(max(0.0, min(100.0, score)), 2)
 
 
@@ -87,6 +98,8 @@ def update_lifecycle(
 ) -> StreamCandidate:
     del policy
     history = stream.history
+    if history and history[-1].failure_code == 'ENVIRONMENT_LIMITED':
+        return stream.model_copy(update={"status": StreamStatus.CANDIDATE})
     latest_success = max(
         (item.checked_at for item in history if item.success),
         default=stream.last_success_at,
