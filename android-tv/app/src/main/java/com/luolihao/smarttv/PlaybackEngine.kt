@@ -37,6 +37,7 @@ class PlaybackEngine(private val context:Context,private val view:PlayerView,pri
     var state="IDLE";private set
     var lastReason="无";private set
     var lastError="无";private set
+    private var lastErrorDetail="无"
     var network="unknown";private set
     var firstFrameMs:Long?=null;private set
     val activePlayerCount:Int get()=if(player==null)0 else 1
@@ -79,7 +80,7 @@ class PlaybackEngine(private val context:Context,private val view:PlayerView,pri
         check(Looper.myLooper()==Looper.getMainLooper())
         if(closed)return
         suspended=false
-        flushWatch();epoch++;recovering=false;preflightEpoch=-1;lastReason="用户选台";lastError="无"
+        flushWatch();epoch++;recovering=false;preflightEpoch=-1;lastReason="用户选台";lastError="无";lastErrorDetail="无"
         channel=selected;network=networkKey();stable=store.stableBuffer
         val ranked=SourceSelector.rank(selected.sources,store.qualities(),network)
         policy=RecoveryPolicy(ranked,config);store.viewed(selected.id)
@@ -125,7 +126,9 @@ class PlaybackEngine(private val context:Context,private val view:PlayerView,pri
         override fun onPlayerError(error:PlaybackException) {
             if(recovering || closed)return
             lastError=error.errorCodeName
-            log.event("player_error","code=${error.errorCodeName} source=${source?.id}")
+            val http=generateSequence<Throwable>(error){it.cause}.take(6).filterIsInstance<androidx.media3.datasource.HttpDataSource.InvalidResponseCodeException>().firstOrNull()?.responseCode
+            lastErrorDetail=diagnosticErrorTypes(error)+(http?.let{" HTTP $it"}?:"")
+            log.event("player_error","code=${error.errorCodeName} source=${source?.id} causes=$lastErrorDetail")
             recover("player_error_${error.errorCodeName}",error.errorCode in 4000..4999 || error.errorCode in 3000..3999)
         }
     }
@@ -230,6 +233,19 @@ class PlaybackEngine(private val context:Context,private val view:PlayerView,pri
 本机网络：$network；观看：${(q?.watchedMs?:0)/1000}秒；卡顿：${q?.stalls?:0}；异常：${q?.failures?:0}
 播放器实例：$activePlayerCount；备用HTTP预检：${if(store.preflight)"开启（仅连通性，非媒体预缓冲）" else "关闭"}
 日志目录：${log.directory.absolutePath}"""
+    }
+    fun photoDiagnostics():String {
+        val p=player;val f=p?.videoFormat
+        return """频道：${channel?.name?:"未选择"}    状态：$state
+线路：${(policy?.index?:0)+1}/${policy?.sources?.size?:0}  ${source?.url?.let(::redactUrl)?:"无"}
+首帧：${firstFrameMs?.let{"${it}ms"}?:"未出现"}    已渲染帧：${p?.videoDecoderCounters?.renderedOutputBufferCount?:0}
+画面：${f?.width?:0}×${f?.height?:0}  ${f?.sampleMimeType?:"未识别视频"}
+缓存：${p?.totalBufferedDuration?:0}ms    协议：${source?.type?:"未知"}
+恢复原因：$lastReason
+错误码：$lastError
+失败类型：$lastErrorDetail
+本机网络：$network
+本页不上传日志，也不包含访问令牌。"""
     }
     private fun stateLabel()=when(state){"PLAYING"->"播放中";"PREPARING"->"等待首帧";"BUFFERING"->"缓冲中";"RECOVERING"->"恢复中";"EXHAUSTED"->"来源耗尽";else->"待机"}
     private fun networkKey():String {

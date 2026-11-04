@@ -38,6 +38,8 @@ class MainActivity:Activity() {
     private var refreshEpoch=0
     private var statusEpoch=0
     private var screen="channels"
+    private var diagnosticHoldTriggered=false
+    private val diagnosticHold=Runnable {diagnosticHoldTriggered=true;showPhotoDiagnostics()}
     val panelVisible:Boolean get()=::overlay.isInitialized && overlay.visibility==View.VISIBLE
     override fun onCreate(savedInstanceState:Bundle?) {
         super.onCreate(savedInstanceState)
@@ -63,7 +65,7 @@ class MainActivity:Activity() {
         hidePanel();refreshCatalog()
     }
     override fun onStart() {super.onStart();if(::engine.isInitialized && engine.activePlayerCount==0)engine.channel?.let{engine.play(it)}}
-    override fun onStop(){if(::engine.isInitialized)engine.stop();super.onStop()}
+    override fun onStop(){if(::root.isInitialized)root.removeCallbacks(diagnosticHold);if(::engine.isInitialized)engine.stop();super.onStop()}
     override fun onDestroy(){refreshEpoch++;worker.shutdownNow();if(::engine.isInitialized)engine.close();super.onDestroy()}
     private fun dp(value:Int)=(resources.displayMetrics.density*value).toInt()
     private fun text(value:String,size:Int=20)=TextView(this).apply{this.text=value;textSize=size.toFloat();setTextColor(Color.WHITE);setPadding(dp(8),dp(5),dp(8),dp(5))}
@@ -199,6 +201,25 @@ class MainActivity:Activity() {
         content.addView(button("测试：所有来源失效"){startDiagnostic("all-failed")},LinearLayout.LayoutParams(-1,dp(46)))
         refresh.requestFocus()
     }
+    private fun showPhotoDiagnostics() {
+        screen="photo-diagnostics";overlay.removeAllViews();overlay.visibility=View.VISIBLE
+        overlay.layoutParams=FrameLayout.LayoutParams(-1,-1);overlay.contentDescription="隐藏诊断"
+        overlay.addView(text("播放诊断 · 请拍照此页",24))
+        overlay.addView(text(engine.photoDiagnostics()+"\n目录：$loadMessage\n版本：${BuildConfig.VERSION_NAME}",18).apply{contentDescription="诊断快照"})
+        overlay.addView(text("短按确认刷新 · 返回键继续看电视",16))
+        root.isFocusableInTouchMode=true;root.requestFocus()
+    }
+    override fun dispatchKeyEvent(event:KeyEvent):Boolean {
+        if(::root.isInitialized && event.keyCode in listOf(KeyEvent.KEYCODE_DPAD_CENTER,KeyEvent.KEYCODE_ENTER)) {
+            if(event.action==KeyEvent.ACTION_DOWN && event.repeatCount==0) {
+                diagnosticHoldTriggered=false;root.removeCallbacks(diagnosticHold);root.postDelayed(diagnosticHold,4000)
+            } else if(event.action==KeyEvent.ACTION_UP) {
+                root.removeCallbacks(diagnosticHold)
+                if(diagnosticHoldTriggered){diagnosticHoldTriggered=false;return true}
+            }
+        }
+        return super.dispatchKeyEvent(event)
+    }
     fun startDiagnostic(mode:String="normal") {
         val good=Source("diagnostic-good","asset:///diagnostic.mp4","progressive",90.0,originGroup="self-made")
         val bad=Source("diagnostic-invalid","asset:///invalid.bin","progressive",100.0,originGroup="self-made")
@@ -239,6 +260,10 @@ class MainActivity:Activity() {
         } catch(_:Exception) {log.event("bundled_trial_unavailable")}
     }
     override fun onKeyDown(keyCode:Int,event:KeyEvent):Boolean {
+        if(screen=="photo-diagnostics" && panelVisible) {
+            if(keyCode==KeyEvent.KEYCODE_BACK){screen="channels";hidePanel();return true}
+            if(keyCode in listOf(KeyEvent.KEYCODE_DPAD_CENTER,KeyEvent.KEYCODE_ENTER)){showPhotoDiagnostics();return true}
+        }
         if(keyCode==KeyEvent.KEYCODE_BACK){if(panelVisible){if(screen=="channels")hidePanel() else showChannels()} else finish();return true}
         if(!panelVisible) {
             when(keyCode) {

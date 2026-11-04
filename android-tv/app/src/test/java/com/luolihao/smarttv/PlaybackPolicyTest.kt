@@ -4,6 +4,10 @@ import org.junit.Assert.*
 import org.junit.Test
 
 class PlaybackPolicyTest {
+    @Test fun photoErrorSummaryIncludesCauseTypesWithoutSecrets() {
+        val error=java.io.IOException("https://user:password@media.example/live?token=secret",java.net.SocketTimeoutException("secret"))
+        assertEquals("IOException > SocketTimeoutException",diagnosticErrorTypes(error))
+    }
     @Test fun backupOrderTriesDifferentOriginBeforeAliasesOfPrimary() {
         val sources=listOf(source("a",99.0).copy(originGroup="shared"),source("alias",98.0).copy(originGroup="shared"),source("other",70.0))
         assertEquals(listOf("a","other","alias"),SourceSelector.rank(sources,emptyMap(),"wifi").map{it.id})

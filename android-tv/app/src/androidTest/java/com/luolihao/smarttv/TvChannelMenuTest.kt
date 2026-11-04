@@ -49,6 +49,16 @@ class TvChannelMenuTest {
         return null
     }
     private fun key(code:Int){instrumentation.sendKeyDownUpSync(code);instrumentation.waitForIdleSync()}
+    @Test fun holdingOkOpensHiddenPhotographDiagnosticsAndBackReturnsToVideo() {
+        val down=android.os.SystemClock.uptimeMillis()
+        instrumentation.sendKeySync(KeyEvent(down,down,KeyEvent.ACTION_DOWN,KeyEvent.KEYCODE_DPAD_CENTER,0))
+        Thread.sleep(4300)
+        instrumentation.sendKeySync(KeyEvent(down,android.os.SystemClock.uptimeMillis(),KeyEvent.ACTION_UP,KeyEvent.KEYCODE_DPAD_CENTER,0))
+        instrumentation.waitForIdleSync()
+        instrumentation.runOnMainSync{assertNotNull(find("隐藏诊断"));assertNotNull(find("诊断快照"))}
+        key(KeyEvent.KEYCODE_BACK)
+        instrumentation.runOnMainSync{assertFalse(activity.panelVisible)}
+    }
     @Test fun channelMenuIsALeftSidebarAndRightSideStaysVisible() {
         instrumentation.runOnMainSync {
             val panel=find("频道侧栏")

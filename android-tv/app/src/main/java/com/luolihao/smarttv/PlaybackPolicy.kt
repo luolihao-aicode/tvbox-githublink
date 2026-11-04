@@ -80,4 +80,5 @@ fun redactUrl(url:String):String = try {
  val uri=java.net.URI(url)
  if(uri.scheme=="asset") "asset:///本地诊断媒体" else if(uri.host!=null) "${uri.scheme}://${uri.host}${if(uri.port>0) ":${uri.port}" else ""}/…" else "[已脱敏地址]"
 } catch(_:Exception) {"[已脱敏地址]"}
+fun diagnosticErrorTypes(error:Throwable)=generateSequence(error){it.cause}.take(6).joinToString(" > "){it.javaClass.simpleName}
 fun redactMessage(message:String)=Regex("(?i)https?://[^\\s]+(?:\\s|$)").replace(message){redactUrl(it.value.trim())+" "}.take(2000)
