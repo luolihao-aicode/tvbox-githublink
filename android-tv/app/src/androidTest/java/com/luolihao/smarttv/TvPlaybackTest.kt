@@ -12,6 +12,17 @@ import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
 class TvPlaybackTest {
+    @Test fun frequentBufferingCannotStopTheOnlyPlayableSource() {
+        instrumentation.runOnMainSync{activity.startDiagnostic()}
+        waitFor{activity.engine.firstFrameMs!=null}
+        val method=PlaybackEngine::class.java.getDeclaredMethod("recover",String::class.java,Boolean::class.javaPrimitiveType,Boolean::class.javaPrimitiveType).apply{isAccessible=true}
+        instrumentation.runOnMainSync {
+            repeat(4){method.invoke(activity.engine,"frequent_buffering",false,false)}
+            assertEquals("PLAYING",activity.engine.state)
+            assertEquals("diagnostic-good",activity.engine.source?.id)
+            assertEquals(1,activity.engine.activePlayerCount)
+        }
+    }
     @Test fun liveWindowErrorRejoinsWithoutReplacingMediaOrPlayer() {
         instrumentation.runOnMainSync{activity.startDiagnostic()}
         waitFor{activity.engine.firstFrameMs!=null}

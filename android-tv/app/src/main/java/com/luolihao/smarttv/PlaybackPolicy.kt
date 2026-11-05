@@ -4,6 +4,23 @@ data class Source(val id:String,val url:String,val type:String,val score:Double,
 data class Quality(val successes:Int=0,val failures:Int=0,val watchedMs:Long=0,val firstFrameMs:Long=0,val stalls:Int=0,val switches:Int=0,val lastPlayed:Long=0)
 data class PolicyConfig(val firstFrameTimeoutMs:Long=12000,val prepareTimeoutMs:Long=15000,val bufferTimeoutMs:Long=12000,val stallTimeoutMs:Long=12000,val cooldownMs:Long=2000,val quarantineMs:Long=60000,val stallWindowMs:Long=60000,val maxStallsInWindow:Int=3)
 data class PlaybackPreferences(val preflightEnabled:Boolean=false)
+// 缓冲次数只能说明体验差，不能证明线路已经无法继续播放。
+fun shouldRecoverHealth(reason:String):Boolean = reason!="frequent_buffering"
+class DownloadSpeedSampler {
+ private var time:Long?=null
+ private var bytes=0L
+ private var key=""
+ fun sample(now:Long,totalBytes:Long,attemptKey:String):Long {
+   val previous=time
+   val rate=if(previous!=null && key==attemptKey && now>previous && totalBytes>=bytes)
+     (totalBytes-bytes)*1000/(now-previous) else 0L
+   time=now;bytes=totalBytes;key=attemptKey
+   return rate
+ }
+}
+fun downloadSpeedText(bytesPerSecond:Long):String = if(bytesPerSecond>=1024*1024)
+ java.lang.String.format(java.util.Locale.ROOT,"%.2f MB/s",bytesPerSecond/1048576.0)
+ else java.lang.String.format(java.util.Locale.ROOT,"%.1f KB/s",bytesPerSecond/1024.0)
 enum class ActionKind { RETRY, REBUILD, REJOIN_LIVE, SWITCH, WAIT, EXHAUSTED }
 data class RecoveryAction(val kind:ActionKind,val sourceId:String?=null,val delayMs:Long=0)
 class RecoveryPolicy(val sources:List<Source>,val config:PolicyConfig=PolicyConfig()) {
@@ -100,8 +117,8 @@ class PlaybackHealthMonitor(val config:PolicyConfig=PolicyConfig()) {
        bufferingAt=s.now
        if(firstFrameMs!=null)stallStarts.addLast(s.now)
      }
-     if(stallStarts.size>=config.maxStallsInWindow)return "frequent_buffering"
      if(s.now-bufferingAt!!>=config.bufferTimeoutMs)return "continuous_buffering"
+     if(stallStarts.size>=config.maxStallsInWindow)return "frequent_buffering"
    } else bufferingAt=null
    if(s.positionMs!=position) {position=s.positionMs;lastMovement=s.now}
    if(s.renderedFrames!=frames) {frames=s.renderedFrames;lastFrameMovement=s.now}

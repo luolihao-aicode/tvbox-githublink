@@ -33,6 +33,8 @@ class PlaybackEngine(private val context:Context,private val view:PlayerView,pri
     private val worker=Executors.newSingleThreadExecutor()
     private val config=PolicyConfig()
     private val monitor=PlaybackHealthMonitor(config)
+    private val downloadSpeed=DownloadSpeedSampler()
+    private var downloadBytesPerSecond=0L
     private var progress=PlaybackAttemptProgress()
     private class HttpAttempt(val sourceId:String,val number:Int,val progress:NetworkAttemptProgress)
     private class HttpTransfer(val attempt:HttpAttempt,val startedAt:Long,val url:String)
@@ -186,10 +188,9 @@ class PlaybackEngine(private val context:Context,private val view:PlayerView,pri
         onStatus("${channel?.name} · 正在载入")
     }
     private fun recover(reason:String,fatalDecode:Boolean=false,liveWindowExpired:Boolean=false) {
-        if(recovering || closed || state=="EXHAUSTED")return
-        // 短时间反复缓冲表明该线路不适合本机网络，有备源时直接换源。
+        if(recovering || closed || state=="EXHAUSTED" || !shouldRecoverHealth(reason))return
         val now=SystemClock.elapsedRealtime()
-        val action=policy?.failure(now,fatalDecode || reason=="frequent_buffering",progress.shouldPreferBackup(reason),liveWindowExpired)?:return
+        val action=policy?.failure(now,fatalDecode,progress.shouldPreferBackup(reason),liveWindowExpired)?:return
         if(action.kind==ActionKind.WAIT) {
             recovering=true;val token=epoch
             handler.postDelayed({if(token==epoch && !closed){recovering=false;recover(reason,fatalDecode,liveWindowExpired)}},action.delayMs);return
@@ -200,7 +201,7 @@ class PlaybackEngine(private val context:Context,private val view:PlayerView,pri
         stable=true;state="RECOVERING";recovering=true
         if(action.kind!=ActionKind.REJOIN_LIVE)player?.stop()
         log.event("recovery","reason=$reason action=${action.kind} next=${action.sourceId} delay=${action.delayMs} ${progressDetail(now)}")
-        if(action.kind==ActionKind.EXHAUSTED){state="EXHAUSTED";recovering=false;onStatus("所有来源均不可用。请换台或稍后从频道列表重试");return}
+        if(action.kind==ActionKind.EXHAUSTED){state="EXHAUSTED";recovering=false;onStatus("本轮播放重试已结束。请换台或从频道列表重新尝试");return}
         onStatus("播放恢复中：${when(action.kind){ActionKind.RETRY->"重试当前源";ActionKind.REBUILD->"重建解码会话";ActionKind.REJOIN_LIVE->"重新同步直播位置";else->"切换备用源"}}")
         val token=epoch
         handler.postDelayed({
@@ -232,11 +233,17 @@ class PlaybackEngine(private val context:Context,private val view:PlayerView,pri
                 val counters=p.videoDecoderCounters
                 val frames=counters?.renderedOutputBufferCount?:0
                 val now=SystemClock.elapsedRealtime()
+                val attempt=httpAttempt
+                downloadBytesPerSecond=downloadSpeed.sample(now,attempt.progress.transferredBytes,"${attempt.sourceId}:${attempt.number}:$epoch")
+                if(p.playbackState==Player.STATE_BUFFERING) {
+                    onStatus("${channel?.name} · 缓冲中 · 下载 ${downloadSpeedText(downloadBytesPerSecond)} · 已缓冲 ${p.totalBufferedDuration/1000}秒")
+                    log.event("buffering_download","bytes_per_second=$downloadBytesPerSecond ${timelineDetail()}")
+                }
                 if(fpsAt==0L){fpsAt=now;fpsFrames=frames}
                 else if(now-fpsAt>=3000){actualFrameRate=if(p.isPlaying && hasVideo)(frames-fpsFrames).coerceAtLeast(0)*1000.0/(now-fpsAt) else null;fpsAt=now;fpsFrames=frames}
                 val reason=monitor.observe(HealthSample(SystemClock.elapsedRealtime(),p.playbackState==Player.STATE_READY,p.playbackState==Player.STATE_BUFFERING,!tracksKnown || hasVideo,pos>lastPosition,pos,counters?.renderedOutputBufferCount?:0,!p.playWhenReady))
                 lastPosition=pos
-                if(reason!=null)recover(reason)
+                if(reason!=null && shouldRecoverHealth(reason))recover(reason)
                 if(watchedAt>0 && SystemClock.elapsedRealtime()-watchedAt>15000)flushWatch()
             }
             if(!closed)handler.postDelayed(this,1000)

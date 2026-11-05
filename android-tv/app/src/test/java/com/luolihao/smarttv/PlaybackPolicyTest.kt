@@ -4,6 +4,29 @@ import org.junit.Assert.*
 import org.junit.Test
 
 class PlaybackPolicyTest {
+    @Test fun downloadSpeedUsesElapsedTimeAndClearsOnSourceChange() {
+        val speed=DownloadSpeedSampler()
+        assertEquals(0L,speed.sample(1000,100,"a"))
+        assertEquals(2048L,speed.sample(3000,4196,"a"))
+        assertEquals(0L,speed.sample(4000,4196,"a"))
+        assertEquals(0L,speed.sample(5000,20,"b"))
+        assertEquals(1024L,speed.sample(6000,1044,"b"))
+    }
+    @Test fun shortRecoverableStallsMustNotStopEvenTheLastPlayableSource() {
+        assertFalse(shouldRecoverHealth("frequent_buffering"))
+        assertTrue(shouldRecoverHealth("continuous_buffering"))
+        assertTrue(shouldRecoverHealth("video_progress_stalled"))
+        assertTrue(shouldRecoverHealth("first_frame_timeout"))
+    }
+    @Test fun frequentStallWarningCannotMaskARealContinuousTimeout() {
+        val h=PlaybackHealthMonitor();h.begin(0);h.firstFrame(100)
+        for(time in listOf(1000L,3000L)) {
+            h.observe(HealthSample(time,buffering=true))
+            h.observe(HealthSample(time+500,ready=true,positionMs=time,renderedFrames=time.toInt()))
+        }
+        assertEquals("frequent_buffering",h.observe(HealthSample(5000,buffering=true)))
+        assertEquals("continuous_buffering",h.observe(HealthSample(17000,buffering=true)))
+    }
     @Test fun liveWindowExpiryRejoinsLiveEdgeWithFiniteBudgetThenUsesBackup() {
         val p=RecoveryPolicy(listOf(source("a"),source("b")))
         assertEquals("REJOIN_LIVE",p.failure(0,liveWindowExpired=true).kind.name)
