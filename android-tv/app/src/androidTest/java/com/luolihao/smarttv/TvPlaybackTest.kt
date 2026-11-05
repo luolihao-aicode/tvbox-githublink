@@ -12,6 +12,36 @@ import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
 class TvPlaybackTest {
+    @Test fun realSlowMediaDownloadSurvivesStartupDeadlineAndEventuallyRenders() {
+        val server=java.net.ServerSocket(0,2,java.net.InetAddress.getByName("127.0.0.1"))
+        val bytes=instrumentation.targetContext.assets.open("diagnostic.mp4").use{it.readBytes()}
+        val worker=kotlin.concurrent.thread(isDaemon=true) {
+            try {server.accept().use { socket ->
+                val reader=socket.getInputStream().bufferedReader()
+                while(!reader.readLine().isNullOrEmpty()){}
+                val output=socket.getOutputStream()
+                output.write("HTTP/1.1 200 OK\r\nContent-Type: video/mp4\r\nContent-Length: ${bytes.size}\r\nConnection: close\r\n\r\n".toByteArray())
+                output.write(bytes,0,32);output.flush()
+                // 缓慢传输moov，确保超过12秒前仍无首帧，但媒体数据一直增长。
+                for(index in 32 until 112) {output.write(bytes[index].toInt());output.flush();Thread.sleep(200)}
+                output.write(bytes,112,bytes.size-112);output.flush()
+            }}catch(_:Exception){}
+        }
+        try {
+            instrumentation.runOnMainSync {
+                val source=Source("slow-real-media","http://127.0.0.1:${server.localPort}/test.mp4","progressive",90.0)
+                activity.engine.play(Channel("slow-media-test","慢速媒体测试","诊断","",listOf(source)))
+            }
+            Thread.sleep(14000)
+            instrumentation.runOnMainSync {
+                assertNull(activity.engine.firstFrameMs)
+                assertEquals("用户选台",activity.engine.lastReason)
+                assertEquals("PREPARING",activity.engine.state)
+            }
+            waitFor(20000){activity.engine.firstFrameMs!=null}
+            instrumentation.runOnMainSync{assertEquals("slow-real-media",activity.engine.source?.id);assertEquals("用户选台",activity.engine.lastReason)}
+        } finally {server.close();worker.interrupt();worker.join(1000)}
+    }
     @Test fun frequentBufferingCannotStopTheOnlyPlayableSource() {
         instrumentation.runOnMainSync{activity.startDiagnostic()}
         waitFor{activity.engine.firstFrameMs!=null}

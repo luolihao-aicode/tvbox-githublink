@@ -83,11 +83,13 @@ class PlaybackAttemptProgress {
 }
 class NetworkAttemptProgress(private val startedAt:Long) {
  private val bytes=java.util.concurrent.atomic.AtomicLong()
+ private val mediaBytes=java.util.concurrent.atomic.AtomicLong()
  private val firstTransfer=java.util.concurrent.atomic.AtomicLong(-1)
  val transferredBytes:Long get()=bytes.get()
+ val transferredMediaBytes:Long get()=mediaBytes.get()
  val firstTransferMs:Long? get()=firstTransfer.get().takeIf{it>=0}
  fun transferStarted(now:Long) {firstTransfer.compareAndSet(-1,(now-startedAt).coerceAtLeast(0))}
- fun bytesTransferred(count:Int) {bytes.addAndGet(count.toLong())}
+ fun bytesTransferred(count:Int,isMedia:Boolean=false) {bytes.addAndGet(count.toLong());if(isMedia)mediaBytes.addAndGet(count.toLong())}
 }
 object SourceSelector {
  fun rank(sources:List<Source>,stats:Map<String,Quality>,network:String):List<Source> {
@@ -105,7 +107,7 @@ object SourceSelector {
   return preferred+aliases
  }
 }
-data class HealthSample(val now:Long,val ready:Boolean=false,val buffering:Boolean=false,val hasVideo:Boolean=true,val audioAdvancing:Boolean=false,val positionMs:Long=0,val renderedFrames:Int=0,val paused:Boolean=false)
+data class HealthSample(val now:Long,val ready:Boolean=false,val buffering:Boolean=false,val hasVideo:Boolean=true,val audioAdvancing:Boolean=false,val positionMs:Long=0,val renderedFrames:Int=0,val paused:Boolean=false,val downloadedMediaBytes:Long=0,val bufferedPositionMs:Long=0)
 class PlaybackHealthMonitor(val config:PolicyConfig=PolicyConfig()) {
  private var started=0L
  var firstFrameMs:Long?=null; private set
@@ -114,13 +116,21 @@ class PlaybackHealthMonitor(val config:PolicyConfig=PolicyConfig()) {
  private var lastFrameMovement=0L
  private var position=-1L
  private var frames=-1
+ private var lastStartupProgress=0L
+ private var downloadedMediaBytes=0L
+ private var bufferedPositionMs=0L
  private val stallStarts=java.util.ArrayDeque<Long>()
- fun begin(now:Long) {started=now;firstFrameMs=null;bufferingAt=null;stallStarts.clear();lastMovement=now;lastFrameMovement=now;position=-1;frames=-1}
+ fun begin(now:Long,mediaBytes:Long=0,bufferedPosition:Long=0) {started=now;firstFrameMs=null;bufferingAt=null;stallStarts.clear();lastMovement=now;lastFrameMovement=now;position=-1;frames=-1;lastStartupProgress=now;downloadedMediaBytes=mediaBytes;bufferedPositionMs=bufferedPosition}
  fun firstFrame(now:Long) {if(firstFrameMs==null) firstFrameMs=now-started;lastFrameMovement=now}
  fun observe(s:HealthSample):String? {
    if(s.paused) {bufferingAt=null;lastMovement=s.now;lastFrameMovement=s.now;return null}
-   if(s.hasVideo && firstFrameMs==null && s.now-started>=config.firstFrameTimeoutMs) return "first_frame_timeout"
-   if(!s.ready && firstFrameMs==null && s.now-started>=config.prepareTimeoutMs) return "prepare_timeout"
+   if(s.downloadedMediaBytes>downloadedMediaBytes || s.bufferedPositionMs>bufferedPositionMs) {
+     lastStartupProgress=s.now
+     if(firstFrameMs==null && bufferingAt!=null)bufferingAt=s.now
+   }
+   downloadedMediaBytes=s.downloadedMediaBytes;bufferedPositionMs=s.bufferedPositionMs
+   if(s.hasVideo && firstFrameMs==null && s.now-lastStartupProgress>=config.firstFrameTimeoutMs) return "first_frame_timeout"
+   if(!s.ready && firstFrameMs==null && s.now-lastStartupProgress>=config.prepareTimeoutMs) return "prepare_timeout"
    while(stallStarts.isNotEmpty() && s.now-stallStarts.first>config.stallWindowMs)stallStarts.removeFirst()
    if(s.buffering) {
      if(bufferingAt==null) {

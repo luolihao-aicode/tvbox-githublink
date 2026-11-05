@@ -37,7 +37,7 @@ class PlaybackEngine(private val context:Context,private val view:PlayerView,pri
     private var downloadBytesPerSecond=0L
     private var progress=PlaybackAttemptProgress()
     private class HttpAttempt(val sourceId:String,val number:Int,val progress:NetworkAttemptProgress)
-    private class HttpTransfer(val attempt:HttpAttempt,val startedAt:Long,val url:String)
+    private class HttpTransfer(val attempt:HttpAttempt,val startedAt:Long,val url:String,var isMedia:Boolean=false)
     @Volatile private var httpAttempt=HttpAttempt("none",0,NetworkAttemptProgress(0))
     private val transfers=java.util.IdentityHashMap<DataSource,HttpTransfer>()
     private val transferListener=object:TransferListener {
@@ -50,12 +50,15 @@ class PlaybackEngine(private val context:Context,private val view:PlayerView,pri
         override fun onTransferStart(source:DataSource,dataSpec:DataSpec,isNetwork:Boolean) {
             val transfer=synchronized(transfers){transfers[source]}?:return
             val now=SystemClock.elapsedRealtime()
+            val contentType=source.responseHeaders.entries.firstOrNull{it.key.equals("Content-Type",true)}?.value?.joinToString(";").orEmpty()
+            transfer.isMedia=!dataSpec.uri.path.orEmpty().endsWith(".m3u8",true) &&
+                !contentType.contains("mpegurl",true) && !contentType.startsWith("text/",true)
             transfer.attempt.progress.transferStarted(now)
             log.event("http_transfer_start","source=${transfer.attempt.sourceId} attempt=${transfer.attempt.number} url=${transfer.url} elapsed_ms=${now-transfer.startedAt}")
         }
         override fun onBytesTransferred(source:DataSource,dataSpec:DataSpec,isNetwork:Boolean,bytesTransferred:Int) {
             val transfer=synchronized(transfers){transfers[source]}?:return
-            transfer.attempt.progress.bytesTransferred(bytesTransferred)
+            transfer.attempt.progress.bytesTransferred(bytesTransferred,transfer.isMedia)
         }
         override fun onTransferEnd(source:DataSource,dataSpec:DataSpec,isNetwork:Boolean) {
             val transfer=synchronized(transfers){transfers.remove(source)}?:return
@@ -203,7 +206,7 @@ class PlaybackEngine(private val context:Context,private val view:PlayerView,pri
         updateQuality{it.copy(failures=it.failures+1,switches=it.switches+if(action.kind==ActionKind.SWITCH)1 else 0,lastPlayed=System.currentTimeMillis())}
         stable=true;state="RECOVERING";recovering=true
         if(action.kind!=ActionKind.REJOIN_LIVE)player?.stop()
-        log.event("recovery","reason=$reason action=${action.kind} next=${action.sourceId} delay=${action.delayMs} ${progressDetail(now)}")
+        log.event("recovery","reason=$reason action=${action.kind} next=${action.sourceId} delay=${action.delayMs} media_bytes=${httpAttempt.progress.transferredMediaBytes} ${timelineDetail()} ${progressDetail(now)}")
         if(action.kind==ActionKind.EXHAUSTED){state="EXHAUSTED";recovering=false;onStatus("本轮播放重试已结束。请换台或从频道列表重新尝试");return}
         onStatus("播放恢复中：${when(action.kind){ActionKind.RETRY->"重试当前源";ActionKind.REBUILD->"重建解码会话";ActionKind.REJOIN_LIVE->"重新同步直播位置";else->"切换备用源"}}")
         val token=epoch
@@ -217,7 +220,9 @@ class PlaybackEngine(private val context:Context,private val view:PlayerView,pri
     private fun rejoinLiveEdge() {
         val p=player?:return
         val now=SystemClock.elapsedRealtime()
-        sessionFirstFrame=false;firstFrameMs=null;monitor.begin(now);progress.begin(now,source?.id)
+        sessionFirstFrame=false;firstFrameMs=null
+        monitor.begin(now,httpAttempt.progress.transferredMediaBytes,p.bufferedPosition)
+        progress.begin(now,source?.id)
         state="PREPARING";recovering=false
         log.event("live_rejoin","source=${source?.id} ${timelineDetail()} ${progressDetail(now)}")
         // 只返回当前直播窗口；不替换媒体项、不新建播放器，重试预算由原策略保留。
@@ -244,7 +249,8 @@ class PlaybackEngine(private val context:Context,private val view:PlayerView,pri
                 }
                 if(fpsAt==0L){fpsAt=now;fpsFrames=frames}
                 else if(now-fpsAt>=3000){actualFrameRate=if(p.isPlaying && hasVideo)(frames-fpsFrames).coerceAtLeast(0)*1000.0/(now-fpsAt) else null;fpsAt=now;fpsFrames=frames}
-                val reason=monitor.observe(HealthSample(SystemClock.elapsedRealtime(),p.playbackState==Player.STATE_READY,p.playbackState==Player.STATE_BUFFERING,!tracksKnown || hasVideo,pos>lastPosition,pos,counters?.renderedOutputBufferCount?:0,!p.playWhenReady))
+                val reason=monitor.observe(HealthSample(SystemClock.elapsedRealtime(),p.playbackState==Player.STATE_READY,p.playbackState==Player.STATE_BUFFERING,!tracksKnown || hasVideo,pos>lastPosition,pos,counters?.renderedOutputBufferCount?:0,!p.playWhenReady,
+                    downloadedMediaBytes=attempt.progress.transferredMediaBytes,bufferedPositionMs=p.bufferedPosition))
                 lastPosition=pos
                 if(reason!=null && shouldRecoverHealth(reason))recover(reason)
                 if(watchedAt>0 && SystemClock.elapsedRealtime()-watchedAt>15000)flushWatch()

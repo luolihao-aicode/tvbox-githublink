@@ -4,6 +4,27 @@ import org.junit.Assert.*
 import org.junit.Test
 
 class PlaybackPolicyTest {
+    @Test fun playlistTrafficDoesNotCountAsMediaDownloadProgress() {
+        val progress=NetworkAttemptProgress(0)
+        progress.bytesTransferred(300)
+        assertEquals(0L,progress.transferredMediaBytes)
+        progress.bytesTransferred(2000,isMedia=true)
+        assertEquals(2000L,progress.transferredMediaBytes)
+        assertEquals(2300L,progress.transferredBytes)
+    }
+    @Test fun mediaDownloadProgressKeepsStartupAliveUntilDataActuallyStops() {
+        val h=PlaybackHealthMonitor();h.begin(0)
+        for(time in 1000L..30000L step 1000L)
+            assertNull(h.observe(HealthSample(time,buffering=true,downloadedMediaBytes=time*200)))
+        assertNull(h.observe(HealthSample(41000,buffering=true,downloadedMediaBytes=6000000)))
+        assertEquals("first_frame_timeout",h.observe(HealthSample(42000,buffering=true,downloadedMediaBytes=6000000)))
+    }
+    @Test fun growingMediaBufferKeepsStartupAliveWithoutNewNetworkBytes() {
+        val h=PlaybackHealthMonitor();h.begin(0)
+        assertNull(h.observe(HealthSample(11000,buffering=true,bufferedPositionMs=1000)))
+        assertNull(h.observe(HealthSample(21000,buffering=true,bufferedPositionMs=3000)))
+        assertNull(h.observe(HealthSample(31000,buffering=true,bufferedPositionMs=5000)))
+    }
     @Test fun exhaustedBackupsReturnToPreviouslyRenderedSourceWithBackoff() {
         val p=RecoveryPolicy(listOf(source("a"),source("b")))
         p.rendered("a")
