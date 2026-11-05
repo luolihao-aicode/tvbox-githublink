@@ -4,6 +4,22 @@ import org.junit.Assert.*
 import org.junit.Test
 
 class PlaybackPolicyTest {
+    @Test fun exhaustedBackupsReturnToPreviouslyRenderedSourceWithBackoff() {
+        val p=RecoveryPolicy(listOf(source("a"),source("b")))
+        p.rendered("a")
+        assertTrue(p.keepBuffering("continuous_buffering","a"))
+        assertFalse(p.keepBuffering("continuous_buffering","b"))
+        assertFalse(p.keepBuffering("player_error_ERROR_CODE_IO_NETWORK_CONNECTION_TIMEOUT","a"))
+        assertEquals(ActionKind.SWITCH,p.failure(0,fatalDecode=true).kind)
+        val fallback=p.failure(3000,fatalDecode=true)
+        assertEquals(ActionKind.RETRY,fallback.kind)
+        assertEquals("a",fallback.sourceId)
+        assertTrue(fallback.delayMs>=30000)
+        assertEquals(0,p.index)
+        for(now in listOf(70000L,140000L,210000L,280000L)) {
+            assertNotEquals(ActionKind.EXHAUSTED,p.failure(now,fatalDecode=true).kind)
+        }
+    }
     @Test fun downloadSpeedUsesElapsedTimeAndClearsOnSourceChange() {
         val speed=DownloadSpeedSampler()
         assertEquals(0L,speed.sample(1000,100,"a"))

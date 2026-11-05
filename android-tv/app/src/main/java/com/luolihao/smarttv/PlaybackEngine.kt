@@ -154,6 +154,7 @@ class PlaybackEngine(private val context:Context,private val view:PlayerView,pri
             if(recovering || closed)return
             val now=SystemClock.elapsedRealtime()
             monitor.firstFrame(now);progress.firstFrame(now);firstFrameMs=monitor.firstFrameMs;firstFrames++
+            source?.id?.let{policy?.rendered(it)}
             if(!sessionFirstFrame) {
                 sessionFirstFrame=true;watchedAt=SystemClock.elapsedRealtime()
                 updateQuality{it.copy(successes=it.successes+1,firstFrameMs=firstFrameMs?:0,lastPlayed=System.currentTimeMillis())}
@@ -189,6 +190,8 @@ class PlaybackEngine(private val context:Context,private val view:PlayerView,pri
     }
     private fun recover(reason:String,fatalDecode:Boolean=false,liveWindowExpired:Boolean=false) {
         if(recovering || closed || state=="EXHAUSTED" || !shouldRecoverHealth(reason))return
+        // 已有首帧的线路交给内核继续缓冲；不因应用层12秒超时主动stop。
+        if(policy?.keepBuffering(reason,source?.id)==true)return
         val now=SystemClock.elapsedRealtime()
         val action=policy?.failure(now,fatalDecode,progress.shouldPreferBackup(reason),liveWindowExpired)?:return
         if(action.kind==ActionKind.WAIT) {
@@ -237,7 +240,7 @@ class PlaybackEngine(private val context:Context,private val view:PlayerView,pri
                 downloadBytesPerSecond=downloadSpeed.sample(now,attempt.progress.transferredBytes,"${attempt.sourceId}:${attempt.number}:$epoch")
                 if(p.playbackState==Player.STATE_BUFFERING) {
                     onStatus("${channel?.name} · 缓冲中 · 下载 ${downloadSpeedText(downloadBytesPerSecond)} · 已缓冲 ${p.totalBufferedDuration/1000}秒")
-                    log.event("buffering_download","bytes_per_second=$downloadBytesPerSecond ${timelineDetail()}")
+                    log.event("buffering_download","bytes_per_second=$downloadBytesPerSecond loading=${p.isLoading} playback_speed=${p.playbackParameters.speed} declared_video_bitrate=${p.videoFormat?.bitrate} ${timelineDetail()}")
                 }
                 if(fpsAt==0L){fpsAt=now;fpsFrames=frames}
                 else if(now-fpsAt>=3000){actualFrameRate=if(p.isPlaying && hasVideo)(frames-fpsFrames).coerceAtLeast(0)*1000.0/(now-fpsAt) else null;fpsAt=now;fpsFrames=frames}

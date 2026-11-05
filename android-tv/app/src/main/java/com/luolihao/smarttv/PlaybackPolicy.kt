@@ -24,6 +24,9 @@ fun downloadSpeedText(bytesPerSecond:Long):String = if(bytesPerSecond>=1024*1024
 enum class ActionKind { RETRY, REBUILD, REJOIN_LIVE, SWITCH, WAIT, EXHAUSTED }
 data class RecoveryAction(val kind:ActionKind,val sourceId:String?=null,val delayMs:Long=0)
 class RecoveryPolicy(val sources:List<Source>,val config:PolicyConfig=PolicyConfig()) {
+ private val renderedSources=linkedSetOf<String>()
+ fun rendered(sourceId:String) {renderedSources.remove(sourceId);renderedSources.add(sourceId)}
+ fun keepBuffering(reason:String,sourceId:String?):Boolean = reason=="continuous_buffering" && sourceId in renderedSources
  val quarantineUntil=mutableMapOf<String,Long>()
  var index=0; private set
  private var attempts=0
@@ -45,7 +48,14 @@ class RecoveryPolicy(val sources:List<Source>,val config:PolicyConfig=PolicyConf
    }
    quarantineUntil[sources[index].id]=now+config.quarantineMs
    val next=((index+1) until sources.size).firstOrNull{(quarantineUntil[sources[it].id]?:0)<=now}
-   if(next==null) {exhausted=true;return RecoveryAction(ActionKind.EXHAUSTED)}
+   if(next==null) {
+     val known=renderedSources.lastOrNull()?.let{id->sources.indexOfFirst{it.id==id}}?:-1
+     if(known>=0) {
+       index=known;attempts=0
+       return RecoveryAction(ActionKind.RETRY,sources[index].id,config.quarantineMs.coerceAtLeast(30000))
+     }
+     exhausted=true;return RecoveryAction(ActionKind.EXHAUSTED)
+   }
    index=next;attempts=0
    return RecoveryAction(ActionKind.SWITCH,sources[index].id,500)
  }

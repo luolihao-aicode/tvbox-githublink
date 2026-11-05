@@ -18,6 +18,7 @@ class TvPlaybackTest {
         val method=PlaybackEngine::class.java.getDeclaredMethod("recover",String::class.java,Boolean::class.javaPrimitiveType,Boolean::class.javaPrimitiveType).apply{isAccessible=true}
         instrumentation.runOnMainSync {
             repeat(4){method.invoke(activity.engine,"frequent_buffering",false,false)}
+            repeat(4){method.invoke(activity.engine,"continuous_buffering",false,false)}
             assertEquals("PLAYING",activity.engine.state)
             assertEquals("diagnostic-good",activity.engine.source?.id)
             assertEquals(1,activity.engine.activePlayerCount)
