@@ -38,6 +38,9 @@ class MainActivity:Activity() {
     private var refreshEpoch=0
     private var statusEpoch=0
     private var screen="channels"
+    private var pushServer:PhonePushServer?=null
+    private var subscriptionStatus:TextView?=null
+    @Volatile private var subscriptionSession=0
     private var diagnosticHoldTriggered=false
     private val diagnosticHold=Runnable {diagnosticHoldTriggered=true;showPhotoDiagnostics()}
     val panelVisible:Boolean get()=::overlay.isInitialized && overlay.visibility==View.VISIBLE
@@ -65,7 +68,7 @@ class MainActivity:Activity() {
         hidePanel();refreshCatalog()
     }
     override fun onStart() {super.onStart();if(::engine.isInitialized && engine.activePlayerCount==0)engine.channel?.let{engine.play(it)}}
-    override fun onStop(){if(::root.isInitialized)root.removeCallbacks(diagnosticHold);if(::engine.isInitialized)engine.stop();super.onStop()}
+    override fun onStop(){closePushServer();if(::root.isInitialized)root.removeCallbacks(diagnosticHold);if(::engine.isInitialized)engine.stop();super.onStop()}
     override fun onDestroy(){refreshEpoch++;worker.shutdownNow();if(::engine.isInitialized)engine.close();super.onDestroy()}
     private fun dp(value:Int)=(resources.displayMetrics.density*value).toInt()
     private fun text(value:String,size:Int=20)=TextView(this).apply{this.text=value;textSize=size.toFloat();setTextColor(Color.WHITE);setPadding(dp(8),dp(5),dp(8),dp(5))}
@@ -83,12 +86,13 @@ class MainActivity:Activity() {
         val row=LinearLayout(this).apply{orientation=LinearLayout.HORIZONTAL}
         row.addView(button("频道"){showChannels()},LinearLayout.LayoutParams(0,dp(48),1f).apply{setMargins(dp(4),dp(4),dp(4),dp(4))})
         row.addView(button("设置",SETTINGS_ID){showSettings()},LinearLayout.LayoutParams(0,dp(48),1f).apply{setMargins(dp(4),dp(4),dp(4),dp(4))})
-        row.addView(button("诊断",DIAGNOSTICS_ID){showDiagnostics()},LinearLayout.LayoutParams(0,dp(48),1f).apply{setMargins(dp(4),dp(4),dp(4),dp(4))})
         row.addView(button("返回播放",CLOSE_ID){hidePanel()},LinearLayout.LayoutParams(0,dp(48),1f).apply{setMargins(dp(4),dp(4),dp(4),dp(4))})
         overlay.addView(row)
     }
-    private fun hidePanel(){overlay.visibility=View.GONE;root.isFocusableInTouchMode=true;root.requestFocus()}
+    private fun closePushServer(){subscriptionSession++;pushServer?.close();pushServer=null;subscriptionStatus=null}
+    private fun hidePanel(){closePushServer();overlay.visibility=View.GONE;root.isFocusableInTouchMode=true;root.requestFocus()}
     fun showChannels() {
+        closePushServer()
         if(!panelVisible)engine.channel?.let{category=when(it.group){"卫视","地方频道"->"地方台";else->it.group}}
         val previousFocus=if(screen=="channels")currentFocus?.contentDescription?.toString() else null
         screen="channels";overlay.removeAllViews();overlay.visibility=View.VISIBLE
@@ -105,6 +109,7 @@ class MainActivity:Activity() {
         val channelColumn=LinearLayout(this).apply{orientation=LinearLayout.VERTICAL}
         body.addView(channelColumn,LinearLayout.LayoutParams(0,-1,1f))
         overlay.addView(body,LinearLayout.LayoutParams(-1,0,1f))
+        overlay.addView(button("订阅设置",SETTINGS_ID){showSettings()}.apply{contentDescription="订阅设置"},LinearLayout.LayoutParams(-1,dp(44)))
         var firstChannel:View?=null
         val categoryButtons=mutableMapOf<String,Button>()
         val channelButtons=mutableMapOf<String,Button>()
@@ -161,29 +166,63 @@ class MainActivity:Activity() {
         input.requestFocus()
     }
     fun showSettings() {
-        screen="settings";toolbar("设置")
+        closePushServer();screen="settings";toolbar("订阅设置")
         val content=LinearLayout(this).apply{orientation=LinearLayout.VERTICAL}
-        val scroll=ScrollView(this).apply{addView(content)}
-        overlay.addView(scroll,LinearLayout.LayoutParams(-1,0,1f))
-        content.addView(button("载入央视与四个卫视试播频道") {
-            store.configUrl=LocalStore.TV_TRIAL_URL;seedTrialCache();catalog=repository.cached(store.configUrl)?.catalog
-            query="";category="央视";page=0;showChannels();refreshCatalog()
-        }.apply{contentDescription="载入试播频道"},LinearLayout.LayoutParams(-1,dp(48)))
-        content.addView(text("频道目录地址（HTTPS）",19))
-        val address=EditText(this).apply{setText(store.configUrl);textSize=17f;setTextColor(Color.WHITE);isSingleLine=true;inputType=android.text.InputType.TYPE_CLASS_TEXT or android.text.InputType.TYPE_TEXT_VARIATION_URI;setSelectAllOnFocus(true);contentDescription="HTTPS频道目录地址"}
+        overlay.addView(ScrollView(this).apply{addView(content)},LinearLayout.LayoutParams(-1,0,1f))
+        content.addView(text("手机扫码输入订阅 · 手机与电视连接同一路由器",20))
+        subscriptionStatus=text("支持M3U / M3U8频道列表和本项目JSON目录；单台直播地址不是订阅。",16)
+        content.addView(subscriptionStatus)
+        try {
+            val manager=getSystemService(android.net.ConnectivityManager::class.java)
+            val address=manager.getLinkProperties(manager.activeNetwork)?.linkAddresses?.map{it.address}?.firstOrNull{it is java.net.Inet4Address && !it.isLoopbackAddress}?.hostAddress
+            if(address==null)content.addView(text("未获取局域网地址，请连接Wi-Fi或网线后重新打开设置。",17))
+            else {
+                val server=PhonePushServer{url->loadSubscription(url)};pushServer=server
+                val link="http://$address:${server.port}/${server.token}"
+                val matrix=com.google.zxing.qrcode.QRCodeWriter().encode(link,com.google.zxing.BarcodeFormat.QR_CODE,360,360)
+                val pixels=IntArray(360*360){i->if(matrix[i%360,i/360])Color.BLACK else Color.WHITE}
+                val bitmap=android.graphics.Bitmap.createBitmap(pixels,360,360,android.graphics.Bitmap.Config.ARGB_8888)
+                content.addView(ImageView(this).apply{setImageBitmap(bitmap);contentDescription="手机推送订阅二维码"},LinearLayout.LayoutParams(dp(210),dp(210)).apply{gravity=Gravity.CENTER_HORIZONTAL})
+                content.addView(text("保持此页打开，扫码后填写地址并提交。若无法扫码，可在手机浏览器输入：\n$link",14))
+            }
+        }catch(_:Exception){content.addView(text("扫码服务启动失败，可在下方直接输入订阅地址。",17))}
+        val address=EditText(this).apply{setText(store.activeUrl);textSize=17f;setTextColor(Color.WHITE);isSingleLine=true;inputType=android.text.InputType.TYPE_CLASS_TEXT or android.text.InputType.TYPE_TEXT_VARIATION_URI;contentDescription="订阅地址"}
         content.addView(address,LinearLayout.LayoutParams(-1,dp(54)))
-        content.addView(button("保存并更新目录") {
-            try {store.configUrl=address.text.toString();catalog=repository.cached(store.configUrl)?.catalog;loadMessage="正在更新新目录…";showChannels();refreshCatalog()}
-            catch(e:Exception){Toast.makeText(this,e.message?:"配置地址无效",Toast.LENGTH_LONG).show()}
+        val save=button("保存并加载订阅") {
+            subscriptionStatus?.text="正在下载并校验订阅…"
+            val url=address.text.toString()
+            worker.execute {try{loadSubscription(url)}catch(_:Exception){runOnUiThread{subscriptionStatus?.text="加载失败，原频道已保留，请检查地址和网络。"}}}
+        }
+        content.addView(save,LinearLayout.LayoutParams(-1,dp(48)))
+        content.addView(button("刷新当前订阅"){refreshCatalog();subscriptionStatus?.text="正在刷新当前订阅…"},LinearLayout.LayoutParams(-1,dp(48)))
+        content.addView(button("恢复默认订阅") {
+            refreshEpoch++;store.subscriptionUrl="";store.configUrl=LocalStore.TV_TRIAL_URL
+            engine.stop();catalog=null;query="";seedTrialCache();refreshCatalog(replacePlayback=true);showChannels()
         },LinearLayout.LayoutParams(-1,dp(48)))
-        content.addView(button("备用 HTTP 预检：${if(store.preflight)"开启" else "关闭（低资源默认）"}"){store.preflight=!store.preflight;showSettings()},LinearLayout.LayoutParams(-1,dp(48)))
-        content.addView(text("预检只检查下一个 HTTPS 地址的连通性，不预加载视频，不创建备用播放器。不能证明备用源可解码。",15))
-        content.addView(button("缓冲策略：${if(store.stableBuffer)"稳定优先" else "均衡"}"){store.stableBuffer=!store.stableBuffer;showSettings()},LinearLayout.LayoutParams(-1,dp(48)))
-        content.addView(text("切台后应用新缓冲策略。发生故障时自动提高缓冲上限。实际缓存受带宽、媒体时间轴和内存上限影响。",15))
-        content.addView(button("刷新频道目录"){refreshCatalog();Toast.makeText(this,"正在后台更新",Toast.LENGTH_SHORT).show()},LinearLayout.LayoutParams(-1,dp(48)))
-        content.addView(button("清除本地观看记录与质量统计"){store.clearHistory();Toast.makeText(this,"已清除",Toast.LENGTH_SHORT).show()},LinearLayout.LayoutParams(-1,dp(48)))
-        content.addView(text("版本 ${BuildConfig.VERSION_NAME}\n测试版，尚未上架，暂无商店更新渠道。\n观看数据只保存在这台设备，不上传。\n目录状态：$loadMessage",16))
-        address.requestFocus()
+        content.addView(text("版本 ${BuildConfig.VERSION_NAME} · 订阅保存在本机，关闭设置后扫码地址失效。",15))
+        findViewById<View>(CLOSE_ID).requestFocus()
+    }
+    private fun loadSubscription(value:String):String {
+        val session=subscriptionSession
+        val url=validateSubscriptionUrl(value)
+        val result=repository.refresh(url,subscription=true)
+        require(!result.failed && result.catalog!=null && result.catalog.channels.isNotEmpty()){"订阅加载失败，原频道已保留"}
+        val done=java.util.concurrent.CountDownLatch(1)
+        var applied=false
+        runOnUiThread {
+            try {
+                if(!isDestroyed && session==subscriptionSession && screen=="settings" && panelVisible) {
+                    refreshEpoch++;store.subscriptionUrl=url;catalog=result.catalog;loadMessage=result.message
+                    query="";category=result.catalog.channels.first().group
+                    engine.play(result.catalog.channels.first())
+                    subscriptionStatus?.text="已加载 ${result.catalog.channels.size} 个频道，按返回键选择频道。"
+                    log.event("subscription_applied","channels=${result.catalog.channels.size}")
+                    applied=true
+                }
+            } finally {done.countDown()}
+        }
+        require(done.await(5,java.util.concurrent.TimeUnit.SECONDS) && applied){"设置已关闭，请重新扫码"}
+        return "已加载 ${result.catalog.channels.size} 个频道"
     }
     fun showDiagnostics() {
         screen="diagnostics";toolbar("播放诊断")
@@ -230,16 +269,19 @@ class MainActivity:Activity() {
         sources.forEach{store.updateQuality("${engine.network}:${it.id}"){Quality()}}
         engine.play(Channel("__diagnostic__","本地诊断 · $mode","诊断","",sources));hidePanel()
     }
-    private fun refreshCatalog() {
-        val url=store.configUrl;val token=++refreshEpoch
-        repository.cached(url)?.let{catalog=it.catalog;loadMessage="已加载本地有效缓存；正在检查目录更新";startInitialChannel();if(screen=="channels" && panelVisible)showChannels()}
+    private fun refreshCatalog(replacePlayback:Boolean=false) {
+        val url=store.activeUrl;val token=++refreshEpoch
+        repository.cached(url)?.let{catalog=it.catalog;loadMessage="已加载本地有效缓存；正在检查目录更新";if(replacePlayback)it.catalog.channels.firstOrNull()?.let(engine::play) else startInitialChannel();if(screen=="channels" && panelVisible)showChannels()}
         worker.execute {
-            val result=repository.refresh(url)
+            val result=repository.refresh(url,store.subscriptionUrl.isNotBlank())
             runOnUiThread {
                 if(!isDestroyed && token==refreshEpoch) {
-                    catalog=result.catalog;loadMessage=result.message
+                    if(result.catalog!=null)catalog=result.catalog
+                    loadMessage=result.message
+                    if(replacePlayback && result.catalog!=null && result.catalog.channels.none{it.id==engine.channel?.id})result.catalog.channels.firstOrNull()?.let(engine::play)
                     startInitialChannel()
                     log.event("catalog_refresh","channels=${result.catalog?.channels?.size?:0} cached=${result.cached} status=${result.message}")
+                    if(panelVisible && screen=="settings")subscriptionStatus?.text=result.message
                     if(panelVisible && screen=="channels")showChannels()
                 }
             }
@@ -260,6 +302,7 @@ class MainActivity:Activity() {
         } catch(_:Exception) {log.event("bundled_trial_unavailable")}
     }
     override fun onKeyDown(keyCode:Int,event:KeyEvent):Boolean {
+        if(keyCode==KeyEvent.KEYCODE_MENU){showSettings();return true}
         if(screen=="photo-diagnostics" && panelVisible) {
             if(keyCode==KeyEvent.KEYCODE_BACK){screen="channels";hidePanel();return true}
             if(keyCode in listOf(KeyEvent.KEYCODE_DPAD_CENTER,KeyEvent.KEYCODE_ENTER)){showPhotoDiagnostics();return true}

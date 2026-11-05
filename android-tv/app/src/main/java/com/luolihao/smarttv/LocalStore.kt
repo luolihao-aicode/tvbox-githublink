@@ -7,6 +7,10 @@ import java.io.File
 class LocalStore(context:Context) {
     companion object { const val TV_TRIAL_URL="https://luolihao-aicode.github.io/tvbox-githublink/tv-test.json" }
     private val prefs=context.getSharedPreferences("smart-tv",Context.MODE_PRIVATE)
+    var subscriptionUrl:String
+        get()=prefs.getString("subscription_url","")!!
+        set(value){prefs.edit().putString("subscription_url",if(value.isBlank())"" else validateSubscriptionUrl(value)).apply()}
+    val activeUrl:String get()=subscriptionUrl.ifBlank{configUrl}
     var configUrl:String
         get()=prefs.getString("config_url",TV_TRIAL_URL)!!.let {
             if(it=="https://luolihao-aicode.github.io/tvbox-githublink/channels.json")TV_TRIAL_URL else it

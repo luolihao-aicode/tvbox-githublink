@@ -87,8 +87,9 @@ class TvChannelMenuTest {
         key(KeyEvent.KEYCODE_BACK)
         instrumentation.runOnMainSync{assertFalse(activity.panelVisible)}
     }
-    @Test fun viewerOnlySeesCategoriesAndChannelsWithoutUtilityButtons() {
+    @Test fun viewerHasSubscriptionSettingsButNoUnrequestedUtilityButtons() {
         instrumentation.runOnMainSync {
+            assertNotNull(find("订阅设置"))
             for(label in listOf("设置","搜索","诊断","分类：收藏","分类：最近","分类：全部"))assertNull(label,find(label))
         }
     }
