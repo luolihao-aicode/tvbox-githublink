@@ -102,8 +102,10 @@ class TvChannelMenuTest {
         instrumentation.runOnMainSync {
             assertNotNull(find("频道：CCTV-1 综合"))
             val saved=CatalogCache(File(activity.filesDir,"catalog-cache")).read(LocalStore.TV_TRIAL_URL)
-            assertEquals(14,saved?.catalog?.channels?.size)
-            assertEquals(setOf("央视","地方台"),saved!!.catalog.channels.map{it.group}.toSet())
+            // 用户已把在线目录扩为同源央视；启动时允许在线新目录替换14台旧快照。
+            assertNotNull(saved)
+            for(number in 1..10)assertTrue("缺少CCTV-$number",saved!!.catalog.channels.any{it.id=="cctv-$number"})
+            assertTrue(saved!!.catalog.channels.all{it.group in setOf("央视","地方台")})
         }
     }
 }

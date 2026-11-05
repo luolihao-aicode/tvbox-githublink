@@ -130,11 +130,17 @@ class PlaybackEngine(private val context:Context,private val view:PlayerView,pri
     }
     private val listener:Player.Listener=object:Player.Listener {
         override fun onPlaybackStateChanged(playbackState:Int) {
-            if(recovering || closed)return
+            log.event("player_state","source=${source?.id} callback=$playbackState app_state=$state recovering=$recovering ${timelineDetail()}")
+            if(recovering || closed || suspended || state=="EXHAUSTED")return
             state=when(playbackState){Player.STATE_BUFFERING->if(sessionFirstFrame)"BUFFERING" else "PREPARING";Player.STATE_READY->if(sessionFirstFrame || !hasVideo)"PLAYING" else "PREPARING";Player.STATE_ENDED->"ENDED";else->"IDLE"}
             if(playbackState==Player.STATE_BUFFERING && sessionFirstFrame) updateQuality{it.copy(stalls=it.stalls+1)}
             if(playbackState==Player.STATE_ENDED)recover("stream_ended")
             onStatus("${channel?.name?:""} · ${stateLabel()}")
+        }
+        override fun onTimelineChanged(timeline:androidx.media3.common.Timeline,reason:Int) {
+            val manifest=player?.currentManifest as? androidx.media3.exoplayer.hls.HlsManifest
+            val playlist=manifest?.mediaPlaylist
+            log.event("live_timeline","source=${source?.id} reason=$reason sequence=${playlist?.mediaSequence} segments=${playlist?.segments?.size} target_us=${playlist?.targetDurationUs} playlist_us=${playlist?.durationUs} ${timelineDetail()}")
         }
         override fun onTracksChanged(tracks:Tracks) {
             tracksKnown=!tracks.isEmpty
@@ -160,7 +166,8 @@ class PlaybackEngine(private val context:Context,private val view:PlayerView,pri
             val http=generateSequence<Throwable>(error){it.cause}.take(6).filterIsInstance<androidx.media3.datasource.HttpDataSource.InvalidResponseCodeException>().firstOrNull()?.responseCode
             lastErrorDetail=diagnosticErrorTypes(error)+(http?.let{" HTTP $it"}?:"")
             log.event("player_error","code=${error.errorCodeName} source=${source?.id} causes=$lastErrorDetail")
-            recover("player_error_${error.errorCodeName}",error.errorCode in 4000..4999 || error.errorCode in 3000..3999)
+            recover("player_error_${error.errorCodeName}",error.errorCode in 4000..4999 || error.errorCode in 3000..3999,
+                liveWindowExpired=error.errorCode==PlaybackException.ERROR_CODE_BEHIND_LIVE_WINDOW)
         }
     }
     private fun prepare(selected:Source,rebuild:Boolean) {
@@ -178,29 +185,44 @@ class PlaybackEngine(private val context:Context,private val view:PlayerView,pri
         log.event("prepare","source=${selected.id} url=${redactUrl(selected.url)} rebuild=$rebuild buffer=${if(stable)"stable" else "balanced"} ${progressDetail(now)}")
         onStatus("${channel?.name} · 正在载入")
     }
-    private fun recover(reason:String,fatalDecode:Boolean=false) {
+    private fun recover(reason:String,fatalDecode:Boolean=false,liveWindowExpired:Boolean=false) {
         if(recovering || closed || state=="EXHAUSTED")return
         // 短时间反复缓冲表明该线路不适合本机网络，有备源时直接换源。
         val now=SystemClock.elapsedRealtime()
-        val action=policy?.failure(now,fatalDecode || reason=="frequent_buffering",progress.shouldPreferBackup(reason))?:return
+        val action=policy?.failure(now,fatalDecode || reason=="frequent_buffering",progress.shouldPreferBackup(reason),liveWindowExpired)?:return
         if(action.kind==ActionKind.WAIT) {
             recovering=true;val token=epoch
-            handler.postDelayed({if(token==epoch && !closed){recovering=false;recover(reason,fatalDecode)}},action.delayMs);return
+            handler.postDelayed({if(token==epoch && !closed){recovering=false;recover(reason,fatalDecode,liveWindowExpired)}},action.delayMs);return
         }
         progress.failed(now)
         flushWatch();lastReason=reason;lastError=if(lastError=="无")reason else lastError
         updateQuality{it.copy(failures=it.failures+1,switches=it.switches+if(action.kind==ActionKind.SWITCH)1 else 0,lastPlayed=System.currentTimeMillis())}
-        stable=true;state="RECOVERING";recovering=true;player?.stop()
+        stable=true;state="RECOVERING";recovering=true
+        if(action.kind!=ActionKind.REJOIN_LIVE)player?.stop()
         log.event("recovery","reason=$reason action=${action.kind} next=${action.sourceId} delay=${action.delayMs} ${progressDetail(now)}")
         if(action.kind==ActionKind.EXHAUSTED){state="EXHAUSTED";recovering=false;onStatus("所有来源均不可用。请换台或稍后从频道列表重试");return}
-        onStatus("播放恢复中：${when(action.kind){ActionKind.RETRY->"重试当前源";ActionKind.REBUILD->"重建解码会话";else->"切换备用源"}}")
+        onStatus("播放恢复中：${when(action.kind){ActionKind.RETRY->"重试当前源";ActionKind.REBUILD->"重建解码会话";ActionKind.REJOIN_LIVE->"重新同步直播位置";else->"切换备用源"}}")
         val token=epoch
         handler.postDelayed({
             if(token==epoch && !closed) {
                 val next=policy!!.sources.first{it.id==action.sourceId}
-                prepare(next,action.kind!=ActionKind.RETRY)
+                if(action.kind==ActionKind.REJOIN_LIVE)rejoinLiveEdge() else prepare(next,action.kind!=ActionKind.RETRY)
             }
         },action.delayMs)
+    }
+    private fun rejoinLiveEdge() {
+        val p=player?:return
+        val now=SystemClock.elapsedRealtime()
+        sessionFirstFrame=false;firstFrameMs=null;monitor.begin(now);progress.begin(now,source?.id)
+        state="PREPARING";recovering=false
+        log.event("live_rejoin","source=${source?.id} ${timelineDetail()} ${progressDetail(now)}")
+        // 只返回当前直播窗口；不替换媒体项、不新建播放器，重试预算由原策略保留。
+        p.seekToDefaultPosition();p.prepare();p.playWhenReady=true
+        onStatus("${channel?.name} · 正在同步直播位置")
+    }
+    private fun timelineDetail():String {
+        val p=player?:return "player=none"
+        return "position_ms=${p.currentPosition} buffer_ms=${p.totalBufferedDuration} window_ms=${p.duration} live_offset_ms=${p.currentLiveOffset} is_live=${p.isCurrentMediaItemLive}"
     }
     private val tick:Runnable=object:Runnable {
         override fun run() {
@@ -278,6 +300,7 @@ class PlaybackEngine(private val context:Context,private val view:PlayerView,pri
 尝试：${progress.attempts}次  失败：${progress.failures}次  首帧累计等待：${progress.firstFrameWaitMs(SystemClock.elapsedRealtime())/1000}秒
 画面：${f?.width?:0}×${f?.height?:0}  ${f?.sampleMimeType?:"未识别视频"}  ${source?.type?:"未知协议"}
 缓存：${p?.totalBufferedDuration?:0}ms  收到：${httpAttempt.progress.transferredBytes}B  首传输：${httpAttempt.progress.firstTransferMs?.let{"${it}ms"}?:"未开始"}
+直播窗口：${p?.duration?.takeIf{it>=0}?:"未知"}ms  距直播点：${p?.currentLiveOffset?.takeIf{it>=0}?:"未知"}ms
 恢复原因：$lastReason
 错误码：$lastError
 失败类型：$lastErrorDetail

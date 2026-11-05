@@ -12,6 +12,51 @@ import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
 class TvPlaybackTest {
+    @Test fun liveWindowErrorRejoinsWithoutReplacingMediaOrPlayer() {
+        instrumentation.runOnMainSync{activity.startDiagnostic()}
+        waitFor{activity.engine.firstFrameMs!=null}
+        val field=PlaybackEngine::class.java.getDeclaredField("player").apply{isAccessible=true}
+        val file=java.io.File(instrumentation.targetContext.getExternalFilesDir(android.os.Environment.DIRECTORY_DOCUMENTS),"diagnostics/playback.log")
+        val before=file.readText().lines().count{it.contains(" prepare ")}
+        var original:Any?=null
+        instrumentation.runOnMainSync {
+            original=field.get(activity.engine)
+            // 真实播放错误时Media3已经进入IDLE；不能在仍正常出帧的READY播放器上只伪造回调。
+            (original as androidx.media3.exoplayer.ExoPlayer).stop()
+            assertEquals(androidx.media3.common.Player.STATE_IDLE,(original as androidx.media3.exoplayer.ExoPlayer).playbackState)
+            engineListener().onPlayerError(androidx.media3.common.PlaybackException("controlled live window failure",null,androidx.media3.common.PlaybackException.ERROR_CODE_BEHIND_LIVE_WINDOW))
+        }
+        waitFor(10000){activity.engine.state=="PLAYING" && file.readText().contains(" live_rejoin ")}
+        instrumentation.runOnMainSync{assertSame(original,field.get(activity.engine));assertEquals(1,activity.engine.activePlayerCount)}
+        assertEquals(before,file.readText().lines().count{it.contains(" prepare ")})
+    }
+    private fun engineListener():androidx.media3.common.Player.Listener {
+        val field=PlaybackEngine::class.java.getDeclaredField("listener");field.isAccessible=true
+        return field.get(activity.engine) as androidx.media3.common.Player.Listener
+    }
+    @Test fun idleCallbackCannotReplaceExhaustedStateWithMisleadingStandby() {
+        instrumentation.runOnMainSync{activity.startDiagnostic("all-failed")}
+        waitFor(30000){activity.engine.state=="EXHAUSTED"}
+        instrumentation.runOnMainSync {
+            engineListener().onPlaybackStateChanged(androidx.media3.common.Player.STATE_IDLE)
+            assertEquals("EXHAUSTED",activity.engine.state)
+        }
+    }
+    @Test fun bufferingCallbacksAloneDoNotReprepareOrRecreateThePlayer() {
+        instrumentation.runOnMainSync{activity.startDiagnostic()}
+        waitFor{activity.engine.firstFrameMs!=null}
+        val field=PlaybackEngine::class.java.getDeclaredField("player").apply{isAccessible=true}
+        instrumentation.runOnMainSync {
+            val before=field.get(activity.engine)
+            val source=activity.engine.source?.id
+            repeat(5) {
+                engineListener().onPlaybackStateChanged(androidx.media3.common.Player.STATE_BUFFERING)
+                engineListener().onPlaybackStateChanged(androidx.media3.common.Player.STATE_READY)
+            }
+            assertSame(before,field.get(activity.engine));assertEquals(source,activity.engine.source?.id)
+            assertEquals("PLAYING",activity.engine.state)
+        }
+    }
     @Test fun silentHttpPrimarySwitchesToVideoBackupWithinOneStartupTimeout() {
         val server=java.net.ServerSocket(0,1,java.net.InetAddress.getByName("127.0.0.1"))
         val release=java.util.concurrent.CountDownLatch(1)

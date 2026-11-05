@@ -4,6 +4,17 @@ import org.junit.Assert.*
 import org.junit.Test
 
 class PlaybackPolicyTest {
+    @Test fun liveWindowExpiryRejoinsLiveEdgeWithFiniteBudgetThenUsesBackup() {
+        val p=RecoveryPolicy(listOf(source("a"),source("b")))
+        assertEquals("REJOIN_LIVE",p.failure(0,liveWindowExpired=true).kind.name)
+        assertEquals(ActionKind.WAIT,p.failure(1,liveWindowExpired=true).kind)
+        assertEquals("REJOIN_LIVE",p.failure(3000,liveWindowExpired=true).kind.name)
+        assertEquals(ActionKind.SWITCH,p.failure(6000,liveWindowExpired=true).kind)
+        assertEquals("b",p.sources[p.index].id)
+        assertEquals("REJOIN_LIVE",p.failure(9000,liveWindowExpired=true).kind.name)
+        assertEquals("REJOIN_LIVE",p.failure(12000,liveWindowExpired=true).kind.name)
+        assertEquals(ActionKind.EXHAUSTED,p.failure(15000,liveWindowExpired=true).kind)
+    }
     @Test fun photoErrorSummaryIncludesCauseTypesWithoutSecrets() {
         val error=java.io.IOException("https://user:password@media.example/live?token=secret",java.net.SocketTimeoutException("secret"))
         assertEquals("IOException > SocketTimeoutException",diagnosticErrorTypes(error))

@@ -4,7 +4,7 @@ data class Source(val id:String,val url:String,val type:String,val score:Double,
 data class Quality(val successes:Int=0,val failures:Int=0,val watchedMs:Long=0,val firstFrameMs:Long=0,val stalls:Int=0,val switches:Int=0,val lastPlayed:Long=0)
 data class PolicyConfig(val firstFrameTimeoutMs:Long=12000,val prepareTimeoutMs:Long=15000,val bufferTimeoutMs:Long=12000,val stallTimeoutMs:Long=12000,val cooldownMs:Long=2000,val quarantineMs:Long=60000,val stallWindowMs:Long=60000,val maxStallsInWindow:Int=3)
 data class PlaybackPreferences(val preflightEnabled:Boolean=false)
-enum class ActionKind { RETRY, REBUILD, SWITCH, WAIT, EXHAUSTED }
+enum class ActionKind { RETRY, REBUILD, REJOIN_LIVE, SWITCH, WAIT, EXHAUSTED }
 data class RecoveryAction(val kind:ActionKind,val sourceId:String?=null,val delayMs:Long=0)
 class RecoveryPolicy(val sources:List<Source>,val config:PolicyConfig=PolicyConfig()) {
  val quarantineUntil=mutableMapOf<String,Long>()
@@ -12,11 +12,16 @@ class RecoveryPolicy(val sources:List<Source>,val config:PolicyConfig=PolicyConf
  private var attempts=0
  private var lastAction:Long?=null
  private var exhausted=false
- fun failure(now:Long,fatalDecode:Boolean=false,preferBackup:Boolean=false):RecoveryAction {
+ fun failure(now:Long,fatalDecode:Boolean=false,preferBackup:Boolean=false,liveWindowExpired:Boolean=false):RecoveryAction {
    if(exhausted || sources.isEmpty()) return RecoveryAction(ActionKind.EXHAUSTED)
    val elapsed=lastAction?.let{now-it}
    if(elapsed!=null && elapsed<config.cooldownMs) return RecoveryAction(ActionKind.WAIT,delayMs=config.cooldownMs-elapsed)
    lastAction=now
+   if(liveWindowExpired && attempts<2) {
+     attempts++
+     return RecoveryAction(ActionKind.REJOIN_LIVE,sources[index].id,500L*(1L shl attempts))
+   }
+   if(liveWindowExpired)attempts=2
    if(!fatalDecode && !(preferBackup && sources.size>1) && attempts<2) {
      attempts++
      return RecoveryAction(if(attempts==1) ActionKind.RETRY else ActionKind.REBUILD,sources[index].id,500L*(1L shl attempts))
