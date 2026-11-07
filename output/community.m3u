@@ -8,7 +8,7 @@ http://119.62.24.75:50085/tsfile/live/0002_1.m3u8?key=txiptv
 #EXTINF:-1 tvg-id="cctv-10" tvg-name="CCTV-10 科教" group-title="央视",CCTV-10 科教
 http://74.91.26.218:82/live/cctv10hd.m3u8
 #EXTINF:-1 tvg-id="cctv-11" tvg-name="CCTV-11 戏曲" group-title="央视",CCTV-11 戏曲
-http://vpn.famcloud.top:9878/rtp/239.3.1.152:8120
+http://221.14.142.118:9003/hls/11/index.m3u8
 #EXTINF:-1 tvg-id="cctv-12" tvg-name="CCTV-12 社会与法" group-title="央视",CCTV-12 社会与法
 http://74.91.26.218:82/live/cctv12hd.m3u8
 #EXTINF:-1 tvg-id="cctv-13" tvg-name="CCTV-13 新闻" group-title="央视",CCTV-13 新闻
@@ -18,7 +18,7 @@ http://119.62.24.75:50085/tsfile/live/0015_1.m3u8?key=txiptv
 #EXTINF:-1 tvg-id="cctv-15" tvg-name="CCTV-15 音乐" group-title="央视",CCTV-15 音乐
 http://74.91.26.218:82/live/cctv15hd.m3u8
 #EXTINF:-1 tvg-id="cctv-16" tvg-name="CCTV-16 奥林匹克" group-title="央视",CCTV-16 奥林匹克
-http://1.24.39.180:9003/hls/60/index.m3u8
+http://112.27.5.218:9901/tsfile/live/faacts/1001_1.m3u8?key=txiptv
 #EXTINF:-1 tvg-id="cctv-17" tvg-name="CCTV-17 农业农村" group-title="央视",CCTV-17 农业农村
 http://220.169.100.41:10087/udp/239.76.252.238:9000
 #EXTINF:-1 tvg-id="cctv-2" tvg-name="CCTV-2 财经" group-title="央视",CCTV-2 财经
@@ -65,8 +65,6 @@ http://119.62.24.75:50085/tsfile/live/0137_1.m3u8?key=txiptv
 http://bobohome.ignorelist.com:20247/fengshows?id=2.m3u8
 #EXTINF:-1 tvg-id="hk-phoenix-info" tvg-name="凤凰卫视资讯台" group-title="香港",凤凰卫视资讯台
 http://183.236.161.115:8960/live1171.m3u8
-#EXTINF:-1 tvg-id="hk-rthk-31" tvg-name="香港电台31" group-title="香港",香港电台31
-https://rthktv31-live.akamaized.net/hls/live/2036818/RTHKTV31/stream5/streamPlaylist.m3u8
 #EXTINF:-1 tvg-id="hk-tvb-jade" tvg-name="TVB 翡翠台" group-title="香港",TVB 翡翠台
 http://222.128.55.152:9080/live/gdfc.m3u8
 #EXTINF:-1 tvg-id="hubei-satellite" tvg-name="湖北卫视" group-title="地方频道",湖北卫视
@@ -78,7 +76,7 @@ https://ali-m-l.cztv.com/channels/lantian/channel007/1080p.m3u8
 #EXTINF:-1 tvg-id="jiangsu-satellite" tvg-name="江苏卫视" group-title="地方频道",江苏卫视
 http://39.150.102.131:19901/tsfile/live/0127_1.m3u8
 #EXTINF:-1 tvg-id="jiangxi-satellite" tvg-name="江西卫视" group-title="地方频道",江西卫视
-http://mg.cttv.vip/783847495
+http://112.27.5.218:9901/tsfile/live/faacts/0138_1.m3u8
 #EXTINF:-1 tvg-id="jilin-satellite" tvg-name="吉林卫视" group-title="地方频道",吉林卫视
 http://60.16.0.36:5757/hls/32/index.m3u8
 #EXTINF:-1 tvg-id="liaoning-satellite" tvg-name="辽宁卫视" group-title="地方频道",辽宁卫视
@@ -87,8 +85,6 @@ http://60.16.0.36:5757/hls/16/index.m3u8
 http://39.150.102.131:19901/tsfile/live/0112_1.m3u8
 #EXTINF:-1 tvg-id="qinghai-satellite" tvg-name="青海卫视" group-title="地方频道",青海卫视
 http://39.150.102.131:19901/tsfile/live/0140_1.m3u8
-#EXTINF:-1 tvg-id="shaanxi-satellite" tvg-name="陕西卫视" group-title="地方频道",陕西卫视
-http://mg.cttv.vip/738910838
 #EXTINF:-1 tvg-id="shandong-satellite" tvg-name="山东卫视" group-title="地方频道",山东卫视
 http://120.224.84.170:8085/hls/8/index.m3u8
 #EXTINF:-1 tvg-id="shanxi-satellite" tvg-name="山西卫视" group-title="地方频道",山西卫视
