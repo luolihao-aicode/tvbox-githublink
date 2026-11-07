@@ -1,29 +1,29 @@
 {
   "schema_version": 1,
-  "checked_at": "2026-11-07T22:15:38.952115+00:00",
+  "checked_at": "2026-11-07T22:49:30.234196+00:00",
   "discovered_sources": 326,
   "matched_sources": 4270,
   "checked_sources": 4270,
-  "successful_sources": 318,
-  "published_channels": 58,
+  "successful_sources": 329,
+  "published_channels": 57,
   "android_catalog_channels": 0,
   "android_catalog_retained_previous": false,
   "android_catalog_notice": "仅显式授权且合格的源纳入目录；公开访问不代表授权。空目录需要补充真实授权记录。",
   "filter_reasons": {
-    "HTTP_TIMEOUT": 2879,
-    "ENVIRONMENT_LIMITED": 537,
-    "HTTP_FAILED": 274,
-    "WAITING_SECOND_SUCCESS": 48,
-    "MEDIA_TIMEOUT": 188,
-    "INSUFFICIENT_MEDIA_DURATION": 20,
+    "HTTP_TIMEOUT": 2820,
+    "WAITING_SECOND_SUCCESS": 64,
+    "ENVIRONMENT_LIMITED": 535,
+    "HTTP_FAILED": 294,
+    "MEDIA_TIMEOUT": 220,
+    "INSUFFICIENT_MEDIA_DURATION": 18,
     "NON_LIVE_PLAYLIST": 3,
     "HTML_RESPONSE": 25,
+    "FFPROBE_FAILED": 12,
     "PLACEHOLDER_STREAM": 17,
-    "FFPROBE_FAILED": 15,
     "INVALID_HLS": 11,
+    "FIRST_BYTE_TIMEOUT": 2,
     "BELOW_HD_THRESHOLD": 5,
-    "MANUAL_REJECTION": 2,
-    "FIRST_BYTE_TIMEOUT": 1
+    "MANUAL_REJECTION": 2
   },
   "unknown_channel_names": [
     "ABN China (720p)",
@@ -127,15 +127,6 @@
     "Pingxiang TV News Channel (576p) [Not 24/7]",
     "QTV-1"
   ],
-  "issues": [
-    {
-      "source_url": "https://api.github.com/search/code",
-      "code": "GITHUB_SEARCH_FAILED"
-    },
-    {
-      "source_url": "https://api.github.com/search/code",
-      "code": "GITHUB_SEARCH_FAILED"
-    }
-  ],
+  "issues": [],
   "message": "检测完成"
 }
