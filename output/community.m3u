@@ -8,7 +8,7 @@ http://119.62.24.75:50085/tsfile/live/0002_1.m3u8?key=txiptv
 #EXTINF:-1 tvg-id="cctv-10" tvg-name="CCTV-10 科教" group-title="央视",CCTV-10 科教
 http://74.91.26.218:82/live/cctv10hd.m3u8
 #EXTINF:-1 tvg-id="cctv-11" tvg-name="CCTV-11 戏曲" group-title="央视",CCTV-11 戏曲
-http://221.14.142.118:9003/hls/11/index.m3u8
+http://vpn.famcloud.top:9878/rtp/239.3.1.152:8120
 #EXTINF:-1 tvg-id="cctv-12" tvg-name="CCTV-12 社会与法" group-title="央视",CCTV-12 社会与法
 http://74.91.26.218:82/live/cctv12hd.m3u8
 #EXTINF:-1 tvg-id="cctv-13" tvg-name="CCTV-13 新闻" group-title="央视",CCTV-13 新闻
@@ -34,7 +34,7 @@ http://39.150.102.131:19901/tsfile/live/0017_1.m3u8
 #EXTINF:-1 tvg-id="cctv-6" tvg-name="CCTV-6 电影" group-title="央视",CCTV-6 电影
 http://111.14.186.11:5009/hls/6/index.m3u8
 #EXTINF:-1 tvg-id="cctv-7" tvg-name="CCTV-7 国防军事" group-title="央视",CCTV-7 国防军事
-http://221.14.142.118:9003/hls/7/index.m3u8
+http://74.91.26.218:82/live/cctv7hd.m3u8
 #EXTINF:-1 tvg-id="cctv-8" tvg-name="CCTV-8 电视剧" group-title="央视",CCTV-8 电视剧
 http://110.53.235.13:19901/tsfile/live/0008_1.m3u8
 #EXTINF:-1 tvg-id="cctv-9" tvg-name="CCTV-9 纪录" group-title="央视",CCTV-9 纪录
@@ -60,7 +60,7 @@ http://60.16.0.36:5757/hls/33/index.m3u8
 #EXTINF:-1 tvg-id="heilongjiang-satellite" tvg-name="黑龙江卫视" group-title="地方频道",黑龙江卫视
 http://119.62.24.75:50085/tsfile/live/0120_1.m3u8?key=txiptv
 #EXTINF:-1 tvg-id="henan-satellite" tvg-name="河南卫视" group-title="地方频道",河南卫视
-http://119.62.24.75:50085/tsfile/live/0137_1.m3u8?key=txiptv
+http://117.190.8.74:808/hls/39/index.m3u8
 #EXTINF:-1 tvg-id="hk-phoenix-chinese" tvg-name="凤凰卫视中文台" group-title="香港",凤凰卫视中文台
 http://bobohome.ignorelist.com:20247/fengshows?id=2.m3u8
 #EXTINF:-1 tvg-id="hk-phoenix-info" tvg-name="凤凰卫视资讯台" group-title="香港",凤凰卫视资讯台
@@ -73,8 +73,6 @@ http://60.16.0.36:5757/hls/24/index.m3u8
 http://hlsal-ldvt.qing.mgtv.com/nn_live/nn_x64/dWlwPTEyNy4wLjAuMSZ1aWQ9cWluZy1jbXMmbm5fdGltZXpvbmU9OCZjZG5leF9pZD1hbF9obHNfbGR2dCZ1dWlkPTliODY4NmU5ZTM2YzYwMmMmZT02OTE0NjA0JnY9MSZpZD1ITldTWkdTVCZzPTcwN2RiYTc2YzJjNmJmMTQ4MmUyZGYzOWU2NWM3YWFi/HNWSZGST.m3u8
 #EXTINF:-1 tvg-id="inner-mongolia-satellite" tvg-name="内蒙古卫视" group-title="地方频道",内蒙古卫视
 https://ali-m-l.cztv.com/channels/lantian/channel007/1080p.m3u8
-#EXTINF:-1 tvg-id="jiangsu-satellite" tvg-name="江苏卫视" group-title="地方频道",江苏卫视
-http://39.150.102.131:19901/tsfile/live/0127_1.m3u8
 #EXTINF:-1 tvg-id="jiangxi-satellite" tvg-name="江西卫视" group-title="地方频道",江西卫视
 http://110.53.235.13:19901/tsfile/live/0138_1.m3u8
 #EXTINF:-1 tvg-id="jilin-satellite" tvg-name="吉林卫视" group-title="地方频道",吉林卫视
@@ -83,6 +81,8 @@ http://60.16.0.36:5757/hls/32/index.m3u8
 http://60.16.0.36:5757/hls/16/index.m3u8
 #EXTINF:-1 tvg-id="ningxia-satellite" tvg-name="宁夏卫视" group-title="地方频道",宁夏卫视
 http://39.150.102.131:19901/tsfile/live/0112_1.m3u8
+#EXTINF:-1 tvg-id="shaanxi-satellite" tvg-name="陕西卫视" group-title="地方频道",陕西卫视
+http://mg.cttv.vip/738910838
 #EXTINF:-1 tvg-id="shandong-satellite" tvg-name="山东卫视" group-title="地方频道",山东卫视
 http://120.224.84.170:8085/hls/8/index.m3u8
 #EXTINF:-1 tvg-id="shanxi-satellite" tvg-name="山西卫视" group-title="地方频道",山西卫视
@@ -92,7 +92,7 @@ http://60.16.0.36:5757/hls/22/index.m3u8
 #EXTINF:-1 tvg-id="sichuan-satellite" tvg-name="四川卫视" group-title="地方频道",四川卫视
 http://39.150.102.131:19901/tsfile/live/0123_1.m3u8
 #EXTINF:-1 tvg-id="tianjin-satellite" tvg-name="天津卫视" group-title="地方频道",天津卫视
-http://221.14.142.118:9003/hls/27/index.m3u8
+http://60.16.0.36:5757/hls/27/index.m3u8
 #EXTINF:-1 tvg-id="tibet-satellite" tvg-name="西藏卫视" group-title="地方频道",西藏卫视
 http://222.71.55.147:9901/tsfile/live/0111_1.m3u8?key=txiptv
 #EXTINF:-1 tvg-id="tw-cti-entertainment" tvg-name="中天娱乐台" group-title="台湾",中天娱乐台
@@ -107,8 +107,6 @@ https://streamipcfapp.akamaized.net/live/_definst_/live_720/key_b1500.m3u8
 http://38.64.72.148/hls/modn/list/4013/chunklist0.m3u8
 #EXTINF:-1 tvg-id="tw-tvbs-asia" tvg-name="TVBS 亚洲台" group-title="台湾",TVBS 亚洲台
 http://38.64.72.148/hls/modn/list/4005/playlist.m3u8
-#EXTINF:-1 tvg-id="xinjiang-satellite" tvg-name="新疆卫视" group-title="地方频道",新疆卫视
-http://222.71.55.147:85/tsfile/live/0110_1.m3u8?key=txiptv
 #EXTINF:-1 tvg-id="yunnan-satellite" tvg-name="云南卫视" group-title="地方频道",云南卫视
 http://119.62.24.75:50085/tsfile/live/0018_2.m3u8?key=txiptv
 #EXTINF:-1 tvg-id="zhejiang-satellite" tvg-name="浙江卫视" group-title="地方频道",浙江卫视
