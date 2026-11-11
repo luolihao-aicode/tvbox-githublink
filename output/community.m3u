@@ -30,7 +30,7 @@ http://60.16.0.36:5757/hls/4/index.m3u8
 #EXTINF:-1 tvg-id="cctv-5" tvg-name="CCTV-5 体育" group-title="央视",CCTV-5 体育
 http://113.90.154.189:9901/tsfile/live/0018_1.m3u8?key=txiptv
 #EXTINF:-1 tvg-id="cctv-5-plus" tvg-name="CCTV-5+ 体育赛事" group-title="央视",CCTV-5+ 体育赛事
-http://39.150.102.131:19901/tsfile/live/0017_1.m3u8
+http://112.6.28.171:882/hls/16/index.m3u8
 #EXTINF:-1 tvg-id="cctv-6" tvg-name="CCTV-6 电影" group-title="央视",CCTV-6 电影
 http://111.14.186.11:5009/hls/6/index.m3u8
 #EXTINF:-1 tvg-id="cctv-7" tvg-name="CCTV-7 国防军事" group-title="央视",CCTV-7 国防军事
@@ -72,7 +72,7 @@ http://hlsal-ldvt.qing.mgtv.com/nn_live/nn_x64/dWlwPTEyNy4wLjAuMSZ1aWQ9cWluZy1jb
 #EXTINF:-1 tvg-id="inner-mongolia-satellite" tvg-name="内蒙古卫视" group-title="地方频道",内蒙古卫视
 http://play1-qk.nmtv.cn/live/1769652018126032.m3u8
 #EXTINF:-1 tvg-id="jiangsu-satellite" tvg-name="江苏卫视" group-title="地方频道",江苏卫视
-http://61.138.99.166:10080/hls/61/index.m3u8
+http://39.150.102.131:19901/tsfile/live/0127_1.m3u8
 #EXTINF:-1 tvg-id="jiangxi-satellite" tvg-name="江西卫视" group-title="地方频道",江西卫视
 http://110.53.235.13:19901/tsfile/live/0138_1.m3u8
 #EXTINF:-1 tvg-id="jilin-satellite" tvg-name="吉林卫视" group-title="地方频道",吉林卫视

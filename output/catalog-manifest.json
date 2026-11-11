@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
   "contentHash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
-  "channels": "catalog-versions/5382a240787057fa086f021f2963c143fe7cc9b49fbf77a8264b8c8ac9031284/channels.json",
-  "playlist": "catalog-versions/5382a240787057fa086f021f2963c143fe7cc9b49fbf77a8264b8c8ac9031284/all.m3u",
-  "previous": "catalog-versions/5f51f2156db7bed2c4c9ad407e72179ba829cc03e318570ff40df6f581da825b/channels.json",
+  "channels": "catalog-versions/d764333f69f432eeafc2936337c3da1ecd8d58d4a1857fc9f0fb4f3aa0d61d2f/channels.json",
+  "playlist": "catalog-versions/d764333f69f432eeafc2936337c3da1ecd8d58d4a1857fc9f0fb4f3aa0d61d2f/all.m3u",
+  "previous": "catalog-versions/5382a240787057fa086f021f2963c143fe7cc9b49fbf77a8264b8c8ac9031284/channels.json",
   "changes": {
     "added": [],
     "removed": [],
